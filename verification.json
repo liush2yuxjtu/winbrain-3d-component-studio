@@ -1,0 +1,273 @@
+{
+  "checks": [
+    {
+      "name": "22 registered independent components",
+      "passed": true
+    },
+    {
+      "name": "All 22 component buttons",
+      "passed": true
+    },
+    {
+      "name": "Reference camera projects exact 1 / 10 / 0.1 px edits",
+      "passed": true,
+      "detail": {
+        "dx": 1.1,
+        "dy": -10,
+        "depth": 0,
+        "sx": 1,
+        "sy": 1,
+        "sz": 1,
+        "rx": 0,
+        "ry": 0,
+        "rz": 0,
+        "visible": true,
+        "tint": null,
+        "asset": null
+      }
+    },
+    {
+      "name": "Locked scale edits all three axes",
+      "passed": true
+    },
+    {
+      "name": "Editable rotation",
+      "passed": true
+    },
+    {
+      "name": "Material editing is isolated to one component",
+      "passed": true
+    },
+    {
+      "name": "Component reset restores position, scale and color",
+      "passed": true
+    },
+    {
+      "name": "Reference opacity and difference blending",
+      "passed": true
+    },
+    {
+      "name": "Hold Space shows reference only",
+      "passed": true
+    },
+    {
+      "name": "Alignment grid visible",
+      "passed": true
+    },
+    {
+      "name": "Component filtering hides unrelated rows",
+      "passed": true
+    },
+    {
+      "name": "Individual asset can orbit",
+      "passed": true
+    },
+    {
+      "name": "All 22 GLB files load as independent models",
+      "passed": true,
+      "detail": [
+        {
+          "id": "platform.data",
+          "meshes": 15,
+          "bytes": 716608
+        },
+        {
+          "id": "platform.intelligence",
+          "meshes": 18,
+          "bytes": 720616
+        },
+        {
+          "id": "platform.application",
+          "meshes": 17,
+          "bytes": 721408
+        },
+        {
+          "id": "structure.columns",
+          "meshes": 36,
+          "bytes": 703000
+        },
+        {
+          "id": "actor.projects",
+          "meshes": 27,
+          "bytes": 514816
+        },
+        {
+          "id": "actor.experts",
+          "meshes": 21,
+          "bytes": 445180
+        },
+        {
+          "id": "actor.ai-agents",
+          "meshes": 29,
+          "bytes": 669212
+        },
+        {
+          "id": "actor.employees",
+          "meshes": 24,
+          "bytes": 468516
+        },
+        {
+          "id": "structure.connections",
+          "meshes": 3,
+          "bytes": 23264
+        },
+        {
+          "id": "app.chat",
+          "meshes": 10,
+          "bytes": 1485164
+        },
+        {
+          "id": "app.workbench",
+          "meshes": 47,
+          "bytes": 3795936
+        },
+        {
+          "id": "app.integrations",
+          "meshes": 17,
+          "bytes": 1196940
+        },
+        {
+          "id": "city.business",
+          "meshes": 1172,
+          "bytes": 4675512
+        },
+        {
+          "id": "data.people",
+          "meshes": 38,
+          "bytes": 1789628
+        },
+        {
+          "id": "data.documents",
+          "meshes": 43,
+          "bytes": 2474368
+        },
+        {
+          "id": "data.tasks",
+          "meshes": 36,
+          "bytes": 1649064
+        },
+        {
+          "id": "data.business-data",
+          "meshes": 88,
+          "bytes": 2174384
+        },
+        {
+          "id": "data.systems",
+          "meshes": 73,
+          "bytes": 2825724
+        },
+        {
+          "id": "data.devices",
+          "meshes": 83,
+          "bytes": 2903220
+        },
+        {
+          "id": "data.external-data",
+          "meshes": 34,
+          "bytes": 1804908
+        },
+        {
+          "id": "world.earth",
+          "meshes": 299,
+          "bytes": 1807820
+        },
+        {
+          "id": "world.atmosphere",
+          "meshes": 11,
+          "bytes": 140900
+        }
+      ]
+    },
+    {
+      "name": "Native Earth asset retains shader materials",
+      "passed": true
+    },
+    {
+      "name": "GLB download button produces a model file",
+      "passed": true
+    },
+    {
+      "name": "Local GLB replaces the selected asset",
+      "passed": true
+    },
+    {
+      "name": "Edits and imported model survive a reload",
+      "passed": true
+    },
+    {
+      "name": "Homepage consumes saved layout and uploaded asset",
+      "passed": true
+    },
+    {
+      "name": "Saving broadcasts edits to an already-open homepage",
+      "passed": true
+    },
+    {
+      "name": "Explore reveals usable 3D controls",
+      "passed": true
+    },
+    {
+      "name": "Wireframe control still works",
+      "passed": true
+    },
+    {
+      "name": "Clean homepage initially hides view controls",
+      "passed": true
+    },
+    {
+      "name": "Reset restores the reference view and hides controls",
+      "passed": true
+    },
+    {
+      "name": "Homepage has no raster reference images",
+      "passed": true
+    },
+    {
+      "name": "Homepage navigation preserved",
+      "passed": true
+    },
+    {
+      "name": "Editor remains within a 1024 px viewport",
+      "passed": true
+    },
+    {
+      "name": "Comparison slider moves the original/capture boundary",
+      "passed": true
+    },
+    {
+      "name": "OpenCV heatmap can be shown",
+      "passed": true
+    },
+    {
+      "name": "Before/after uses the same heatmap display",
+      "passed": true
+    },
+    {
+      "name": "Region selection keeps original pixel coordinates",
+      "passed": true
+    },
+    {
+      "name": "Studio runs directly from a local HTML file",
+      "passed": true
+    },
+    {
+      "name": "No JavaScript errors",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "No external network dependencies",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "summary": {
+    "passed": 33,
+    "javascriptErrors": 0,
+    "externalRequests": 0,
+    "assetGeometry": "All 22 exported GLBs loaded and every mesh position was finite",
+    "visualComparison": "visual-diff/final-metrics.json"
+  }
+}

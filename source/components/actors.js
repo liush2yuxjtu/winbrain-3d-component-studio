@@ -1,0 +1,181 @@
+import * as THREE from "three";
+import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
+import {
+  W,
+  H,
+  TAU,
+  host,
+  renderer,
+  scene,
+  camera,
+  target,
+  view,
+  initialView,
+  updateCamera,
+  world,
+  yaw0,
+  right,
+  near,
+  pos,
+  rnd,
+  random,
+  mat,
+  glowMat,
+  silver,
+  white,
+  black,
+  glass,
+  tubeGlass,
+  cyan,
+  blue,
+  violet,
+  clickable,
+  animated,
+  labels,
+  mesh,
+  box,
+  sphere,
+  cyl,
+  line,
+  beam,
+  ring,
+  textureCanvas,
+  rr,
+  pool,
+  softGlow,
+  textSprite,
+  label,
+  groupAt,
+  levels,
+} from "../core.js";
+import { register, capture } from "../registry.js";
+import { person, characterBase } from "./people.js";
+import { createRobot } from "./robot.js";
+import { createRoleEmblem } from "./badges.js";
+const teams = [
+  { key: "Projects", x: -4, d: 0.05, color: 0x269ef6 },
+  { key: "Experts", x: -1.35, d: 0.55, color: 0x9874f2 },
+  { key: "AI Agents", x: 1.45, d: 1.45, color: 0x70d4ff },
+  { key: "Employees", x: 4, d: 1.45, color: 0x48c7c0 },
+];
+export function createActors() {
+  for (const t of teams) {
+    capture(
+      "actor." + t.key.toLowerCase().replaceAll(" ", "-"),
+      {
+        name: {
+          Projects: "项目团队",
+          Experts: "专家",
+          "AI Agents": "AI 机器人",
+          Employees: "员工团队",
+        }[t.key],
+        category: "智能角色",
+        source:
+          t.key === "AI Agents"
+            ? "components/robot.js"
+            : "components/people.js",
+        version: 4,
+        rect: {
+          Projects: [380, 366, 186, 172],
+          Experts: [581, 357, 174, 183],
+          "AI Agents": [778, 357, 179, 194],
+          Employees: [987, 377, 198, 177],
+        }[t.key],
+      },
+      () => {
+        const g = groupAt(
+          t.x,
+          levels[2] +
+            {
+              Projects: 0.09,
+              Experts: 0.13,
+              "AI Agents": 0.065,
+              Employees: 0.065,
+            }[t.key],
+          t.d,
+        );
+        g.userData.layer = 2;
+        g.userData.name = t.key;
+        characterBase(g, t.color, t.key === "Experts" ? 0.83 : 0.85);
+        if (t.key === "Projects") {
+          person(g, -0.39, -0.12, t.color, 0.69);
+          person(g, 0.41, -0.1, t.color, 0.65);
+          person(g, 0, 0.17, t.color, 0.88);
+        } else if (t.key === "Experts") {
+          person(g, 0, 0.1, t.color, 0.99, true);
+        } else if (t.key === "Employees") {
+          person(g, 0.24, -0.12, t.color, 0.84);
+          person(g, -0.25, 0.19, t.color, 0.75);
+          person(g, 0.58, -0.25, t.color, 0.53);
+        } else {
+          createRobot(g);
+        }
+        g.traverse((o) => {
+          if (o.isMesh) {
+            o.userData.layer = 2;
+            o.userData.name = t.key;
+            clickable.push(o);
+          }
+        });
+        // Text labels remain attached to their group in space while the view rotates.
+        const textGroup = new THREE.Group();
+        textGroup.position.x = {
+          Projects: -0.66,
+          Experts: 0.04,
+          "AI Agents": -0.47,
+          Employees: -0.25,
+        }[t.key];
+        g.add(textGroup);
+        const titleY =
+          t.key === "Projects"
+            ? 1.79
+            : t.key === "Experts"
+              ? 2.1
+              : t.key === "AI Agents"
+                ? 2.17
+                : 1.82;
+        const titleSprite = label(textGroup, t.key, 0, titleY, 0, 1.9, 0.31, {
+          font: 31,
+          weight: 500,
+        });
+        if (t.key !== "Experts") titleSprite.center.x = 0;
+        const sub =
+          t.key === "Projects"
+            ? ["Turn goals into results"]
+            : t.key === "Experts"
+              ? ["Domain knowledge", "and experience"]
+              : t.key === "AI Agents"
+                ? ["24/7 execution", "by your side"]
+                : ["Human + AI collaboration"];
+        sub.forEach((str, i) => {
+          const s = label(
+            textGroup,
+            str,
+            0,
+            titleY - 0.3 - i * 0.215,
+            0,
+            2.15,
+            0.28,
+            { font: 23, color: "#c2d4ed", weight: 400 },
+          );
+          if (t.key !== "Experts") s.center.x = 0;
+        });
+        const badgeHeight = {
+          Projects: 1.5,
+          Experts: 1.72,
+          "AI Agents": 1.74,
+          Employees: 1.64,
+        }[t.key];
+        const badge = groupAt(t.x - 1.0, levels[2] + badgeHeight, t.d - 0.2);
+        box(0.39, 0.46, 0.08, tubeGlass, new THREE.Vector3(), badge, 0.065);
+        createRoleEmblem(
+          badge,
+          t.key,
+          t.key === "AI Agents" ? 0xbaa2ff : t.color,
+        );
+        softGlow(badge, new THREE.Vector3(), 0.8, t.color);
+      },
+    );
+  }
+}
+export { teams };

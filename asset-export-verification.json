@@ -1,0 +1,117 @@
+{
+  "components": 22,
+  "previews": 44,
+  "sizes": [
+    {
+      "id": "platform.data",
+      "glb": 716608,
+      "native": 652789
+    },
+    {
+      "id": "platform.intelligence",
+      "glb": 720616,
+      "native": 653642
+    },
+    {
+      "id": "platform.application",
+      "glb": 721408,
+      "native": 658604
+    },
+    {
+      "id": "structure.columns",
+      "glb": 703000,
+      "native": 150718
+    },
+    {
+      "id": "actor.projects",
+      "glb": 514816,
+      "native": 183939
+    },
+    {
+      "id": "actor.experts",
+      "glb": 445180,
+      "native": 195601
+    },
+    {
+      "id": "actor.ai-agents",
+      "glb": 669212,
+      "native": 203085
+    },
+    {
+      "id": "actor.employees",
+      "glb": 468516,
+      "native": 187736
+    },
+    {
+      "id": "structure.connections",
+      "glb": 23264,
+      "native": 9833
+    },
+    {
+      "id": "app.chat",
+      "glb": 1485164,
+      "native": 668768
+    },
+    {
+      "id": "app.workbench",
+      "glb": 3795936,
+      "native": 774799
+    },
+    {
+      "id": "app.integrations",
+      "glb": 1196940,
+      "native": 716173
+    },
+    {
+      "id": "city.business",
+      "glb": 4675512,
+      "native": 294957
+    },
+    {
+      "id": "data.people",
+      "glb": 1789628,
+      "native": 634012
+    },
+    {
+      "id": "data.documents",
+      "glb": 2474368,
+      "native": 650055
+    },
+    {
+      "id": "data.tasks",
+      "glb": 1649064,
+      "native": 630674
+    },
+    {
+      "id": "data.business-data",
+      "glb": 2174384,
+      "native": 968679
+    },
+    {
+      "id": "data.systems",
+      "glb": 2825724,
+      "native": 665048
+    },
+    {
+      "id": "data.devices",
+      "glb": 2903220,
+      "native": 1005442
+    },
+    {
+      "id": "data.external-data",
+      "glb": 1804908,
+      "native": 2991868
+    },
+    {
+      "id": "world.earth",
+      "glb": 1807820,
+      "native": 778484
+    },
+    {
+      "id": "world.atmosphere",
+      "glb": 140900,
+      "native": 184343
+    }
+  ],
+  "errors": []
+}

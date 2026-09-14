@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+.opencv-venv/
+.env
+.env.*
+*.local
+WinBrain-Component-Studio.zip
