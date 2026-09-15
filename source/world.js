@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { world } from "./core.js";
+import { registry } from "./registry.js";
 import { applyDesignTokens } from "./tokens/apply.js";
 import { createPlatforms } from "./components/platforms.js";
 import { createColumns } from "./components/columns.js";
@@ -11,10 +12,17 @@ import { createDataObjects } from "./components/data-objects.js";
 import { createEarth } from "./components/earth.js";
 import { createAtmosphere } from "./components/atmosphere.js";
 
+const platformLayerOrder = [
+  ["platform.data", 1],
+  ["platform.intelligence", 2],
+  ["platform.application", 3],
+];
+
 function transparentLayerOffset(object) {
   for (let current = object; current; current = current.parent) {
-    const order = current.userData?.transparentLayerOrder;
-    if (Number.isFinite(order)) return order * 0.1;
+    for (const [id, order] of platformLayerOrder) {
+      if (registry.get(id)?.root === current) return order * 0.1;
+    }
   }
   return 0;
 }
