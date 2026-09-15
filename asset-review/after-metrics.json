@@ -7,7 +7,7 @@
   ],
   "registration": "none; identical pixel coordinates",
   "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
-  "capture_sha256": "7db6f3b921f62f3681f0f128939a5d9ae4eb0a91f00728505816b1b22a36cf5f",
+  "capture_sha256": "92902aea17630dfa2d2a77806c1ad7deee892ee70a37a047a0680681fcdc0196",
   "regions": {
     "whole": {
       "rect": [
@@ -16,9 +16,9 @@
         1536,
         1024
       ],
-      "mae_rgb": 20.0765,
-      "blurred_mae": 13.5145,
-      "ssim_gray": 0.63811,
+      "mae_rgb": 20.073,
+      "blurred_mae": 13.5137,
+      "ssim_gray": 0.63813,
       "reference_luma": 49.16,
       "capture_luma": 48.01,
       "edge_distance_px": 2.489
@@ -86,12 +86,12 @@
         905,
         286
       ],
-      "mae_rgb": 29.6759,
-      "blurred_mae": 21.8135,
-      "ssim_gray": 0.48061,
+      "mae_rgb": 29.6805,
+      "blurred_mae": 21.796,
+      "ssim_gray": 0.48051,
       "reference_luma": 66.17,
-      "capture_luma": 60.48,
-      "edge_distance_px": 2.986
+      "capture_luma": 60.51,
+      "edge_distance_px": 2.984
     },
     "data_foundation": {
       "rect": [
@@ -100,11 +100,11 @@
         960,
         288
       ],
-      "mae_rgb": 33.2955,
-      "blurred_mae": 23.9777,
-      "ssim_gray": 0.38309,
+      "mae_rgb": 33.2712,
+      "blurred_mae": 23.9899,
+      "ssim_gray": 0.38329,
       "reference_luma": 72.7,
-      "capture_luma": 67.73,
+      "capture_luma": 67.66,
       "edge_distance_px": 2.953
     },
     "earth": {

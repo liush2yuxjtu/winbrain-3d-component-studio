@@ -43,7 +43,7 @@ export function createDataObjects() {
         icon.scale.set(...sculptureScale);
         if (n.type === "data") {
           const captionPanel = plate(2.54, 0.54, 0.028,
-            mat(0x131e2e, { metalness: 0, roughness: 1, transparent: true, opacity: 0.94, depthWrite: false }),
+            mat(0x131e2e, { metalness: 0, roughness: 1, transparent: true, opacity: 0.94, depthWrite: false, depthTest: false }),
             g, 0, 0.255, n.r + 0.17, 0.12, 0.004);
           captionPanel.name = "database-caption-panel";
           label(

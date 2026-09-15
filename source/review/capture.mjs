@@ -6,7 +6,6 @@ import { execFileSync } from 'node:child_process';
 const root = path.resolve(import.meta.dirname, '../..');
 const out = path.join(root, 'asset-review');
 await fs.mkdir(out, { recursive: true });
-await import('./calibrate-apps.mjs');
 const browser = await chromium.launch({ headless: true, args: ['--enable-unsafe-swiftshader'] });
 const checks = [];
 const check = (name, value, detail = null) => {
@@ -74,6 +73,11 @@ try {
   check('database has exactly three solid tiers', geometry.counts['data.business-data'].databaseTiers === 3);
   check('rounded robot visor exists', await page.evaluate(() => Boolean(studio.registry.get('actor.ai-agents').root.getObjectByName('rounded-inset-visor'))));
   check('application laminate exists', await page.evaluate(() => Boolean(studio.registry.get('platform.application').root.getObjectByName('application-inner-glass-laminate'))));
+  check('server reference control layout', await page.evaluate(() => {
+    const root = studio.registry.get('data.systems').root;
+    return Boolean(root.getObjectByName('server-power-port-2') && root.getObjectByName('server-extra-port-0'));
+  }));
+  check('expert uses portrait emblem', await page.evaluate(() => Boolean(studio.registry.get('actor.experts').root.getObjectByName('expert-portrait-emblem'))));
   for (const asset of manifest.components) {
     console.log('Exporting', asset.id);
     const result = await page.evaluate(async id => {

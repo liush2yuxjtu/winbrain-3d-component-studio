@@ -308,38 +308,19 @@ function server(g) {
     const drawer = box(0.594, 0.222, 0.417, satin, V(0, y, 0), model, 0.031);
     drawer.name = `server-drawer-${j + 1}`;
     plate(0.548, 0.18, 0.025, porcelain, model, 0, y, 0.218, 0.026, 0.008);
-    plate(
-      0.287,
-      0.043,
-      0.013,
-      recess,
-      model,
-      -0.053,
-      y + 0.025,
-      0.239,
-      0.012,
-      0.003,
-    );
-    plate(
-      0.26,
-      0.009,
-      0.01,
-      mat(0x7790ab),
-      model,
-      -0.057,
-      y + 0.021,
-      0.248,
-      0.003,
-      0.002,
-    );
-    const port = mesh(
-      new THREE.TorusGeometry(0.033, 0.006, 8, 32),
-      chrome,
-      model,
-    );
-    port.position.set(0.193, y, 0.245);
-    sphere(0.028, recess, V(0.193, y, 0.239), model, 1, 1, 0.35);
-    statusLight(model, 0.193, y, 0.249, 0.014);
+    // Upper units have a left power control and a right status slot.
+    // The bottom unit has two larger round sockets, not a fourth drawer handle.
+    if (j > 0) {
+      plate(0.25, 0.043, 0.013, recess, model, 0.063, y + 0.025, 0.239, 0.012, 0.003);
+      plate(0.23, 0.009, 0.010, mat(0x7790ab), model, 0.063, y + 0.021, 0.248, 0.003, 0.002);
+    }
+    for (const [index, x] of (j === 0 ? [-0.18, 0.155] : [-0.18]).entries()) {
+      const port = mesh(new THREE.TorusGeometry(0.041, 0.008, 8, 40), chrome, model);
+      port.name = index === 1 ? 'server-extra-port-0' : `server-power-port-${j}`;
+      port.position.set(x, y, 0.245);
+      sphere(0.033, recess, V(x, y, 0.239), model, 1, 1, 0.35);
+      if (j === 2) statusLight(model, x, y, 0.249, 0.016);
+    }
     for (const x of [-0.242, 0.248])
       sphere(0.008, recess, V(x, y + 0.06, 0.243), model, 1, 1, 0.25);
     for (let k = 0; k < 4; k++)

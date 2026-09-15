@@ -3,7 +3,7 @@ import { mesh, glowMat, sphere, line } from "../core.js";
 
 /** Small, real geometry emblems. No image textures are used. */
 export function createRoleEmblem(parent, role, color) {
-  const material = glowMat(color, 1.2);
+  const material = glowMat(role === "Experts" ? 0xe8e7ff : color, role === "Experts" ? 1.08 : 1.2);
   const loop = (radius, thickness, x = 0, y = 0, angle = 0) => {
     const shape = mesh(
       new THREE.TorusGeometry(radius, thickness, 8, 32),
@@ -22,11 +22,25 @@ export function createRoleEmblem(parent, role, color) {
       }
     sphere(0.027, material, new THREE.Vector3(0, 0, 0.075), parent);
   } else if (role === "Experts") {
-    for (const angle of [0, Math.PI / 3, -Math.PI / 3]) {
-      const shape = loop(0.106, 0.012, 0, 0, angle);
-      shape.scale.x = 0.45;
+    // A portrait with glasses and an open book, rather than an unrelated atom.
+    const head = loop(0.061, 0.008, 0, 0.046);
+    head.scale.y = 1.12;
+    head.name = "expert-portrait-emblem";
+    for (const x of [-0.024, 0.024]) loop(0.022, 0.005, x, 0.050).scale.y = 0.75;
+    const shoulders = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-0.099, -0.100, 0.061),
+      new THREE.Vector3(-0.087, -0.042, 0.061),
+      new THREE.Vector3(-0.050, -0.014, 0.061),
+      new THREE.Vector3(0, -0.041, 0.061),
+      new THREE.Vector3(0.050, -0.014, 0.061),
+      new THREE.Vector3(0.087, -0.042, 0.061),
+      new THREE.Vector3(0.099, -0.100, 0.061),
+    ]);
+    mesh(new THREE.TubeGeometry(shoulders, 32, 0.008, 6, false), material, parent);
+    for (const side of [-1, 1]) {
+      const points = [[0,-0.076],[side*0.066,-0.049],[side*0.066,-0.103],[0,-0.125]];
+      line(points.map(([x,y]) => new THREE.Vector3(x,y,0.069)), 0xe8e7ff, 0.9, parent);
     }
-    sphere(0.028, material, new THREE.Vector3(0, 0, 0.085), parent);
   } else if (role === "AI Agents") {
     loop(0.102, 0.027);
     loop(0.052, 0.015, 0, 0, 0.2).rotation.y = 0.8;

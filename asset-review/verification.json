@@ -31,6 +31,16 @@
       "detail": null
     },
     {
+      "name": "server reference control layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "expert uses portrait emblem",
+      "passed": true,
+      "detail": null
+    },
+    {
       "name": "platform.data: GLB round trip",
       "passed": true,
       "detail": null
