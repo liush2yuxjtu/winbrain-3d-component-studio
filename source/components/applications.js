@@ -20,6 +20,7 @@ import {
   roundedShape,
   solidShape,
 } from "./exhibit-geometry.js";
+import { SCREEN_PALETTE } from "./application-palette.js";
 import { appIcon } from "../assets/app-icons.js";
 // UI surfaces, chart bars and app tiles are separately extruded geometry.
 // Canvas carries type and the glass sheen; brand artwork is embedded from official sources.
@@ -74,13 +75,13 @@ const widgetGlass = mat(0x485b85, {
   transparent: true,
   opacity: 0.68,
 });
-const darkWidget = mat(0x17233d, { metalness: 0.3, roughness: 0.25 });
+const darkWidget = mat(0x46516d, { metalness: 0.12, roughness: 0.38 });
 const iconPorcelain = mat(0xf4f7ff, {
   metalness: 0.1,
   roughness: 0.22,
   clearcoat: 1,
-  emissive: 0x8c9cb9,
-  emissiveIntensity: 0.18,
+  emissive: 0xb8c5dc,
+  emissiveIntensity: 0.30,
 });
 function textTexture(s, paint) {
   return textureCanvas(s.px * 4, s.py * 4, (c) => {
@@ -122,12 +123,12 @@ function buildScreen(s, g) {
   const frame = roundedShape(s.w - 0.015, s.h - 0.015, 0.07);
   frame.holes.push(roundedShape(s.w - 0.055, s.h - 0.055, 0.055));
   solidShape(frame, 0.155, edge, g, 0.007).name = "beveled-glass-chassis";
-  plate(
+  const backing = plate(
     s.w - 0.048,
     s.h - 0.048,
     0.028,
     new THREE.MeshBasicMaterial({
-      color: 0x29354d,
+      color: SCREEN_PALETTE[s.kind],
       // An opaque smoked backing writes depth before the transparent platform
       // edges render. The bevel and reflected front sheet remain translucent.
       transparent: false,
@@ -139,6 +140,7 @@ function buildScreen(s, g) {
     0.055,
     0.006,
   );
+  backing.name = "smoke-backing";
   const sheen = textureCanvas(512, 384, (c, w, h) => {
     const gradient = c.createLinearGradient(0, 0, w, h);
     gradient.addColorStop(0, "#8b9bbb66");
@@ -213,7 +215,7 @@ function buildScreen(s, g) {
       68,
       0.102,
       0.022,
-      mat(0x546783, {
+      mat(0x61738b, {
         metalness: 0.15,
         roughness: 0.45,
         transparent: true,
@@ -446,7 +448,7 @@ export function createApplications() {
         category: "应用屏幕",
         source: "components/applications.js",
         rect: s.rect,
-        version: 4,
+        version: 5,
       },
       () => {
         const g = groupAt(

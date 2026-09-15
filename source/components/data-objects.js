@@ -1,72 +1,11 @@
 import * as THREE from "three";
-import { groupAt, levels, label, clickable } from "../core.js";
+import { groupAt, levels, label, clickable, mat, cyl, ring } from "../core.js";
 import { capture } from "../registry.js";
 import { createBusinessModel, createPedestal } from "./business-models.js";
-const dataNodes = [
-  {
-    name: "People",
-    x: -5.28,
-    d: -0.52,
-    r: 0.48,
-    h: 0.7,
-    type: "people",
-    rect: [332, 610, 96, 140],
-  },
-  {
-    name: "Documents",
-    x: -4.0,
-    d: 0.6,
-    r: 0.63,
-    h: 0.86,
-    type: "doc",
-    rect: [411, 582, 133, 196],
-  },
-  {
-    name: "Tasks",
-    x: -2.76,
-    d: 3.44,
-    r: 0.62,
-    h: 0.82,
-    type: "task",
-    rect: [505, 635, 130, 174],
-  },
-  {
-    name: "Business Data",
-    x: -0.15,
-    d: 3.78,
-    r: 1,
-    h: 0.8,
-    type: "data",
-    rect: [667, 613, 183, 201],
-  },
-  {
-    name: "Systems",
-    x: 2.3,
-    d: 3.88,
-    r: 0.64,
-    h: 0.8,
-    type: "server",
-    rect: [879, 649, 115, 173],
-  },
-  {
-    name: "Devices",
-    x: 3.73,
-    d: 3,
-    r: 0.64,
-    h: 0.9,
-    type: "laptop",
-    rect: [988, 633, 112, 159],
-  },
-  {
-    name: "External Data",
-    x: 5.1,
-    d: 1.8,
-    r: 0.6,
-    h: 0.8,
-    type: "cloud",
-    rect: [1094, 634, 116, 153],
-  },
-];
+import { createExternalDataModelV2 } from "./external-data-model-v2.js";
+import { plate } from "./exhibit-geometry.js";
+import { dataNodes } from "./data-layout.js";
+
 export function createDataObjects() {
   for (const n of dataNodes)
     capture(
@@ -74,13 +13,43 @@ export function createDataObjects() {
       {
         name: n.name,
         category: "业务对象",
-        source: "components/business-models.js",
+        source:
+          n.type === "cloud"
+            ? "components/external-data-model-v2.js"
+            : "components/business-models.js",
         rect: n.rect,
-        version: 4,
+        version: n.type === "cloud" ? 6 : 5,
       },
       () => {
         const g = groupAt(n.x, levels[1] + 0.14, n.d);
         createPedestal(n, g);
+        // The new cloud keeps the old architectural pedestal but gets its own
+        // softly diffusing top deck, so the model can evolve independently.
+        if (n.type === "cloud") {
+          const frosted = mat(0xc7dff2, {
+            metalness: 0.02,
+            roughness: 0.38,
+            transmission: 0.38,
+            thickness: 0.18,
+            ior: 1.33,
+            transparent: true,
+            opacity: 0.36,
+            depthWrite: false,
+            clearcoat: 0.45,
+            clearcoatRoughness: 0.28,
+            side: THREE.DoubleSide,
+          });
+          const frostDeck = cyl(
+            n.r * 0.84,
+            n.r * 0.88,
+            0.055,
+            frosted,
+            new THREE.Vector3(0, n.h + 0.11, 0),
+            g,
+          );
+          frostDeck.name = "cloud-frosted-glass-deck-v2";
+          ring(n.r * 0.86, n.h + 0.14, 0xb7e4ff, g, 0.007);
+        }
         label(
           g,
           n.name,
@@ -89,14 +58,45 @@ export function createDataObjects() {
           n.r + 0.12,
           n.type === "data" ? 2.1 : 1.65,
           0.31,
-          { font: 27, weight: 400 },
+          { font: n.type === "data" ? 29 : 27, weight: n.type === "data" ? 500 : 400 },
         );
         const icon = new THREE.Group();
         icon.name = n.type + "-sculpture";
-        icon.position.y = n.h + 0.125;
+        icon.position.y = n.h + (n.type === "cloud" ? 0.105 : 0.125);
         g.add(icon);
-        createBusinessModel(n.type, icon);
+        if (n.type === "cloud") createExternalDataModelV2(icon);
+        else createBusinessModel(n.type, icon);
+        const sculptureScale = {
+          people: [1, 1.02, 1],
+          doc: [0.96, 0.94, 1],
+          task: [0.96, 1.10, 1],
+          data: [1, 1, 1],
+          server: [0.96, 0.95, 1],
+          laptop: [1, 1.08, 1],
+          cloud: [1, 1, 1],
+        }[n.type];
+        icon.scale.set(...sculptureScale);
         if (n.type === "data") {
+          const captionPanel = plate(
+            2.54,
+            0.54,
+            0.028,
+            mat(0x131e2e, {
+              metalness: 0,
+              roughness: 1,
+              transparent: true,
+              opacity: 0.94,
+              depthWrite: false,
+              depthTest: false,
+            }),
+            g,
+            0,
+            0.255,
+            n.r + 0.17,
+            0.12,
+            0.004,
+          );
+          captionPanel.name = "database-caption-panel";
           label(
             g,
             "Orders · Products · Inventory",

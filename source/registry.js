@@ -2,8 +2,10 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { scene, world, camera, W, H } from "./core.js";
 
+import { previewStorageScope } from './storage-scope.js';
+const storageScope = previewStorageScope(location.pathname);
 export const registry = new Map();
-export const STORAGE_KEY = "winbrain-component-layout-v1";
+export const STORAGE_KEY = "winbrain-component-layout-v1" + storageScope;
 const channel =
   typeof BroadcastChannel === "function"
     ? new BroadcastChannel(STORAGE_KEY)
@@ -243,7 +245,7 @@ export function serializeConfig() {
 
 function database() {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open("winbrain-local-assets-v1", 1);
+    const req = indexedDB.open("winbrain-local-assets-v1" + storageScope, 1);
     req.onupgradeneeded = () => req.result.createObjectStore("assets");
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);

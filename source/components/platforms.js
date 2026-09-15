@@ -119,6 +119,18 @@ function platform(level, scale) {
   slab.rotation.x = -Math.PI / 2;
   slab.userData = { layer: level, name: "Glass platform" };
   clickable.push(slab);
+  if (level === 3) {
+    const laminate = mesh(
+      new THREE.ShapeGeometry(roundedShape(w - 0.18, d - 0.18, r - 0.06), 24),
+      mat(0xaabbd8, { transparent: true, opacity: 0.10, depthWrite: false,
+        metalness: 0.08, roughness: 0.35, side: THREE.DoubleSide }), g);
+    laminate.name = "application-inner-glass-laminate";
+    laminate.rotation.x = -Math.PI / 2;
+    laminate.position.y = -thickness * 0.16;
+    const innerRim = roundedShape(w - 0.18, d - 0.18, r - 0.06).getPoints(28)
+      .map((p) => new THREE.Vector3(p.x, -thickness * 0.16, -p.y));
+    line(innerRim, 0xa6bce2, 0.22, g);
+  }
   const contour = shape.getPoints(32);
   for (const y of [thickness / 2, -thickness / 2]) {
     const points = contour.map((p) => new THREE.Vector3(p.x, y, -p.y));
@@ -244,7 +256,7 @@ export function createPlatforms() {
         name: { 1: "数据层平台", 2: "智能层平台", 3: "应用层平台" }[level],
         category: "平台与结构",
         source: "components/platforms.js",
-        version: 4,
+        version: level === 3 ? 5 : 4,
         rect: {
           1: [278, 612, 963, 278],
           2: [309, 447, 911, 185],

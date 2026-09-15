@@ -3,7 +3,7 @@ import { mesh, glowMat, sphere, line } from "../core.js";
 
 /** Small, real geometry emblems. No image textures are used. */
 export function createRoleEmblem(parent, role, color) {
-  const material = glowMat(color, 1.2);
+  const material = glowMat(role === "Experts" ? 0xe8e7ff : color, role === "Experts" ? 1.08 : 1.2);
   const loop = (radius, thickness, x = 0, y = 0, angle = 0) => {
     const shape = mesh(
       new THREE.TorusGeometry(radius, thickness, 8, 32),
@@ -22,11 +22,13 @@ export function createRoleEmblem(parent, role, color) {
       }
     sphere(0.027, material, new THREE.Vector3(0, 0, 0.075), parent);
   } else if (role === "Experts") {
+    // The static reference uses an atom-style expert badge.
     for (const angle of [0, Math.PI / 3, -Math.PI / 3]) {
-      const shape = loop(0.106, 0.012, 0, 0, angle);
-      shape.scale.x = 0.45;
+      const orbit = loop(0.112, 0.009, 0, 0, angle);
+      orbit.scale.y = 0.52;
+      orbit.name = "expert-atom-orbit";
     }
-    sphere(0.028, material, new THREE.Vector3(0, 0, 0.085), parent);
+    sphere(0.024, material, new THREE.Vector3(0, 0, 0.075), parent);
   } else if (role === "AI Agents") {
     loop(0.102, 0.027);
     loop(0.052, 0.015, 0, 0, 0.2).rotation.y = 0.8;

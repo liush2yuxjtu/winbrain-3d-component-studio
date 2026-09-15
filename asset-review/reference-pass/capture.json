@@ -1,0 +1,34 @@
+{
+  "records": [
+    {
+      "id": "actor.experts",
+      "file": "actor.experts-detail.png",
+      "rect": [
+        581,
+        357,
+        174,
+        183
+      ],
+      "output": [
+        696,
+        732
+      ],
+      "method": "camera view offset, existing scene and postprocessing; inspection only, not used for scoring"
+    },
+    {
+      "id": "data.external-data",
+      "file": "data.external-data-detail.png",
+      "rect": [
+        1094,
+        634,
+        116,
+        153
+      ],
+      "output": [
+        464,
+        612
+      ],
+      "method": "camera view offset, existing scene and postprocessing; inspection only, not used for scoring"
+    }
+  ]
+}

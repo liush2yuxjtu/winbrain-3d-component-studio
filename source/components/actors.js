@@ -50,13 +50,14 @@ import {
 } from "../core.js";
 import { register, capture } from "../registry.js";
 import { person, characterBase } from "./people.js";
+import { createExpertModelV2 } from "./expert-model-v2.js";
 import { createRobot } from "./robot.js";
 import { createRoleEmblem } from "./badges.js";
 const teams = [
-  { key: "Projects", x: -4, d: 0.05, color: 0x269ef6 },
-  { key: "Experts", x: -1.35, d: 0.55, color: 0x9874f2 },
+  { key: "Projects", x: -4, d: 0.05, color: 0x2868f2 },
+  { key: "Experts", x: -1.35, d: 0.55, color: 0x7764df },
   { key: "AI Agents", x: 1.45, d: 1.45, color: 0x70d4ff },
-  { key: "Employees", x: 4, d: 1.45, color: 0x48c7c0 },
+  { key: "Employees", x: 4, d: 1.45, color: 0x32a89e },
 ];
 export function createActors() {
   for (const t of teams) {
@@ -73,8 +74,10 @@ export function createActors() {
         source:
           t.key === "AI Agents"
             ? "components/robot.js"
-            : "components/people.js",
-        version: 4,
+            : t.key === "Experts"
+              ? "components/expert-model-v2.js"
+              : "components/people.js",
+        version: t.key === "Experts" ? 6 : 5,
         rect: {
           Projects: [380, 366, 186, 172],
           Experts: [581, 357, 174, 183],
@@ -83,26 +86,23 @@ export function createActors() {
         }[t.key],
       },
       () => {
-        const g = groupAt(
-          t.x,
-          levels[2] +
-            {
-              Projects: 0.09,
-              Experts: 0.13,
-              "AI Agents": 0.065,
-              Employees: 0.065,
-            }[t.key],
-          t.d,
-        );
+        const yOffset = {
+          Projects: 0.09,
+          Experts: 0.105,
+          "AI Agents": 0.065,
+          Employees: 0.065,
+        }[t.key];
+        const g = groupAt(t.x, levels[2] + yOffset, t.d);
         g.userData.layer = 2;
         g.userData.name = t.key;
-        characterBase(g, t.color, t.key === "Experts" ? 0.83 : 0.85);
+        const frosted = t.key === "Experts" || t.key === "AI Agents" || t.key === "Employees";
+        characterBase(g, t.color, t.key === "Experts" ? 0.8 : 0.85, frosted);
         if (t.key === "Projects") {
           person(g, -0.39, -0.12, t.color, 0.69);
           person(g, 0.41, -0.1, t.color, 0.65);
           person(g, 0, 0.17, t.color, 0.88);
         } else if (t.key === "Experts") {
-          person(g, 0, 0.1, t.color, 0.99, true);
+          createExpertModelV2(g, t.color);
         } else if (t.key === "Employees") {
           person(g, 0.24, -0.12, t.color, 0.84);
           person(g, -0.25, 0.19, t.color, 0.75);
@@ -117,11 +117,10 @@ export function createActors() {
             clickable.push(o);
           }
         });
-        // Text labels remain attached to their group in space while the view rotates.
         const textGroup = new THREE.Group();
         textGroup.position.x = {
           Projects: -0.66,
-          Experts: 0.04,
+          Experts: 0.02,
           "AI Agents": -0.47,
           Employees: -0.25,
         }[t.key];
@@ -130,7 +129,7 @@ export function createActors() {
           t.key === "Projects"
             ? 1.79
             : t.key === "Experts"
-              ? 2.1
+              ? 2.02
               : t.key === "AI Agents"
                 ? 2.17
                 : 1.82;
@@ -162,18 +161,33 @@ export function createActors() {
         });
         const badgeHeight = {
           Projects: 1.5,
-          Experts: 1.72,
+          Experts: 1.66,
           "AI Agents": 1.74,
           Employees: 1.64,
         }[t.key];
         const badge = groupAt(t.x - 1.0, levels[2] + badgeHeight, t.d - 0.2);
-        box(0.39, 0.46, 0.08, tubeGlass, new THREE.Vector3(), badge, 0.065);
+        const badgeGlass = frosted
+          ? mat(0xc7d9ef, {
+              metalness: 0.03,
+              roughness: 0.44,
+              transmission: 0.34,
+              thickness: 0.15,
+              ior: 1.33,
+              transparent: true,
+              opacity: 0.34,
+              depthWrite: false,
+              clearcoat: 0.34,
+              clearcoatRoughness: 0.45,
+            })
+          : tubeGlass;
+        box(0.39, 0.46, 0.08, badgeGlass, new THREE.Vector3(), badge, 0.065);
         createRoleEmblem(
           badge,
           t.key,
           t.key === "AI Agents" ? 0xbaa2ff : t.color,
         );
-        softGlow(badge, new THREE.Vector3(), 0.8, t.color);
+        const badgeGlow = softGlow(badge, new THREE.Vector3(), 0.76, t.color);
+        badgeGlow.material.opacity = frosted ? 0.46 : 1;
       },
     );
   }
