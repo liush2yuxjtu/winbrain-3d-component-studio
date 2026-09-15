@@ -16,24 +16,66 @@ concurrency:
 jobs:
   review:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: source/package-lock.json
-      - name: Install and build
-        working-directory: source
-        run: npm ci && npm run build
-      - name: Package review workspace
+      - name: Apply initial source migration
         run: |
-          tar --exclude=.git --exclude=review-workspace.tgz -czf /tmp/review-workspace.tgz .
+          if [ -f source/review/apply-fixes.py ]; then
+            python3 source/review/apply-fixes.py
+          fi
+      - name: Install build and browser dependencies
+        working-directory: source
+        run: |
+          npm ci
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Install comparison dependencies
+        run: python3 -m pip install numpy==2.2.6 opencv-python-headless==4.12.0.88
+      - name: Build baseline and candidate
+        run: |
+          git worktree add --detach /tmp/winbrain-baseline bc2a884927706d66fe107d8c0c2c2b7af81ba853
+          ln -s "$GITHUB_WORKSPACE/source/node_modules" /tmp/winbrain-baseline/source/node_modules
+          (cd /tmp/winbrain-baseline/source && npm run build)
+          (cd source && npm run build)
+      - name: Capture, export, and round-trip models
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/candidate-server.log 2>&1 &
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory /tmp/winbrain-baseline > /tmp/baseline-server.log 2>&1 &
+          node source/review/capture.mjs
+      - name: Measure reference differences and frozen-frame stability
+        run: python3 source/review/compare.py
+      - name: Rebuild catalog from refreshed manifest
+        working-directory: source
+        run: node build-catalog.mjs
+      - name: Commit verified artifacts on review branch only
+        if: github.event_name == 'push' && github.ref == 'refs/heads/fix/p0-p1-assets-20260915'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm --ignore-unmatch source/review/apply-fixes.py
+          git add source/components assets previews asset-review index.html studio.html catalog.html tokens.html tokens.css motion.html motion-manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: apply P0/P1 models and refresh verified exports and snapshots'
+            git push origin HEAD:fix/p0-p1-assets-20260915
+          fi
+      - name: Package visual evidence
+        if: always()
+        run: |
           mkdir -p review-artifact
-          mv /tmp/review-workspace.tgz review-artifact/
+          tar -czf review-artifact/asset-review.tgz asset-review source/components source/review assets/catalog.json previews index.html studio.html catalog.html || true
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: winbrain-review-workspace
-          path: review-artifact/review-workspace.tgz
-          retention-days: 3
+          name: winbrain-asset-review
+          path: review-artifact/asset-review.tgz
+          retention-days: 7
