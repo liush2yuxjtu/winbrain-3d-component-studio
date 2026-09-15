@@ -18,9 +18,10 @@ export function createDataObjects() {
       () => {
         const g = groupAt(n.x, levels[1] + 0.14, n.d);
         createPedestal(n, g);
-        const frostedTarget = n.type === "task" || n.type === "cloud";
-        if (frostedTarget) {
-          const frosted = mat(n.type === "task" ? 0xbdd5ee : 0xc7dff2, {
+        // Reference cloud sits on a softly diffusing glass deck. Keep Tasks on its
+        // original pedestal because an extra deck reduced structural similarity.
+        if (n.type === "cloud") {
+          const frosted = mat(0xc7dff2, {
             metalness: 0.02,
             roughness: 0.48,
             transmission: 0.32,
@@ -41,8 +42,8 @@ export function createDataObjects() {
             new THREE.Vector3(0, n.h + 0.11, 0),
             g,
           );
-          frostDeck.name = `${n.type}-frosted-glass-deck`;
-          ring(n.r * 0.86, n.h + 0.14, n.type === "task" ? 0x9fc9f3 : 0xa9d9f0, g, 0.006);
+          frostDeck.name = "cloud-frosted-glass-deck";
+          ring(n.r * 0.86, n.h + 0.14, 0xa9d9f0, g, 0.006);
         }
         label(
           g,
@@ -56,21 +57,19 @@ export function createDataObjects() {
         );
         const icon = new THREE.Group();
         icon.name = n.type + "-sculpture";
-        icon.position.y = n.h + (n.type === "task" ? 0.11 : n.type === "cloud" ? 0.105 : 0.125);
+        icon.position.y = n.h + (n.type === "cloud" ? 0.105 : 0.125);
         g.add(icon);
         createBusinessModel(n.type, icon);
-        // Reference-first silhouette tuning. Task had become too tall; cloud needs a wider, flatter read.
         const sculptureScale = {
           people: [1, 1.02, 1],
           doc: [0.96, 0.94, 1],
-          task: [0.94, 1.01, 0.98],
+          task: [0.96, 1.10, 1],
           data: [1, 1, 1],
           server: [0.96, 0.95, 1],
           laptop: [1, 1.08, 1],
           cloud: [1.02, 0.94, 1.04],
         }[n.type];
         icon.scale.set(...sculptureScale);
-        if (n.type === "task") icon.rotation.y -= 0.035;
         if (n.type === "cloud") icon.position.z -= 0.015;
         if (n.type === "data") {
           const captionPanel = plate(
