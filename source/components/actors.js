@@ -50,6 +50,7 @@ import {
 } from "../core.js";
 import { register, capture } from "../registry.js";
 import { person, characterBase } from "./people.js";
+import { createExpertModelV2 } from "./expert-model-v2.js";
 import { createRobot } from "./robot.js";
 import { createRoleEmblem } from "./badges.js";
 const teams = [
@@ -73,8 +74,10 @@ export function createActors() {
         source:
           t.key === "AI Agents"
             ? "components/robot.js"
-            : "components/people.js",
-        version: 5,
+            : t.key === "Experts"
+              ? "components/expert-model-v2.js"
+              : "components/people.js",
+        version: t.key === "Experts" ? 6 : 5,
         rect: {
           Projects: [380, 366, 186, 172],
           Experts: [581, 357, 174, 183],
@@ -99,7 +102,7 @@ export function createActors() {
           person(g, 0.41, -0.1, t.color, 0.65);
           person(g, 0, 0.17, t.color, 0.88);
         } else if (t.key === "Experts") {
-          person(g, 0, 0.085, t.color, 0.94, true);
+          createExpertModelV2(g, t.color);
         } else if (t.key === "Employees") {
           person(g, 0.24, -0.12, t.color, 0.84);
           person(g, -0.25, 0.19, t.color, 0.75);
