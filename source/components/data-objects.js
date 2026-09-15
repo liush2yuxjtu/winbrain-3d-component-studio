@@ -68,7 +68,7 @@ export function createDataObjects() {
           data: [1, 1, 1],
           server: [0.96, 0.95, 1],
           laptop: [1, 1.08, 1],
-          cloud: [0.90, 0.94, 1.04],
+          cloud: [1.02, 0.94, 1.04],
         }[n.type];
         icon.scale.set(...sculptureScale);
         if (n.type === "cloud") icon.position.z -= 0.015;
