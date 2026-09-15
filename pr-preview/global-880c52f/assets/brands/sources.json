@@ -1,0 +1,33 @@
+{
+  "fetched": "2026-09-14",
+  "assets": [
+    {
+      "name": "Slack",
+      "source": "https://slack.com/media-kit",
+      "download": "https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png",
+      "file": "slack.png",
+      "sha256": "cfd9f050bf26ea547af438722c5a93be002c721f0f32a3c996595eab7af1b36d"
+    },
+    {
+      "name": "GitHub",
+      "source": "https://brand.github.com/foundations/logo",
+      "download": "https://brand.github.com/GitHub_Logos.zip",
+      "file": "github.png",
+      "sha256": "2a2f5cbcc74c7fa83c40127dd8b0e42c23f1157131aebe28492aa1ac27bbdc6d"
+    },
+    {
+      "name": "Notion",
+      "source": "https://notion.notion.site/Media-Kit-205535b1d9c4440497a3d7a2ac096286",
+      "download": "https://www.notion.so/front-static/logo-ios.png",
+      "file": "notion.png",
+      "sha256": "483846a85e43e22879445047b83b22033e70fcc25ab34809ebadb7f856507ee0"
+    },
+    {
+      "name": "Lark",
+      "source": "https://play.google.com/store/apps/details?id=com.larksuite.suite",
+      "download": "https://play-lh.googleusercontent.com/jVb-k0e8tuH2HysKnAbHNQ623R7PdXQwuIUlh-LGLC9fdMblDKBvztmllNCHVi_vB4a-8wBBAdrXPEHrAv0a9w=w240-h480",
+      "file": "lark.png",
+      "sha256": "f1a7c6c45f95ee94b5df21f6bca499a147c89c893f2698d3f9c38ad4341eb551"
+    }
+  ]
+}

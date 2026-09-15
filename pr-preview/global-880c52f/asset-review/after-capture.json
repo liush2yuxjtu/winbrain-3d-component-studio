@@ -1,0 +1,82 @@
+{
+  "view": {
+    "yaw": 0.7853981633974483,
+    "pitch": 0.17,
+    "zoom": 1
+  },
+  "stats": {
+    "meshes": 1037,
+    "triangles": 937900,
+    "externalTextures": 0,
+    "referenceImages": 0,
+    "frames": 4,
+    "drawCalls": 6154,
+    "threeRevision": "180",
+    "motion": {
+      "elapsed": 0,
+      "paused": true,
+      "autoRotate": false,
+      "enabled": false,
+      "running": true,
+      "frames": 4,
+      "bindings": [
+        {
+          "behavior": "robot.idle",
+          "sourceKind": "robot"
+        },
+        {
+          "behavior": "connection.packet-flow",
+          "sourceKind": "packet"
+        },
+        {
+          "behavior": "connection.packet-flow",
+          "sourceKind": "packet"
+        },
+        {
+          "behavior": "connection.packet-flow",
+          "sourceKind": "packet"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        },
+        {
+          "behavior": "atmosphere.data-rise",
+          "sourceKind": "rise"
+        }
+      ]
+    }
+  },
+  "count": 22,
+  "viewport": [
+    1536,
+    1024
+  ],
+  "dpr": 1,
+  "browser": "153.0.8010.12",
+  "capture": "Actual WebGL backbuffer copied 1:1 into same-size 2D canvas for DOM capture; frozen test uses native backbuffers"
+}

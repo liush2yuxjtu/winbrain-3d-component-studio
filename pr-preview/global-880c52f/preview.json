@@ -1,0 +1,17 @@
+{
+  "pull_request": 3,
+  "preview_type": "global-scene-review",
+  "source_commit": "880c52f19da923a216c26addb997ad1a1235ab19",
+  "artifact_commit": "fb6a10f901868f951aee9ff8e6df8ed445feca03",
+  "preview_shell_commit": "f14ae67b66a6f86a150f01b995dabf7dc12b2966",
+  "validation_run": "https://github.com/liush2yuxjtu/winbrain-3d-component-studio/actions/runs/34951083194",
+  "entry": "global.html",
+  "default_mode": "actual-code-snapshot",
+  "live_mode": "global.html#live",
+  "reference_comparison": "global.html#compare",
+  "components": 22,
+  "models_changed_in_shell_pass": false,
+  "global_qa": "global-preview-qa.json",
+  "visual_acceptance": "pending",
+  "production_root_modified": false
+}

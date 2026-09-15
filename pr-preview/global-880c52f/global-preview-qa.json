@@ -1,0 +1,24 @@
+{
+ "tested_shell_commit": "f14ae67b66a6f86a150f01b995dabf7dc12b2966",
+ "method": "Local Chromium layout and controls test with unchanged PNG bytes embedded for offline inspection. Live iframe is not covered by this local result.",
+ "viewports": [[1440,1080],[390,844],[768,1024]],
+ "color_schemes": ["dark", "light"],
+ "checks": {
+  "no_horizontal_overflow": true,
+  "all_snapshot_images_loaded": true,
+  "mode_buttons_min_height_44px": true,
+  "exactly_one_pressed_mode": true,
+  "reference_current_compare_switching": true,
+  "keyboard_enter_activation": true,
+  "no_page_javascript_errors": true,
+  "live_load_timeout_preserves_labeled_snapshot": true
+ },
+ "fixes": [
+  "A comparison.html compatibility route now targets the current full-scene comparison rather than a missing page.",
+  "Review controls and navigation are outside the 1536px scaled scene, with 44px targets and a mobile layout.",
+  "Snapshot, design reference and live rendering have separate explicit labels.",
+  "Model revision, artifact revision and preview-shell revision are recorded separately.",
+  "Live loading is on demand with a timeout and direct-scene fallback; hidden live rendering is suspended."
+ ],
+ "limits": ["Not a complete animated flicker audit.", "Existing model mismatches remain; no blanket visual approval."]
+}

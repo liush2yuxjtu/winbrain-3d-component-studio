@@ -1,0 +1,189 @@
+{
+  "schema": "winbrain.motion/v1",
+  "tokens": [
+    {
+      "id": "motion.clock.max-delta",
+      "group": "Clock",
+      "value": 0.05,
+      "unit": "s",
+      "usage": [
+        "hero.ambient"
+      ]
+    },
+    {
+      "id": "motion.speed.camera-orbit",
+      "group": "Speed",
+      "value": 0.1,
+      "unit": "rad/s",
+      "usage": [
+        "camera.auto-orbit"
+      ]
+    },
+    {
+      "id": "motion.speed.robot-float",
+      "group": "Speed",
+      "value": 1.6,
+      "unit": "rad/s",
+      "usage": [
+        "robot.idle"
+      ]
+    },
+    {
+      "id": "motion.speed.packet-progress",
+      "group": "Speed",
+      "value": 0.16,
+      "unit": "path/s",
+      "usage": [
+        "connection.packet-flow"
+      ]
+    },
+    {
+      "id": "motion.speed.rise-progress",
+      "group": "Speed",
+      "value": 0.23,
+      "unit": "path/s",
+      "usage": [
+        "atmosphere.data-rise"
+      ]
+    },
+    {
+      "id": "motion.amplitude.robot-float-y",
+      "group": "Amplitude",
+      "value": 0.024,
+      "unit": "scene",
+      "usage": [
+        "robot.idle"
+      ]
+    }
+  ],
+  "primitives": [
+    {
+      "id": "floatY",
+      "name": "Float Y",
+      "channel": "position.y",
+      "description": "围绕基准 Y 做正弦浮动。"
+    },
+    {
+      "id": "followPath",
+      "name": "Follow Path",
+      "channel": "position.xyz",
+      "description": "沿 Curve 的 0–1 进度循环移动。"
+    },
+    {
+      "id": "riseY",
+      "name": "Rise Y",
+      "channel": "position.xyz",
+      "description": "在给定上下边界之间向上循环。"
+    },
+    {
+      "id": "orbitYaw",
+      "name": "Orbit Yaw",
+      "channel": "camera.yaw",
+      "description": "按速度持续改变相机 yaw。"
+    }
+  ],
+  "behaviors": [
+    {
+      "id": "robot.idle",
+      "name": "Robot Idle Float",
+      "category": "Ambient",
+      "primitive": "floatY",
+      "trigger": "ambient.loop",
+      "tokens": [
+        "motion.speed.robot-float",
+        "motion.amplitude.robot-float-y"
+      ],
+      "usedBy": [
+        "actor.ai-agents"
+      ],
+      "description": "AI 机器人在底座上做轻微上下浮动。"
+    },
+    {
+      "id": "connection.packet-flow",
+      "name": "Connection Packet Flow",
+      "category": "Data Flow",
+      "primitive": "followPath",
+      "trigger": "ambient.loop",
+      "tokens": [
+        "motion.speed.packet-progress"
+      ],
+      "usedBy": [
+        "structure.connections"
+      ],
+      "description": "协作层光点沿项目、专家、AI Agent 与员工之间的曲线循环移动。"
+    },
+    {
+      "id": "atmosphere.data-rise",
+      "name": "Atmosphere Data Rise",
+      "category": "Data Flow",
+      "primitive": "riseY",
+      "trigger": "ambient.loop",
+      "tokens": [
+        "motion.speed.rise-progress"
+      ],
+      "usedBy": [
+        "world.atmosphere"
+      ],
+      "description": "底层到数据平台之间的发光数据点持续向上流动。"
+    },
+    {
+      "id": "camera.auto-orbit",
+      "name": "Camera Auto Orbit",
+      "category": "Camera",
+      "primitive": "orbitYaw",
+      "trigger": "ui.auto-rotate",
+      "tokens": [
+        "motion.speed.camera-orbit"
+      ],
+      "usedBy": [
+        "home.reference-view"
+      ],
+      "description": "用户开启自动旋转后，相机围绕组织世界缓慢旋转。"
+    }
+  ],
+  "timelines": [
+    {
+      "id": "hero.ambient",
+      "name": "Hero Ambient Loop",
+      "mode": "parallel",
+      "loop": true,
+      "trigger": "scene.ready",
+      "tracks": [
+        "robot.idle",
+        "connection.packet-flow",
+        "atmosphere.data-rise"
+      ],
+      "optionalTracks": [
+        "camera.auto-orbit"
+      ],
+      "description": "首页默认环境动效并行运行；相机自动旋转由用户单独开启。"
+    }
+  ],
+  "triggers": [
+    {
+      "id": "scene.ready",
+      "name": "Scene Ready",
+      "description": "三维世界构建完成后启动环境 Timeline。"
+    },
+    {
+      "id": "ambient.loop",
+      "name": "Ambient Loop",
+      "description": "场景处于运行状态时持续循环。"
+    },
+    {
+      "id": "ui.auto-rotate",
+      "name": "Auto Rotate Toggle",
+      "description": "用户点击自动旋转按钮后启停。"
+    },
+    {
+      "id": "ui.pause",
+      "name": "Pause Motion Toggle",
+      "description": "用户暂停或继续环境光流。"
+    },
+    {
+      "id": "pointer.drag",
+      "name": "Pointer Drag",
+      "description": "开始手动旋转场景时停止自动相机旋转。"
+    }
+  ]
+}

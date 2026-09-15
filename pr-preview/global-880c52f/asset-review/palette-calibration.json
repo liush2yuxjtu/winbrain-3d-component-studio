@@ -1,0 +1,319 @@
+{
+  "method": "Fixed geometry and camera; 16 sRGB backing colors; minimize MAE/255 + 0.5*(1-SSIM) on the existing context crop. Final joint render is measured separately.",
+  "selected": {
+    "app.chat": {
+      "color": "#303749",
+      "mae_rgb": 22.3537,
+      "ssim_gray": 0.55099,
+      "objective": 0.3121680060188396
+    },
+    "app.workbench": {
+      "color": "#2c3142",
+      "mae_rgb": 24.2698,
+      "ssim_gray": 0.48433,
+      "objective": 0.35300990493553724
+    },
+    "app.integrations": {
+      "color": "#303749",
+      "mae_rgb": 30.4861,
+      "ssim_gray": 0.47858,
+      "objective": 0.3802630285061434
+    }
+  },
+  "candidates": {
+    "app.chat": [
+      {
+        "color": "#29354d",
+        "mae_rgb": 22.504,
+        "ssim_gray": 0.54996,
+        "objective": 0.31327207953455327
+      },
+      {
+        "color": "#2c3142",
+        "mae_rgb": 22.2951,
+        "ssim_gray": 0.54842,
+        "objective": 0.31322381555216633
+      },
+      {
+        "color": "#202839",
+        "mae_rgb": 23.5857,
+        "ssim_gray": 0.53849,
+        "objective": 0.323246714715768
+      },
+      {
+        "color": "#253049",
+        "mae_rgb": 22.5765,
+        "ssim_gray": 0.54714,
+        "objective": 0.31496411139735847
+      },
+      {
+        "color": "#26334b",
+        "mae_rgb": 22.5432,
+        "ssim_gray": 0.54924,
+        "objective": 0.3137869847571336
+      },
+      {
+        "color": "#31394d",
+        "mae_rgb": 22.6711,
+        "ssim_gray": 0.55128,
+        "objective": 0.3132675749750675
+      },
+      {
+        "color": "#354056",
+        "mae_rgb": 24.1968,
+        "ssim_gray": 0.55047,
+        "objective": 0.3196539913845013
+      },
+      {
+        "color": "#3a4660",
+        "mae_rgb": 26.3755,
+        "ssim_gray": 0.54744,
+        "objective": 0.3297115811441447
+      },
+      {
+        "color": "#202332",
+        "mae_rgb": 24.2428,
+        "ssim_gray": 0.53388,
+        "objective": 0.3281290399570355
+      },
+      {
+        "color": "#353950",
+        "mae_rgb": 23.1421,
+        "ssim_gray": 0.55167,
+        "objective": 0.31491980007987375
+      },
+      {
+        "color": "#1c2940",
+        "mae_rgb": 23.3922,
+        "ssim_gray": 0.53969,
+        "objective": 0.3218890114001462
+      },
+      {
+        "color": "#242f41",
+        "mae_rgb": 22.6875,
+        "ssim_gray": 0.54604,
+        "objective": 0.31595219053955675
+      },
+      {
+        "color": "#2b374e",
+        "mae_rgb": 22.5558,
+        "ssim_gray": 0.55059,
+        "objective": 0.3131575485389609
+      },
+      {
+        "color": "#303c52",
+        "mae_rgb": 23.1472,
+        "ssim_gray": 0.55127,
+        "objective": 0.3151383631389649
+      },
+      {
+        "color": "#303749",
+        "mae_rgb": 22.3537,
+        "ssim_gray": 0.55099,
+        "objective": 0.3121680060188396
+      },
+      {
+        "color": "#252b39",
+        "mae_rgb": 23.2208,
+        "ssim_gray": 0.54281,
+        "objective": 0.3196592249864446
+      }
+    ],
+    "app.workbench": [
+      {
+        "color": "#29354d",
+        "mae_rgb": 24.9239,
+        "ssim_gray": 0.48525,
+        "objective": 0.35511402328989067
+      },
+      {
+        "color": "#2c3142",
+        "mae_rgb": 24.2698,
+        "ssim_gray": 0.48433,
+        "objective": 0.35300990493553724
+      },
+      {
+        "color": "#202839",
+        "mae_rgb": 25.7388,
+        "ssim_gray": 0.47369,
+        "objective": 0.3640925241616675
+      },
+      {
+        "color": "#253049",
+        "mae_rgb": 24.8869,
+        "ssim_gray": 0.48284,
+        "objective": 0.35617710780467976
+      },
+      {
+        "color": "#26334b",
+        "mae_rgb": 24.9049,
+        "ssim_gray": 0.48454,
+        "objective": 0.35539515532899363
+      },
+      {
+        "color": "#31394d",
+        "mae_rgb": 25.1996,
+        "ssim_gray": 0.48542,
+        "objective": 0.35611299554575493
+      },
+      {
+        "color": "#354056",
+        "mae_rgb": 26.8567,
+        "ssim_gray": 0.48214,
+        "objective": 0.36425149660722667
+      },
+      {
+        "color": "#3a4660",
+        "mae_rgb": 28.8688,
+        "ssim_gray": 0.47639,
+        "objective": 0.3750145601022744
+      },
+      {
+        "color": "#202332",
+        "mae_rgb": 26.4822,
+        "ssim_gray": 0.46758,
+        "objective": 0.37006063602467854
+      },
+      {
+        "color": "#353950",
+        "mae_rgb": 25.7168,
+        "ssim_gray": 0.48493,
+        "objective": 0.3583845569755286
+      },
+      {
+        "color": "#1c2940",
+        "mae_rgb": 25.6744,
+        "ssim_gray": 0.47435,
+        "objective": 0.36350845448760816
+      },
+      {
+        "color": "#242f41",
+        "mae_rgb": 24.7671,
+        "ssim_gray": 0.48171,
+        "objective": 0.35627288860030026
+      },
+      {
+        "color": "#2b374e",
+        "mae_rgb": 25.0194,
+        "ssim_gray": 0.48558,
+        "objective": 0.3553232772456392
+      },
+      {
+        "color": "#303c52",
+        "mae_rgb": 25.7699,
+        "ssim_gray": 0.48463,
+        "objective": 0.3587411992827503
+      },
+      {
+        "color": "#303749",
+        "mae_rgb": 24.7278,
+        "ssim_gray": 0.48572,
+        "objective": 0.354112714724499
+      },
+      {
+        "color": "#252b39",
+        "mae_rgb": 25.2122,
+        "ssim_gray": 0.47861,
+        "objective": 0.35956602193320075
+      }
+    ],
+    "app.integrations": [
+      {
+        "color": "#29354d",
+        "mae_rgb": 30.9151,
+        "ssim_gray": 0.4783,
+        "objective": 0.3820859038914596
+      },
+      {
+        "color": "#2c3142",
+        "mae_rgb": 30.4028,
+        "ssim_gray": 0.47723,
+        "objective": 0.3806137074726772
+      },
+      {
+        "color": "#202839",
+        "mae_rgb": 31.5955,
+        "ssim_gray": 0.46697,
+        "objective": 0.39041748833106904
+      },
+      {
+        "color": "#253049",
+        "mae_rgb": 30.8992,
+        "ssim_gray": 0.47572,
+        "objective": 0.3833119060874999
+      },
+      {
+        "color": "#26334b",
+        "mae_rgb": 30.9163,
+        "ssim_gray": 0.47759,
+        "objective": 0.3824461006204448
+      },
+      {
+        "color": "#31394d",
+        "mae_rgb": 30.9208,
+        "ssim_gray": 0.47819,
+        "objective": 0.3821631343868779
+      },
+      {
+        "color": "#354056",
+        "mae_rgb": 32.6402,
+        "ssim_gray": 0.47548,
+        "objective": 0.3902623955069152
+      },
+      {
+        "color": "#3a4660",
+        "mae_rgb": 34.8072,
+        "ssim_gray": 0.47015,
+        "objective": 0.40142543394437963
+      },
+      {
+        "color": "#202332",
+        "mae_rgb": 32.1474,
+        "ssim_gray": 0.46098,
+        "objective": 0.39558046314562295
+      },
+      {
+        "color": "#353950",
+        "mae_rgb": 31.417,
+        "ssim_gray": 0.47799,
+        "objective": 0.3842091520793742
+      },
+      {
+        "color": "#1c2940",
+        "mae_rgb": 31.5721,
+        "ssim_gray": 0.46764,
+        "objective": 0.3899904973244266
+      },
+      {
+        "color": "#242f41",
+        "mae_rgb": 30.8381,
+        "ssim_gray": 0.47485,
+        "objective": 0.3835087643458668
+      },
+      {
+        "color": "#2b374e",
+        "mae_rgb": 30.9554,
+        "ssim_gray": 0.47875,
+        "objective": 0.38201606187171083
+      },
+      {
+        "color": "#303c52",
+        "mae_rgb": 31.5814,
+        "ssim_gray": 0.47793,
+        "objective": 0.38488445608089794
+      },
+      {
+        "color": "#303749",
+        "mae_rgb": 30.4861,
+        "ssim_gray": 0.47858,
+        "objective": 0.3802630285061434
+      },
+      {
+        "color": "#252b39",
+        "mae_rgb": 31.1796,
+        "ssim_gray": 0.47155,
+        "objective": 0.3865001424228327
+      }
+    ]
+  }
+}
