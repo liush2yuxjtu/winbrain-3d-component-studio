@@ -7,7 +7,7 @@
   ],
   "registration": "none; identical pixel coordinates",
   "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
-  "capture_sha256": "8c02544042bcccc7bf9d2aa5c140728c1126c27344b0170a069f9f1ef8701ade",
+  "capture_sha256": "f3f4a8cd8292627c6ab5f28e0a86a79d56381678531ab4cb6f1cad59974c5337",
   "regions": {
     "whole": {
       "rect": [
@@ -16,12 +16,12 @@
         1536,
         1024
       ],
-      "mae_rgb": 20.3893,
-      "blurred_mae": 13.7668,
-      "ssim_gray": 0.63194,
+      "mae_rgb": 20.1249,
+      "blurred_mae": 13.5067,
+      "ssim_gray": 0.63459,
       "reference_luma": 49.16,
-      "capture_luma": 47.57,
-      "edge_distance_px": 2.509
+      "capture_luma": 48.11,
+      "edge_distance_px": 2.476
     },
     "header": {
       "rect": [
@@ -58,12 +58,12 @@
         665,
         157
       ],
-      "mae_rgb": 24.8597,
-      "blurred_mae": 15.0135,
-      "ssim_gray": 0.51079,
+      "mae_rgb": 24.8535,
+      "blurred_mae": 15.0091,
+      "ssim_gray": 0.51081,
       "reference_luma": 72.78,
-      "capture_luma": 74.71,
-      "edge_distance_px": 1.81
+      "capture_luma": 74.74,
+      "edge_distance_px": 1.809
     },
     "application_platform": {
       "rect": [
@@ -72,12 +72,12 @@
         892,
         169
       ],
-      "mae_rgb": 25.6059,
-      "blurred_mae": 17.4639,
-      "ssim_gray": 0.52155,
+      "mae_rgb": 25.5941,
+      "blurred_mae": 17.4454,
+      "ssim_gray": 0.52178,
       "reference_luma": 75.38,
-      "capture_luma": 69.83,
-      "edge_distance_px": 2.472
+      "capture_luma": 70.07,
+      "edge_distance_px": 2.471
     },
     "intelligence": {
       "rect": [
@@ -86,12 +86,12 @@
         905,
         286
       ],
-      "mae_rgb": 31.2572,
-      "blurred_mae": 23.119,
-      "ssim_gray": 0.45287,
+      "mae_rgb": 29.7879,
+      "blurred_mae": 21.6792,
+      "ssim_gray": 0.46812,
       "reference_luma": 66.17,
-      "capture_luma": 57.76,
-      "edge_distance_px": 3.297
+      "capture_luma": 60.86,
+      "edge_distance_px": 3.126
     },
     "data_foundation": {
       "rect": [
@@ -100,12 +100,12 @@
         960,
         288
       ],
-      "mae_rgb": 33.6194,
-      "blurred_mae": 24.2326,
-      "ssim_gray": 0.37817,
+      "mae_rgb": 33.4059,
+      "blurred_mae": 24.0321,
+      "ssim_gray": 0.37959,
       "reference_luma": 72.7,
-      "capture_luma": 67.68,
-      "edge_distance_px": 2.816
+      "capture_luma": 67.88,
+      "edge_distance_px": 2.821
     },
     "earth": {
       "rect": [
@@ -128,8 +128,8 @@
         291,
         733
       ],
-      "mae_rgb": 11.2856,
-      "blurred_mae": 4.0018,
+      "mae_rgb": 11.2858,
+      "blurred_mae": 4.002,
       "ssim_gray": 0.79757,
       "reference_luma": 26.92,
       "capture_luma": 25.75,

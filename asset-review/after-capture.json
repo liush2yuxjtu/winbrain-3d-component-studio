@@ -6,11 +6,11 @@
   },
   "stats": {
     "meshes": 1037,
-    "triangles": 886606,
+    "triangles": 886574,
     "externalTextures": 0,
     "referenceImages": 0,
     "frames": 4,
-    "drawCalls": 6154,
+    "drawCalls": 6158,
     "threeRevision": "180",
     "motion": {
       "elapsed": 0,
