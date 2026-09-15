@@ -61,34 +61,6 @@ export function createDataObjects() {
         icon.position.y = n.h + (n.type === "cloud" ? 0.105 : 0.125);
         g.add(icon);
         createBusinessModel(n.type, icon);
-        if (n.type === "cloud") {
-          const cloud = icon.getObjectByName("unified-sculpted-cloud");
-          if (cloud?.isMesh) {
-            cloud.material = mat(0x9fc1e2, {
-              metalness: 0.08,
-              roughness: 0.2,
-              clearcoat: 1,
-              clearcoatRoughness: 0.1,
-              emissive: 0x2d587d,
-              emissiveIntensity: 0.12,
-            });
-            const halo = new THREE.Mesh(
-              cloud.geometry.clone(),
-              new THREE.MeshBasicMaterial({
-                color: 0xe8f6ff,
-                transparent: true,
-                opacity: 0.12,
-                side: THREE.BackSide,
-                depthWrite: false,
-                toneMapped: false,
-              }),
-            );
-            halo.name = "external-data-cloud-rim";
-            halo.rotation.copy(cloud.rotation);
-            halo.scale.setScalar(1.035);
-            icon.add(halo);
-          }
-        }
         const sculptureScale = {
           people: [1, 1.02, 1],
           doc: [0.96, 0.94, 1],
@@ -96,7 +68,7 @@ export function createDataObjects() {
           data: [1, 1, 1],
           server: [0.96, 0.95, 1],
           laptop: [1, 1.08, 1],
-          cloud: [1.02, 0.94, 1.04],
+          cloud: [0.90, 0.94, 1.04],
         }[n.type];
         icon.scale.set(...sculptureScale);
         if (n.type === "cloud") icon.position.z -= 0.015;
