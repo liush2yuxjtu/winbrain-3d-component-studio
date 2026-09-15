@@ -18,7 +18,9 @@ region_before = module.compare(out/'before.png')
 region_after = module.compare(out/'after.png')
 ssims = [module.ssim_map(ref, image) for image in (before,after)]
 manifest = json.loads((root/'assets/catalog.json').read_text())
-changed = [c for c in manifest['components'] if c['version'] == 5]
+# P0/P1 review assets start at v5. New isolated replacements may advance to v6+
+# and must remain in the same visual review instead of silently disappearing.
+changed = [c for c in manifest['components'] if c['version'] >= 5]
 assert len(changed) == 16, f'Expected 16 corrected assets, found {len(changed)}'
 rows=[]
 for c in changed:
