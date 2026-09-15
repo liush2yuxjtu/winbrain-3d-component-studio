@@ -24,8 +24,8 @@ export function createRoleEmblem(parent, role, color) {
   } else if (role === "Experts") {
     // The static reference uses an atom-style expert badge.
     for (const angle of [0, Math.PI / 3, -Math.PI / 3]) {
-      const orbit = loop(0.092, 0.008, 0, 0, angle);
-      orbit.scale.y = 0.48;
+      const orbit = loop(0.112, 0.009, 0, 0, angle);
+      orbit.scale.y = 0.52;
       orbit.name = "expert-atom-orbit";
     }
     sphere(0.024, material, new THREE.Vector3(0, 0, 0.075), parent);
