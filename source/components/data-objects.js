@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { groupAt, levels, label, clickable, mat, cyl, ring } from "../core.js";
 import { capture } from "../registry.js";
 import { createBusinessModel, createPedestal } from "./business-models.js";
+import { createExternalDataModelV2 } from "./external-data-model-v2.js";
 import { plate } from "./exhibit-geometry.js";
 import { dataNodes } from "./data-layout.js";
 
@@ -12,27 +13,30 @@ export function createDataObjects() {
       {
         name: n.name,
         category: "业务对象",
-        source: "components/business-models.js",
+        source:
+          n.type === "cloud"
+            ? "components/external-data-model-v2.js"
+            : "components/business-models.js",
         rect: n.rect,
-        version: 5,
+        version: n.type === "cloud" ? 6 : 5,
       },
       () => {
         const g = groupAt(n.x, levels[1] + 0.14, n.d);
         createPedestal(n, g);
-        // Reference cloud sits on a softly diffusing glass deck. Keep Tasks on its
-        // original pedestal because an extra deck reduced structural similarity.
+        // The new cloud keeps the old architectural pedestal but gets its own
+        // softly diffusing top deck, so the model can evolve independently.
         if (n.type === "cloud") {
           const frosted = mat(0xc7dff2, {
             metalness: 0.02,
-            roughness: 0.48,
-            transmission: 0.32,
+            roughness: 0.38,
+            transmission: 0.38,
             thickness: 0.18,
             ior: 1.33,
             transparent: true,
-            opacity: 0.34,
+            opacity: 0.36,
             depthWrite: false,
-            clearcoat: 0.28,
-            clearcoatRoughness: 0.5,
+            clearcoat: 0.45,
+            clearcoatRoughness: 0.28,
             side: THREE.DoubleSide,
           });
           const frostDeck = cyl(
@@ -43,8 +47,8 @@ export function createDataObjects() {
             new THREE.Vector3(0, n.h + 0.11, 0),
             g,
           );
-          frostDeck.name = "cloud-frosted-glass-deck";
-          ring(n.r * 0.86, n.h + 0.14, 0xa9d9f0, g, 0.006);
+          frostDeck.name = "cloud-frosted-glass-deck-v2";
+          ring(n.r * 0.86, n.h + 0.14, 0xb7e4ff, g, 0.007);
         }
         label(
           g,
@@ -60,7 +64,8 @@ export function createDataObjects() {
         icon.name = n.type + "-sculpture";
         icon.position.y = n.h + (n.type === "cloud" ? 0.105 : 0.125);
         g.add(icon);
-        createBusinessModel(n.type, icon);
+        if (n.type === "cloud") createExternalDataModelV2(icon);
+        else createBusinessModel(n.type, icon);
         const sculptureScale = {
           people: [1, 1.02, 1],
           doc: [0.96, 0.94, 1],
@@ -68,10 +73,9 @@ export function createDataObjects() {
           data: [1, 1, 1],
           server: [0.96, 0.95, 1],
           laptop: [1, 1.08, 1],
-          cloud: [1.02, 0.94, 1.04],
+          cloud: [1, 1, 1],
         }[n.type];
         icon.scale.set(...sculptureScale);
-        if (n.type === "cloud") icon.position.z -= 0.015;
         if (n.type === "data") {
           const captionPanel = plate(
             2.54,
