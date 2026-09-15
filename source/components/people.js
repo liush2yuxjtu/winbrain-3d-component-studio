@@ -57,12 +57,12 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
   parent.add(g);
   const m = mat(color, glasses
     ? {
-        roughness: 0.48,
-        metalness: 0.03,
-        clearcoat: 0.24,
-        clearcoatRoughness: 0.34,
+        roughness: 0.36,
+        metalness: 0.025,
+        clearcoat: 0.48,
+        clearcoatRoughness: 0.22,
         emissive: color,
-        emissiveIntensity: 0.06,
+        emissiveIntensity: 0.10,
       }
     : {
         roughness: 0.42,
@@ -71,7 +71,7 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
         emissive: color,
         emissiveIntensity: 0.09,
       });
-  sphere(0.215, m, new THREE.Vector3(0, 0.9, 0), g, 1, 1.20, 0.98);
+  sphere(0.215, m, new THREE.Vector3(0, 0.9, 0), g, glasses ? 1.14 : 1, 1.20, 0.98);
   cyl(0.095, 0.11, 0.075, m, new THREE.Vector3(0, 0.667, 0), g);
   const torso = mesh(
     new THREE.LatheGeometry(
@@ -85,31 +85,42 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
     m,
     g,
   );
-  torso.scale.z = 0.82;
-  for (const s of [-1, 1]) {
-    const arm = mesh(new THREE.CapsuleGeometry(0.070, 0.28, 7, 16), m, g);
-    arm.position.set(s * 0.285, 0.235, 0.0);
-    arm.rotation.z = -s * 0.08;
+  torso.scale.set(glasses ? 1.06 : 1, 1, 0.82);
+  if (!glasses) {
+    for (const s of [-1, 1]) {
+      const arm = mesh(new THREE.CapsuleGeometry(0.070, 0.28, 7, 16), m, g);
+      arm.position.set(s * 0.285, 0.235, 0.0);
+      arm.rotation.z = -s * 0.08;
+    }
   }
   if (glasses) {
-    // Keep the expert compact without changing every other human asset.
+    // The reference expert is a smooth bust with unmistakable bright glasses.
     g.scale.x *= 1.08;
-    for (const x of [-0.097, 0.097]) {
+    const glassesMat = glowMat(0xe9f2ff, 1.18);
+    for (const x of [-0.105, 0.105]) {
       const t = mesh(
-        new THREE.TorusGeometry(0.101, 0.012, 8, 40),
-        glowMat(0xd8c7ff, 0.82),
+        new THREE.TorusGeometry(0.108, 0.015, 8, 48),
+        glassesMat,
         g,
       );
-      t.position.set(x, 0.915, 0.174);
-      t.scale.y = 0.8;
+      t.position.set(x, 0.915, 0.232);
+      t.scale.y = 0.78;
     }
     beam(
-      new THREE.Vector3(-0.018, 0.915, 0.184),
-      new THREE.Vector3(0.022, 0.915, 0.184),
-      0.009,
-      white,
+      new THREE.Vector3(-0.022, 0.915, 0.238),
+      new THREE.Vector3(0.022, 0.915, 0.238),
+      0.011,
+      glassesMat,
       g,
     );
+    for (const side of [-1, 1])
+      beam(
+        new THREE.Vector3(side * 0.194, 0.918, 0.221),
+        new THREE.Vector3(side * 0.245, 0.927, 0.126),
+        0.008,
+        glassesMat,
+        g,
+      );
   }
   return g;
 }
