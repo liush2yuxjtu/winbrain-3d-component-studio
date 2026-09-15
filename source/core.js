@@ -48,6 +48,10 @@ function updateCamera() {
   camera.lookAt(target);
   camera.zoom = view.zoom;
   camera.updateProjectionMatrix();
+  // DOM labels project world anchors before the WebGL render pass. Keep the
+  // camera world/inverse matrices current here so labels never project with the
+  // previous frame's camera during pointer-drag rotation.
+  camera.updateMatrixWorld(true);
 }
 updateCamera();
 const pmrem = new THREE.PMREMGenerator(renderer);

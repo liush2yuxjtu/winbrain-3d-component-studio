@@ -1,0 +1,975 @@
+{
+  "baseline": {
+    "capture": "visual-diff/before.png",
+    "opencv": "4.12.0",
+    "canvas": [
+      1536,
+      1024
+    ],
+    "registration": "none; identical pixel coordinates",
+    "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+    "capture_sha256": "c2f7e5c02a6fe671e8c2e87a47aad8f6e5d839b165844aac5d94808222aa466a",
+    "regions": {
+      "whole": {
+        "rect": [
+          0,
+          0,
+          1536,
+          1024
+        ],
+        "mae_rgb": 26.9475,
+        "blurred_mae": 20.0307,
+        "ssim_gray": 0.54008,
+        "reference_luma": 49.16,
+        "capture_luma": 38.07,
+        "edge_distance_px": 3.191
+      },
+      "header": {
+        "rect": [
+          0,
+          0,
+          1536,
+          90
+        ],
+        "mae_rgb": 9.1905,
+        "blurred_mae": 4.6008,
+        "ssim_gray": 0.84802,
+        "reference_luma": 20.25,
+        "capture_luma": 17.48,
+        "edge_distance_px": 0.868
+      },
+      "hero": {
+        "rect": [
+          0,
+          125,
+          322,
+          370
+        ],
+        "mae_rgb": 16.6674,
+        "blurred_mae": 6.3545,
+        "ssim_gray": 0.75327,
+        "reference_luma": 33.53,
+        "capture_luma": 30.5,
+        "edge_distance_px": 0.861
+      },
+      "apps": {
+        "rect": [
+          445,
+          100,
+          665,
+          157
+        ],
+        "mae_rgb": 36.4111,
+        "blurred_mae": 26.2852,
+        "ssim_gray": 0.43582,
+        "reference_luma": 72.78,
+        "capture_luma": 57.5,
+        "edge_distance_px": 2.085
+      },
+      "application_platform": {
+        "rect": [
+          325,
+          200,
+          892,
+          169
+        ],
+        "mae_rgb": 41.3912,
+        "blurred_mae": 32.8168,
+        "ssim_gray": 0.41362,
+        "reference_luma": 75.38,
+        "capture_luma": 52.86,
+        "edge_distance_px": 3.267
+      },
+      "intelligence": {
+        "rect": [
+          315,
+          351,
+          905,
+          286
+        ],
+        "mae_rgb": 36.459,
+        "blurred_mae": 27.8739,
+        "ssim_gray": 0.40492,
+        "reference_luma": 66.17,
+        "capture_luma": 57.35,
+        "edge_distance_px": 3.434
+      },
+      "data_foundation": {
+        "rect": [
+          280,
+          594,
+          960,
+          288
+        ],
+        "mae_rgb": 39.7697,
+        "blurred_mae": 30.8769,
+        "ssim_gray": 0.31522,
+        "reference_luma": 72.7,
+        "capture_luma": 56.3,
+        "edge_distance_px": 2.976
+      },
+      "earth": {
+        "rect": [
+          140,
+          863,
+          1240,
+          161
+        ],
+        "mae_rgb": 34.4538,
+        "blurred_mae": 30.7054,
+        "ssim_gray": 0.39798,
+        "reference_luma": 58.87,
+        "capture_luma": 37.8,
+        "edge_distance_px": 3.887
+      },
+      "sidebar": {
+        "rect": [
+          1245,
+          120,
+          291,
+          733
+        ],
+        "mae_rgb": 17.3611,
+        "blurred_mae": 9.9286,
+        "ssim_gray": 0.66501,
+        "reference_luma": 26.92,
+        "capture_luma": 17.78,
+        "edge_distance_px": 0.952
+      }
+    }
+  },
+  "round1": {
+    "capture": "intermediate capture round1",
+    "opencv": "4.12.0",
+    "canvas": [
+      1536,
+      1024
+    ],
+    "registration": "none; identical pixel coordinates",
+    "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+    "capture_sha256": "bd98f14416e9b21e519d9136718bef42eb4e669b76350ed30e819cc9f5557bf3",
+    "regions": {
+      "whole": {
+        "rect": [
+          0,
+          0,
+          1536,
+          1024
+        ],
+        "mae_rgb": 22.6573,
+        "blurred_mae": 15.8679,
+        "ssim_gray": 0.60815,
+        "reference_luma": 49.16,
+        "capture_luma": 47.33,
+        "edge_distance_px": 3.003
+      },
+      "header": {
+        "rect": [
+          0,
+          0,
+          1536,
+          90
+        ],
+        "mae_rgb": 7.1821,
+        "blurred_mae": 2.6186,
+        "ssim_gray": 0.87936,
+        "reference_luma": 20.25,
+        "capture_luma": 19.94,
+        "edge_distance_px": 0.884
+      },
+      "hero": {
+        "rect": [
+          0,
+          125,
+          322,
+          370
+        ],
+        "mae_rgb": 15.3855,
+        "blurred_mae": 5.1365,
+        "ssim_gray": 0.77199,
+        "reference_luma": 33.53,
+        "capture_luma": 32.43,
+        "edge_distance_px": 0.868
+      },
+      "apps": {
+        "rect": [
+          445,
+          100,
+          665,
+          157
+        ],
+        "mae_rgb": 34.6525,
+        "blurred_mae": 24.6188,
+        "ssim_gray": 0.44809,
+        "reference_luma": 72.78,
+        "capture_luma": 59.74,
+        "edge_distance_px": 2.088
+      },
+      "application_platform": {
+        "rect": [
+          325,
+          200,
+          892,
+          169
+        ],
+        "mae_rgb": 36.6579,
+        "blurred_mae": 28.6535,
+        "ssim_gray": 0.45289,
+        "reference_luma": 75.38,
+        "capture_luma": 63.15,
+        "edge_distance_px": 3.224
+      },
+      "intelligence": {
+        "rect": [
+          315,
+          351,
+          905,
+          286
+        ],
+        "mae_rgb": 31.0775,
+        "blurred_mae": 22.7097,
+        "ssim_gray": 0.45671,
+        "reference_luma": 66.17,
+        "capture_luma": 66.85,
+        "edge_distance_px": 3.265
+      },
+      "data_foundation": {
+        "rect": [
+          280,
+          594,
+          960,
+          288
+        ],
+        "mae_rgb": 35.1765,
+        "blurred_mae": 25.7052,
+        "ssim_gray": 0.37306,
+        "reference_luma": 72.7,
+        "capture_luma": 69.21,
+        "edge_distance_px": 2.992
+      },
+      "earth": {
+        "rect": [
+          140,
+          863,
+          1240,
+          161
+        ],
+        "mae_rgb": 29.8648,
+        "blurred_mae": 25.991,
+        "ssim_gray": 0.4627,
+        "reference_luma": 58.87,
+        "capture_luma": 58.51,
+        "edge_distance_px": 3.356
+      },
+      "sidebar": {
+        "rect": [
+          1245,
+          120,
+          291,
+          733
+        ],
+        "mae_rgb": 11.075,
+        "blurred_mae": 4.0455,
+        "ssim_gray": 0.79946,
+        "reference_luma": 26.92,
+        "capture_luma": 25.42,
+        "edge_distance_px": 0.939
+      }
+    }
+  },
+  "round2": {
+    "capture": "intermediate capture round2",
+    "opencv": "4.12.0",
+    "canvas": [
+      1536,
+      1024
+    ],
+    "registration": "none; identical pixel coordinates",
+    "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+    "capture_sha256": "35eabd39aff0dcf9782be397a350b1b09112e2e1e5dcbce03305949290192829",
+    "regions": {
+      "whole": {
+        "rect": [
+          0,
+          0,
+          1536,
+          1024
+        ],
+        "mae_rgb": 22.2932,
+        "blurred_mae": 15.6437,
+        "ssim_gray": 0.61021,
+        "reference_luma": 49.16,
+        "capture_luma": 46.06,
+        "edge_distance_px": 2.666
+      },
+      "header": {
+        "rect": [
+          0,
+          0,
+          1536,
+          90
+        ],
+        "mae_rgb": 6.7416,
+        "blurred_mae": 2.4669,
+        "ssim_gray": 0.88642,
+        "reference_luma": 20.25,
+        "capture_luma": 19.94,
+        "edge_distance_px": 0.834
+      },
+      "hero": {
+        "rect": [
+          0,
+          125,
+          322,
+          370
+        ],
+        "mae_rgb": 15.6568,
+        "blurred_mae": 5.2517,
+        "ssim_gray": 0.76597,
+        "reference_luma": 33.53,
+        "capture_luma": 32.43,
+        "edge_distance_px": 0.894
+      },
+      "apps": {
+        "rect": [
+          445,
+          100,
+          665,
+          157
+        ],
+        "mae_rgb": 34.726,
+        "blurred_mae": 24.6989,
+        "ssim_gray": 0.44734,
+        "reference_luma": 72.78,
+        "capture_luma": 59.47,
+        "edge_distance_px": 2.07
+      },
+      "application_platform": {
+        "rect": [
+          325,
+          200,
+          892,
+          169
+        ],
+        "mae_rgb": 34.514,
+        "blurred_mae": 25.9621,
+        "ssim_gray": 0.46422,
+        "reference_luma": 75.38,
+        "capture_luma": 60.03,
+        "edge_distance_px": 2.756
+      },
+      "intelligence": {
+        "rect": [
+          315,
+          351,
+          905,
+          286
+        ],
+        "mae_rgb": 30.0428,
+        "blurred_mae": 21.847,
+        "ssim_gray": 0.4661,
+        "reference_luma": 66.17,
+        "capture_luma": 64.28,
+        "edge_distance_px": 3.211
+      },
+      "data_foundation": {
+        "rect": [
+          280,
+          594,
+          960,
+          288
+        ],
+        "mae_rgb": 35.0543,
+        "blurred_mae": 25.7431,
+        "ssim_gray": 0.36524,
+        "reference_luma": 72.7,
+        "capture_luma": 66.42,
+        "edge_distance_px": 3.09
+      },
+      "earth": {
+        "rect": [
+          140,
+          863,
+          1240,
+          161
+        ],
+        "mae_rgb": 29.8858,
+        "blurred_mae": 26.0912,
+        "ssim_gray": 0.46265,
+        "reference_luma": 58.87,
+        "capture_luma": 58.08,
+        "edge_distance_px": 3.323
+      },
+      "sidebar": {
+        "rect": [
+          1245,
+          120,
+          291,
+          733
+        ],
+        "mae_rgb": 12.7545,
+        "blurred_mae": 6.4417,
+        "ssim_gray": 0.75547,
+        "reference_luma": 26.92,
+        "capture_luma": 25.38,
+        "edge_distance_px": 1.593
+      }
+    }
+  },
+  "round3": {
+    "capture": "intermediate capture round3",
+    "opencv": "4.12.0",
+    "canvas": [
+      1536,
+      1024
+    ],
+    "registration": "none; identical pixel coordinates",
+    "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+    "capture_sha256": "bf2d8f0a536a9bec96c25504bac799ca9a20b5cad5a12409fe36f5b030bc8b5e",
+    "regions": {
+      "whole": {
+        "rect": [
+          0,
+          0,
+          1536,
+          1024
+        ],
+        "mae_rgb": 21.6528,
+        "blurred_mae": 14.914,
+        "ssim_gray": 0.6303,
+        "reference_luma": 49.16,
+        "capture_luma": 47.99,
+        "edge_distance_px": 2.467
+      },
+      "header": {
+        "rect": [
+          0,
+          0,
+          1536,
+          90
+        ],
+        "mae_rgb": 6.7416,
+        "blurred_mae": 2.467,
+        "ssim_gray": 0.88642,
+        "reference_luma": 20.25,
+        "capture_luma": 19.94,
+        "edge_distance_px": 0.834
+      },
+      "hero": {
+        "rect": [
+          0,
+          125,
+          322,
+          370
+        ],
+        "mae_rgb": 15.385,
+        "blurred_mae": 5.1389,
+        "ssim_gray": 0.77207,
+        "reference_luma": 33.53,
+        "capture_luma": 32.43,
+        "edge_distance_px": 0.868
+      },
+      "apps": {
+        "rect": [
+          445,
+          100,
+          665,
+          157
+        ],
+        "mae_rgb": 34.882,
+        "blurred_mae": 24.6062,
+        "ssim_gray": 0.44895,
+        "reference_luma": 72.78,
+        "capture_luma": 59.54,
+        "edge_distance_px": 1.982
+      },
+      "application_platform": {
+        "rect": [
+          325,
+          200,
+          892,
+          169
+        ],
+        "mae_rgb": 32.6968,
+        "blurred_mae": 24.5983,
+        "ssim_gray": 0.50644,
+        "reference_luma": 75.38,
+        "capture_luma": 58.8,
+        "edge_distance_px": 2.378
+      },
+      "intelligence": {
+        "rect": [
+          315,
+          351,
+          905,
+          286
+        ],
+        "mae_rgb": 29.1288,
+        "blurred_mae": 21.0269,
+        "ssim_gray": 0.48116,
+        "reference_luma": 66.17,
+        "capture_luma": 63.74,
+        "edge_distance_px": 2.994
+      },
+      "data_foundation": {
+        "rect": [
+          280,
+          594,
+          960,
+          288
+        ],
+        "mae_rgb": 34.4907,
+        "blurred_mae": 25.06,
+        "ssim_gray": 0.38318,
+        "reference_luma": 72.7,
+        "capture_luma": 69.6,
+        "edge_distance_px": 2.943
+      },
+      "earth": {
+        "rect": [
+          140,
+          863,
+          1240,
+          161
+        ],
+        "mae_rgb": 29.3096,
+        "blurred_mae": 25.1392,
+        "ssim_gray": 0.50128,
+        "reference_luma": 58.87,
+        "capture_luma": 73.03,
+        "edge_distance_px": 3.316
+      },
+      "sidebar": {
+        "rect": [
+          1245,
+          120,
+          291,
+          733
+        ],
+        "mae_rgb": 11.0374,
+        "blurred_mae": 4.0054,
+        "ssim_gray": 0.80058,
+        "reference_luma": 26.92,
+        "capture_luma": 25.38,
+        "edge_distance_px": 0.92
+      }
+    }
+  },
+  "round4": {
+    "capture": "intermediate capture round4",
+    "opencv": "4.12.0",
+    "canvas": [
+      1536,
+      1024
+    ],
+    "registration": "none; identical pixel coordinates",
+    "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+    "capture_sha256": "7ebbb4c34906b203214c3333992c4885ede83737410032017e6c033b5e0402b1",
+    "regions": {
+      "whole": {
+        "rect": [
+          0,
+          0,
+          1536,
+          1024
+        ],
+        "mae_rgb": 20.5482,
+        "blurred_mae": 13.8408,
+        "ssim_gray": 0.63583,
+        "reference_luma": 49.16,
+        "capture_luma": 48.0,
+        "edge_distance_px": 2.455
+      },
+      "header": {
+        "rect": [
+          0,
+          0,
+          1536,
+          90
+        ],
+        "mae_rgb": 6.7416,
+        "blurred_mae": 2.467,
+        "ssim_gray": 0.88642,
+        "reference_luma": 20.25,
+        "capture_luma": 19.94,
+        "edge_distance_px": 0.834
+      },
+      "hero": {
+        "rect": [
+          0,
+          125,
+          322,
+          370
+        ],
+        "mae_rgb": 15.3851,
+        "blurred_mae": 5.1389,
+        "ssim_gray": 0.77207,
+        "reference_luma": 33.53,
+        "capture_luma": 32.43,
+        "edge_distance_px": 0.868
+      },
+      "apps": {
+        "rect": [
+          445,
+          100,
+          665,
+          157
+        ],
+        "mae_rgb": 27.8365,
+        "blurred_mae": 17.7998,
+        "ssim_gray": 0.49941,
+        "reference_luma": 72.78,
+        "capture_luma": 70.67,
+        "edge_distance_px": 1.816
+      },
+      "application_platform": {
+        "rect": [
+          325,
+          200,
+          892,
+          169
+        ],
+        "mae_rgb": 28.5554,
+        "blurred_mae": 20.3839,
+        "ssim_gray": 0.52502,
+        "reference_luma": 75.38,
+        "capture_luma": 64.2,
+        "edge_distance_px": 2.36
+      },
+      "intelligence": {
+        "rect": [
+          315,
+          351,
+          905,
+          286
+        ],
+        "mae_rgb": 29.1285,
+        "blurred_mae": 21.0406,
+        "ssim_gray": 0.48099,
+        "reference_luma": 66.17,
+        "capture_luma": 63.81,
+        "edge_distance_px": 2.986
+      },
+      "data_foundation": {
+        "rect": [
+          280,
+          594,
+          960,
+          288
+        ],
+        "mae_rgb": 33.9173,
+        "blurred_mae": 24.5205,
+        "ssim_gray": 0.38103,
+        "reference_luma": 72.7,
+        "capture_luma": 69.09,
+        "edge_distance_px": 2.942
+      },
+      "earth": {
+        "rect": [
+          140,
+          863,
+          1240,
+          161
+        ],
+        "mae_rgb": 24.4193,
+        "blurred_mae": 20.3753,
+        "ssim_gray": 0.52152,
+        "reference_luma": 58.87,
+        "capture_luma": 67.01,
+        "edge_distance_px": 3.341
+      },
+      "sidebar": {
+        "rect": [
+          1245,
+          120,
+          291,
+          733
+        ],
+        "mae_rgb": 11.0374,
+        "blurred_mae": 4.0054,
+        "ssim_gray": 0.80058,
+        "reference_luma": 26.92,
+        "capture_luma": 25.38,
+        "edge_distance_px": 0.92
+      }
+    }
+  },
+  "round5": {
+    "capture": "intermediate capture round5",
+    "opencv": "4.12.0",
+    "canvas": [
+      1536,
+      1024
+    ],
+    "registration": "none; identical pixel coordinates",
+    "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+    "capture_sha256": "b993d82af41a663dcb01e1cd527d7a4a3d38353b85c3801f891036f69b015f17",
+    "regions": {
+      "whole": {
+        "rect": [
+          0,
+          0,
+          1536,
+          1024
+        ],
+        "mae_rgb": 20.7755,
+        "blurred_mae": 14.1083,
+        "ssim_gray": 0.63496,
+        "reference_luma": 49.16,
+        "capture_luma": 47.47,
+        "edge_distance_px": 2.472
+      },
+      "header": {
+        "rect": [
+          0,
+          0,
+          1536,
+          90
+        ],
+        "mae_rgb": 6.7416,
+        "blurred_mae": 2.467,
+        "ssim_gray": 0.88642,
+        "reference_luma": 20.25,
+        "capture_luma": 19.94,
+        "edge_distance_px": 0.834
+      },
+      "hero": {
+        "rect": [
+          0,
+          125,
+          322,
+          370
+        ],
+        "mae_rgb": 15.3851,
+        "blurred_mae": 5.1392,
+        "ssim_gray": 0.77207,
+        "reference_luma": 33.53,
+        "capture_luma": 32.43,
+        "edge_distance_px": 0.868
+      },
+      "apps": {
+        "rect": [
+          445,
+          100,
+          665,
+          157
+        ],
+        "mae_rgb": 27.8909,
+        "blurred_mae": 17.9566,
+        "ssim_gray": 0.4987,
+        "reference_luma": 72.78,
+        "capture_luma": 70.24,
+        "edge_distance_px": 1.777
+      },
+      "application_platform": {
+        "rect": [
+          325,
+          200,
+          892,
+          169
+        ],
+        "mae_rgb": 28.8248,
+        "blurred_mae": 20.706,
+        "ssim_gray": 0.52027,
+        "reference_luma": 75.38,
+        "capture_luma": 63.77,
+        "edge_distance_px": 2.353
+      },
+      "intelligence": {
+        "rect": [
+          315,
+          351,
+          905,
+          286
+        ],
+        "mae_rgb": 30.3047,
+        "blurred_mae": 22.3864,
+        "ssim_gray": 0.47855,
+        "reference_luma": 66.17,
+        "capture_luma": 61.07,
+        "edge_distance_px": 3.063
+      },
+      "data_foundation": {
+        "rect": [
+          280,
+          594,
+          960,
+          288
+        ],
+        "mae_rgb": 33.8892,
+        "blurred_mae": 24.5736,
+        "ssim_gray": 0.382,
+        "reference_luma": 72.7,
+        "capture_luma": 68.72,
+        "edge_distance_px": 2.951
+      },
+      "earth": {
+        "rect": [
+          140,
+          863,
+          1240,
+          161
+        ],
+        "mae_rgb": 24.4193,
+        "blurred_mae": 20.3752,
+        "ssim_gray": 0.52152,
+        "reference_luma": 58.87,
+        "capture_luma": 67.01,
+        "edge_distance_px": 3.341
+      },
+      "sidebar": {
+        "rect": [
+          1245,
+          120,
+          291,
+          733
+        ],
+        "mae_rgb": 11.0374,
+        "blurred_mae": 4.0054,
+        "ssim_gray": 0.80058,
+        "reference_luma": 26.92,
+        "capture_luma": 25.38,
+        "edge_distance_px": 0.92
+      }
+    }
+  },
+  "round6": {
+    "capture": "visual-diff/final.png",
+    "opencv": "4.12.0",
+    "canvas": [
+      1536,
+      1024
+    ],
+    "registration": "none; identical pixel coordinates",
+    "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+    "capture_sha256": "65b4942fed158e7b500eb41bdaf75b8c09046978daa060d240a81492525f8931",
+    "regions": {
+      "whole": {
+        "rect": [
+          0,
+          0,
+          1536,
+          1024
+        ],
+        "mae_rgb": 20.5585,
+        "blurred_mae": 13.8975,
+        "ssim_gray": 0.63675,
+        "reference_luma": 49.16,
+        "capture_luma": 48.23,
+        "edge_distance_px": 2.464
+      },
+      "header": {
+        "rect": [
+          0,
+          0,
+          1536,
+          90
+        ],
+        "mae_rgb": 6.7416,
+        "blurred_mae": 2.4669,
+        "ssim_gray": 0.88642,
+        "reference_luma": 20.25,
+        "capture_luma": 19.94,
+        "edge_distance_px": 0.834
+      },
+      "hero": {
+        "rect": [
+          0,
+          125,
+          322,
+          370
+        ],
+        "mae_rgb": 15.3833,
+        "blurred_mae": 5.1382,
+        "ssim_gray": 0.77207,
+        "reference_luma": 33.53,
+        "capture_luma": 32.43,
+        "edge_distance_px": 0.868
+      },
+      "apps": {
+        "rect": [
+          445,
+          100,
+          665,
+          157
+        ],
+        "mae_rgb": 27.48,
+        "blurred_mae": 17.5527,
+        "ssim_gray": 0.50095,
+        "reference_luma": 72.78,
+        "capture_luma": 71.22,
+        "edge_distance_px": 1.822
+      },
+      "application_platform": {
+        "rect": [
+          325,
+          200,
+          892,
+          169
+        ],
+        "mae_rgb": 26.7906,
+        "blurred_mae": 18.7713,
+        "ssim_gray": 0.53305,
+        "reference_luma": 75.38,
+        "capture_luma": 65.55,
+        "edge_distance_px": 2.382
+      },
+      "intelligence": {
+        "rect": [
+          315,
+          351,
+          905,
+          286
+        ],
+        "mae_rgb": 30.0286,
+        "blurred_mae": 22.0676,
+        "ssim_gray": 0.48099,
+        "reference_luma": 66.17,
+        "capture_luma": 63.95,
+        "edge_distance_px": 2.986
+      },
+      "data_foundation": {
+        "rect": [
+          280,
+          594,
+          960,
+          288
+        ],
+        "mae_rgb": 34.0317,
+        "blurred_mae": 24.7294,
+        "ssim_gray": 0.3828,
+        "reference_luma": 72.7,
+        "capture_luma": 69.29,
+        "edge_distance_px": 2.969
+      },
+      "earth": {
+        "rect": [
+          140,
+          863,
+          1240,
+          161
+        ],
+        "mae_rgb": 24.4191,
+        "blurred_mae": 20.3657,
+        "ssim_gray": 0.52146,
+        "reference_luma": 58.87,
+        "capture_luma": 67.03,
+        "edge_distance_px": 3.341
+      },
+      "sidebar": {
+        "rect": [
+          1245,
+          120,
+          291,
+          733
+        ],
+        "mae_rgb": 11.0374,
+        "blurred_mae": 4.0053,
+        "ssim_gray": 0.80058,
+        "reference_luma": 26.92,
+        "capture_luma": 25.38,
+        "edge_distance_px": 0.92
+      }
+    }
+  }
+}
