@@ -1,0 +1,10 @@
+{
+  "pull_request": 3,
+  "branch": "fix/p0-p1-assets-20260915",
+  "artifact_commit": "5e9f61d12572cd06de55a738591e2ef26ed3c263",
+  "tested_source_commit": "79078a3121c9b3bd2a2503ca7390a5231e53b040",
+  "baseline_commit": "bc2a884927706d66fe107d8c0c2c2b7af81ba853",
+  "validation_run": "https://github.com/liush2yuxjtu/winbrain-3d-component-studio/actions/runs/34930816306",
+  "review_status": "draft: visual acceptance pending; some similarity metrics are mixed",
+  "scope": "isolated static preview; no production root source or generated page replacement"
+}

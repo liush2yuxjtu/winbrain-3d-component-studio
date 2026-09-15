@@ -1,0 +1,427 @@
+{
+  "schema": "winbrain.catalog/v1",
+  "reference": {
+    "width": 1536,
+    "height": 1024
+  },
+  "components": [
+    {
+      "id": "platform.data",
+      "name": "数据层平台",
+      "category": "平台与结构",
+      "source": "components/platforms.js",
+      "version": 4,
+      "referenceRect": [
+        278,
+        612,
+        963,
+        278
+      ],
+      "glb": "assets/platform.data.glb",
+      "native": "assets/platform.data.wb3d.json",
+      "preview": "previews/platform.data.png",
+      "mockPreview": "previews/mock-platform.data.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "platform.intelligence",
+      "name": "智能层平台",
+      "category": "平台与结构",
+      "source": "components/platforms.js",
+      "version": 4,
+      "referenceRect": [
+        309,
+        447,
+        911,
+        185
+      ],
+      "glb": "assets/platform.intelligence.glb",
+      "native": "assets/platform.intelligence.wb3d.json",
+      "preview": "previews/platform.intelligence.png",
+      "mockPreview": "previews/mock-platform.intelligence.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "platform.application",
+      "name": "应用层平台",
+      "category": "平台与结构",
+      "source": "components/platforms.js",
+      "version": 5,
+      "referenceRect": [
+        332,
+        192,
+        888,
+        176
+      ],
+      "glb": "assets/platform.application.glb",
+      "native": "assets/platform.application.wb3d.json",
+      "preview": "previews/platform.application.png",
+      "mockPreview": "previews/mock-platform.application.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "structure.columns",
+      "name": "玻璃支撑柱",
+      "category": "平台与结构",
+      "source": "components/columns.js",
+      "version": 1,
+      "referenceRect": [
+        518,
+        307,
+        482,
+        407
+      ],
+      "glb": "assets/structure.columns.glb",
+      "native": "assets/structure.columns.wb3d.json",
+      "preview": "previews/structure.columns.png",
+      "mockPreview": "previews/mock-structure.columns.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "actor.projects",
+      "name": "项目团队",
+      "category": "智能角色",
+      "source": "components/people.js",
+      "version": 5,
+      "referenceRect": [
+        380,
+        366,
+        186,
+        172
+      ],
+      "glb": "assets/actor.projects.glb",
+      "native": "assets/actor.projects.wb3d.json",
+      "preview": "previews/actor.projects.png",
+      "mockPreview": "previews/mock-actor.projects.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "actor.experts",
+      "name": "专家",
+      "category": "智能角色",
+      "source": "components/people.js",
+      "version": 5,
+      "referenceRect": [
+        581,
+        357,
+        174,
+        183
+      ],
+      "glb": "assets/actor.experts.glb",
+      "native": "assets/actor.experts.wb3d.json",
+      "preview": "previews/actor.experts.png",
+      "mockPreview": "previews/mock-actor.experts.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "actor.ai-agents",
+      "name": "AI 机器人",
+      "category": "智能角色",
+      "source": "components/robot.js",
+      "version": 5,
+      "referenceRect": [
+        778,
+        357,
+        179,
+        194
+      ],
+      "glb": "assets/actor.ai-agents.glb",
+      "native": "assets/actor.ai-agents.wb3d.json",
+      "preview": "previews/actor.ai-agents.png",
+      "mockPreview": "previews/mock-actor.ai-agents.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "actor.employees",
+      "name": "员工团队",
+      "category": "智能角色",
+      "source": "components/people.js",
+      "version": 5,
+      "referenceRect": [
+        987,
+        377,
+        198,
+        177
+      ],
+      "glb": "assets/actor.employees.glb",
+      "native": "assets/actor.employees.wb3d.json",
+      "preview": "previews/actor.employees.png",
+      "mockPreview": "previews/mock-actor.employees.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "structure.connections",
+      "name": "协作光路",
+      "category": "平台与结构",
+      "source": "components/connections.js",
+      "version": 1,
+      "referenceRect": [
+        414,
+        471,
+        676,
+        94
+      ],
+      "glb": "assets/structure.connections.glb",
+      "native": "assets/structure.connections.wb3d.json",
+      "preview": "previews/structure.connections.png",
+      "mockPreview": "previews/mock-structure.connections.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "app.chat",
+      "name": "AI Chat",
+      "category": "应用屏幕",
+      "source": "components/applications.js",
+      "version": 5,
+      "referenceRect": [
+        450,
+        107,
+        181,
+        150
+      ],
+      "glb": "assets/app.chat.glb",
+      "native": "assets/app.chat.wb3d.json",
+      "preview": "previews/app.chat.png",
+      "mockPreview": "previews/mock-app.chat.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "app.workbench",
+      "name": "Business Workbench",
+      "category": "应用屏幕",
+      "source": "components/applications.js",
+      "version": 5,
+      "referenceRect": [
+        637,
+        103,
+        275,
+        162
+      ],
+      "glb": "assets/app.workbench.glb",
+      "native": "assets/app.workbench.wb3d.json",
+      "preview": "previews/app.workbench.png",
+      "mockPreview": "previews/mock-app.workbench.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "app.integrations",
+      "name": "Apps & Integrations",
+      "category": "应用屏幕",
+      "source": "components/applications.js",
+      "version": 5,
+      "referenceRect": [
+        922,
+        102,
+        184,
+        165
+      ],
+      "glb": "assets/app.integrations.glb",
+      "native": "assets/app.integrations.wb3d.json",
+      "preview": "previews/app.integrations.png",
+      "mockPreview": "previews/mock-app.integrations.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "city.business",
+      "name": "企业微缩城市",
+      "category": "业务对象",
+      "source": "components/city.js",
+      "version": 5,
+      "referenceRect": [
+        307,
+        605,
+        911,
+        215
+      ],
+      "glb": "assets/city.business.glb",
+      "native": "assets/city.business.wb3d.json",
+      "preview": "previews/city.business.png",
+      "mockPreview": "previews/mock-city.business.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "data.people",
+      "name": "People",
+      "category": "业务对象",
+      "source": "components/business-models.js",
+      "version": 5,
+      "referenceRect": [
+        332,
+        610,
+        96,
+        140
+      ],
+      "glb": "assets/data.people.glb",
+      "native": "assets/data.people.wb3d.json",
+      "preview": "previews/data.people.png",
+      "mockPreview": "previews/mock-data.people.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "data.documents",
+      "name": "Documents",
+      "category": "业务对象",
+      "source": "components/business-models.js",
+      "version": 5,
+      "referenceRect": [
+        411,
+        582,
+        133,
+        196
+      ],
+      "glb": "assets/data.documents.glb",
+      "native": "assets/data.documents.wb3d.json",
+      "preview": "previews/data.documents.png",
+      "mockPreview": "previews/mock-data.documents.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "data.tasks",
+      "name": "Tasks",
+      "category": "业务对象",
+      "source": "components/business-models.js",
+      "version": 5,
+      "referenceRect": [
+        505,
+        635,
+        130,
+        174
+      ],
+      "glb": "assets/data.tasks.glb",
+      "native": "assets/data.tasks.wb3d.json",
+      "preview": "previews/data.tasks.png",
+      "mockPreview": "previews/mock-data.tasks.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "data.business-data",
+      "name": "Business Data",
+      "category": "业务对象",
+      "source": "components/business-models.js",
+      "version": 5,
+      "referenceRect": [
+        667,
+        613,
+        183,
+        201
+      ],
+      "glb": "assets/data.business-data.glb",
+      "native": "assets/data.business-data.wb3d.json",
+      "preview": "previews/data.business-data.png",
+      "mockPreview": "previews/mock-data.business-data.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "data.systems",
+      "name": "Systems",
+      "category": "业务对象",
+      "source": "components/business-models.js",
+      "version": 5,
+      "referenceRect": [
+        879,
+        649,
+        115,
+        173
+      ],
+      "glb": "assets/data.systems.glb",
+      "native": "assets/data.systems.wb3d.json",
+      "preview": "previews/data.systems.png",
+      "mockPreview": "previews/mock-data.systems.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "data.devices",
+      "name": "Devices",
+      "category": "业务对象",
+      "source": "components/business-models.js",
+      "version": 5,
+      "referenceRect": [
+        988,
+        633,
+        112,
+        159
+      ],
+      "glb": "assets/data.devices.glb",
+      "native": "assets/data.devices.wb3d.json",
+      "preview": "previews/data.devices.png",
+      "mockPreview": "previews/mock-data.devices.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "data.external-data",
+      "name": "External Data",
+      "category": "业务对象",
+      "source": "components/business-models.js",
+      "version": 5,
+      "referenceRect": [
+        1094,
+        634,
+        116,
+        153
+      ],
+      "glb": "assets/data.external-data.glb",
+      "native": "assets/data.external-data.wb3d.json",
+      "preview": "previews/data.external-data.png",
+      "mockPreview": "previews/mock-data.external-data.png",
+      "previewMode": "asset",
+      "note": null
+    },
+    {
+      "id": "world.earth",
+      "name": "现实世界 · 地球",
+      "category": "世界环境",
+      "source": "components/earth.js",
+      "version": 1,
+      "referenceRect": [
+        158,
+        862,
+        1217,
+        162
+      ],
+      "glb": "assets/world.earth.glb",
+      "native": "assets/world.earth.wb3d.json",
+      "preview": "previews/world.earth.png",
+      "mockPreview": "previews/mock-world.earth.png",
+      "previewMode": "asset",
+      "note": "原生资产保留程序地形与大气；GLB 使用便携近似材质。"
+    },
+    {
+      "id": "world.atmosphere",
+      "name": "星光、光束与薄雾",
+      "category": "世界环境",
+      "source": "components/atmosphere.js",
+      "version": 1,
+      "referenceRect": [
+        280,
+        125,
+        955,
+        824
+      ],
+      "glb": "assets/world.atmosphere.glb",
+      "native": "assets/world.atmosphere.wb3d.json",
+      "preview": "previews/world.atmosphere.png",
+      "mockPreview": "previews/mock-world.atmosphere.png",
+      "previewMode": "asset",
+      "note": null
+    }
+  ]
+}
