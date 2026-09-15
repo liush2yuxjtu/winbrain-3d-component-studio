@@ -22,4 +22,4 @@ Current migrated motions:
 - `world.atmosphere` → `atmosphere.data-rise`
 - homepage camera → `camera.auto-orbit`
 
-`motion.html` and `motion-manifest.json` are generated from `library.js` so the audit page and machine-readable contract stay aligned with the runtime source.
+`motion.html` and `motion-manifest.json` are generated from `library.js` so the audit page and machine-readable contract stay aligned with the runtime source. The generated-page workflow tracks both existing outputs and newly-created Motion outputs.
