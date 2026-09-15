@@ -1,0 +1,652 @@
+{
+  "source_commit": "d9be834b42672281e562e5c16bd41b715a9991fa",
+  "baseline_commit": "bc2a884927706d66fe107d8c0c2c2b7af81ba853",
+  "generated_at": "2026-09-15T04:33:22.073517+00:00",
+  "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
+  "viewport": [
+    1536,
+    1024
+  ],
+  "dpr": 1,
+  "registration": "none",
+  "frozen_frame_max_delta": {
+    "before": 0,
+    "after": 0
+  },
+  "assets": [
+    {
+      "id": "platform.application",
+      "rect": [
+        332,
+        192,
+        888,
+        176
+      ],
+      "before": {
+        "mae_rgb": 26.9964,
+        "ssim_gray": 0.52712
+      },
+      "after": {
+        "mae_rgb": 26.3587,
+        "ssim_gray": 0.5195
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "actor.projects",
+      "rect": [
+        380,
+        366,
+        186,
+        172
+      ],
+      "before": {
+        "mae_rgb": 34.9103,
+        "ssim_gray": 0.38536
+      },
+      "after": {
+        "mae_rgb": 35.294,
+        "ssim_gray": 0.38287
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "actor.experts",
+      "rect": [
+        581,
+        357,
+        174,
+        183
+      ],
+      "before": {
+        "mae_rgb": 34.0744,
+        "ssim_gray": 0.401
+      },
+      "after": {
+        "mae_rgb": 34.1901,
+        "ssim_gray": 0.40215
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "actor.ai-agents",
+      "rect": [
+        778,
+        357,
+        179,
+        194
+      ],
+      "before": {
+        "mae_rgb": 31.4277,
+        "ssim_gray": 0.42592
+      },
+      "after": {
+        "mae_rgb": 31.1024,
+        "ssim_gray": 0.41959
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "actor.employees",
+      "rect": [
+        987,
+        377,
+        198,
+        177
+      ],
+      "before": {
+        "mae_rgb": 33.0944,
+        "ssim_gray": 0.47342
+      },
+      "after": {
+        "mae_rgb": 33.5109,
+        "ssim_gray": 0.47291
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "app.chat",
+      "rect": [
+        450,
+        107,
+        181,
+        150
+      ],
+      "before": {
+        "mae_rgb": 23.1395,
+        "ssim_gray": 0.54665
+      },
+      "after": {
+        "mae_rgb": 27.4259,
+        "ssim_gray": 0.52973
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "app.workbench",
+      "rect": [
+        637,
+        103,
+        275,
+        162
+      ],
+      "before": {
+        "mae_rgb": 29.6754,
+        "ssim_gray": 0.45494
+      },
+      "after": {
+        "mae_rgb": 32.8556,
+        "ssim_gray": 0.4485
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "app.integrations",
+      "rect": [
+        922,
+        102,
+        184,
+        165
+      ],
+      "before": {
+        "mae_rgb": 31.1802,
+        "ssim_gray": 0.4787
+      },
+      "after": {
+        "mae_rgb": 35.6344,
+        "ssim_gray": 0.46497
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "city.business",
+      "rect": [
+        307,
+        605,
+        911,
+        215
+      ],
+      "before": {
+        "mae_rgb": 39.8808,
+        "ssim_gray": 0.27667
+      },
+      "after": {
+        "mae_rgb": 39.8033,
+        "ssim_gray": 0.27911
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "data.people",
+      "rect": [
+        332,
+        610,
+        96,
+        140
+      ],
+      "before": {
+        "mae_rgb": 34.4158,
+        "ssim_gray": 0.33492
+      },
+      "after": {
+        "mae_rgb": 35.2521,
+        "ssim_gray": 0.32227
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "data.documents",
+      "rect": [
+        411,
+        582,
+        133,
+        196
+      ],
+      "before": {
+        "mae_rgb": 39.3114,
+        "ssim_gray": 0.29363
+      },
+      "after": {
+        "mae_rgb": 40.0618,
+        "ssim_gray": 0.28686
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "data.tasks",
+      "rect": [
+        505,
+        635,
+        130,
+        174
+      ],
+      "before": {
+        "mae_rgb": 39.6424,
+        "ssim_gray": 0.21499
+      },
+      "after": {
+        "mae_rgb": 38.0281,
+        "ssim_gray": 0.20818
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "data.business-data",
+      "rect": [
+        667,
+        613,
+        183,
+        201
+      ],
+      "before": {
+        "mae_rgb": 49.736,
+        "ssim_gray": 0.17445
+      },
+      "after": {
+        "mae_rgb": 51.5056,
+        "ssim_gray": 0.1633
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "data.systems",
+      "rect": [
+        879,
+        649,
+        115,
+        173
+      ],
+      "before": {
+        "mae_rgb": 42.1002,
+        "ssim_gray": 0.18742
+      },
+      "after": {
+        "mae_rgb": 42.4781,
+        "ssim_gray": 0.1881
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "data.devices",
+      "rect": [
+        988,
+        633,
+        112,
+        159
+      ],
+      "before": {
+        "mae_rgb": 42.5484,
+        "ssim_gray": 0.21704
+      },
+      "after": {
+        "mae_rgb": 40.6218,
+        "ssim_gray": 0.24064
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    },
+    {
+      "id": "data.external-data",
+      "rect": [
+        1094,
+        634,
+        116,
+        153
+      ],
+      "before": {
+        "mae_rgb": 33.978,
+        "ssim_gray": 0.34795
+      },
+      "after": {
+        "mae_rgb": 32.5081,
+        "ssim_gray": 0.36957
+      },
+      "measurement": "canonical full-scene context crop; includes neighboring objects"
+    }
+  ],
+  "regions_before": {
+    "whole": {
+      "rect": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "mae_rgb": 20.4651,
+      "blurred_mae": 13.8822,
+      "ssim_gray": 0.63848,
+      "reference_luma": 49.16,
+      "capture_luma": 48.23,
+      "edge_distance_px": 2.487
+    },
+    "header": {
+      "rect": [
+        0,
+        0,
+        1536,
+        90
+      ],
+      "mae_rgb": 6.889,
+      "blurred_mae": 2.7993,
+      "ssim_gray": 0.88061,
+      "reference_luma": 20.25,
+      "capture_luma": 20.17,
+      "edge_distance_px": 0.959
+    },
+    "hero": {
+      "rect": [
+        0,
+        125,
+        322,
+        370
+      ],
+      "mae_rgb": 13.4566,
+      "blurred_mae": 4.6522,
+      "ssim_gray": 0.80453,
+      "reference_luma": 33.53,
+      "capture_luma": 32.73,
+      "edge_distance_px": 0.766
+    },
+    "apps": {
+      "rect": [
+        445,
+        100,
+        665,
+        157
+      ],
+      "mae_rgb": 27.4871,
+      "blurred_mae": 17.5028,
+      "ssim_gray": 0.49991,
+      "reference_luma": 72.78,
+      "capture_luma": 70.88,
+      "edge_distance_px": 1.816
+    },
+    "application_platform": {
+      "rect": [
+        325,
+        200,
+        892,
+        169
+      ],
+      "mae_rgb": 26.8728,
+      "blurred_mae": 18.7596,
+      "ssim_gray": 0.53101,
+      "reference_luma": 75.38,
+      "capture_luma": 65.71,
+      "edge_distance_px": 2.37
+    },
+    "intelligence": {
+      "rect": [
+        315,
+        351,
+        905,
+        286
+      ],
+      "mae_rgb": 29.7309,
+      "blurred_mae": 21.7187,
+      "ssim_gray": 0.48127,
+      "reference_luma": 66.17,
+      "capture_luma": 63.08,
+      "edge_distance_px": 2.975
+    },
+    "data_foundation": {
+      "rect": [
+        280,
+        594,
+        960,
+        288
+      ],
+      "mae_rgb": 34.244,
+      "blurred_mae": 25.0005,
+      "ssim_gray": 0.38471,
+      "reference_luma": 72.7,
+      "capture_luma": 69.61,
+      "edge_distance_px": 3.051
+    },
+    "earth": {
+      "rect": [
+        140,
+        863,
+        1240,
+        161
+      ],
+      "mae_rgb": 24.765,
+      "blurred_mae": 20.6027,
+      "ssim_gray": 0.51743,
+      "reference_luma": 58.87,
+      "capture_luma": 67.27,
+      "edge_distance_px": 3.369
+    },
+    "sidebar": {
+      "rect": [
+        1245,
+        120,
+        291,
+        733
+      ],
+      "mae_rgb": 11.29,
+      "blurred_mae": 4.006,
+      "ssim_gray": 0.79755,
+      "reference_luma": 26.92,
+      "capture_luma": 25.76,
+      "edge_distance_px": 0.941
+    }
+  },
+  "regions_after": {
+    "whole": {
+      "rect": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "mae_rgb": 20.6996,
+      "blurred_mae": 14.1552,
+      "ssim_gray": 0.63714,
+      "reference_luma": 49.16,
+      "capture_luma": 48.91,
+      "edge_distance_px": 2.493
+    },
+    "header": {
+      "rect": [
+        0,
+        0,
+        1536,
+        90
+      ],
+      "mae_rgb": 6.889,
+      "blurred_mae": 2.7993,
+      "ssim_gray": 0.88061,
+      "reference_luma": 20.25,
+      "capture_luma": 20.17,
+      "edge_distance_px": 0.959
+    },
+    "hero": {
+      "rect": [
+        0,
+        125,
+        322,
+        370
+      ],
+      "mae_rgb": 13.4566,
+      "blurred_mae": 4.652,
+      "ssim_gray": 0.80453,
+      "reference_luma": 33.53,
+      "capture_luma": 32.73,
+      "edge_distance_px": 0.766
+    },
+    "apps": {
+      "rect": [
+        445,
+        100,
+        665,
+        157
+      ],
+      "mae_rgb": 31.287,
+      "blurred_mae": 21.3132,
+      "ssim_gray": 0.48877,
+      "reference_luma": 72.78,
+      "capture_luma": 80.23,
+      "edge_distance_px": 1.806
+    },
+    "application_platform": {
+      "rect": [
+        325,
+        200,
+        892,
+        169
+      ],
+      "mae_rgb": 26.1954,
+      "blurred_mae": 17.9368,
+      "ssim_gray": 0.52316,
+      "reference_luma": 75.38,
+      "capture_luma": 70.27,
+      "edge_distance_px": 2.586
+    },
+    "intelligence": {
+      "rect": [
+        315,
+        351,
+        905,
+        286
+      ],
+      "mae_rgb": 29.9136,
+      "blurred_mae": 21.8938,
+      "ssim_gray": 0.4806,
+      "reference_luma": 66.17,
+      "capture_luma": 62.15,
+      "edge_distance_px": 2.962
+    },
+    "data_foundation": {
+      "rect": [
+        280,
+        594,
+        960,
+        288
+      ],
+      "mae_rgb": 34.1931,
+      "blurred_mae": 25.1928,
+      "ssim_gray": 0.38687,
+      "reference_luma": 72.7,
+      "capture_luma": 69.21,
+      "edge_distance_px": 2.987
+    },
+    "earth": {
+      "rect": [
+        140,
+        863,
+        1240,
+        161
+      ],
+      "mae_rgb": 24.7648,
+      "blurred_mae": 20.6026,
+      "ssim_gray": 0.51742,
+      "reference_luma": 58.87,
+      "capture_luma": 67.27,
+      "edge_distance_px": 3.37
+    },
+    "sidebar": {
+      "rect": [
+        1245,
+        120,
+        291,
+        733
+      ],
+      "mae_rgb": 11.2826,
+      "blurred_mae": 3.9983,
+      "ssim_gray": 0.79758,
+      "reference_luma": 26.92,
+      "capture_luma": 25.74,
+      "edge_distance_px": 0.941
+    }
+  },
+  "export_sha256": {
+    "assets/platform.data.glb": "ac53880d8e2ed6ce69aa787eed5413af8df1df3cd9a7985dbd8020950abed2b2",
+    "assets/platform.data.wb3d.json": "630ac0fbb1670ea1d82f7294fbb1b3788713db8112d3dd48336da4acfc9da5fb",
+    "previews/platform.data.png": "2c60cb9ff3dede6f37a55955baa9f0922471eee8089c12b14e89a67c8c03d954",
+    "previews/mock-platform.data.png": "f8897b22e66e7b7bd2e504518d635a46522c0f741e7ca0595cdcf6963dba500f",
+    "assets/platform.intelligence.glb": "21afb9ee71b76391185af09515161e97f5eaf29178c48aa6321a13e0bde9f56f",
+    "assets/platform.intelligence.wb3d.json": "45c1252a44673a6fc1ea0d345cf68058d38f78fa2706ce773aa1aa4c6104f243",
+    "previews/platform.intelligence.png": "17e69d46cde071337b3e3ca7d300e675e885d56ac3cae30099233a809a3cdfe6",
+    "previews/mock-platform.intelligence.png": "d243cd4b1a7aa462ed14c323526bcce3aa1e21540c2bafa09c992b3bcc3fc68f",
+    "assets/platform.application.glb": "413eec4f770e8cc667805f907a0a2f1eb8b1000fa5f7f6e2c9c3e13c3a6a2c8e",
+    "assets/platform.application.wb3d.json": "9a9e52a0072ec4a2fef7f318c2f26392d60eb35b666c79bd1e5916bb7702b19c",
+    "previews/platform.application.png": "da6b13deb94e236e7c6c82a61b98d0e1f084f974064fa5c167205b4e414c8df3",
+    "previews/mock-platform.application.png": "0256e56129ae204094bd76a1a0ad9a37ca8fe0a31676a9ec382f8a096dbc08ba",
+    "assets/structure.columns.glb": "b01f46b821f8aeded137e2d93b5cad0b1cd3048ac6b2e02b57854e38e0c85d11",
+    "assets/structure.columns.wb3d.json": "5a22ca8f5b352114c23e704bfe8a3cbf236780f58bf8bd33922a9feeed06888b",
+    "previews/structure.columns.png": "f892d845c9a09c7535c0c37f075730bcb204b9e469552f94c298db16afb8e699",
+    "previews/mock-structure.columns.png": "35deae714c7bd51552aa36cc48ffecd7332f7450e1a727e99c9f7c5de274540a",
+    "assets/actor.projects.glb": "5cdefef2665317e013c37168aa6a4285a7f1cd65587a42cba788902695e0637f",
+    "assets/actor.projects.wb3d.json": "b4bfa3d09b48f881bca768775e4f023264c28c00ac8b091ac4f7cc47a22a48d6",
+    "previews/actor.projects.png": "2b01091c49aa3aa68efe64db8e8cde1b0991670c97c14a4b0c0c3602d3e6edc2",
+    "previews/mock-actor.projects.png": "d9a72f000a6451a35f761c6daeb9435b254f73fb9faf734f5c1abea0f417c8bf",
+    "assets/actor.experts.glb": "6ad735838219b8d0f93848ae38f8ad6a690a6575902072b6845576a356c8bf0b",
+    "assets/actor.experts.wb3d.json": "db5970c0ee226f9eaa0ae50acd17513c6db439ebccf63f1cc7549be11e9dc15d",
+    "previews/actor.experts.png": "09ed181813dffea19135392f66d9da76699611ac3d30c2ae5edf38ab04ac6e42",
+    "previews/mock-actor.experts.png": "4c56991511f0b72803dc6774c69e69728efbbca354f2e67b483d3aabf379158e",
+    "assets/actor.ai-agents.glb": "2ef7a14e7ebf97d8a53f7e146c8f95b007556469e7c45d824193dc72ba1b4061",
+    "assets/actor.ai-agents.wb3d.json": "17d924cf8d0ee2145dd5fee6059a0457970c5f1a05ce60ac7f289273455bdde2",
+    "previews/actor.ai-agents.png": "c665699800449294c0f155d7ddc5bb9fbddf4f518aeb39526fcdfa838ed1f950",
+    "previews/mock-actor.ai-agents.png": "42ceccd45e9d954ca7dfc35ef4a98b5d57d38829b8d4d0036cbf66a74bd67d24",
+    "assets/actor.employees.glb": "bd4ad15ba4c659f5ebb3bfa4550df5d721103d21ae4a4bca3e46ae5649312b51",
+    "assets/actor.employees.wb3d.json": "f4c127b23061a4bec5391944a46ba4f14acb358d0cf98ad5b8e2988c6670f480",
+    "previews/actor.employees.png": "a4df1c8a70a5fcd56d0eff9326c442144b7e903521e2b6720f8bb0add1b86563",
+    "previews/mock-actor.employees.png": "63756c13eeaa8bba5569697331ff3a4de642034d9f8f64a0bd8059a1bfc479a6",
+    "assets/structure.connections.glb": "4b4789d11c8832e886884876b52c7a68a55063093be22c94e2faa1d4fe304fe7",
+    "assets/structure.connections.wb3d.json": "52d8446b1589df3c4ff5a8690d68b789ef6bbfcfd591e4231068dcbf85eeb0cb",
+    "previews/structure.connections.png": "fbd0ced8ce233ba0a6922c320e4f8ab0ba1532787e1aa3978ac58f6703e7d7e5",
+    "previews/mock-structure.connections.png": "265cda55216a0d1a814eb0ca195176241773f50107d6e138acd8efe7d2ab7247",
+    "assets/app.chat.glb": "0d58d1e873458b50815f33909d72473a3f08cecb9ada7e9488057c6d21c045ff",
+    "assets/app.chat.wb3d.json": "dab3ed27f2acee770c4b4ea784c071b37f658c4c8578819c7ef04582364b7f41",
+    "previews/app.chat.png": "5c43233b90a2f929ef0bad3398eef075d83e31ec15341952d1e37ebccf2526c1",
+    "previews/mock-app.chat.png": "66b3b57e2bd58027382cf8e580103c7510c4992b8e396974a6a47d2e22ebfcc2",
+    "assets/app.workbench.glb": "26fb362010d971be697b255da029ea83104feedbbffb29f03e0f67bb9f830005",
+    "assets/app.workbench.wb3d.json": "66992a1033ca632e59b2f90ef2c423b31f781d55f5d8f09e13e39d32d3e59bcc",
+    "previews/app.workbench.png": "68967d9c03aede171f4e6706678b0dcd262e9ceda505a7eed0ca447961aefa8f",
+    "previews/mock-app.workbench.png": "557cd416f8726a5f0ac0a77581f7967b3e39dea6c156c76824ec7f4e4c66d3c8",
+    "assets/app.integrations.glb": "8693a35defe54b870c03ac2b0de5566e31ac5fa82ee86e1801c5965bdcdff818",
+    "assets/app.integrations.wb3d.json": "50a94589f581235f3342de14975eb2a805091c78e18f2e9e46c703c5db4521b3",
+    "previews/app.integrations.png": "500927d05766467eecc54efd5adeb2cf94dc95da2caaf9923261a36ad5f037c7",
+    "previews/mock-app.integrations.png": "c6ca7c44f1253a435dcfcf2e1a0c2206f8c87bd79f1f2e325a1665db5e6c0352",
+    "assets/city.business.glb": "c4bdd6a5e1fcdf9d38e426d55836f7afd5017e4f60ef228a0cfdcc8022a5ee19",
+    "assets/city.business.wb3d.json": "95df6a5292bb49b01c2900f1853d77f6ea4da217d98b69e5e1ae4bc765284c4e",
+    "previews/city.business.png": "0ee3cfd4086f1b565c4d080c7401b67835d77ad99d93e990ecc3c2e6f671d327",
+    "previews/mock-city.business.png": "645ef1cccaec69e9002ac335c237d7ad3319ccb1a93ab06f52ec1ea139291253",
+    "assets/data.people.glb": "5b8a5d647185de95166c394df244b0a33021374118ae99c09521e6781b15df1c",
+    "assets/data.people.wb3d.json": "25b1dddea8908886e7207d918bd9e4ce02363fa06cef1349deaa41b4a4516c91",
+    "previews/data.people.png": "dde1b62983fd42fc2229a3522dd23fe54237f5399a0488d82a696c0b7bf78103",
+    "previews/mock-data.people.png": "67453434b5680e587547673cef188769bfa399cf90c44dbd49770064b7e16e35",
+    "assets/data.documents.glb": "5f1ecbd23e62c012f2187715a6aa01386d4005a4c4527f0c3dfe0835408719ff",
+    "assets/data.documents.wb3d.json": "73eb39765e108dc7de805c205a2dd6cde14c7f0578886468decf7f4a602ccab1",
+    "previews/data.documents.png": "6511f23c4af99f04d88de1dee63fb26e810e0b15a679095292f27a0c5f30ca56",
+    "previews/mock-data.documents.png": "4c34ce1623fa4cc31afcd90f853cfd75d88d4cc4927439d9aee4e1457dfed7cb",
+    "assets/data.tasks.glb": "d367963fa25387d9b07b60140099e47a29ccafcc82da0be9ca4ea0ac5652e555",
+    "assets/data.tasks.wb3d.json": "3d7080fba8275e512b32408d4bfab133f91965727489a7b6d974f1d21f34303d",
+    "previews/data.tasks.png": "c090b54368184fdaeb53d8ca31be8c7821fdda5f50c37d2ee5ef793f9c905267",
+    "previews/mock-data.tasks.png": "c474caa204bc1a480689928e48a254598b45eff62dfb734eb183ad5142d157f2",
+    "assets/data.business-data.glb": "02df4d4e554c675ea137037abcdeee38d6f0018280cbad622ba3fffff5b4b86c",
+    "assets/data.business-data.wb3d.json": "efa185169d2e8509d44d50d4600d9652ceeead09f5731f077ee5220d201b7f3f",
+    "previews/data.business-data.png": "da57e8c05e7f6fd55c74a2336629a3498dd88d274e39189d05a9e3d8d87a5905",
+    "previews/mock-data.business-data.png": "80342e836177af111e4e004bbd3e9b18297158261dd95205c101b5ffb6befe99",
+    "assets/data.systems.glb": "f1d2ec165df82c3fde30db52b48c065195835cd980e279b36f9b96641c9aded1",
+    "assets/data.systems.wb3d.json": "dd6fa761e114e23d083f1752028ba3c960f3e2b1d888bc0087c9b638bdc56824",
+    "previews/data.systems.png": "19247db5b612a570e5130015e8f411ef3ae3beea34f6d6e468639563eba39f23",
+    "previews/mock-data.systems.png": "f5dc650ebaa6d6c66f3f08af734614d640371fa0ea61a2b9a6e87d012228a502",
+    "assets/data.devices.glb": "73b0b7a125529737a98246016bf4fb969af64824e0b0101ee31a9804efc3e713",
+    "assets/data.devices.wb3d.json": "1df307acf0f3e9951df18e711bc750fac626eee223200925e2441ae40f08f6e8",
+    "previews/data.devices.png": "faf403d4bc222d3e0d83aa3935920994e1801419fa2809fdb559d856c29b0978",
+    "previews/mock-data.devices.png": "c8da610633131570a9ecdf52f857d562478b80e643a470448e155bf2015540c7",
+    "assets/data.external-data.glb": "cf1d65b0bce2379f0107b8e6cb9381199193bbf19860791064b608eda0481984",
+    "assets/data.external-data.wb3d.json": "0762a91767c823f65a76cbabf2316b61fff09b11569a786b28b6e510a9245cf5",
+    "previews/data.external-data.png": "a61e1167c0e6070aa5ffd261688cb959a0a81c7b2f143cb66270858fccb3e394",
+    "previews/mock-data.external-data.png": "76505dc11af37ba104bba6bc82f1d857930c448b00559eed35ffad880fbd8d57",
+    "assets/world.earth.glb": "f492e9f0d315b7c2af2e9718fd45779805fe21d7666f6bbdf095be1a28712792",
+    "assets/world.earth.wb3d.json": "d6772cd77ff27036029f999f61feb03971e38e633e44b1634589eecaa524ad0a",
+    "previews/world.earth.png": "c26273e955422a9bd1f980e306a413232fd89bdc355026ff7e0fe4cc6e477eec",
+    "previews/mock-world.earth.png": "66a8d257b8d3996c29323525f6fd3ea6589c850d2136d705668e145d7c2b48d1",
+    "assets/world.atmosphere.glb": "3d8dee7118ab02c16822a15d1424732490d0e1e86768d40f1ef5e3f17069a276",
+    "assets/world.atmosphere.wb3d.json": "a1cc5a9db0aa65aa9e6e489ae4b61a29d2ad6ed60ffe39a23dafb89f6ee35e75",
+    "previews/world.atmosphere.png": "f47865c78ce4229262d581997fc303d8c76cdf158fee952242fd3d77313d9c15",
+    "previews/mock-world.atmosphere.png": "a1c8e271ec5f09401d8807da250ad3cfcdce1b15c9a36bdd53c5e074d32c8c69"
+  }
+}

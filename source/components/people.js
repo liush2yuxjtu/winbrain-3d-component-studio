@@ -56,10 +56,11 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
   g.scale.setScalar(scale);
   parent.add(g);
   const m = mat(color, {
-    roughness: 0.36,
-    metalness: 0.15,
+    roughness: 0.48,
+    metalness: 0.05,
+    clearcoat: 0.32,
     emissive: color,
-    emissiveIntensity: 0.17,
+    emissiveIntensity: 0.12,
   });
   sphere(0.2, m, new THREE.Vector3(0, 0.9, 0), g, 1, 1.13, 0.98);
   cyl(0.125, 0.14, 0.14, m, new THREE.Vector3(0, 0.67, 0), g);
@@ -69,11 +70,11 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
         [0, 0.012],
         [0.23, 0.012],
         [0.28, 0.028],
-        [0.3, 0.08],
-        [0.3, 0.27],
-        [0.29, 0.38],
-        [0.26, 0.46],
-        [0.2, 0.53],
+        [0.275, 0.08],
+        [0.29, 0.27],
+        [0.315, 0.38],
+        [0.285, 0.46],
+        [0.21, 0.53],
         [0.13, 0.57],
         [0, 0.57],
       ].map((p) => new THREE.Vector2(...p)),
@@ -84,8 +85,8 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
   );
   torso.scale.z = 0.82;
   for (const s of [-1, 1]) {
-    const arm = mesh(new THREE.CapsuleGeometry(0.085, 0.31, 7, 16), m, g);
-    arm.position.set(s * 0.29, 0.29, 0.0);
+    const arm = mesh(new THREE.CapsuleGeometry(0.077, 0.29, 7, 16), m, g);
+    arm.position.set(s * 0.285, 0.29, 0.0);
     arm.rotation.z = -s * 0.08;
   }
   if (glasses) {

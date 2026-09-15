@@ -48,6 +48,7 @@ import {
   groupAt,
   levels,
 } from "../core.js";
+import { plate, outline } from "./exhibit-geometry.js";
 import { register, capture } from "../registry.js";
 export function createRobot(parent) {
   const robot = new THREE.Group();
@@ -58,24 +59,11 @@ export function createRobot(parent) {
   cyl(0.34, 0.44, 0.14, white, new THREE.Vector3(0, 0.07, 0), robot);
   sphere(0.35, white, new THREE.Vector3(0, 0.28, 0), robot, 1, 0.75, 0.9);
   cyl(0.13, 0.16, 0.2, silver, new THREE.Vector3(0, 0.48, 0), robot);
-  const head = box(
-    0.78,
-    0.66,
-    0.56,
-    white,
-    new THREE.Vector3(0, 0.88, 0),
-    robot,
-    0.25,
-  );
-  const face = box(
-    0.61,
-    0.43,
-    0.095,
-    black,
-    new THREE.Vector3(0, 0.88, 0.284),
-    robot,
-    0.18,
-  );
+  const ceramic = mat(0xe1eafa, { roughness: 0.34, metalness: 0.06, clearcoat: 0.45 });
+  const head = plate(0.78, 0.66, 0.56, ceramic, robot, 0, 0.88, 0, 0.22, 0.025);
+  head.name = "rounded-ceramic-head";
+  const face = plate(0.61, 0.43, 0.095, black, robot, 0, 0.88, 0.284, 0.17, 0.012);
+  face.name = "rounded-inset-visor";
   for (const sx of [-1, 1]) {
     sphere(
       0.046,
@@ -154,20 +142,7 @@ export function createRobot(parent) {
     robot,
     0.014,
   );
-  const visorRim = new THREE.Shape();
-  const rimPoints = [];
-  for (let i = 0; i <= 64; i++) {
-    const a = (i / 64) * Math.PI * 2;
-    rimPoints.push(
-      new THREE.Vector3(
-        Math.sign(Math.cos(a)) * Math.pow(Math.abs(Math.cos(a)), 0.55) * 0.307,
-        0.88 +
-          Math.sign(Math.sin(a)) * Math.pow(Math.abs(Math.sin(a)), 0.6) * 0.213,
-        0.341,
-      ),
-    );
-  }
-  line(rimPoints, 0x7192c1, 0.72, robot);
+  outline(0.612, 0.432, 0.17, 0.338, 0x7192c1, 0.52, robot, 0, 0.88);
   animated.push({ object: robot, kind: "robot", base: robot.position.y });
   return robot;
 }

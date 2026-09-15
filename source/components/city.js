@@ -49,6 +49,7 @@ import {
   levels,
 } from "../core.js";
 import { register, capture } from "../registry.js";
+import { dataNodes } from "./data-layout.js";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 // A miniature business city. Building facades are generated windows, not photos.
 function facade(seed) {
@@ -142,20 +143,50 @@ export function createCity() {
   const city = new THREE.Group();
   city.position.y = levels[1] + 0.15;
   world.add(city);
-  for (let i = 0; i < 174; i++) {
-    const x = (random() - 0.5) * 8.5,
-      z = (random() - 0.5) * 8.3;
-    const screenX = new THREE.Vector3(x, 0, z).dot(right),
-      screenD = new THREE.Vector3(x, 0, z).dot(near);
-    if (screenD > 1.2 && Math.abs(screenX) < 4.7) continue;
-    const h = 0.17 + Math.pow(random(), 1.4) * 1.12;
-    building(city, x, z, 0.15 + random() * 0.31, 0.18 + random() * 0.33, h, i);
+  // Compatibility reservation: V4's city consumed 1053 values of the shared
+  // seed-321 stream. Keep Earth and atmosphere unchanged while the city moves
+  // to its own stream. Remove with a separately reviewed environment migration.
+  for (let i = 0; i < 1053; i++) random();
+  const cityRandom = rnd(321);
+  const occupied = [];
+  const clearOfExhibits = (x, z, radius) => {
+    const point = new THREE.Vector3(x, 0, z);
+    const lateral = point.dot(right), depth = point.dot(near);
+    return dataNodes.every((n) =>
+      Math.hypot(lateral - n.x, depth - n.d) > n.r * 1.22 + radius + 0.09);
+  };
+  // Staggered blocks retain a dense miniature skyline, with real streets and
+  // reserved exhibit footprints. Rebuilding any other component cannot move it.
+  for (let row = 0; row < 13; row++) {
+    for (let col = 0; col < 13; col++) {
+      const x = -3.95 + col * 0.65 + (cityRandom() - 0.5) * 0.14;
+      const z = -3.9 + row * 0.64 + (cityRandom() - 0.5) * 0.14;
+      const w = 0.20 + cityRandom() * 0.23;
+      const d = 0.20 + cityRandom() * 0.25;
+      const depth = new THREE.Vector3(x, 0, z).dot(near);
+      const lateral = new THREE.Vector3(x, 0, z).dot(right);
+      const heightNoise = cityRandom();
+      if (depth > 1.2 && Math.abs(lateral) < 4.7) continue;
+      if (!clearOfExhibits(x, z, Math.hypot(w, d) / 2)) continue;
+      const heightEnvelope = depth < -1.2 ? 0.83 : 0.56;
+      const h = 0.17 + Math.pow(heightNoise, 1.4) * heightEnvelope;
+      building(city, x, z, w, d, h, row * 13 + col);
+      occupied.push({ x, z, w, d });
+    }
   }
-  for (let i = 0; i < 110; i++) {
-    const x = (random() - 0.5) * 8.9,
-      z = (random() - 0.5) * 8.7;
-    tree(city, x, 0.0, z, 0.6 + random() * 0.7);
+  let planted = 0;
+  for (let attempt = 0; attempt < 500 && planted < 100; attempt++) {
+    const x = (cityRandom() - 0.5) * 8.9;
+    const z = (cityRandom() - 0.5) * 8.7;
+    const scale = 0.48 + cityRandom() * 0.40;
+    const canopy = 0.15 * scale;
+    if (!clearOfExhibits(x, z, canopy)) continue;
+    if (occupied.some((b) => Math.abs(x - b.x) < b.w / 2 + canopy &&
+      Math.abs(z - b.z) < b.d / 2 + canopy)) continue;
+    tree(city, x, 0, z, scale);
+    planted++;
   }
+  city.userData.layout = { seed: 321, buildings: occupied.length, trees: planted };
   for (let i = 0; i < 9; i++) {
     const q = -4 + i;
     line(
@@ -204,6 +235,7 @@ export function createCity() {
     name: "企业微缩城市",
     category: "业务对象",
     source: "components/city.js",
+    version: 5,
     rect: [307, 605, 911, 215],
   });
   // Export instanced primitive geometry; render the efficient merged geometry on the homepage.

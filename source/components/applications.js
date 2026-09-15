@@ -74,7 +74,7 @@ const widgetGlass = mat(0x485b85, {
   transparent: true,
   opacity: 0.68,
 });
-const darkWidget = mat(0x17233d, { metalness: 0.3, roughness: 0.25 });
+const darkWidget = mat(0x25344d, { metalness: 0.18, roughness: 0.34 });
 const iconPorcelain = mat(0xf4f7ff, {
   metalness: 0.1,
   roughness: 0.22,
@@ -142,15 +142,15 @@ function buildScreen(s, g) {
   const sheen = textureCanvas(512, 384, (c, w, h) => {
     const gradient = c.createLinearGradient(0, 0, w, h);
     gradient.addColorStop(0, "#8b9bbb66");
-    gradient.addColorStop(0.36, "#3d4a6355");
-    gradient.addColorStop(0.8, "#1e294110");
+    gradient.addColorStop(0.36, "#61739255");
+    gradient.addColorStop(0.8, "#35476822");
     gradient.addColorStop(1, "#8496ca55");
     rr(c, 2, 2, w - 4, h - 4, 16, gradient);
     const reflection = c.createLinearGradient(0, 0, w, 0);
     reflection.addColorStop(0, "#d7edff25");
     reflection.addColorStop(0.07, "#d7edff00");
     reflection.addColorStop(0.88, "#acbeff00");
-    reflection.addColorStop(1, "#aabbff14");
+    reflection.addColorStop(1, "#aabbff28");
     rr(c, 3, 3, w - 6, h - 6, 16, reflection);
     const bounce = c.createLinearGradient(0, h * 0.55, 0, h);
     bounce.addColorStop(0, "#8dacf900");
@@ -446,7 +446,7 @@ export function createApplications() {
         category: "应用屏幕",
         source: "components/applications.js",
         rect: s.rect,
-        version: 4,
+        version: 5,
       },
       () => {
         const g = groupAt(

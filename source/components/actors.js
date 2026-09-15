@@ -74,7 +74,7 @@ export function createActors() {
           t.key === "AI Agents"
             ? "components/robot.js"
             : "components/people.js",
-        version: 4,
+        version: 5,
         rect: {
           Projects: [380, 366, 186, 172],
           Experts: [581, 357, 174, 183],

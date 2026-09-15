@@ -1,0 +1,157 @@
+{
+  "checks": [
+    {
+      "name": "before: 22 registered components",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "after: 22 registered components",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "finite vertex coordinates",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "database has exactly three solid tiers",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "rounded robot visor exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "application laminate exists",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "platform.data: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "platform.intelligence: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "platform.application: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "structure.columns: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "actor.projects: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "actor.experts: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "actor.ai-agents: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "actor.employees: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "structure.connections: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "app.chat: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "app.workbench: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "app.integrations: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "city.business: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data.people: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data.documents: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data.tasks: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data.business-data: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data.systems: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data.devices: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "data.external-data: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world.earth: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "world.atmosphere: GLB round trip",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "catalog mobile: no horizontal overflow",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no browser page errors",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "browser": "153.0.8010.12",
+  "capture": "Actual WebGL backbuffer copied 1:1 into same-size 2D canvas for DOM capture; frozen test uses native backbuffers"
+}

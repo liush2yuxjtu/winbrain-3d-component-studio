@@ -2,71 +2,7 @@ import * as THREE from "three";
 import { groupAt, levels, label, clickable } from "../core.js";
 import { capture } from "../registry.js";
 import { createBusinessModel, createPedestal } from "./business-models.js";
-const dataNodes = [
-  {
-    name: "People",
-    x: -5.28,
-    d: -0.52,
-    r: 0.48,
-    h: 0.7,
-    type: "people",
-    rect: [332, 610, 96, 140],
-  },
-  {
-    name: "Documents",
-    x: -4.0,
-    d: 0.6,
-    r: 0.63,
-    h: 0.86,
-    type: "doc",
-    rect: [411, 582, 133, 196],
-  },
-  {
-    name: "Tasks",
-    x: -2.76,
-    d: 3.44,
-    r: 0.62,
-    h: 0.82,
-    type: "task",
-    rect: [505, 635, 130, 174],
-  },
-  {
-    name: "Business Data",
-    x: -0.15,
-    d: 3.78,
-    r: 1,
-    h: 0.8,
-    type: "data",
-    rect: [667, 613, 183, 201],
-  },
-  {
-    name: "Systems",
-    x: 2.3,
-    d: 3.88,
-    r: 0.64,
-    h: 0.8,
-    type: "server",
-    rect: [879, 649, 115, 173],
-  },
-  {
-    name: "Devices",
-    x: 3.73,
-    d: 3,
-    r: 0.64,
-    h: 0.9,
-    type: "laptop",
-    rect: [988, 633, 112, 159],
-  },
-  {
-    name: "External Data",
-    x: 5.1,
-    d: 1.8,
-    r: 0.6,
-    h: 0.8,
-    type: "cloud",
-    rect: [1094, 634, 116, 153],
-  },
-];
+import { dataNodes } from "./data-layout.js";
 export function createDataObjects() {
   for (const n of dataNodes)
     capture(
@@ -76,7 +12,7 @@ export function createDataObjects() {
         category: "业务对象",
         source: "components/business-models.js",
         rect: n.rect,
-        version: 4,
+        version: 5,
       },
       () => {
         const g = groupAt(n.x, levels[1] + 0.14, n.d);
@@ -96,6 +32,14 @@ export function createDataObjects() {
         icon.position.y = n.h + 0.125;
         g.add(icon);
         createBusinessModel(n.type, icon);
+        // Silhouette corrections preserve the established exhibit anchors.
+        const sculptureScale = {
+          people: [0.96, 1.02, 1], doc: [0.90, 1, 1],
+          task: [0.96, 1.10, 1], data: [1, 1, 1],
+          server: [0.96, 0.95, 1], laptop: [1, 1.08, 1],
+          cloud: [0.94, 1, 1],
+        }[n.type];
+        icon.scale.set(...sculptureScale);
         if (n.type === "data") {
           label(
             g,

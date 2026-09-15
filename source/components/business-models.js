@@ -229,41 +229,41 @@ function database(g) {
     roughness: 0.25,
     clearcoat: 1,
   });
-  for (let j = 0; j < 4; j++) {
-    const y = 0.035 + j * 0.319;
+  for (let j = 0; j < 3; j++) {
+    const y = 0.035 + j * 0.425;
     const profile = [
       [0, y],
       [0.548, y],
-      [0.601, y + 0.009],
-      [0.625, y + 0.035],
-      [0.625, y + 0.247],
-      [0.608, y + 0.273],
-      [0.56, y + 0.282],
-      [0, y + 0.282],
+      [0.601, y + 0.012],
+      [0.625, y + 0.046667],
+      [0.625, y + 0.329333],
+      [0.608, y + 0.364],
+      [0.56, y + 0.376],
+      [0, y + 0.376],
     ];
     const barrel = lathe(profile, barrelMaterial, g);
     barrel.name = `solid-database-volume-${j + 1}`;
-    rim(0.611, y + 0.028, g, chrome, 0.009);
-    rim(0.611, y + 0.269, g, chrome, 0.01);
+    rim(0.611, y + 0.037333, g, chrome, 0.009);
+    rim(0.611, y + 0.358667, g, chrome, 0.01);
     cyl(
       0.57,
       0.57,
       0.014,
       [chrome, polishedCap, chrome],
-      V(0, y + 0.284, 0),
+      V(0, y + 0.378667, 0),
       g,
     );
     // Shallow concentric machining grooves catch light across a solid top cap.
     rim(
       0.48,
-      y + 0.294,
+      y + 0.392,
       g,
       mat(0x6e8baa, { metalness: 0.6, roughness: 0.35 }),
       0.003,
     );
     rim(
       0.615,
-      y + 0.06,
+      y + 0.08,
       g,
       mat(0x416685, { metalness: 0.38, roughness: 0.25 }),
       0.004,
@@ -272,7 +272,7 @@ function database(g) {
       const socket = sphere(
         0.028,
         recess,
-        V(Math.sin(a) * 0.626, y + 0.16, Math.cos(a) * 0.626),
+        V(Math.sin(a) * 0.626, y + 0.213333, Math.cos(a) * 0.626),
         g,
         1,
         0.7,
@@ -282,7 +282,7 @@ function database(g) {
       const light = sphere(
         0.026,
         led,
-        V(Math.sin(a) * 0.638, y + 0.16, Math.cos(a) * 0.638),
+        V(Math.sin(a) * 0.638, y + 0.213333, Math.cos(a) * 0.638),
         g,
         1,
         0.55,
@@ -534,6 +534,18 @@ export function createPedestal(n, parent) {
       shade.addColorStop(1, "#283e4b");
       c.fillStyle = shade;
       c.fillRect(0, 0, w, h);
+      const reflection = c.createLinearGradient(0, 0, w, 0);
+      [[0, "#06132520"], [0.22, "#c5dff033"], [0.43, "#06132544"],
+       [0.72, "#b1cce222"], [1, "#06132520"]].forEach(([t, color]) => reflection.addColorStop(t, color));
+      c.fillStyle = reflection;
+      c.fillRect(0, 0, w, h);
+      for (let floor = 1; floor < 5; floor++) {
+        const y = Math.round(h * floor / 5);
+        c.fillStyle = "#06121eaa";
+        c.fillRect(0, y, w, 4);
+        c.fillStyle = "#c4d9ed42";
+        c.fillRect(0, y + 4, w, 1);
+      }
       for (let i = 0; i < 24; i++) {
         const x = (i * w) / 24;
         c.fillStyle = i % 3 === 0 ? "#bdd8ff10" : "#020c1d2a";
@@ -582,7 +594,7 @@ export function createPedestal(n, parent) {
   lawn.name = "landscaped-exhibit-footprint";
   lawn.rotation.x = -Math.PI / 2;
   lawn.position.y = 0.012;
-  lawn.scale.z = 1.12;
+  lawn.scale.y = 1.12;
   for (let k = 0; k < 3; k++) {
     const a = [-1.1, 0.65, 2.2][k],
       distance = r * (1.08 + 0.07 * (k % 2));

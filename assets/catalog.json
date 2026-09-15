@@ -48,7 +48,7 @@
       "name": "应用层平台",
       "category": "平台与结构",
       "source": "components/platforms.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         332,
         192,
@@ -86,7 +86,7 @@
       "name": "项目团队",
       "category": "智能角色",
       "source": "components/people.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         380,
         366,
@@ -105,7 +105,7 @@
       "name": "专家",
       "category": "智能角色",
       "source": "components/people.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         581,
         357,
@@ -124,7 +124,7 @@
       "name": "AI 机器人",
       "category": "智能角色",
       "source": "components/robot.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         778,
         357,
@@ -143,7 +143,7 @@
       "name": "员工团队",
       "category": "智能角色",
       "source": "components/people.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         987,
         377,
@@ -181,7 +181,7 @@
       "name": "AI Chat",
       "category": "应用屏幕",
       "source": "components/applications.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         450,
         107,
@@ -200,7 +200,7 @@
       "name": "Business Workbench",
       "category": "应用屏幕",
       "source": "components/applications.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         637,
         103,
@@ -219,7 +219,7 @@
       "name": "Apps & Integrations",
       "category": "应用屏幕",
       "source": "components/applications.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         922,
         102,
@@ -238,7 +238,7 @@
       "name": "企业微缩城市",
       "category": "业务对象",
       "source": "components/city.js",
-      "version": 1,
+      "version": 5,
       "referenceRect": [
         307,
         605,
@@ -257,7 +257,7 @@
       "name": "People",
       "category": "业务对象",
       "source": "components/business-models.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         332,
         610,
@@ -276,7 +276,7 @@
       "name": "Documents",
       "category": "业务对象",
       "source": "components/business-models.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         411,
         582,
@@ -295,7 +295,7 @@
       "name": "Tasks",
       "category": "业务对象",
       "source": "components/business-models.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         505,
         635,
@@ -314,7 +314,7 @@
       "name": "Business Data",
       "category": "业务对象",
       "source": "components/business-models.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         667,
         613,
@@ -333,7 +333,7 @@
       "name": "Systems",
       "category": "业务对象",
       "source": "components/business-models.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         879,
         649,
@@ -352,7 +352,7 @@
       "name": "Devices",
       "category": "业务对象",
       "source": "components/business-models.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         988,
         633,
@@ -371,7 +371,7 @@
       "name": "External Data",
       "category": "业务对象",
       "source": "components/business-models.js",
-      "version": 4,
+      "version": 5,
       "referenceRect": [
         1094,
         634,

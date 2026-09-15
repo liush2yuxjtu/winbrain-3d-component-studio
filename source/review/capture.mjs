@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 const root = path.resolve(import.meta.dirname, '../..');
 const out = path.join(root, 'asset-review');
 await fs.mkdir(out, { recursive: true });
-const browser = await chromium.launch({ headless: true, args: ['--enable-unsafe-swiftshader', '--use-angle=swiftshader'] });
+const browser = await chromium.launch({ headless: true, args: ['--enable-unsafe-swiftshader'] });
 const checks = [];
 const check = (name, value, detail = null) => {
   checks.push({ name, passed: Boolean(value), detail });
@@ -17,6 +17,7 @@ try {
   for (const [label, port] of [['before', 8766], ['after', 8765]]) {
     const context = await browser.newContext(contextOptions);
     const page = await context.newPage();
+    page.setDefaultTimeout(180000);
     page.on('pageerror', e => errors.push({ page: label, message: e.message }));
     await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'load' });
     await page.waitForFunction(() => window.winbrain && document.body.dataset.ready, null, { timeout: 120000 });
@@ -25,16 +26,30 @@ try {
       return { view: winbrain.view, stats: winbrain.stats(), count: winbrain.registry.size };
     });
     check(`${label}: 22 registered components`, state.count === 22);
-    await page.screenshot({ path: path.join(out, `${label}.png`) });
+    // Freeze actual GPU pixels into a same-sized 2D canvas. This avoids a
+    // headless WebGL compositor capture stall; no reference pixels are used.
+    await page.evaluate(() => {
+      const live = winbrain.renderer.domElement;
+      const frozen = document.createElement('canvas');
+      for (const attribute of live.attributes) frozen.setAttribute(attribute.name, attribute.value);
+      frozen.width = live.width; frozen.height = live.height;
+      frozen.getContext('2d').drawImage(live, 0, 0);
+      live.replaceWith(frozen);
+    });
+    await page.screenshot({ path: path.join(out, `${label}.png`), timeout: 180000, animations: 'disabled' });
     for (let frame = 0; frame < 3; frame++) {
-      await page.evaluate(() => winbrain.renderOnce());
-      await page.screenshot({ path: path.join(out, `${label}-frozen-${frame}.png`) });
+      const pixels = await page.evaluate(() => {
+        winbrain.renderOnce();
+        return winbrain.renderer.domElement.toDataURL('image/png');
+      });
+      await fs.writeFile(path.join(out, `${label}-frozen-${frame}.png`), Buffer.from(pixels.split(',')[1], 'base64'));
     }
-    await fs.writeFile(path.join(out, `${label}-capture.json`), JSON.stringify({ ...state, viewport: [1536, 1024], dpr: 1, browser: browser.version() }, null, 2));
+    await fs.writeFile(path.join(out, `${label}-capture.json`), JSON.stringify({ ...state, viewport: [1536, 1024], dpr: 1, browser: browser.version(), capture: 'Actual WebGL backbuffer copied 1:1 into same-size 2D canvas for DOM capture; frozen test uses native backbuffers' }, null, 2));
     await context.close();
   }
   const context = await browser.newContext(contextOptions);
   const page = await context.newPage();
+    page.setDefaultTimeout(180000);
   page.on('pageerror', e => errors.push({ page: 'studio', message: e.message }));
   await page.goto('http://127.0.0.1:8765/studio.html');
   await page.waitForFunction(() => window.studio && document.body.dataset.ready, null, { timeout: 120000 });
@@ -94,6 +109,6 @@ try {
   check('no browser page errors', errors.length === 0, errors);
   await context.close();
 } finally {
-  await fs.writeFile(path.join(out, 'verification.json'), JSON.stringify({ checks, errors, browser: browser.version() }, null, 2));
+  await fs.writeFile(path.join(out, 'verification.json'), JSON.stringify({ checks, errors, browser: browser.version(), capture: 'Actual WebGL backbuffer copied 1:1 into same-size 2D canvas for DOM capture; frozen test uses native backbuffers' }, null, 2));
   await browser.close();
 }
