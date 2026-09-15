@@ -3,6 +3,7 @@ name: Asset visual review
 on:
   push:
     branches: ["fix/p0-p1-assets-20260915"]
+    paths: ["source/**", ".github/workflows/asset-review.yml"]
   pull_request:
     paths: ["source/**", ".github/workflows/asset-review.yml"]
 
@@ -28,19 +29,22 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: source/package-lock.json
-      - name: Apply initial source migration
+      - name: Apply initial source migrations
         run: |
-          if [ -f source/review/apply-fixes.py ]; then
-            python3 source/review/apply-fixes.py
-          fi
+          if [ -f source/review/apply-fixes.py ]; then python3 source/review/apply-fixes.py; fi
+          if [ -f source/review/finish-setup.py ]; then python3 source/review/finish-setup.py; fi
       - name: Install build and browser dependencies
         working-directory: source
         run: |
           npm ci
-          npm install --no-save --package-lock=false playwright@1.55.0
+          npm install --no-save --package-lock=false playwright@1.63.0
           npx playwright install --with-deps chromium
       - name: Install comparison dependencies
         run: python3 -m pip install numpy==2.2.6 opencv-python-headless==4.12.0.88
+      - name: Test preview storage isolation
+        run: |
+          mkdir -p asset-review
+          node --test source/review/storage-scope.test.mjs | tee asset-review/storage-tests.txt
       - name: Build baseline and candidate
         run: |
           git worktree add --detach /tmp/winbrain-baseline bc2a884927706d66fe107d8c0c2c2b7af81ba853
@@ -62,8 +66,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git rm --ignore-unmatch source/review/apply-fixes.py
-          git add source/components assets previews asset-review index.html studio.html catalog.html tokens.html tokens.css motion.html motion-manifest.json
+          git rm --ignore-unmatch source/review/apply-fixes.py source/review/finish-setup.py
+          git add source assets previews asset-review index.html studio.html catalog.html tokens.html tokens.css motion.html motion-manifest.json
           if ! git diff --cached --quiet; then
             git commit -m 'fix: apply P0/P1 models and refresh verified exports and snapshots'
             git push origin HEAD:fix/p0-p1-assets-20260915
@@ -72,7 +76,7 @@ jobs:
         if: always()
         run: |
           mkdir -p review-artifact
-          tar -czf review-artifact/asset-review.tgz asset-review source/components source/review assets/catalog.json previews index.html studio.html catalog.html || true
+          tar -czf review-artifact/asset-review.tgz asset-review source/components source/review source/registry.js source/storage-scope.js assets/catalog.json previews index.html studio.html catalog.html || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
