@@ -104,8 +104,8 @@
       "id": "actor.experts",
       "name": "专家",
       "category": "智能角色",
-      "source": "components/people.js",
-      "version": 5,
+      "source": "components/expert-model-v2.js",
+      "version": 6,
       "referenceRect": [
         581,
         357,
@@ -370,8 +370,8 @@
       "id": "data.external-data",
       "name": "External Data",
       "category": "业务对象",
-      "source": "components/business-models.js",
-      "version": 5,
+      "source": "components/external-data-model-v2.js",
+      "version": 6,
       "referenceRect": [
         1094,
         634,
