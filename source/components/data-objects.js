@@ -1,9 +1,33 @@
 import * as THREE from "three";
-import { groupAt, levels, label, clickable, mat, cyl, ring } from "../core.js";
+import { groupAt, levels, label, clickable, mat, cyl, ring, sphere, softGlow } from "../core.js";
 import { capture } from "../registry.js";
 import { createBusinessModel, createPedestal } from "./business-models.js";
 import { plate } from "./exhibit-geometry.js";
 import { dataNodes } from "./data-layout.js";
+
+function createReferenceCloud(parent) {
+  const cloudMat = mat(0xa9c9e7, {
+    metalness: 0.035,
+    roughness: 0.18,
+    transmission: 0.16,
+    thickness: 0.18,
+    ior: 1.34,
+    transparent: true,
+    opacity: 0.88,
+    clearcoat: 1,
+    clearcoatRoughness: 0.09,
+    emissive: 0x315d85,
+    emissiveIntensity: 0.16,
+  });
+  // A classic four-lobe cloud: wide flat base, tall middle, smaller side lobes.
+  sphere(0.28, cloudMat, new THREE.Vector3(0, 0.24, 0), parent, 1.45, 0.55, 0.78);
+  sphere(0.24, cloudMat, new THREE.Vector3(-0.27, 0.35, 0.01), parent, 1.05, 0.95, 0.86);
+  sphere(0.31, cloudMat, new THREE.Vector3(0, 0.46, 0), parent, 1, 1.04, 0.88);
+  sphere(0.22, cloudMat, new THREE.Vector3(0.28, 0.35, 0.015), parent, 1.05, 0.93, 0.84);
+  const glow = softGlow(parent, new THREE.Vector3(0, 0.43, -0.08), 1.04, 0xb7e1ff);
+  glow.material.opacity = 0.18;
+}
+
 export function createDataObjects() {
   for (const n of dataNodes)
     capture(
@@ -59,7 +83,8 @@ export function createDataObjects() {
         icon.name = n.type + "-sculpture";
         icon.position.y = n.h + (n.type === "cloud" ? 0.105 : 0.125);
         g.add(icon);
-        createBusinessModel(n.type, icon);
+        if (n.type === "cloud") createReferenceCloud(icon);
+        else createBusinessModel(n.type, icon);
         const sculptureScale = {
           people: [1, 1.02, 1],
           doc: [0.96, 0.94, 1],
