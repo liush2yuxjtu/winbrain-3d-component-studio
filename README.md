@@ -1,10 +1,11 @@
 # WinBrain Component Studio
 
-一个用代码建模的三维组织世界，以及逐组件编辑、替换和对齐工具。V4 根据原图截图和 OpenCV 差异结果，继续修正了构图、玻璃平台、文字、模型材料和地球。
+一个用代码建模的三维组织世界，以及逐组件编辑、替换、设计 Token 审计和像素级对齐工具。V4 根据原图截图和 OpenCV 差异结果，继续修正了构图、玻璃平台、文字、模型材料和地球。
 
 ## 在线查看
 
 - **三维首页：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/
+- **Design Token Audit：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/tokens.html
 - **原图差异对照：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/comparison.html
 - **组件编辑器：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/studio.html
 - **22 个资产总览：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/catalog.html
@@ -13,6 +14,7 @@ GitHub 源码：https://github.com/liush2yuxjtu/winbrain-3d-component-studio
 
 ## 在本机打开
 
+- **Design Token Audit：** http://127.0.0.1:8765/tokens.html
 - **原图差异对照：** http://127.0.0.1:8765/comparison.html
 - **组件编辑器：** http://127.0.0.1:8765/studio.html
 - **22 个资产总览：** http://127.0.0.1:8765/catalog.html
@@ -27,6 +29,17 @@ python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
 也可以直接双击 `index.html` 或 `studio.html` 预览。要使用“保存并应用到首页”和跨页面同步，请使用同一个浏览器里的本地 HTTP 地址。
+
+## Design Tokens
+
+`source/tokens/tokens.js` 是重复设计规则的结构化真源。3D 世界在 `buildWorld()` 创建组件前通过 `source/tokens/apply.js` 应用相机、环境、灯光、共享玻璃材质与三层高度等 Token；组件独有的模型顶点和姿态继续留在各组件文件中。
+
+构建时 `source/build-tokens.mjs` 从同一真源生成：
+
+- `tokens.css`：可复用的 CSS Custom Properties。
+- `tokens.html`：Design Token Audit 页面，可搜索、按类别筛选、复制值，并通过 **USED BY** 直接跳到使用它的 Asset / Studio 页面。
+
+当前 Token 分为 Color、Typography、Spacing、Radius、3D Material、Lighting、Camera 和 Layout。原则是：**重复规则进入 Token；单个资产一次性的几何细节不 Token 化。**
 
 ## V4 · OpenCV 对照修正
 
@@ -48,10 +61,11 @@ python3 -m http.server 8765 --bind 127.0.0.1
 
 ## 怎么使用
 
-1. 从左侧选择一个组件。
-2. 选择预览模式：**整页构图**看全景，**独立 3D**旋转检查模型，**Mock-3D 对齐**锁定原图镜头。
-3. 用右侧字段调整位置、大小、角度和颜色。也可以导入 GLB / `.wb3d.json` 替换模型，或从内置组件库选一个模型。
-4. 点击 **保存并应用到首页**。同一浏览器内已打开的首页会同步更新。
+1. 从 `tokens.html` 审计全局设计规则，或者从 `catalog.html` 选择一个组件。
+2. 在 Token 的 **USED BY** 中可直接进入使用该 Token 的 Asset；在 Catalog 里也可以进入对应 Studio。
+3. 在 Studio 选择预览模式：**整页构图**看全景，**独立 3D**旋转检查模型，**Mock-3D 对齐**锁定原图镜头。
+4. 用右侧字段调整位置、大小、角度和颜色。也可以导入 GLB / `.wb3d.json` 替换模型，或从内置组件库选一个模型。
+5. 点击 **保存并应用到首页**。同一浏览器内已打开的首页会同步更新。
 
 Mock-3D 支持参考图叠加、透明度、差值显示、网格、100%–800% 显示倍率，以及临时显示原图。位置可以拖动，也可以按方向键调整：默认 **1 px**，按住 Shift 为 **10 px**，按住 Alt 为 **0.1 px**。按住空格查看原图，按 F 适合窗口。
 
@@ -69,6 +83,10 @@ Mock-3D 支持参考图叠加、透明度、差值显示、网格、100%–800% 
 | 文件 | 用途 |
 |---|---|
 | `index.html` | 可独立运行的三维首页 |
+| `tokens.html` | Design Token 审计：搜索、分类、值、CSS 变量、使用资产反查 |
+| `tokens.css` | 从 Token 真源生成的 CSS Custom Properties |
+| `source/tokens/tokens.js` | UI / 3D 共用设计规则的结构化真源 |
+| `source/tokens/apply.js` | 在 3D 世界创建前应用运行时 Token |
 | `studio.html` | 可独立运行的组件编辑器，内嵌参考图 |
 | `catalog.html` | 22 个组件的预览、编辑入口和下载入口 |
 | `assets/` | 22 个 GLB、22 个原生资产、目录和参考图 |
@@ -99,12 +117,12 @@ npm ci
 npm run build
 ```
 
-构建脚本会生成上一层的 `index.html`、`studio.html` 和 `catalog.html`。模型源文件修改后，网页会使用新模型。现有 GLB 和 PNG 是交付时的快照；修改后可在编辑器重新导出对应模型和预览。
+构建脚本会生成上一层的 `index.html`、`studio.html`、`catalog.html`、`tokens.css` 和 `tokens.html`。模型源文件或 Token 修改后，网页会使用新值。现有 GLB 和 PNG 是交付时的快照；模型修改后可在编辑器重新导出对应模型和预览。
 
 运行时无需访问在线模型、在线字体或远程贴图。四个品牌图标已内嵌，其他纹理由代码生成。Three.js 与字体的许可证随项目提供，品牌素材来源单独记录。
 
 ## 已验证与当前差异
 
-33 项检查全部通过。自动化检查覆盖全部 22 个 GLB 的实际加载、精确像素位移、单组件材质隔离、等比缩放、模型旋转、参考图与差值显示、GLB 导出与回导、刷新后恢复、同步到首页、1024 像素宽度，以及直接打开本地编辑器。运行检查没有发现 JavaScript 错误或外部网络依赖。
+原有 33 项检查覆盖全部 22 个 GLB 的实际加载、精确像素位移、单组件材质隔离、等比缩放、模型旋转、参考图与差值显示、GLB 导出与回导、刷新后恢复、同步到首页、1024 像素宽度，以及直接打开本地编辑器。设计 Token 层新增后，仍应在每次视觉 Token 修改后重新执行页面截图与 OpenCV 对照，避免全局 Token 改动意外影响像素校准结果。
 
 仍有视觉差异：这是浏览器中的代码模型，玻璃折射、微缩城市和地球表面无法从一张生成图中反推出完全相同的原始模型与灯光。地球 GLB 采用近似材质，原生资产保留程序材质。详见 `COMPONENTS.md`。
