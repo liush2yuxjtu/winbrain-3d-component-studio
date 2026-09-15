@@ -55,36 +55,44 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
   g.position.set(x, 0.17, z);
   g.scale.setScalar(scale);
   parent.add(g);
-  const m = mat(color, {
-    roughness: 0.5,
-    metalness: 0.03,
-    clearcoat: 0.22,
-    clearcoatRoughness: 0.36,
-    emissive: color,
-    emissiveIntensity: 0.055,
-  });
-  sphere(0.205, m, new THREE.Vector3(0, 0.89, 0), g, 1, 1.18, 0.96);
-  cyl(0.09, 0.105, 0.065, m, new THREE.Vector3(0, 0.668, 0), g);
+  const m = mat(color, glasses
+    ? {
+        roughness: 0.48,
+        metalness: 0.03,
+        clearcoat: 0.24,
+        clearcoatRoughness: 0.34,
+        emissive: color,
+        emissiveIntensity: 0.06,
+      }
+    : {
+        roughness: 0.42,
+        metalness: 0.05,
+        clearcoat: 0.32,
+        emissive: color,
+        emissiveIntensity: 0.09,
+      });
+  sphere(0.215, m, new THREE.Vector3(0, 0.9, 0), g, 1, 1.20, 0.98);
+  cyl(0.095, 0.11, 0.075, m, new THREE.Vector3(0, 0.667, 0), g);
   const torso = mesh(
     new THREE.LatheGeometry(
       [
-        [0, 0.008], [0.282, 0.008], [0.298, 0.024], [0.305, 0.09],
-        [0.305, 0.20], [0.299, 0.31], [0.279, 0.42], [0.247, 0.505],
-        [0.202, 0.568], [0.141, 0.612], [0.071, 0.631], [0, 0.635],
+        [0, 0.008], [0.29, 0.008], [0.305, 0.024], [0.313, 0.09],
+        [0.313, 0.20], [0.306, 0.31], [0.286, 0.42], [0.253, 0.51],
+        [0.207, 0.575], [0.145, 0.621], [0.072, 0.641], [0, 0.644],
       ].map((p) => new THREE.Vector2(...p)),
       64,
     ),
     m,
     g,
   );
-  torso.scale.z = 0.79;
+  torso.scale.z = 0.82;
   for (const s of [-1, 1]) {
-    const arm = mesh(new THREE.CapsuleGeometry(0.066, 0.265, 7, 16), m, g);
-    arm.position.set(s * 0.278, 0.232, 0.0);
-    arm.rotation.z = -s * 0.07;
+    const arm = mesh(new THREE.CapsuleGeometry(0.070, 0.28, 7, 16), m, g);
+    arm.position.set(s * 0.285, 0.235, 0.0);
+    arm.rotation.z = -s * 0.08;
   }
   if (glasses) {
-    // Reference expert is a compact bust; keep glasses readable without widening the whole head.
+    // Keep the expert compact without changing every other human asset.
     g.scale.x *= 1.08;
     for (const x of [-0.097, 0.097]) {
       const t = mesh(
@@ -92,12 +100,12 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
         glowMat(0xd8c7ff, 0.82),
         g,
       );
-      t.position.set(x, 0.91, 0.169);
+      t.position.set(x, 0.915, 0.174);
       t.scale.y = 0.8;
     }
     beam(
-      new THREE.Vector3(-0.018, 0.91, 0.18),
-      new THREE.Vector3(0.022, 0.91, 0.18),
+      new THREE.Vector3(-0.018, 0.915, 0.184),
+      new THREE.Vector3(0.022, 0.915, 0.184),
       0.009,
       white,
       g,
