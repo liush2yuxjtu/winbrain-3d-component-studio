@@ -4,7 +4,6 @@ import { capture } from "../registry.js";
 import { createBusinessModel, createPedestal } from "./business-models.js";
 import { plate } from "./exhibit-geometry.js";
 import { dataNodes } from "./data-layout.js";
-import { createReferenceCloud } from "./cloud-model.js";
 
 export function createDataObjects() {
   for (const n of dataNodes)
@@ -61,8 +60,35 @@ export function createDataObjects() {
         icon.name = n.type + "-sculpture";
         icon.position.y = n.h + (n.type === "cloud" ? 0.105 : 0.125);
         g.add(icon);
-        if (n.type === "cloud") createReferenceCloud(icon);
-        else createBusinessModel(n.type, icon);
+        createBusinessModel(n.type, icon);
+        if (n.type === "cloud") {
+          const cloud = icon.getObjectByName("unified-sculpted-cloud");
+          if (cloud?.isMesh) {
+            cloud.material = mat(0x9fc1e2, {
+              metalness: 0.08,
+              roughness: 0.2,
+              clearcoat: 1,
+              clearcoatRoughness: 0.1,
+              emissive: 0x2d587d,
+              emissiveIntensity: 0.12,
+            });
+            const halo = new THREE.Mesh(
+              cloud.geometry.clone(),
+              new THREE.MeshBasicMaterial({
+                color: 0xe8f6ff,
+                transparent: true,
+                opacity: 0.12,
+                side: THREE.BackSide,
+                depthWrite: false,
+                toneMapped: false,
+              }),
+            );
+            halo.name = "external-data-cloud-rim";
+            halo.rotation.copy(cloud.rotation);
+            halo.scale.setScalar(1.035);
+            icon.add(halo);
+          }
+        }
         const sculptureScale = {
           people: [1, 1.02, 1],
           doc: [0.96, 0.94, 1],
