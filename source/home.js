@@ -415,8 +415,17 @@ function frame(now) {
   }
   for (const { anchor, el } of labels) {
     const v = anchor.getWorldPosition(new THREE.Vector3()).project(camera);
-    el.style.left = `${THREE.MathUtils.clamp((v.x * 0.5 + 0.5) * W, 565, 975)}px`;
-    el.style.top = `${(-v.y * 0.5 + 0.5) * H}px`;
+    // Move projected DOM labels on their own compositor layer and snap the
+    // translation to the nearest *physical* display pixel. Updating left/top at
+    // arbitrary fractions forces text + translucent backgrounds to re-rasterize
+    // while orbiting; a snapped translate3d keeps glyph sampling stable.
+    const x = THREE.MathUtils.clamp((v.x * 0.5 + 0.5) * W, 565, 975);
+    const y = (-v.y * 0.5 + 0.5) * H;
+    const sceneScale = document.querySelector(".scene")?.getBoundingClientRect().width / W || 1;
+    const snapUnit = 1 / ((window.devicePixelRatio || 1) * sceneScale);
+    const snap = (value) => Math.round(value / snapUnit) * snapUnit;
+    el.style.setProperty("--label-x", `${snap(x)}px`);
+    el.style.setProperty("--label-y", `${snap(y)}px`);
     el.style.opacity = v.z < 1 ? "1" : "0";
   }
   renderer.info.reset();
