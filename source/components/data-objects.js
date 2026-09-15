@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { groupAt, levels, label, clickable, mat } from "../core.js";
+import { groupAt, levels, label, clickable, mat, cyl, ring } from "../core.js";
 import { capture } from "../registry.js";
 import { createBusinessModel, createPedestal } from "./business-models.js";
 import { plate } from "./exhibit-geometry.js";
@@ -18,6 +18,32 @@ export function createDataObjects() {
       () => {
         const g = groupAt(n.x, levels[1] + 0.14, n.d);
         createPedestal(n, g);
+        const frostedTarget = n.type === "task" || n.type === "cloud";
+        if (frostedTarget) {
+          const frosted = mat(n.type === "task" ? 0xbdd5ee : 0xc7dff2, {
+            metalness: 0.02,
+            roughness: 0.48,
+            transmission: 0.32,
+            thickness: 0.18,
+            ior: 1.33,
+            transparent: true,
+            opacity: 0.34,
+            depthWrite: false,
+            clearcoat: 0.28,
+            clearcoatRoughness: 0.5,
+            side: THREE.DoubleSide,
+          });
+          const frostDeck = cyl(
+            n.r * 0.84,
+            n.r * 0.88,
+            0.055,
+            frosted,
+            new THREE.Vector3(0, n.h + 0.11, 0),
+            g,
+          );
+          frostDeck.name = `${n.type}-frosted-glass-deck`;
+          ring(n.r * 0.86, n.h + 0.14, n.type === "task" ? 0x9fc9f3 : 0xa9d9f0, g, 0.006);
+        }
         label(
           g,
           n.name,
@@ -30,21 +56,42 @@ export function createDataObjects() {
         );
         const icon = new THREE.Group();
         icon.name = n.type + "-sculpture";
-        icon.position.y = n.h + 0.125;
+        icon.position.y = n.h + (n.type === "task" ? 0.11 : n.type === "cloud" ? 0.105 : 0.125);
         g.add(icon);
         createBusinessModel(n.type, icon);
-        // Silhouette corrections preserve the established exhibit anchors.
+        // Reference-first silhouette tuning. Task had become too tall; cloud needs a wider, flatter read.
         const sculptureScale = {
-          people: [1, 1.02, 1], doc: [0.96, 0.94, 1],
-          task: [0.96, 1.10, 1], data: [1, 1, 1],
-          server: [0.96, 0.95, 1], laptop: [1, 1.08, 1],
-          cloud: [0.94, 1, 1],
+          people: [1, 1.02, 1],
+          doc: [0.96, 0.94, 1],
+          task: [0.94, 1.01, 0.98],
+          data: [1, 1, 1],
+          server: [0.96, 0.95, 1],
+          laptop: [1, 1.08, 1],
+          cloud: [1.02, 0.94, 1.04],
         }[n.type];
         icon.scale.set(...sculptureScale);
+        if (n.type === "task") icon.rotation.y -= 0.035;
+        if (n.type === "cloud") icon.position.z -= 0.015;
         if (n.type === "data") {
-          const captionPanel = plate(2.54, 0.54, 0.028,
-            mat(0x131e2e, { metalness: 0, roughness: 1, transparent: true, opacity: 0.94, depthWrite: false, depthTest: false }),
-            g, 0, 0.255, n.r + 0.17, 0.12, 0.004);
+          const captionPanel = plate(
+            2.54,
+            0.54,
+            0.028,
+            mat(0x131e2e, {
+              metalness: 0,
+              roughness: 1,
+              transparent: true,
+              opacity: 0.94,
+              depthWrite: false,
+              depthTest: false,
+            }),
+            g,
+            0,
+            0.255,
+            n.r + 0.17,
+            0.12,
+            0.004,
+          );
           captionPanel.name = "database-caption-panel";
           label(
             g,
