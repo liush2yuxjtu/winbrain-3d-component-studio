@@ -22,25 +22,13 @@ export function createRoleEmblem(parent, role, color) {
       }
     sphere(0.027, material, new THREE.Vector3(0, 0, 0.075), parent);
   } else if (role === "Experts") {
-    // A portrait with glasses and an open book, rather than an unrelated atom.
-    const head = loop(0.061, 0.008, 0, 0.046);
-    head.scale.y = 1.12;
-    head.name = "expert-portrait-emblem";
-    for (const x of [-0.024, 0.024]) loop(0.022, 0.005, x, 0.050).scale.y = 0.75;
-    const shoulders = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-0.099, -0.100, 0.061),
-      new THREE.Vector3(-0.087, -0.042, 0.061),
-      new THREE.Vector3(-0.050, -0.014, 0.061),
-      new THREE.Vector3(0, -0.041, 0.061),
-      new THREE.Vector3(0.050, -0.014, 0.061),
-      new THREE.Vector3(0.087, -0.042, 0.061),
-      new THREE.Vector3(0.099, -0.100, 0.061),
-    ]);
-    mesh(new THREE.TubeGeometry(shoulders, 32, 0.008, 6, false), material, parent);
-    for (const side of [-1, 1]) {
-      const points = [[0,-0.076],[side*0.066,-0.049],[side*0.066,-0.103],[0,-0.125]];
-      line(points.map(([x,y]) => new THREE.Vector3(x,y,0.069)), 0xe8e7ff, 0.9, parent);
+    // The static reference uses an atom-style expert badge.
+    for (const angle of [0, Math.PI / 3, -Math.PI / 3]) {
+      const orbit = loop(0.092, 0.008, 0, 0, angle);
+      orbit.scale.y = 0.48;
+      orbit.name = "expert-atom-orbit";
     }
+    sphere(0.024, material, new THREE.Vector3(0, 0, 0.075), parent);
   } else if (role === "AI Agents") {
     loop(0.102, 0.027);
     loop(0.052, 0.015, 0, 0, 0.2).rotation.y = 0.8;
