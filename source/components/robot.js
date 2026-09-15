@@ -52,97 +52,112 @@ import { plate, outline } from "./exhibit-geometry.js";
 import { register, capture } from "../registry.js";
 export function createRobot(parent) {
   const robot = new THREE.Group();
-  robot.position.y = 0.13;
-  robot.scale.set(1.07, 0.92, 1);
-  robot.name = "Aster • ceramic assistant v2";
+  robot.position.y = 0.11;
+  // The static reference reads as a compact assistant, not a wide toy robot.
+  robot.scale.set(0.96, 0.86, 0.94);
+  robot.name = "Aster • ceramic assistant v3";
   parent.add(robot);
-  cyl(0.34, 0.44, 0.14, white, new THREE.Vector3(0, 0.07, 0), robot);
-  sphere(0.35, white, new THREE.Vector3(0, 0.28, 0), robot, 1, 0.75, 0.9);
-  cyl(0.13, 0.16, 0.2, silver, new THREE.Vector3(0, 0.48, 0), robot);
-  const ceramic = mat(0xe1eafa, { roughness: 0.34, metalness: 0.06, clearcoat: 0.45 });
-  const head = plate(0.78, 0.66, 0.56, ceramic, robot, 0, 0.88, 0, 0.22, 0.025);
+  const ceramic = mat(0xdbe8f5, {
+    roughness: 0.38,
+    metalness: 0.04,
+    clearcoat: 0.38,
+    clearcoatRoughness: 0.34,
+  });
+  const frostedWhite = mat(0xcfe0f2, {
+    roughness: 0.46,
+    metalness: 0.02,
+    transmission: 0.16,
+    thickness: 0.13,
+    transparent: true,
+    opacity: 0.82,
+    clearcoat: 0.26,
+    clearcoatRoughness: 0.44,
+  });
+  cyl(0.31, 0.405, 0.13, frostedWhite, new THREE.Vector3(0, 0.065, 0), robot);
+  sphere(0.325, frostedWhite, new THREE.Vector3(0, 0.265, 0), robot, 1, 0.74, 0.88);
+  cyl(0.115, 0.145, 0.18, silver, new THREE.Vector3(0, 0.455, 0), robot);
+  const head = plate(0.69, 0.59, 0.5, ceramic, robot, 0, 0.82, 0, 0.15, 0.022);
   head.name = "rounded-ceramic-head";
-  const face = plate(0.61, 0.43, 0.095, black, robot, 0, 0.88, 0.284, 0.17, 0.012);
+  const visorMat = mat(0x10243c, {
+    roughness: 0.3,
+    metalness: 0.08,
+    transmission: 0.12,
+    transparent: true,
+    opacity: 0.92,
+    clearcoat: 0.24,
+  });
+  const face = plate(0.52, 0.35, 0.08, visorMat, robot, 0, 0.82, 0.255, 0.115, 0.01);
   face.name = "rounded-inset-visor";
   for (const sx of [-1, 1]) {
     sphere(
-      0.046,
-      glowMat(0x4aaeff, 3),
-      new THREE.Vector3(sx * 0.14, 0.89, 0.34),
+      0.041,
+      glowMat(0x4aaeff, 2.4),
+      new THREE.Vector3(sx * 0.122, 0.83, 0.305),
       robot,
       1,
-      1.8,
-      0.6,
+      1.65,
+      0.55,
     );
     sphere(
-      0.11,
+      0.095,
       silver,
-      new THREE.Vector3(sx * 0.44, 0.87, 0.01),
+      new THREE.Vector3(sx * 0.385, 0.81, 0.01),
       robot,
-      0.62,
-      1.65,
+      0.58,
+      1.5,
       1,
     );
   }
   const mouth = new THREE.EllipseCurve(
     0,
     0,
-    0.085,
-    0.045,
+    0.07,
+    0.036,
     Math.PI,
     TAU,
     false,
     0,
   )
     .getPoints(20)
-    .map((p) => new THREE.Vector3(p.x, 0.81 + p.y, 0.344));
-  line(mouth, 0x549bff, 1, robot);
+    .map((p) => new THREE.Vector3(p.x, 0.755 + p.y, 0.306));
+  line(mouth, 0x549bff, 0.82, robot);
   beam(
-    new THREE.Vector3(0, 1.2, 0),
-    new THREE.Vector3(0.02, 1.43, 0),
-    0.025,
+    new THREE.Vector3(0, 1.095, 0),
+    new THREE.Vector3(0.015, 1.29, 0),
+    0.021,
     silver,
     robot,
   );
-  sphere(0.05, glowMat(0xb2ddff, 1.6), new THREE.Vector3(0.02, 1.43, 0), robot);
+  sphere(0.043, glowMat(0xb2ddff, 1.35), new THREE.Vector3(0.015, 1.29, 0), robot);
   for (const side of [-1, 1]) {
     const arm = mesh(
-      new THREE.CapsuleGeometry(0.07, 0.2, 6, 16),
+      new THREE.CapsuleGeometry(0.064, 0.18, 6, 16),
       silver,
       robot,
     );
-    arm.position.set(side * 0.34, 0.3, 0.005);
-    arm.rotation.z = side * 0.22;
+    arm.position.set(side * 0.305, 0.285, 0.005);
+    arm.rotation.z = side * 0.19;
     sphere(
-      0.075,
-      white,
-      new THREE.Vector3(side * 0.375, 0.175, 0.035),
+      0.068,
+      ceramic,
+      new THREE.Vector3(side * 0.34, 0.17, 0.03),
       robot,
-      0.85,
-      1.2,
+      0.82,
+      1.1,
       1,
     );
-    sphere(
-      0.049,
-      glowMat(0x67cfff, 1.25),
-      new THREE.Vector3(side * 0.465, 0.87, 0.068),
-      robot,
-      0.35,
-      1.4,
-      0.65,
-    );
   }
-  ring(0.135, 0.535, 0x8cdeff, robot, 0.009);
+  ring(0.122, 0.5, 0x8cdeff, robot, 0.008);
   box(
-    0.105,
-    0.038,
-    0.024,
+    0.095,
+    0.034,
+    0.021,
     cyan,
-    new THREE.Vector3(0, 0.28, 0.31),
+    new THREE.Vector3(0, 0.265, 0.285),
     robot,
-    0.014,
+    0.012,
   );
-  outline(0.612, 0.432, 0.17, 0.338, 0x7192c1, 0.52, robot, 0, 0.88);
+  outline(0.525, 0.355, 0.135, 0.3, 0x7192c1, 0.38, robot, 0, 0.82);
   animated.push({ object: robot, kind: "robot", base: robot.position.y });
   return robot;
 }
