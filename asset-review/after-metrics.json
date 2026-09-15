@@ -7,7 +7,7 @@
   ],
   "registration": "none; identical pixel coordinates",
   "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
-  "capture_sha256": "94ce6400c3e076fa0b454038f7d0ab1b5ad973521af2cf4ff1d1745af8c34bb8",
+  "capture_sha256": "8c02544042bcccc7bf9d2aa5c140728c1126c27344b0170a069f9f1ef8701ade",
   "regions": {
     "whole": {
       "rect": [
@@ -16,12 +16,12 @@
         1536,
         1024
       ],
-      "mae_rgb": 20.1596,
-      "blurred_mae": 13.5451,
-      "ssim_gray": 0.63369,
+      "mae_rgb": 20.3893,
+      "blurred_mae": 13.7668,
+      "ssim_gray": 0.63194,
       "reference_luma": 49.16,
-      "capture_luma": 48.01,
-      "edge_distance_px": 2.487
+      "capture_luma": 47.57,
+      "edge_distance_px": 2.509
     },
     "header": {
       "rect": [
@@ -58,12 +58,12 @@
         665,
         157
       ],
-      "mae_rgb": 24.8537,
-      "blurred_mae": 15.0093,
-      "ssim_gray": 0.51081,
+      "mae_rgb": 24.8597,
+      "blurred_mae": 15.0135,
+      "ssim_gray": 0.51079,
       "reference_luma": 72.78,
-      "capture_luma": 74.73,
-      "edge_distance_px": 1.809
+      "capture_luma": 74.71,
+      "edge_distance_px": 1.81
     },
     "application_platform": {
       "rect": [
@@ -72,12 +72,12 @@
         892,
         169
       ],
-      "mae_rgb": 25.6434,
-      "blurred_mae": 17.4964,
-      "ssim_gray": 0.52013,
+      "mae_rgb": 25.6059,
+      "blurred_mae": 17.4639,
+      "ssim_gray": 0.52155,
       "reference_luma": 75.38,
-      "capture_luma": 70.12,
-      "edge_distance_px": 2.474
+      "capture_luma": 69.83,
+      "edge_distance_px": 2.472
     },
     "intelligence": {
       "rect": [
@@ -86,12 +86,12 @@
         905,
         286
       ],
-      "mae_rgb": 29.9731,
-      "blurred_mae": 21.8953,
-      "ssim_gray": 0.46435,
+      "mae_rgb": 31.2572,
+      "blurred_mae": 23.119,
+      "ssim_gray": 0.45287,
       "reference_luma": 66.17,
-      "capture_luma": 60.51,
-      "edge_distance_px": 3.165
+      "capture_luma": 57.76,
+      "edge_distance_px": 3.297
     },
     "data_foundation": {
       "rect": [
@@ -100,12 +100,12 @@
         960,
         288
       ],
-      "mae_rgb": 33.4322,
-      "blurred_mae": 24.0508,
-      "ssim_gray": 0.37799,
+      "mae_rgb": 33.6194,
+      "blurred_mae": 24.2326,
+      "ssim_gray": 0.37817,
       "reference_luma": 72.7,
-      "capture_luma": 67.66,
-      "edge_distance_px": 2.83
+      "capture_luma": 67.68,
+      "edge_distance_px": 2.816
     },
     "earth": {
       "rect": [
@@ -114,11 +114,11 @@
         1240,
         161
       ],
-      "mae_rgb": 24.7522,
-      "blurred_mae": 20.5889,
-      "ssim_gray": 0.51667,
+      "mae_rgb": 24.7519,
+      "blurred_mae": 20.5884,
+      "ssim_gray": 0.5167,
       "reference_luma": 58.87,
-      "capture_luma": 67.21,
+      "capture_luma": 67.22,
       "edge_distance_px": 3.371
     },
     "sidebar": {
@@ -128,11 +128,11 @@
         291,
         733
       ],
-      "mae_rgb": 11.2818,
-      "blurred_mae": 3.9979,
-      "ssim_gray": 0.79758,
+      "mae_rgb": 11.2856,
+      "blurred_mae": 4.0018,
+      "ssim_gray": 0.79757,
       "reference_luma": 26.92,
-      "capture_luma": 25.74,
+      "capture_luma": 25.75,
       "edge_distance_px": 0.941
     }
   }
