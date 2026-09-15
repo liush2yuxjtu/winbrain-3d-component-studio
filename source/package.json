@@ -1,10 +1,10 @@
 {
   "name": "winbrain-component-studio",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node build.mjs && node build-catalog.mjs"
+    "build": "node build.mjs && node build-catalog.mjs && node build-tokens.mjs"
   },
   "dependencies": {
     "three": "0.180.0"
