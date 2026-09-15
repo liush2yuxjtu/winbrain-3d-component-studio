@@ -52,7 +52,7 @@ import { register, capture } from "../registry.js";
 // People are rounded, independent meshes: torso, head, shoulders, arms, glasses.
 export function person(parent, x, z, color, scale = 1, glasses = false) {
   const g = new THREE.Group();
-  g.position.set(x, 0.17, z);
+  g.position.set(x, glasses ? 0.195 : 0.17, z);
   g.scale.setScalar(scale);
   parent.add(g);
   const m = mat(color, glasses
@@ -85,7 +85,7 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
     m,
     g,
   );
-  torso.scale.set(glasses ? 1.06 : 1, 1, 0.82);
+  torso.scale.set(glasses ? 1.30 : 1, glasses ? 0.96 : 1, 0.82);
   if (!glasses) {
     for (const s of [-1, 1]) {
       const arm = mesh(new THREE.CapsuleGeometry(0.070, 0.28, 7, 16), m, g);
@@ -99,12 +99,12 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
     const glassesMat = glowMat(0xe9f2ff, 1.18);
     for (const x of [-0.105, 0.105]) {
       const t = mesh(
-        new THREE.TorusGeometry(0.108, 0.015, 8, 48),
+        new THREE.TorusGeometry(0.108, 0.013, 8, 48),
         glassesMat,
         g,
       );
       t.position.set(x, 0.915, 0.232);
-      t.scale.y = 0.78;
+      t.scale.y = 0.69;
     }
     beam(
       new THREE.Vector3(-0.022, 0.915, 0.238),
