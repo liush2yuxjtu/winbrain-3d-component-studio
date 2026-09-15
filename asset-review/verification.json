@@ -50,11 +50,13 @@
         ],
         "lenses": true,
         "cloudSize": [
-          0.9660081565380096,
-          0.6760043743997812,
-          0.19150041788816452
+          0.9578420221805573,
+          0.667918000370264,
+          0.20324622094631195
         ],
-        "cloudConstruction": "ExtrudeGeometry",
+        "cloudConstruction": "shape-driven-rounded-extrusion",
+        "unifiedBust": true,
+        "singleCloud": true,
         "cloudMaterials": true,
         "noCloudHalo": true
       }
@@ -65,12 +67,17 @@
       "detail": null
     },
     {
+      "name": "expert: shoulders and short sleeves share one surface",
+      "passed": true,
+      "detail": null
+    },
+    {
       "name": "cloud: closed shallow beveled extrusion",
       "passed": true,
       "detail": [
-        0.9660081565380096,
-        0.6760043743997812,
-        0.19150041788816452
+        0.9578420221805573,
+        0.667918000370264,
+        0.20324622094631195
       ]
     },
     {
