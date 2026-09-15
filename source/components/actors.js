@@ -86,26 +86,24 @@ export function createActors() {
         const yOffset = {
           Projects: 0.09,
           Experts: 0.105,
-          "AI Agents": 0.045,
-          Employees: 0.055,
+          "AI Agents": 0.065,
+          Employees: 0.065,
         }[t.key];
         const g = groupAt(t.x, levels[2] + yOffset, t.d);
         g.userData.layer = 2;
         g.userData.name = t.key;
         const frosted = t.key === "Experts" || t.key === "AI Agents" || t.key === "Employees";
-        characterBase(g, t.color, t.key === "Experts" ? 0.8 : 0.83, frosted);
+        characterBase(g, t.color, t.key === "Experts" ? 0.8 : 0.85, frosted);
         if (t.key === "Projects") {
           person(g, -0.39, -0.12, t.color, 0.69);
           person(g, 0.41, -0.1, t.color, 0.65);
           person(g, 0, 0.17, t.color, 0.88);
         } else if (t.key === "Experts") {
-          // Static design shows one compact expert bust centered over the base.
           person(g, 0, 0.085, t.color, 0.94, true);
         } else if (t.key === "Employees") {
-          // Tighten the triangular cluster; previous spread made the silhouette too wide.
-          person(g, 0.17, -0.10, t.color, 0.8);
-          person(g, -0.22, 0.16, t.color, 0.72);
-          person(g, 0.46, -0.21, t.color, 0.5);
+          person(g, 0.24, -0.12, t.color, 0.84);
+          person(g, -0.25, 0.19, t.color, 0.75);
+          person(g, 0.58, -0.25, t.color, 0.53);
         } else {
           createRobot(g);
         }
@@ -120,8 +118,8 @@ export function createActors() {
         textGroup.position.x = {
           Projects: -0.66,
           Experts: 0.02,
-          "AI Agents": -0.42,
-          Employees: -0.22,
+          "AI Agents": -0.47,
+          Employees: -0.25,
         }[t.key];
         g.add(textGroup);
         const titleY =
@@ -130,8 +128,8 @@ export function createActors() {
             : t.key === "Experts"
               ? 2.02
               : t.key === "AI Agents"
-                ? 2.04
-                : 1.76;
+                ? 2.17
+                : 1.82;
         const titleSprite = label(textGroup, t.key, 0, titleY, 0, 1.9, 0.31, {
           font: 31,
           weight: 500,
@@ -161,10 +159,10 @@ export function createActors() {
         const badgeHeight = {
           Projects: 1.5,
           Experts: 1.66,
-          "AI Agents": 1.66,
-          Employees: 1.57,
+          "AI Agents": 1.74,
+          Employees: 1.64,
         }[t.key];
-        const badge = groupAt(t.x - 0.96, levels[2] + badgeHeight, t.d - 0.18);
+        const badge = groupAt(t.x - 1.0, levels[2] + badgeHeight, t.d - 0.2);
         const badgeGlass = frosted
           ? mat(0xc7d9ef, {
               metalness: 0.03,
@@ -179,14 +177,14 @@ export function createActors() {
               clearcoatRoughness: 0.45,
             })
           : tubeGlass;
-        box(0.37, 0.43, 0.07, badgeGlass, new THREE.Vector3(), badge, 0.065);
+        box(0.39, 0.46, 0.08, badgeGlass, new THREE.Vector3(), badge, 0.065);
         createRoleEmblem(
           badge,
           t.key,
           t.key === "AI Agents" ? 0xbaa2ff : t.color,
         );
-        const badgeGlow = softGlow(badge, new THREE.Vector3(), 0.7, t.color);
-        badgeGlow.material.opacity = frosted ? 0.42 : 1;
+        const badgeGlow = softGlow(badge, new THREE.Vector3(), 0.76, t.color);
+        badgeGlow.material.opacity = frosted ? 0.46 : 1;
       },
     );
   }
