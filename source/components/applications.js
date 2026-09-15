@@ -74,7 +74,7 @@ const widgetGlass = mat(0x485b85, {
   transparent: true,
   opacity: 0.68,
 });
-const darkWidget = mat(0x25344d, { metalness: 0.18, roughness: 0.34 });
+const darkWidget = mat(0x293047, { metalness: 0.12, roughness: 0.38 });
 const iconPorcelain = mat(0xf4f7ff, {
   metalness: 0.1,
   roughness: 0.22,
@@ -121,13 +121,13 @@ function buildScreen(s, g) {
     );
   const frame = roundedShape(s.w - 0.015, s.h - 0.015, 0.07);
   frame.holes.push(roundedShape(s.w - 0.055, s.h - 0.055, 0.055));
-  solidShape(frame, 0.155, edge, g, 0.007).name = "beveled-glass-chassis";
+  solidShape(frame, 0.105, edge, g, 0.005).name = "beveled-glass-chassis";
   plate(
     s.w - 0.048,
     s.h - 0.048,
     0.028,
     new THREE.MeshBasicMaterial({
-      color: 0x29354d,
+      color: 0x202332,
       // An opaque smoked backing writes depth before the transparent platform
       // edges render. The bevel and reflected front sheet remain translucent.
       transparent: false,
@@ -141,16 +141,16 @@ function buildScreen(s, g) {
   );
   const sheen = textureCanvas(512, 384, (c, w, h) => {
     const gradient = c.createLinearGradient(0, 0, w, h);
-    gradient.addColorStop(0, "#8b9bbb66");
-    gradient.addColorStop(0.36, "#61739255");
-    gradient.addColorStop(0.8, "#35476822");
-    gradient.addColorStop(1, "#8496ca55");
+    gradient.addColorStop(0, "#70778950");
+    gradient.addColorStop(0.36, "#3d435a38");
+    gradient.addColorStop(0.8, "#1b213710");
+    gradient.addColorStop(1, "#7583b84a");
     rr(c, 2, 2, w - 4, h - 4, 16, gradient);
     const reflection = c.createLinearGradient(0, 0, w, 0);
     reflection.addColorStop(0, "#d7edff25");
     reflection.addColorStop(0.07, "#d7edff00");
     reflection.addColorStop(0.88, "#acbeff00");
-    reflection.addColorStop(1, "#aabbff28");
+    reflection.addColorStop(1, "#aabbff14");
     rr(c, 3, 3, w - 6, h - 6, 16, reflection);
     const bounce = c.createLinearGradient(0, h * 0.55, 0, h);
     bounce.addColorStop(0, "#8dacf900");
@@ -213,11 +213,11 @@ function buildScreen(s, g) {
       68,
       0.102,
       0.022,
-      mat(0x546783, {
+      mat(0x3c475e, {
         metalness: 0.15,
         roughness: 0.45,
         transparent: true,
-        opacity: 0.36,
+        opacity: 0.30,
       }),
       5,
     );

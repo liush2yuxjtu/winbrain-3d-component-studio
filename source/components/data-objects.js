@@ -34,7 +34,7 @@ export function createDataObjects() {
         createBusinessModel(n.type, icon);
         // Silhouette corrections preserve the established exhibit anchors.
         const sculptureScale = {
-          people: [0.96, 1.02, 1], doc: [0.90, 1, 1],
+          people: [1, 1.02, 1], doc: [0.96, 0.94, 1],
           task: [0.96, 1.10, 1], data: [1, 1, 1],
           server: [0.96, 0.95, 1], laptop: [1, 1.08, 1],
           cloud: [0.94, 1, 1],

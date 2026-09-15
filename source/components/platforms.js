@@ -122,7 +122,7 @@ function platform(level, scale) {
   if (level === 3) {
     const laminate = mesh(
       new THREE.ShapeGeometry(roundedShape(w - 0.18, d - 0.18, r - 0.06), 24),
-      mat(0xaabbd8, { transparent: true, opacity: 0.10, depthWrite: false,
+      mat(0xb9bdca, { transparent: true, opacity: 0.07, depthWrite: false,
         metalness: 0.08, roughness: 0.35, side: THREE.DoubleSide }), g);
     laminate.name = "application-inner-glass-laminate";
     laminate.rotation.x = -Math.PI / 2;

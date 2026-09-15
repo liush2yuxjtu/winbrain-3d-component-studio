@@ -56,27 +56,20 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
   g.scale.setScalar(scale);
   parent.add(g);
   const m = mat(color, {
-    roughness: 0.48,
+    roughness: 0.42,
     metalness: 0.05,
     clearcoat: 0.32,
     emissive: color,
-    emissiveIntensity: 0.12,
+    emissiveIntensity: 0.09,
   });
-  sphere(0.2, m, new THREE.Vector3(0, 0.9, 0), g, 1, 1.13, 0.98);
-  cyl(0.125, 0.14, 0.14, m, new THREE.Vector3(0, 0.67, 0), g);
+  sphere(0.215, m, new THREE.Vector3(0, 0.9, 0), g, 1, 1.20, 0.98);
+  cyl(0.095, 0.11, 0.075, m, new THREE.Vector3(0, 0.667, 0), g);
   const torso = mesh(
     new THREE.LatheGeometry(
       [
-        [0, 0.012],
-        [0.23, 0.012],
-        [0.28, 0.028],
-        [0.275, 0.08],
-        [0.29, 0.27],
-        [0.315, 0.38],
-        [0.285, 0.46],
-        [0.21, 0.53],
-        [0.13, 0.57],
-        [0, 0.57],
+        [0, 0.008], [0.29, 0.008], [0.305, 0.024], [0.313, 0.09],
+        [0.313, 0.20], [0.306, 0.31], [0.286, 0.42], [0.253, 0.51],
+        [0.207, 0.575], [0.145, 0.621], [0.072, 0.641], [0, 0.644],
       ].map((p) => new THREE.Vector2(...p)),
       64,
     ),
@@ -85,8 +78,8 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
   );
   torso.scale.z = 0.82;
   for (const s of [-1, 1]) {
-    const arm = mesh(new THREE.CapsuleGeometry(0.077, 0.29, 7, 16), m, g);
-    arm.position.set(s * 0.285, 0.29, 0.0);
+    const arm = mesh(new THREE.CapsuleGeometry(0.070, 0.28, 7, 16), m, g);
+    arm.position.set(s * 0.285, 0.235, 0.0);
     arm.rotation.z = -s * 0.08;
   }
   if (glasses) {
@@ -125,7 +118,7 @@ export function person(parent, x, z, color, scale = 1, glasses = false) {
   return g;
 }
 function characterBase(g, color, r = 0.82) {
-  cyl(r, r * 0.97, 0.11, tubeGlass, new THREE.Vector3(0, 0.04, 0), g);
+  cyl(r, r * 0.97, 0.11, mat(color, { transparent: true, opacity: 0.35, depthWrite: false, metalness: 0.12, roughness: 0.22 }), new THREE.Vector3(0, 0.04, 0), g);
   cyl(
     r * 0.86,
     r * 0.89,

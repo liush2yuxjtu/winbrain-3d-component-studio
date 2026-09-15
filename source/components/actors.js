@@ -53,10 +53,10 @@ import { person, characterBase } from "./people.js";
 import { createRobot } from "./robot.js";
 import { createRoleEmblem } from "./badges.js";
 const teams = [
-  { key: "Projects", x: -4, d: 0.05, color: 0x269ef6 },
-  { key: "Experts", x: -1.35, d: 0.55, color: 0x9874f2 },
+  { key: "Projects", x: -4, d: 0.05, color: 0x2868f2 },
+  { key: "Experts", x: -1.35, d: 0.55, color: 0x7764df },
   { key: "AI Agents", x: 1.45, d: 1.45, color: 0x70d4ff },
-  { key: "Employees", x: 4, d: 1.45, color: 0x48c7c0 },
+  { key: "Employees", x: 4, d: 1.45, color: 0x32a89e },
 ];
 export function createActors() {
   for (const t of teams) {

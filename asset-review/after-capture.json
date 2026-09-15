@@ -5,12 +5,12 @@
     "zoom": 1
   },
   "stats": {
-    "meshes": 1032,
-    "triangles": 869418,
+    "meshes": 1053,
+    "triangles": 898090,
     "externalTextures": 0,
     "referenceImages": 0,
     "frames": 4,
-    "drawCalls": 3300,
+    "drawCalls": 3360,
     "threeRevision": "180",
     "motion": {
       "elapsed": 0,

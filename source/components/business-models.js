@@ -11,6 +11,7 @@ import {
   glowMat,
   pool,
   textureCanvas,
+  softGlow,
 } from "../core.js";
 import { plate, solidShape, outline, facePlane } from "./exhibit-geometry.js";
 import { tree } from "./city.js";
@@ -106,7 +107,7 @@ function portrait(g) {
   plate(0.44, 0.64, 0.16, satin, model, 0, 0.35, 0, 0.075, 0.023);
   plate(0.375, 0.566, 0.028, acrylic, model, 0, 0.35, 0.091, 0.057, 0.009);
   outline(0.381, 0.572, 0.059, 0.108, 0xcde6ff, 0.52, model, 0, 0.35);
-  sphere(0.086, porcelain, V(0, 0.457, 0.14), model, 1, 1.08, 0.65);
+  sphere(0.091, porcelain, V(0, 0.465, 0.161), model, 1, 1.10, 0.73);
   const s = new THREE.Shape();
   s.moveTo(-0.15, 0.133);
   s.lineTo(-0.15, 0.205);
@@ -116,7 +117,8 @@ function portrait(g) {
   s.lineTo(0.15, 0.133);
   s.closePath();
   const torso = solidShape(s, 0.09, porcelain, model, 0.014);
-  torso.position.z = 0.141;
+  torso.position.set(0, -0.018, 0.168);
+  torso.scale.x = 1.13;
   beam(V(-0.143, 0.136, 0.1), V(0.143, 0.136, 0.1), 0.008, chrome, model);
   contact(g, 0.45, 0.25);
 }
@@ -204,15 +206,15 @@ function database(g) {
   const barrelMap = textureCanvas(1024, 128, (c, w, h) => {
     const bands = c.createLinearGradient(0, 0, w, 0);
     [
-      [0, "#657fa2"],
-      [0.1, "#a4bdda"],
-      [0.19, "#edf5ff"],
-      [0.28, "#8aaaca"],
-      [0.42, "#587798"],
-      [0.58, "#a7c7e5"],
-      [0.7, "#e8f4ff"],
-      [0.79, "#748caf"],
-      [1, "#657fa2"],
+      [0, "#38495f"],
+      [0.1, "#9aadc6"],
+      [0.19, "#eaf3ff"],
+      [0.28, "#536681"],
+      [0.42, "#25374f"],
+      [0.58, "#879dbb"],
+      [0.7, "#eff6ff"],
+      [0.79, "#4b6080"],
+      [1, "#38495f"],
     ].forEach(([p, v]) => bands.addColorStop(p, v));
     c.fillStyle = bands;
     c.fillRect(0, 0, w, h);
@@ -223,10 +225,10 @@ function database(g) {
     c.fillStyle = shade;
     c.fillRect(0, 0, w, h);
   });
-  const barrelMaterial = mat(0xc5d8ee, {
+  const barrelMaterial = mat(0xffffff, {
     map: barrelMap,
-    metalness: 0.38,
-    roughness: 0.25,
+    metalness: 0.12,
+    roughness: 0.22,
     clearcoat: 1,
   });
   for (let j = 0; j < 3; j++) {
@@ -243,8 +245,8 @@ function database(g) {
     ];
     const barrel = lathe(profile, barrelMaterial, g);
     barrel.name = `solid-database-volume-${j + 1}`;
-    rim(0.611, y + 0.037333, g, chrome, 0.009);
-    rim(0.611, y + 0.358667, g, chrome, 0.01);
+    rim(0.623, y + 0.037333, g, glowMat(0xc8def9, 1.05), 0.009);
+    rim(0.617, y + 0.358667, g, glowMat(0xdcecff, 1.10), 0.010);
     cyl(
       0.57,
       0.57,
@@ -289,6 +291,8 @@ function database(g) {
         0.35,
       );
       light.rotation.y = a;
+      const flare = softGlow(g, V(Math.sin(a) * 0.65, y + 0.213333, Math.cos(a) * 0.65), 0.16, 0x55caff);
+      flare.material.opacity = 0.6;
     }
   }
   const p = pool(g, 0, 0.015, 0, 1.9, 0x7ca9e5);
@@ -528,10 +532,10 @@ export function createPedestal(n, parent) {
   if (!pedestalMaterials.has(n.type)) {
     const map = textureCanvas(768, 256, (c, w, h) => {
       const shade = c.createLinearGradient(0, 0, 0, h);
-      shade.addColorStop(0, "#597087");
-      shade.addColorStop(0.17, "#324257");
-      shade.addColorStop(0.66, "#1e2e41");
-      shade.addColorStop(1, "#283e4b");
+      shade.addColorStop(0, "#647181");
+      shade.addColorStop(0.17, "#3b454f");
+      shade.addColorStop(0.66, "#26313c");
+      shade.addColorStop(1, "#34404a");
       c.fillStyle = shade;
       c.fillRect(0, 0, w, h);
       const reflection = c.createLinearGradient(0, 0, w, 0);
@@ -548,7 +552,7 @@ export function createPedestal(n, parent) {
       }
       for (let i = 0; i < 24; i++) {
         const x = (i * w) / 24;
-        c.fillStyle = i % 3 === 0 ? "#bdd8ff10" : "#020c1d2a";
+        c.fillStyle = i % 3 === 0 ? "#bdd8ff10" : "#020c1d14";
         c.fillRect(x, 0, w / 24 - 1, h);
         c.fillStyle = "#a7c5ea28";
         c.fillRect(x, 0, 1, h);
@@ -561,7 +565,7 @@ export function createPedestal(n, parent) {
     });
     pedestalMaterials.set(
       n.type,
-      mat(0xd6e2f0, {
+      mat(0xe1e3e7, {
         map,
         metalness: 0.24,
         roughness: 0.36,
@@ -606,12 +610,13 @@ export function createPedestal(n, parent) {
       0.52 + k * 0.1,
     );
   }
-  cyl(r * 1.04, r * 1.055, 0.052, satin, V(0, h + 0.006, 0), parent);
+  const cap = mat(n.type === "data" ? 0x35435b : 0x8493aa, { metalness: 0.3, roughness: 0.27, clearcoat: 1 });
+  cyl(r * 1.04, r * 1.055, 0.052, cap, V(0, h + 0.006, 0), parent);
   cyl(
     r * 0.99,
     r * 1.025,
     0.026,
-    [chrome, polishedCap, chrome],
+    [chrome, cap, chrome],
     V(0, h + 0.035, 0),
     parent,
   );
@@ -631,7 +636,10 @@ export function createPedestal(n, parent) {
   rim(r * 0.91, h + 0.111, parent, chrome, 0.006);
   const p = pool(parent, 0, h + 0.121, 0, r * 2.5, 0x6591c2);
   p.material.opacity = 0.28;
-  // Four inset architectural uprights add actual depth to the facade.
+  // Inset architectural uprights and floor bands add real facade depth.
+  for (let floor = 1; floor <= 3; floor++) {
+    rim(r * 1.002, h * floor / 4, parent, mat(0x6d7b8d, { metalness: 0.3, roughness: 0.45 }), 0.005);
+  }
   for (let k = 0; k < 12; k++) {
     const a = (k * Math.PI) / 6;
     const rib = box(

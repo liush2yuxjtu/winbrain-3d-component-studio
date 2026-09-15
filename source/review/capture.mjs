@@ -2,6 +2,7 @@ import { chromium } from 'playwright';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 const root = path.resolve(import.meta.dirname, '../..');
 const out = path.join(root, 'asset-review');
 await fs.mkdir(out, { recursive: true });
@@ -99,6 +100,7 @@ try {
   }
   await fs.writeFile(path.join(root, 'assets/catalog.json'), JSON.stringify(manifest, null, 2));
   await page.close();
+  execFileSync(process.execPath, ['source/build-catalog.mjs'], { cwd: root });
   const catalog = await context.newPage();
   catalog.on('pageerror', e => errors.push({ page: 'catalog', message: e.message }));
   await catalog.goto('http://127.0.0.1:8765/catalog.html');
