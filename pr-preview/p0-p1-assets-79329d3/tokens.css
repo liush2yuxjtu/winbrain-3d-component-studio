@@ -1,0 +1,43 @@
+/* WinBrain Design Tokens — generated from source/tokens/tokens.js. */
+:root {
+  --wb-color-canvas: #101720;
+  --wb-color-panel: #182434;
+  --wb-color-border: #31445F;
+  --wb-color-text: #DCE7F6;
+  --wb-color-text-muted: #93A9C5;
+  --wb-color-accent: #67CCFF;
+  --wb-color-scene-background: #141B25;
+  --wb-color-glass: #365A95;
+  --wb-color-tube-glass: #ACCDF9;
+  --wb-type-hero-size: 44px;
+  --wb-type-hero-weight: 600;
+  --wb-type-layer-title-size: 20px;
+  --wb-type-body-size: 14px;
+  --wb-type-caption-size: 12px;
+  --wb-space-8: 8px;
+  --wb-space-12: 12px;
+  --wb-space-16: 16px;
+  --wb-space-24: 24px;
+  --wb-space-32: 32px;
+  --wb-radius-card: 9px;
+  --wb-radius-panel: 19px;
+  --wb-radius-dialog: 20px;
+  --wb-material-default-roughness: 0.25;
+  --wb-material-default-metalness: 0.22;
+  --wb-material-glass-opacity: 0.27;
+  --wb-material-glass-roughness: 0.1;
+  --wb-material-glass-transmission: 0.55;
+  --wb-material-glass-ior: 1.38;
+  --wb-light-environment-intensity: 0.4;
+  --wb-light-key-intensity: 2.2;
+  --wb-light-rim-intensity: 1.7;
+  --wb-light-front-intensity: 0.65;
+  --wb-render-exposure: 1.1;
+  --wb-camera-yaw: 0.7853981633974483;
+  --wb-camera-pitch: 0.17;
+  --wb-camera-zoom: 1;
+  --wb-camera-distance: 48;
+  --wb-layer-application-y: 7.6;
+  --wb-layer-intelligence-y: 4.1;
+  --wb-layer-data-y: 1.05;
+}
