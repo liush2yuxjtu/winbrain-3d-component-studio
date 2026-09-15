@@ -11,6 +11,14 @@ import { createDataObjects } from "./components/data-objects.js";
 import { createEarth } from "./components/earth.js";
 import { createAtmosphere } from "./components/atmosphere.js";
 
+function transparentLayerOffset(object) {
+  for (let current = object; current; current = current.parent) {
+    const order = current.userData?.transparentLayerOrder;
+    if (Number.isFinite(order)) return order * 0.1;
+  }
+  return 0;
+}
+
 function stabilizeTransparentRenderOrder() {
   world.traverse((object) => {
     if (!object.material) return;
@@ -29,19 +37,24 @@ function stabilizeTransparentRenderOrder() {
     const isTransmissive = transparent.some(
       (material) => (material.transmission ?? 0) > 0,
     );
+    const layerOffset = transparentLayerOffset(object);
 
     // Three.js normally re-sorts transparent objects by camera-space depth every
     // frame. Large glass surfaces and animated glow particles can swap order as
     // their centers cross, which appears as one-frame flashes. Keep broad glass
     // first, regular alpha geometry next, additive glows above that, and labels
-    // last so animation does not change the ordering bucket.
-    object.renderOrder = isOverlaySprite
+    // last so animation does not change the ordering bucket. Stacked platform
+    // groups also get a small, deterministic bottom-to-top offset so rotating the
+    // camera cannot make DATA FOUNDATION / INTELLIGENCE HUB / APPLICATION LAYER
+    // swap transparent draw order with one another.
+    const baseOrder = isOverlaySprite
       ? 40
       : isAdditive
         ? 30
         : isTransmissive
           ? 10
           : 20;
+    object.renderOrder = baseOrder + layerOffset;
   });
 }
 
