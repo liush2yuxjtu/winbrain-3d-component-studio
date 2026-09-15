@@ -3,15 +3,18 @@ name: Build generated Pages artifacts
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches:
+      - main
+      - fix/3d-transparent-flicker
     paths:
       - "source/**"
+      - ".github/workflows/build-generated-pages.yml"
 
 permissions:
   contents: write
 
 concurrency:
-  group: winbrain-generated-pages
+  group: winbrain-generated-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
