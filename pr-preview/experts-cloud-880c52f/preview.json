@@ -1,0 +1,10 @@
+{
+  "pull_request": 3,
+  "source_commit": "880c52f19da923a216c26addb997ad1a1235ab19",
+  "artifact_commit": "fb6a10f901868f951aee9ff8e6df8ed445feca03",
+  "validation_run": "https://github.com/liush2yuxjtu/winbrain-3d-component-studio/actions/runs/34951083194",
+  "scope": ["actor.experts", "data.external-data"],
+  "comparison": "Original static design PNG versus real code renders. Inspection close-ups are not used for scoring.",
+  "visual_acceptance": "pending",
+  "production_root_modified": false
+}
