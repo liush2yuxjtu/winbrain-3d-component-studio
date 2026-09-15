@@ -5,6 +5,7 @@ import {
   camera,
   target,
   view,
+  initialView,
   updateCamera,
   silver,
   white,
@@ -29,6 +30,7 @@ function setDirectional(light, token) {
 }
 
 export function applyDesignTokens() {
+  renderer.setClearColor(hex(TOKENS.color.sceneClear), 0);
   renderer.toneMappingExposure = TOKENS.rendering.toneMappingExposure;
   scene.environmentIntensity = TOKENS.rendering.environmentIntensity;
 
@@ -40,9 +42,12 @@ export function applyDesignTokens() {
   camera.near = ortho.near;
   camera.far = ortho.far;
   target.set(...TOKENS.camera.target);
-  view.yaw = TOKENS.camera.yaw;
-  view.pitch = TOKENS.camera.pitch;
-  view.zoom = TOKENS.camera.zoom;
+  Object.assign(view, {
+    yaw: TOKENS.camera.yaw,
+    pitch: TOKENS.camera.pitch,
+    zoom: TOKENS.camera.zoom,
+  });
+  Object.assign(initialView, view);
   updateCamera();
 
   const hemi = scene.children.find((node) => node.isHemisphereLight);
