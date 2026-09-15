@@ -77,7 +77,7 @@ try {
     const root = studio.registry.get('data.systems').root;
     return Boolean(root.getObjectByName('server-power-port-2') && root.getObjectByName('server-extra-port-0'));
   }));
-  check('expert uses portrait emblem', await page.evaluate(() => Boolean(studio.registry.get('actor.experts').root.getObjectByName('expert-portrait-emblem'))));
+  check('expert uses reference atom emblem', await page.evaluate(() => Boolean(studio.registry.get('actor.experts').root.getObjectByName('expert-atom-orbit'))));
   for (const asset of manifest.components) {
     console.log('Exporting', asset.id);
     const result = await page.evaluate(async id => {
