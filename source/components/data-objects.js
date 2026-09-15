@@ -1,7 +1,8 @@
 import * as THREE from "three";
-import { groupAt, levels, label, clickable } from "../core.js";
+import { groupAt, levels, label, clickable, mat } from "../core.js";
 import { capture } from "../registry.js";
 import { createBusinessModel, createPedestal } from "./business-models.js";
+import { plate } from "./exhibit-geometry.js";
 import { dataNodes } from "./data-layout.js";
 export function createDataObjects() {
   for (const n of dataNodes)
@@ -25,7 +26,7 @@ export function createDataObjects() {
           n.r + 0.12,
           n.type === "data" ? 2.1 : 1.65,
           0.31,
-          { font: 27, weight: 400 },
+          { font: n.type === "data" ? 29 : 27, weight: n.type === "data" ? 500 : 400 },
         );
         const icon = new THREE.Group();
         icon.name = n.type + "-sculpture";
@@ -41,6 +42,10 @@ export function createDataObjects() {
         }[n.type];
         icon.scale.set(...sculptureScale);
         if (n.type === "data") {
+          const captionPanel = plate(2.54, 0.54, 0.028,
+            mat(0x131e2e, { metalness: 0, roughness: 1, transparent: true, opacity: 0.94, depthWrite: false }),
+            g, 0, 0.255, n.r + 0.17, 0.12, 0.004);
+          captionPanel.name = "database-caption-panel";
           label(
             g,
             "Orders · Products · Inventory",

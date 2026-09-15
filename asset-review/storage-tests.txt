@@ -2,13 +2,13 @@ TAP version 13
 # Subtest: existing production storage keys remain unchanged
 ok 1 - existing production storage keys remain unchanged
   ---
-  duration_ms: 0.828802
+  duration_ms: 0.493919
   type: 'test'
   ...
 # Subtest: homepage and editor share only their own preview scope
 ok 2 - homepage and editor share only their own preview scope
   ---
-  duration_ms: 0.19622
+  duration_ms: 0.123689
   type: 'test'
   ...
 1..2
@@ -19,4 +19,4 @@ ok 2 - homepage and editor share only their own preview scope
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 58.019869
+# duration_ms 41.763772

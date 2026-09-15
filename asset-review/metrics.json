@@ -1,7 +1,7 @@
 {
-  "source_commit": "9a2a71aafc453faea368da165c227c6f3ec878f2",
+  "source_commit": "b2ecd5268acf5cf35133222f3a3efb57da05e6b5",
   "baseline_commit": "bc2a884927706d66fe107d8c0c2c2b7af81ba853",
-  "generated_at": "2026-09-15T04:45:19.601334+00:00",
+  "generated_at": "2026-09-15T04:54:26.908224+00:00",
   "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
   "viewport": [
     1536,
@@ -27,8 +27,8 @@
         "ssim_gray": 0.52712
       },
       "after": {
-        "mae_rgb": 27.5593,
-        "ssim_gray": 0.51537
+        "mae_rgb": 25.4592,
+        "ssim_gray": 0.52714
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
     },
@@ -117,8 +117,8 @@
         "ssim_gray": 0.54665
       },
       "after": {
-        "mae_rgb": 30.5121,
-        "ssim_gray": 0.48463
+        "mae_rgb": 22.3537,
+        "ssim_gray": 0.55099
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
     },
@@ -135,8 +135,8 @@
         "ssim_gray": 0.45494
       },
       "after": {
-        "mae_rgb": 30.9695,
-        "ssim_gray": 0.44502
+        "mae_rgb": 24.2698,
+        "ssim_gray": 0.48433
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
     },
@@ -153,8 +153,8 @@
         "ssim_gray": 0.4787
       },
       "after": {
-        "mae_rgb": 32.5956,
-        "ssim_gray": 0.4534
+        "mae_rgb": 30.4861,
+        "ssim_gray": 0.47858
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
     },
@@ -171,8 +171,8 @@
         "ssim_gray": 0.27667
       },
       "after": {
-        "mae_rgb": 38.6977,
-        "ssim_gray": 0.27039
+        "mae_rgb": 38.5362,
+        "ssim_gray": 0.27392
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
     },
@@ -225,7 +225,7 @@
         "ssim_gray": 0.21499
       },
       "after": {
-        "mae_rgb": 36.9064,
+        "mae_rgb": 36.9065,
         "ssim_gray": 0.18994
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
@@ -243,8 +243,8 @@
         "ssim_gray": 0.17445
       },
       "after": {
-        "mae_rgb": 49.793,
-        "ssim_gray": 0.1421
+        "mae_rgb": 48.9371,
+        "ssim_gray": 0.16107
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
     },
@@ -261,8 +261,8 @@
         "ssim_gray": 0.18742
       },
       "after": {
-        "mae_rgb": 41.5579,
-        "ssim_gray": 0.17319
+        "mae_rgb": 41.558,
+        "ssim_gray": 0.17318
       },
       "measurement": "canonical full-scene context crop; includes neighboring objects"
     },
@@ -439,12 +439,12 @@
         1536,
         1024
       ],
-      "mae_rgb": 20.4631,
-      "blurred_mae": 13.8315,
-      "ssim_gray": 0.635,
+      "mae_rgb": 20.0765,
+      "blurred_mae": 13.5145,
+      "ssim_gray": 0.63811,
       "reference_luma": 49.16,
-      "capture_luma": 47.14,
-      "edge_distance_px": 2.495
+      "capture_luma": 48.01,
+      "edge_distance_px": 2.489
     },
     "header": {
       "rect": [
@@ -481,12 +481,12 @@
         665,
         157
       ],
-      "mae_rgb": 30.4076,
-      "blurred_mae": 19.6539,
-      "ssim_gray": 0.47221,
+      "mae_rgb": 24.8063,
+      "blurred_mae": 14.9831,
+      "ssim_gray": 0.51353,
       "reference_luma": 72.78,
-      "capture_luma": 60.82,
-      "edge_distance_px": 1.801
+      "capture_luma": 74.65,
+      "edge_distance_px": 1.798
     },
     "application_platform": {
       "rect": [
@@ -495,12 +495,12 @@
         892,
         169
       ],
-      "mae_rgb": 27.3795,
-      "blurred_mae": 19.3116,
-      "ssim_gray": 0.51888,
+      "mae_rgb": 25.4981,
+      "blurred_mae": 17.4348,
+      "ssim_gray": 0.52962,
       "reference_luma": 75.38,
-      "capture_luma": 66.55,
-      "edge_distance_px": 2.57
+      "capture_luma": 70.1,
+      "edge_distance_px": 2.589
     },
     "intelligence": {
       "rect": [
@@ -523,12 +523,12 @@
         960,
         288
       ],
-      "mae_rgb": 33.4099,
-      "blurred_mae": 24.0471,
-      "ssim_gray": 0.38058,
+      "mae_rgb": 33.2955,
+      "blurred_mae": 23.9777,
+      "ssim_gray": 0.38309,
       "reference_luma": 72.7,
-      "capture_luma": 68.34,
-      "edge_distance_px": 2.968
+      "capture_luma": 67.73,
+      "edge_distance_px": 2.953
     },
     "earth": {
       "rect": [
@@ -561,91 +561,91 @@
   },
   "export_sha256": {
     "assets/platform.data.glb": "ac53880d8e2ed6ce69aa787eed5413af8df1df3cd9a7985dbd8020950abed2b2",
-    "assets/platform.data.wb3d.json": "8f88bdb94d77bb17b39e2cd4ad3a5e1e255b037318c86287948ed6d637584b65",
+    "assets/platform.data.wb3d.json": "b742b7992de0b8f676d85be658e88e902f9c2bdc1f5eb74edaea08f1665196d0",
     "previews/platform.data.png": "2c60cb9ff3dede6f37a55955baa9f0922471eee8089c12b14e89a67c8c03d954",
     "previews/mock-platform.data.png": "f8897b22e66e7b7bd2e504518d635a46522c0f741e7ca0595cdcf6963dba500f",
     "assets/platform.intelligence.glb": "21afb9ee71b76391185af09515161e97f5eaf29178c48aa6321a13e0bde9f56f",
-    "assets/platform.intelligence.wb3d.json": "c071e77ca4882bb461a2ae4dd4e43f3fef5ee21aa1a149d4da53bb827dc58276",
+    "assets/platform.intelligence.wb3d.json": "5eb029b960ee1e47fa5ce11253538d6412cbf994207f69b74e7efd33fa29aab8",
     "previews/platform.intelligence.png": "17e69d46cde071337b3e3ca7d300e675e885d56ac3cae30099233a809a3cdfe6",
     "previews/mock-platform.intelligence.png": "d243cd4b1a7aa462ed14c323526bcce3aa1e21540c2bafa09c992b3bcc3fc68f",
-    "assets/platform.application.glb": "9c082ecc93e5a0b5b82d087c9cba3f666877b342228db5e8a79c6679948ab7fd",
-    "assets/platform.application.wb3d.json": "93712f29484dfe5f940b9f7468db35f6c9c2343b112664d3c39e5290c7fcce33",
-    "previews/platform.application.png": "0d769bfc0b1dce3a581b3a0a922ecf814be5ec020bbfe60cbfdfa124c931a99f",
-    "previews/mock-platform.application.png": "259e477cde35f102882119c4a27f7f6ec52a787c528025e04d206a0064c3dba5",
+    "assets/platform.application.glb": "413eec4f770e8cc667805f907a0a2f1eb8b1000fa5f7f6e2c9c3e13c3a6a2c8e",
+    "assets/platform.application.wb3d.json": "0e9200bd804154305a997cb6b033cae69764d43ddc34fad48b049754f47f8c56",
+    "previews/platform.application.png": "da6b13deb94e236e7c6c82a61b98d0e1f084f974064fa5c167205b4e414c8df3",
+    "previews/mock-platform.application.png": "0256e56129ae204094bd76a1a0ad9a37ca8fe0a31676a9ec382f8a096dbc08ba",
     "assets/structure.columns.glb": "b01f46b821f8aeded137e2d93b5cad0b1cd3048ac6b2e02b57854e38e0c85d11",
-    "assets/structure.columns.wb3d.json": "1c29ff1314b868ff8a228f628a419a1645c6dd53fad57b74a696805f29998f7e",
+    "assets/structure.columns.wb3d.json": "f707ada989e1c155b6d52102c589585e8efa1cb781023ec63961f3959561a87d",
     "previews/structure.columns.png": "f892d845c9a09c7535c0c37f075730bcb204b9e469552f94c298db16afb8e699",
     "previews/mock-structure.columns.png": "35deae714c7bd51552aa36cc48ffecd7332f7450e1a727e99c9f7c5de274540a",
     "assets/actor.projects.glb": "5c0e87e58e4ef7ef28645d59bea5fd28cce0f7e518a3c4178922a54ee494ec57",
-    "assets/actor.projects.wb3d.json": "1ae529b4488007b6cf3afd0bae46b65c18bc039c0a4314c35fdb80a725bf67ac",
+    "assets/actor.projects.wb3d.json": "ac8cde6ef0751170562f302a706a38aa2fc37e7cb72db1030a802288ceb8b30d",
     "previews/actor.projects.png": "fcaa79753291aa1a69318295d97ee84b123c6d736a4fbf15337b7479dbd8107f",
     "previews/mock-actor.projects.png": "169691a164bcd330fa63510024e5e7439d21f3280dd3826ae79029bf2f32f00c",
     "assets/actor.experts.glb": "bf5e8372ff877a19b026dd1c1cc8612326e77f9d086f886e1308ef946b5e3725",
-    "assets/actor.experts.wb3d.json": "6f5836d96b287f32d628629fbb4468e01044d59a10b081854a8992cfeeb234ec",
+    "assets/actor.experts.wb3d.json": "9318000bbfc082c7abf9e52ba84eaacdf7b23e1b76d6f25d208eafb40409236a",
     "previews/actor.experts.png": "6db20e27585b592a19aa0744e8bb8c2bcab0fa34883a6df3ae096c1c0a490dfc",
     "previews/mock-actor.experts.png": "86d226617d391c9e1a14b39228e5886dc23ea585a71c74b2db85ca3195ef1860",
     "assets/actor.ai-agents.glb": "fcb944761ebbccb4ec393bb63374f99223a2d84c5e63025a8d2511ba2b63061b",
-    "assets/actor.ai-agents.wb3d.json": "b6742ecc02a27f58d39dc9370d63c10fbd720f5d29bd3b8eb61605c5ef9436a2",
+    "assets/actor.ai-agents.wb3d.json": "f870e42fc3ee15727404e45957d680c32cf86cf673ed2b23566d001e9406fb49",
     "previews/actor.ai-agents.png": "1e436459d674afded4fc48d0bdbe79017223f1e484106c02c6891fa4d700f3d8",
     "previews/mock-actor.ai-agents.png": "b819b3c483c93996aefb6e161e62f9fb5641b37f3600733bbdca61c3632dd053",
     "assets/actor.employees.glb": "f3e50d9acbb27608f7b1bfbee36fb782d0773d77c70b4f4584c6e0d6249e093f",
-    "assets/actor.employees.wb3d.json": "266ecc9742bf03ad38b5d2c7343f76f3ed7386135596986a4a15bc9a70ea21bc",
+    "assets/actor.employees.wb3d.json": "815420b62d9f46f701c03c40045a6a0e6c050870dd9712bf4fa3d496b5d417c3",
     "previews/actor.employees.png": "59dd9340b24b86b80c3818c4ca2e3981d2c2c509d187100b1c33c1a715e5cdc9",
     "previews/mock-actor.employees.png": "707bcf4ff4364696854e2a4ba155cc51d00d61cdeb671d25c779317d2a0ab8ae",
     "assets/structure.connections.glb": "4b4789d11c8832e886884876b52c7a68a55063093be22c94e2faa1d4fe304fe7",
-    "assets/structure.connections.wb3d.json": "95f237c4b43f5e595b45532104ea1f6a714b1c18f6a14bdb553504ccf3e81bd5",
+    "assets/structure.connections.wb3d.json": "b175a3dcdc727dd956762b09110b64f0b22214d54431cb563f5ed6e56f4cb78d",
     "previews/structure.connections.png": "fbd0ced8ce233ba0a6922c320e4f8ab0ba1532787e1aa3978ac58f6703e7d7e5",
     "previews/mock-structure.connections.png": "265cda55216a0d1a814eb0ca195176241773f50107d6e138acd8efe7d2ab7247",
-    "assets/app.chat.glb": "802040755d3dd933b8112990b9c23ad9403e4fd79ef94f1b6b580bb0d2751b7a",
-    "assets/app.chat.wb3d.json": "0d360a3a660961d63faef758f02a21597cadae58b30c32ea549374310394b8ae",
-    "previews/app.chat.png": "b1f33edb40e5a1db1db7f855f27643d8f4a8c5dcefb1d6e3bd4a7eb58291637c",
-    "previews/mock-app.chat.png": "a90b05919ba0406cba8493c5a1ca98b950a5f8e32d22f2c6fb8e4c34a1cc9c05",
-    "assets/app.workbench.glb": "7a8e3c580bd80e9bf3de8f183b35a734ca1f36e2e57ca17d7d413aaeb146f0d3",
-    "assets/app.workbench.wb3d.json": "db8216a3da563106d7041e6305579576f9beab0ae96131ce07455d2435334519",
-    "previews/app.workbench.png": "78f29c511878557e38baa61b80f5a6ac1e7c8468862083047d6453c7e8ebb1d9",
-    "previews/mock-app.workbench.png": "759b703e20b419703fde99155a18a9df96c27d59130ceaffdc5357b3a903ae3a",
-    "assets/app.integrations.glb": "c3a210455cdfea9cd5d7d4e8df1af22e494e7bd128cd34f3d40b4edc7a1c122e",
-    "assets/app.integrations.wb3d.json": "97f5db58b36ed17d0d9400dbfdf95abeaa1f59dc843f12ada7463cb20d929d35",
-    "previews/app.integrations.png": "2b2012d95109327aa5d8b0523b2153d0704b8f56a3b4625434d233f290891299",
-    "previews/mock-app.integrations.png": "d066836406720893158fee1acade242724c82fc3402e665eb40ec230542d7bec",
+    "assets/app.chat.glb": "f1ae8d71df344928d9d89db9fe19fb601897636a8a94a7418f2d4d7f7003369e",
+    "assets/app.chat.wb3d.json": "55ae4b80d26ebf4eb3c9d04cb1ac84010d788850243621fb3752ce42b4677c54",
+    "previews/app.chat.png": "d5172b332208a9954929424886a7d0fe47200cfb2c3435d57ec7225c8ba2a64a",
+    "previews/mock-app.chat.png": "c5e37ed4369cd8d3bc3892068d5260a1e57af850a29dc8ee5b77bb7ac0457489",
+    "assets/app.workbench.glb": "d576c1dc4ef6704f021f76057326f627f9453434b0e58b97f54801d8a5261e80",
+    "assets/app.workbench.wb3d.json": "7edce041456b773590ae60100d31dce83dd3558ec36224574404bba2e5fe0eaf",
+    "previews/app.workbench.png": "31fa68c6766a5f5d59db59eee1e5d9244fddc240fa591add9d7ca71f5de3b823",
+    "previews/mock-app.workbench.png": "3c646b1fea08be917165c59c09a4048c8bdbde233d7cd4826ce4d29ed1ec80cd",
+    "assets/app.integrations.glb": "d375cb6dd82c625cf623753e43ace616ec4157b39c74efa4e535367aee9a9c84",
+    "assets/app.integrations.wb3d.json": "89d0a475b4cfb8c8fdb3b26dc29dc2c4c8bfbe8a961110438c5a1ce1883917a5",
+    "previews/app.integrations.png": "8a8e681b8bd754e27c20256b4940358cb2f69e425688f5d06c4f8abfb6d2d975",
+    "previews/mock-app.integrations.png": "70e6bed782522e6d2872b8b70ddc1dd7676d0df215b0f2af8fd7ee5a7927067f",
     "assets/city.business.glb": "c4bdd6a5e1fcdf9d38e426d55836f7afd5017e4f60ef228a0cfdcc8022a5ee19",
-    "assets/city.business.wb3d.json": "a847ccc184c788692e868128ef74b480b5be756c93a7744850042980e241928c",
+    "assets/city.business.wb3d.json": "63353e5618d471f96c605df3b88eaa1b5ab5a4abd1a2a7d775b1073702bd9c8c",
     "previews/city.business.png": "0ee3cfd4086f1b565c4d080c7401b67835d77ad99d93e990ecc3c2e6f671d327",
     "previews/mock-city.business.png": "645ef1cccaec69e9002ac335c237d7ad3319ccb1a93ab06f52ec1ea139291253",
-    "assets/data.people.glb": "008ff009c0b593d7f79b74c5db83c805ed93b8df198bda2c1902badfd04cb66a",
-    "assets/data.people.wb3d.json": "6667f89aec65924163f1eaae39d347a8fec45d05c88f4264b4b0196e19d38176",
+    "assets/data.people.glb": "df7d645c3fa825bea9bfd9d6857f9232d81331ecb232924fcacac8b67cf19574",
+    "assets/data.people.wb3d.json": "8863efa323e58521aac1ae301c28bbde340e714488c6dda76605bde52b014f73",
     "previews/data.people.png": "88e6fc22a0bb696f12ccd710b66b4dc3d9809a92fa085470de73c23a90e7319d",
     "previews/mock-data.people.png": "5b9a0312b35e33e9172fd27b038e3d5f5ab691808ebf05bbd89b0a2b89dca563",
     "assets/data.documents.glb": "9eb31d5388fd6e8e90aac98dd57f276ff136a86caa5e98957cc52294c2f9cef9",
-    "assets/data.documents.wb3d.json": "94d758b64903c37a3737239b530d199353c5d1ef23c958a67929034edc20e024",
+    "assets/data.documents.wb3d.json": "069e8b624c2f6562f7463bf838078a5485518df0172fc823c212f070e8a70b90",
     "previews/data.documents.png": "a3f95e42f273e51255dbaa6af6d05906f6546232ff33c065df7147a7983a29be",
     "previews/mock-data.documents.png": "4619b5d74c29604741983bd73d6382bfc6c8cf3f8dd41e08bca05c332cd2d0b3",
     "assets/data.tasks.glb": "127a4e6e25d1ec71420a3c4455e58d4987c7a61e32cfebf6b59c4b8730a4e8db",
-    "assets/data.tasks.wb3d.json": "3263e57e5346ea4d3448619d3b7f7a23211d607b60cfc0f64e5e5460dda31b16",
+    "assets/data.tasks.wb3d.json": "f1813be10a05f6790d95746d8d968473ca3e309211b42cc03718c595653d0f89",
     "previews/data.tasks.png": "e372c7168b6034466700da2587fb77c7a630f0b5dac5c28875a833b8f85d817e",
     "previews/mock-data.tasks.png": "4bb9bb67047604b466d439f4fa65e2f9dcfe63f1edb0b86644ae9f12954efba1",
-    "assets/data.business-data.glb": "8f22ad7e263eb775fe437bd9afd20bc19d370877108f2d74c718500cfd33fee4",
-    "assets/data.business-data.wb3d.json": "92c5fb40999e50c7eed0801c28e220dfb11da9e6cfcc0c300c0ba14b2d86f521",
-    "previews/data.business-data.png": "7ab22f5aebe3b9283a112330161eab527c9653818b0d8b926f5592662bc15bf9",
-    "previews/mock-data.business-data.png": "64cfc02428a530d58e4749017b50c8dac1555beb4f76c6c4397e3a44eacd2cd4",
-    "assets/data.systems.glb": "cb5167553b09cb8373b1175dc7253f5f8d5b7764f86ce1ad703cf349c800be8b",
-    "assets/data.systems.wb3d.json": "88fe2dabb624eababc3c707423652162dd3f8d2735317047cf9d5ba5ee9d54d1",
+    "assets/data.business-data.glb": "e56cce1d6315b734d4cea120492f3c2fc434ebac2b3a77fb61d0d84ddf49d603",
+    "assets/data.business-data.wb3d.json": "173588168fe24019dd2faf4cc821fec3d728e8f4c5bac5df48ed56b2d41bf786",
+    "previews/data.business-data.png": "a858b9b3531ac17eee9da25f9d2042b184552d8540b194a651abb8e664ef2cda",
+    "previews/mock-data.business-data.png": "9f572663c3b3e48cb885866d95196a7a062bc88486f3675e02d8698cb953e233",
+    "assets/data.systems.glb": "6c5df4dcd0d0b73e19f2057035cc968b619db53d196094720b656e10949980ec",
+    "assets/data.systems.wb3d.json": "9cb88bb236294d16d2293baa6bae19fc90b907915b5a12195152e4e75c9ebb7f",
     "previews/data.systems.png": "659328b2203f4bc9d226211a098cf517c1378b9ed3a5c222154ffd80399e0c04",
     "previews/mock-data.systems.png": "1e2c5a5f3de73cc12d51e089a487d6ee46fce9f352323bee55c933104362cd5b",
-    "assets/data.devices.glb": "2b8aaf83b6ec7675fc1679ede390af87ed688d98457e534611a6daa7683c71fb",
-    "assets/data.devices.wb3d.json": "5e97af4639ffc557feb19886ac4eb1ded76c6496426220eb6ae2839506c55348",
+    "assets/data.devices.glb": "9b8e5e511bce86b69f1c501c7c99fb3014fbfa699ee56c1c0acab2facc8b6383",
+    "assets/data.devices.wb3d.json": "2ee06603c311e63a28f126ec6e1782d4809ec5bd15782d956304d9a22d3e39f2",
     "previews/data.devices.png": "6c2df7d1cbe09bc1216ba873e3caed1e464cdee0ed3b9e064e80fb9e3005ff3f",
     "previews/mock-data.devices.png": "5f2449b545638196348d862702c082dce9ba0118034da102498ee1413d883077",
-    "assets/data.external-data.glb": "c0d798782b9b14df5fc1e7bc7d0a3a18f9e8e05047fd4d0d82cca1e33adc74eb",
-    "assets/data.external-data.wb3d.json": "a41fe4b8886a6a8b5e02296f2b3cc81f0b965a33dd1f531bb824296dd0c663d1",
+    "assets/data.external-data.glb": "4148409b5d866429c3a0a488d0ec532de8010224b18cfcf6beda703b27f0d3f7",
+    "assets/data.external-data.wb3d.json": "546d62a193020967817580cb2c895d1f4441440c153bf53e7dea95a46e63e0fa",
     "previews/data.external-data.png": "8991b8e6e7319ee64b36974fcb6b85f301673c8859b16e3db4ac92e29474b9fe",
     "previews/mock-data.external-data.png": "fad3fa4d65e507c6ec795fb6e649b25b7404eb23d65d497a81357487bee31e78",
     "assets/world.earth.glb": "f492e9f0d315b7c2af2e9718fd45779805fe21d7666f6bbdf095be1a28712792",
-    "assets/world.earth.wb3d.json": "5652eb4fe3d082dc4d1ac19fb65c9236814681d19409088b4b1c68b3ec8c77a3",
+    "assets/world.earth.wb3d.json": "a02f5076258a0a46c9c6404f1755c3a886d568523e68ae4f1b5cd0cd21ef9358",
     "previews/world.earth.png": "c26273e955422a9bd1f980e306a413232fd89bdc355026ff7e0fe4cc6e477eec",
     "previews/mock-world.earth.png": "66a8d257b8d3996c29323525f6fd3ea6589c850d2136d705668e145d7c2b48d1",
     "assets/world.atmosphere.glb": "3d8dee7118ab02c16822a15d1424732490d0e1e86768d40f1ef5e3f17069a276",
-    "assets/world.atmosphere.wb3d.json": "fc7f36840267fc8e50ccf62387fb56eff2495de9b25be86dd4c1b7f46d306ed4",
+    "assets/world.atmosphere.wb3d.json": "5a14cd516ef5fdc1359ed3b8a829a151848abc4c31ee7eb58704a85d6a98af1a",
     "previews/world.atmosphere.png": "f47865c78ce4229262d581997fc303d8c76cdf158fee952242fd3d77313d9c15",
     "previews/mock-world.atmosphere.png": "a1c8e271ec5f09401d8807da250ad3cfcdce1b15c9a36bdd53c5e074d32c8c69"
   }

@@ -7,7 +7,7 @@
   ],
   "registration": "none; identical pixel coordinates",
   "reference_sha256": "a2f3fb5748aa0e88b41055e36c8825736f616e5c33e563bf3bed291185035534",
-  "capture_sha256": "9650f0d62a7a24d37ebec334e3a13fe978a94e8261f67670ba950ee43499887c",
+  "capture_sha256": "7db6f3b921f62f3681f0f128939a5d9ae4eb0a91f00728505816b1b22a36cf5f",
   "regions": {
     "whole": {
       "rect": [
@@ -16,12 +16,12 @@
         1536,
         1024
       ],
-      "mae_rgb": 20.4631,
-      "blurred_mae": 13.8315,
-      "ssim_gray": 0.635,
+      "mae_rgb": 20.0765,
+      "blurred_mae": 13.5145,
+      "ssim_gray": 0.63811,
       "reference_luma": 49.16,
-      "capture_luma": 47.14,
-      "edge_distance_px": 2.495
+      "capture_luma": 48.01,
+      "edge_distance_px": 2.489
     },
     "header": {
       "rect": [
@@ -58,12 +58,12 @@
         665,
         157
       ],
-      "mae_rgb": 30.4076,
-      "blurred_mae": 19.6539,
-      "ssim_gray": 0.47221,
+      "mae_rgb": 24.8063,
+      "blurred_mae": 14.9831,
+      "ssim_gray": 0.51353,
       "reference_luma": 72.78,
-      "capture_luma": 60.82,
-      "edge_distance_px": 1.801
+      "capture_luma": 74.65,
+      "edge_distance_px": 1.798
     },
     "application_platform": {
       "rect": [
@@ -72,12 +72,12 @@
         892,
         169
       ],
-      "mae_rgb": 27.3795,
-      "blurred_mae": 19.3116,
-      "ssim_gray": 0.51888,
+      "mae_rgb": 25.4981,
+      "blurred_mae": 17.4348,
+      "ssim_gray": 0.52962,
       "reference_luma": 75.38,
-      "capture_luma": 66.55,
-      "edge_distance_px": 2.57
+      "capture_luma": 70.1,
+      "edge_distance_px": 2.589
     },
     "intelligence": {
       "rect": [
@@ -100,12 +100,12 @@
         960,
         288
       ],
-      "mae_rgb": 33.4099,
-      "blurred_mae": 24.0471,
-      "ssim_gray": 0.38058,
+      "mae_rgb": 33.2955,
+      "blurred_mae": 23.9777,
+      "ssim_gray": 0.38309,
       "reference_luma": 72.7,
-      "capture_luma": 68.34,
-      "edge_distance_px": 2.968
+      "capture_luma": 67.73,
+      "edge_distance_px": 2.953
     },
     "earth": {
       "rect": [

@@ -531,6 +531,14 @@ const pedestalMaterials = new Map();
 export function createPedestal(n, parent) {
   if (!pedestalMaterials.has(n.type)) {
     const map = textureCanvas(768, 256, (c, w, h) => {
+      if (n.type === "data") {
+        const plinth = c.createLinearGradient(0, 0, 0, h);
+        plinth.addColorStop(0, "#273751");
+        plinth.addColorStop(0.22, "#101e32");
+        plinth.addColorStop(1, "#0c1421");
+        c.fillStyle = plinth; c.fillRect(0, 0, w, h);
+        return;
+      }
       const shade = c.createLinearGradient(0, 0, 0, h);
       shade.addColorStop(0, "#647181");
       shade.addColorStop(0.17, "#3b454f");
@@ -637,10 +645,10 @@ export function createPedestal(n, parent) {
   const p = pool(parent, 0, h + 0.121, 0, r * 2.5, 0x6591c2);
   p.material.opacity = 0.28;
   // Inset architectural uprights and floor bands add real facade depth.
-  for (let floor = 1; floor <= 3; floor++) {
+  for (let floor = 1; n.type !== "data" && floor <= 3; floor++) {
     rim(r * 1.002, h * floor / 4, parent, mat(0x6d7b8d, { metalness: 0.3, roughness: 0.45 }), 0.005);
   }
-  for (let k = 0; k < 12; k++) {
+  for (let k = 0; n.type !== "data" && k < 12; k++) {
     const a = (k * Math.PI) / 6;
     const rib = box(
       0.009,

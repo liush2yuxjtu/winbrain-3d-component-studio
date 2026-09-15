@@ -20,6 +20,7 @@ import {
   roundedShape,
   solidShape,
 } from "./exhibit-geometry.js";
+import { SCREEN_PALETTE } from "./application-palette.js";
 import { appIcon } from "../assets/app-icons.js";
 // UI surfaces, chart bars and app tiles are separately extruded geometry.
 // Canvas carries type and the glass sheen; brand artwork is embedded from official sources.
@@ -74,13 +75,13 @@ const widgetGlass = mat(0x485b85, {
   transparent: true,
   opacity: 0.68,
 });
-const darkWidget = mat(0x293047, { metalness: 0.12, roughness: 0.38 });
+const darkWidget = mat(0x46516d, { metalness: 0.12, roughness: 0.38 });
 const iconPorcelain = mat(0xf4f7ff, {
   metalness: 0.1,
   roughness: 0.22,
   clearcoat: 1,
-  emissive: 0x8c9cb9,
-  emissiveIntensity: 0.18,
+  emissive: 0xb8c5dc,
+  emissiveIntensity: 0.30,
 });
 function textTexture(s, paint) {
   return textureCanvas(s.px * 4, s.py * 4, (c) => {
@@ -121,13 +122,13 @@ function buildScreen(s, g) {
     );
   const frame = roundedShape(s.w - 0.015, s.h - 0.015, 0.07);
   frame.holes.push(roundedShape(s.w - 0.055, s.h - 0.055, 0.055));
-  solidShape(frame, 0.105, edge, g, 0.005).name = "beveled-glass-chassis";
-  plate(
+  solidShape(frame, 0.155, edge, g, 0.007).name = "beveled-glass-chassis";
+  const backing = plate(
     s.w - 0.048,
     s.h - 0.048,
     0.028,
     new THREE.MeshBasicMaterial({
-      color: 0x202332,
+      color: SCREEN_PALETTE[s.kind],
       // An opaque smoked backing writes depth before the transparent platform
       // edges render. The bevel and reflected front sheet remain translucent.
       transparent: false,
@@ -139,12 +140,13 @@ function buildScreen(s, g) {
     0.055,
     0.006,
   );
+  backing.name = "smoke-backing";
   const sheen = textureCanvas(512, 384, (c, w, h) => {
     const gradient = c.createLinearGradient(0, 0, w, h);
-    gradient.addColorStop(0, "#70778950");
-    gradient.addColorStop(0.36, "#3d435a38");
-    gradient.addColorStop(0.8, "#1b213710");
-    gradient.addColorStop(1, "#7583b84a");
+    gradient.addColorStop(0, "#8b9bbb66");
+    gradient.addColorStop(0.36, "#3d4a6355");
+    gradient.addColorStop(0.8, "#1e294110");
+    gradient.addColorStop(1, "#8496ca55");
     rr(c, 2, 2, w - 4, h - 4, 16, gradient);
     const reflection = c.createLinearGradient(0, 0, w, 0);
     reflection.addColorStop(0, "#d7edff25");
@@ -213,11 +215,11 @@ function buildScreen(s, g) {
       68,
       0.102,
       0.022,
-      mat(0x3c475e, {
+      mat(0x61738b, {
         metalness: 0.15,
         roughness: 0.45,
         transparent: true,
-        opacity: 0.30,
+        opacity: 0.36,
       }),
       5,
     );

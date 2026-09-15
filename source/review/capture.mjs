@@ -6,6 +6,7 @@ import { execFileSync } from 'node:child_process';
 const root = path.resolve(import.meta.dirname, '../..');
 const out = path.join(root, 'asset-review');
 await fs.mkdir(out, { recursive: true });
+await import('./calibrate-apps.mjs');
 const browser = await chromium.launch({ headless: true, args: ['--enable-unsafe-swiftshader'] });
 const checks = [];
 const check = (name, value, detail = null) => {
