@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { createUnifiedExpertBust } from "./reference-solids.js";
 
 // The public V2 factory remains compatible; modelRevision identifies refinements.
 // Lens apertures are actual holes, not transparent boxes covering an opaque slab.
@@ -48,21 +49,8 @@ export function createExpertModelV2(parent, color = 0x7764df) {
   head.scale.set(1, 1.18, 0.98);
   addMesh(expert, "expert-v3-neck", new THREE.CylinderGeometry(0.09, 0.11, 0.085, 48), body, 0, 0.673, 0);
 
-  const profile = new THREE.SplineCurve([
-    [0.29, 0.025], [0.308, 0.055], [0.31, 0.20], [0.292, 0.38],
-    [0.253, 0.50], [0.194, 0.578], [0.125, 0.619], [0.075, 0.635],
-  ].map(p => new THREE.Vector2(...p))).getPoints(48);
-  const torsoGeometry = new THREE.LatheGeometry([
-    new THREE.Vector2(0, 0.025), ...profile, new THREE.Vector2(0, 0.64),
-  ], 80);
-  const torso = addMesh(expert, "expert-v3-bust", torsoGeometry, body);
-  torso.scale.z = 0.76;
-  // Sleeve tops overlap inside the shoulder volume; do not leave detached ellipsoids.
-  for (const side of [-1, 1]) {
-    const arm = addMesh(expert, `expert-v3-sleeve-${side}`, new THREE.SphereGeometry(1, 40, 32), body, side * 0.255, 0.282, 0);
-    arm.scale.set(0.085, 0.255, 0.133);
-    arm.rotation.z = -side * 0.23;
-  }
+  const torso = addMesh(expert, "expert-v3-bust", createUnifiedExpertBust(), body);
+  torso.userData.construction = "unified-chest-shoulders-sleeves";
 
   const frameMaterial = new THREE.MeshPhysicalMaterial({
     color: 0xe8edff, metalness: 0.03, roughness: 0.2,

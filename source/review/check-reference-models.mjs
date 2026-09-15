@@ -31,13 +31,16 @@ export async function checkReferenceModels(page, check) {
       holes,
       lenses: ['left','right'].every(side => expert.getObjectByName(`expert-v3-glasses-lens-${side}`)?.material.transmission > 0.8),
       cloudSize,
-      cloudConstruction: cloud?.geometry.type,
+      cloudConstruction: cloud?.userData.construction,
+      unifiedBust: expert.getObjectByName('expert-v3-bust')?.userData.construction === 'unified-chest-shoulders-sleeves',
+      singleCloud: cloud?.children.length === 0,
       cloudMaterials: Array.isArray(cloud?.material) && cloud.material.length === 2,
       noCloudHalo: !cloudRoot.getObjectByName('external-data-cloud-v2-rim'),
     };
   });
   check('expert: both glasses have actual open lens apertures', report.holes.length === 2 && report.holes.every(Boolean), report);
   check('expert: transmissive lenses exist inside apertures', report.lenses);
-  check('cloud: closed shallow beveled extrusion', report.cloudConstruction === 'ExtrudeGeometry' && report.cloudSize[2] > 0.1 && report.cloudSize[2] < report.cloudSize[0] * 0.25, report.cloudSize);
+  check('expert: shoulders and short sleeves share one surface', report.unifiedBust);
+  check('cloud: closed shallow beveled extrusion', report.cloudConstruction === 'shape-driven-rounded-extrusion' && report.singleCloud && report.cloudSize[2] > 0.1 && report.cloudSize[2] < report.cloudSize[0] * 0.25, report.cloudSize);
   check('cloud: distinct face and edge materials; no duplicate halo', report.cloudMaterials && report.noCloudHalo);
 }
