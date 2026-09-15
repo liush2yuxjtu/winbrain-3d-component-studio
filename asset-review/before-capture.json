@@ -9,7 +9,7 @@
     "triangles": 910704,
     "externalTextures": 0,
     "referenceImages": 0,
-    "frames": 4,
+    "frames": 5,
     "drawCalls": 3586,
     "threeRevision": "180",
     "motion": {
@@ -18,7 +18,7 @@
       "autoRotate": false,
       "enabled": false,
       "running": true,
-      "frames": 4,
+      "frames": 5,
       "bindings": [
         {
           "behavior": "robot.idle",

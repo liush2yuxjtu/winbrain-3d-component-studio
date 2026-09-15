@@ -5,12 +5,12 @@
     "zoom": 1
   },
   "stats": {
-    "meshes": 1036,
-    "triangles": 895076,
+    "meshes": 1038,
+    "triangles": 893430,
     "externalTextures": 0,
     "referenceImages": 0,
-    "frames": 4,
-    "drawCalls": 6152,
+    "frames": 5,
+    "drawCalls": 6156,
     "threeRevision": "180",
     "motion": {
       "elapsed": 0,
@@ -18,7 +18,7 @@
       "autoRotate": false,
       "enabled": false,
       "running": true,
-      "frames": 4,
+      "frames": 5,
       "bindings": [
         {
           "behavior": "robot.idle",
