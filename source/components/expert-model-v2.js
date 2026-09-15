@@ -1,147 +1,100 @@
 import * as THREE from "three";
-import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
-import {
-  mat,
-  glowMat,
-  mesh,
-  sphere,
-  cyl,
-  beam,
-  softGlow,
-} from "../core.js";
 
-// Reference-driven Expert model.
-// The legacy human generator stays in people.js for comparison / rollback.
+// Keep the public factory name so the isolated V2 integration remains compatible.
+// Revision 3 uses real apertures. A transparent lens cannot cut a hole in a solid box.
+function roundedLoop(path, width, height, radius) {
+  const x = -width / 2, y = -height / 2;
+  const r = Math.min(radius, width / 2, height / 2);
+  path.moveTo(x + r, y);
+  path.lineTo(x + width - r, y);
+  path.quadraticCurveTo(x + width, y, x + width, y + r);
+  path.lineTo(x + width, y + height - r);
+  path.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+  path.lineTo(x + r, y + height);
+  path.quadraticCurveTo(x, y + height, x, y + height - r);
+  path.lineTo(x, y + r);
+  path.quadraticCurveTo(x, y, x + r, y);
+  path.closePath();
+  return path;
+}
+function addMesh(parent, name, geometry, material, x = 0, y = 0, z = 0) {
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.name = name;
+  mesh.position.set(x, y, z);
+  parent.add(mesh);
+  return mesh;
+}
+function tube(parent, name, points, radius, material) {
+  const curve = new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p)));
+  return addMesh(parent, name, new THREE.TubeGeometry(curve, 24, radius, 8, false), material);
+}
 export function createExpertModelV2(parent, color = 0x7764df) {
   const expert = new THREE.Group();
   expert.name = "expert-model-v2";
+  expert.userData.modelRevision = 3;
   expert.position.set(0, 0.17, 0.085);
   expert.scale.setScalar(0.94);
   parent.add(expert);
 
-  const body = mat(color, {
-    metalness: 0.03,
-    roughness: 0.18,
-    clearcoat: 1,
-    clearcoatRoughness: 0.08,
-    transmission: 0.08,
-    transparent: true,
-    opacity: 0.94,
-    emissive: color,
-    emissiveIntensity: 0.07,
+  const body = new THREE.MeshPhysicalMaterial({
+    color, metalness: 0.02, roughness: 0.29,
+    clearcoat: 0.9, clearcoatRoughness: 0.22,
+    transmission: 0.12, thickness: 0.3, ior: 1.36,
+    opacity: 1, depthWrite: true,
+    emissive: color, emissiveIntensity: 0.085,
   });
+  const head = addMesh(expert, "expert-v3-head", new THREE.SphereGeometry(0.218, 64, 48), body, 0, 0.91, 0);
+  head.scale.set(1, 1.18, 0.98);
+  addMesh(expert, "expert-v3-neck", new THREE.CylinderGeometry(0.09, 0.11, 0.085, 48), body, 0, 0.673, 0);
 
-  const head = sphere(
-    0.218,
-    body,
-    new THREE.Vector3(0, 0.91, 0),
-    expert,
-    1,
-    1.18,
-    0.98,
-  );
-  head.name = "expert-v2-head";
-
-  const neck = cyl(
-    0.09,
-    0.105,
-    0.075,
-    body,
-    new THREE.Vector3(0, 0.675, 0),
-    expert,
-  );
-  neck.name = "expert-v2-neck";
-
-  // One continuous bust instead of torso + detached arm capsules.
-  const torso = mesh(
-    new THREE.LatheGeometry(
-      [
-        [0.0, 0.015],
-        [0.30, 0.015],
-        [0.33, 0.045],
-        [0.34, 0.13],
-        [0.335, 0.25],
-        [0.31, 0.39],
-        [0.27, 0.50],
-        [0.21, 0.58],
-        [0.145, 0.625],
-        [0.07, 0.646],
-        [0.0, 0.65],
-      ].map(([x, y]) => new THREE.Vector2(x, y)),
-      64,
-    ),
-    body,
-    expert,
-  );
-  torso.name = "expert-v2-continuous-bust";
-  torso.scale.z = 0.80;
-
-  const frame = mat(0xf3f7ff, {
-    metalness: 0.04,
-    roughness: 0.10,
-    clearcoat: 1,
-    clearcoatRoughness: 0.05,
-    emissive: 0xcbd9ff,
-    emissiveIntensity: 0.32,
-  });
-  const lens = mat(0xa88cf8, {
-    metalness: 0.01,
-    roughness: 0.06,
-    transmission: 0.36,
-    thickness: 0.03,
-    ior: 1.38,
-    transparent: true,
-    opacity: 0.30,
-    depthWrite: false,
-    clearcoat: 1,
-    clearcoatRoughness: 0.04,
-  });
-
+  // Smooth the profile before revolving; sparse lathe rings made the shoulders faceted.
+  const profile = new THREE.SplineCurve([
+    [0.29, 0.025], [0.308, 0.055], [0.31, 0.20], [0.292, 0.38],
+    [0.253, 0.50], [0.194, 0.578], [0.125, 0.619], [0.075, 0.635],
+  ].map(p => new THREE.Vector2(...p))).getPoints(48);
+  const torsoGeometry = new THREE.LatheGeometry([
+    new THREE.Vector2(0, 0.025), ...profile, new THREE.Vector2(0, 0.64),
+  ], 80);
+  const torso = addMesh(expert, "expert-v3-bust", torsoGeometry, body);
+  torso.scale.z = 0.76;
+  // The reference has short shoulders/sleeves, not a featureless pawn-shaped torso.
   for (const side of [-1, 1]) {
-    const x = side * 0.105;
-    const outer = mesh(
-      new RoundedBoxGeometry(0.235, 0.165, 0.035, 4, 0.052),
-      frame,
-      expert,
-    );
-    outer.name = `expert-v2-glasses-frame-${side < 0 ? "left" : "right"}`;
-    outer.position.set(x, 0.925, 0.205);
-
-    // A slightly larger forward lens visually cuts the solid frame into a bright rim.
-    const inner = mesh(
-      new RoundedBoxGeometry(0.195, 0.125, 0.038, 4, 0.042),
-      lens,
-      expert,
-    );
-    inner.name = `expert-v2-glasses-lens-${side < 0 ? "left" : "right"}`;
-    inner.position.set(x, 0.925, 0.225);
+    const arm = addMesh(expert, `expert-v3-sleeve-${side}`, new THREE.SphereGeometry(1, 40, 32), body, side * 0.286, 0.252, 0);
+    arm.scale.set(0.087, 0.235, 0.135);
+    arm.rotation.z = -side * 0.13;
   }
 
-  beam(
-    new THREE.Vector3(-0.018, 0.925, 0.226),
-    new THREE.Vector3(0.018, 0.925, 0.226),
-    0.012,
-    frame,
-    expert,
-  ).name = "expert-v2-glasses-bridge";
-
+  const frameMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0xe8edff, metalness: 0.03, roughness: 0.2,
+    clearcoat: 1, clearcoatRoughness: 0.12,
+    emissive: 0xb9bbff, emissiveIntensity: 0.32,
+  });
+  const lensMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0xb7a2f0, metalness: 0, roughness: 0.15,
+    transmission: 0.86, thickness: 0.015, ior: 1.18,
+    opacity: 1, depthWrite: false, clearcoat: 0.5,
+  });
   for (const side of [-1, 1]) {
-    beam(
-      new THREE.Vector3(side * 0.205, 0.938, 0.205),
-      new THREE.Vector3(side * 0.245, 0.925, 0.08),
-      0.009,
-      frame,
-      expert,
-    ).name = `expert-v2-glasses-temple-${side < 0 ? "left" : "right"}`;
+    const shape = roundedLoop(new THREE.Shape(), 0.211, 0.153, 0.064);
+    shape.holes.push(roundedLoop(new THREE.Path(), 0.173, 0.116, 0.046));
+    const geometry = new THREE.ExtrudeGeometry(shape, {
+      depth: 0.013, steps: 1, curveSegments: 16,
+      bevelEnabled: true, bevelSize: 0.003, bevelThickness: 0.003, bevelSegments: 3,
+    });
+    const name = side < 0 ? "left" : "right";
+    const frame = addMesh(expert, `expert-v3-glasses-frame-${name}`, geometry, frameMaterial, side * 0.11, 0.928, 0.224);
+    frame.userData.aperture = [0.173, 0.116];
+    const lensShape = roundedLoop(new THREE.Shape(), 0.171, 0.114, 0.046);
+    const lensGeometry = new THREE.ExtrudeGeometry(lensShape, {
+      depth: 0.009, steps: 1, curveSegments: 16, bevelEnabled: false,
+    });
+    addMesh(expert, `expert-v3-glasses-lens-${name}`, lensGeometry, lensMaterial, side * 0.11, 0.928, 0.226);
+    tube(expert, `expert-v3-glasses-temple-${name}`, [
+      [side * 0.210, 0.957, 0.231], [side * 0.232, 0.947, 0.18], [side * 0.229, 0.935, 0.08],
+    ], 0.009, frameMaterial);
   }
-
-  const glow = softGlow(
-    expert,
-    new THREE.Vector3(0, 0.72, -0.05),
-    1.15,
-    color,
-  );
-  glow.material.opacity = 0.18;
-
+  tube(expert, "expert-v3-glasses-bridge", [
+    [-0.025, 0.933, 0.236], [0, 0.951, 0.241], [0.025, 0.933, 0.236],
+  ], 0.011, frameMaterial);
   return expert;
 }

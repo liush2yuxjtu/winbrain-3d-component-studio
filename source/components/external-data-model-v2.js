@@ -1,99 +1,48 @@
 import * as THREE from "three";
-import { MarchingCubes } from "three/addons/objects/MarchingCubes.js";
-import { mat, mesh, softGlow } from "../core.js";
 
-// Reference-driven External Data cloud.
-// The original cloud() implementation remains in business-models.js as a fallback.
+// Revision 3: the reference is a shallow beveled glass icon, not metaball spheres.
+// The factory name stays compatible with the existing isolated asset integration.
 export function createExternalDataModelV2(parent) {
-  const material = mat(0xb6d7f4, {
-    metalness: 0.02,
-    roughness: 0.14,
-    transmission: 0.28,
-    thickness: 0.22,
-    ior: 1.34,
-    transparent: true,
-    opacity: 0.82,
-    clearcoat: 1,
-    clearcoatRoughness: 0.06,
-    emissive: 0x5b8fbd,
-    emissiveIntensity: 0.18,
+  const shape = new THREE.Shape();
+  shape.moveTo(-0.28, 0.04);
+  shape.lineTo(0.28, 0.04);
+  shape.bezierCurveTo(0.39, 0.04, 0.455, 0.118, 0.455, 0.229);
+  shape.bezierCurveTo(0.455, 0.337, 0.391, 0.409, 0.295, 0.397);
+  shape.bezierCurveTo(0.292, 0.547, 0.207, 0.660, 0.049, 0.660);
+  shape.bezierCurveTo(-0.106, 0.660, -0.220, 0.552, -0.224, 0.408);
+  shape.bezierCurveTo(-0.363, 0.414, -0.455, 0.321, -0.455, 0.218);
+  shape.bezierCurveTo(-0.455, 0.109, -0.384, 0.040, -0.28, 0.04);
+  shape.closePath();
+
+  const face = new THREE.MeshPhysicalMaterial({
+    color: 0x94b6e2, metalness: 0.02, roughness: 0.34,
+    transmission: 0.23, thickness: 0.15, ior: 1.32,
+    opacity: 1, depthWrite: true,
+    clearcoat: 0.9, clearcoatRoughness: 0.18,
+    emissive: 0x386da4, emissiveIntensity: 0.12,
   });
-
-  const field = new MarchingCubes(48, material, false, false, 20000);
-  field.isolation = 0;
-
-  // Classic three-lobe cloud silhouette with a broad, softly rounded base.
-  const lobes = [
-    [-0.27, 0.25, 0.00, 0.23, 0.23, 0.16],
-    [-0.02, 0.45, 0.00, 0.30, 0.32, 0.19],
-    [0.25, 0.29, 0.00, 0.22, 0.22, 0.16],
-    [0.00, 0.155, 0.00, 0.42, 0.135, 0.18],
-  ];
-
-  const smoothMin = (a, b, k) => {
-    const h = Math.max(k - Math.abs(a - b), 0) / k;
-    return Math.min(a, b) - h * h * k * 0.25;
-  };
-
-  for (let z = 0; z < 48; z++)
-    for (let y = 0; y < 48; y++)
-      for (let x = 0; x < 48; x++) {
-        const px = (x / 24 - 1) * 0.7;
-        const py = (y / 24 - 1) * 0.6 + 0.35;
-        const pz = (z / 24 - 1) * 0.4;
-        let d = 10;
-        for (const [cx, cy, cz, rx, ry, rz] of lobes) {
-          const q = Math.sqrt(
-            ((px - cx) / rx) ** 2 +
-            ((py - cy) / ry) ** 2 +
-            ((pz - cz) / rz) ** 2,
-          ) - 1;
-          d = smoothMin(d, q * Math.min(rx, ry, rz), 0.052);
-        }
-        field.setCell(x, y, z, -d);
-      }
-
-  field.update();
-
-  const geometry = new THREE.BufferGeometry();
-  for (const key of ["position", "normal"])
-    geometry.setAttribute(
-      key,
-      new THREE.BufferAttribute(
-        field.geometry.getAttribute(key).array.slice(0, field.count * 3),
-        3,
-      ),
-    );
-
-  geometry.scale(0.66, 0.54, 0.40);
-  geometry.translate(0, 0.39, 0);
+  const bevel = new THREE.MeshPhysicalMaterial({
+    color: 0xd3eaff, metalness: 0.05, roughness: 0.18,
+    transmission: 0.16, thickness: 0.08, ior: 1.34,
+    opacity: 1, depthWrite: true,
+    clearcoat: 1, clearcoatRoughness: 0.1,
+    emissive: 0x6ca8e1, emissiveIntensity: 0.22,
+  });
+  const geometry = new THREE.ExtrudeGeometry(shape, {
+    depth: 0.14, steps: 1, curveSegments: 40,
+    bevelEnabled: true, bevelSize: 0.028, bevelThickness: 0.026, bevelSegments: 8,
+    material: 0, extrudeMaterial: 1,
+  });
+  geometry.translate(0, 0, -0.07);
+  geometry.computeBoundingBox();
   geometry.computeBoundingSphere();
-  field.geometry.dispose();
-
-  const cloud = mesh(geometry, material, parent);
-  cloud.name = "external-data-cloud-v2";
-  cloud.rotation.y = -0.10;
-
-  const rim = new THREE.MeshBasicMaterial({
-    color: 0xe7f5ff,
-    transparent: true,
-    opacity: 0.18,
-    side: THREE.BackSide,
-    depthWrite: false,
-    toneMapped: false,
-  });
-  const halo = mesh(geometry.clone(), rim, parent);
-  halo.name = "external-data-cloud-v2-rim";
-  halo.rotation.copy(cloud.rotation);
-  halo.scale.set(1.035, 1.035, 1.035);
-
-  const glow = softGlow(
-    parent,
-    new THREE.Vector3(0, 0.46, -0.08),
-    0.92,
-    0xb9e3ff,
-  );
-  glow.material.opacity = 0.17;
-
+  const cloud = new THREE.Mesh(geometry, [face, bevel]);
+  cloud.name = "external-data-cloud-v3";
+  cloud.userData.modelRevision = 3;
+  cloud.userData.construction = "closed three-lobe beveled extrusion; separate frosted face and polished edge";
+  cloud.rotation.y = -0.12;
+  parent.add(cloud);
+  // No inflated backside duplicate or billboard halo: both used to wash out the
+  // silhouette and create an apparent fourth lobe at oblique camera angles.
   return cloud;
 }

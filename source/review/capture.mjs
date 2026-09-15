@@ -3,6 +3,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { checkReferenceModels } from './check-reference-models.mjs';
+import { captureTargetedEvidence } from './targeted-evidence.mjs';
 const root = path.resolve(import.meta.dirname, '../..');
 const out = path.join(root, 'asset-review');
 await fs.mkdir(out, { recursive: true });
@@ -27,8 +29,8 @@ try {
       return { view: winbrain.view, stats: winbrain.stats(), count: winbrain.registry.size };
     });
     check(`${label}: 22 registered components`, state.count === 22);
-    // Freeze actual GPU pixels into a same-sized 2D canvas. This avoids a
-    // headless WebGL compositor capture stall; no reference pixels are used.
+    if (label === 'after') await captureTargetedEvidence(page, out);
+    // Copy actual GPU pixels 1:1, avoiding headless compositor stalls. Never insert reference pixels.
     await page.evaluate(() => {
       const live = winbrain.renderer.domElement;
       const frozen = document.createElement('canvas');
@@ -50,7 +52,7 @@ try {
   }
   const context = await browser.newContext(contextOptions);
   const page = await context.newPage();
-    page.setDefaultTimeout(180000);
+  page.setDefaultTimeout(180000);
   page.on('pageerror', e => errors.push({ page: 'studio', message: e.message }));
   await page.goto('http://127.0.0.1:8765/studio.html');
   await page.waitForFunction(() => window.studio && document.body.dataset.ready, null, { timeout: 120000 });
@@ -78,6 +80,7 @@ try {
     return Boolean(root.getObjectByName('server-power-port-2') && root.getObjectByName('server-extra-port-0'));
   }));
   check('expert uses reference atom emblem', await page.evaluate(() => Boolean(studio.registry.get('actor.experts').root.getObjectByName('expert-atom-orbit'))));
+  await checkReferenceModels(page, check);
   for (const asset of manifest.components) {
     console.log('Exporting', asset.id);
     const result = await page.evaluate(async id => {
