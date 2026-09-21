@@ -240,7 +240,7 @@ pip install playwright && playwright install chromium   # 首次
 cd source && npm run verify:system -- --port 8791
 ```
 
-`source/review/verify-design-system.py` 驱动真实 Chromium，做五件事，结果写入 `design-system-verification.json`：
+`npm run verify:system` 跑两步：先由 `source/system/check-docs.mjs` 断言本文件里每一个引用到的实测数字都与 `manifest.json` 一致（文档里的数字同样会腐烂），再由 `source/review/verify-design-system.py` 驱动真实 Chromium 做五件事，结果写入 `design-system-verification.json`：
 
 1. **加载**：6 个页面 + 28 个独立预览页全部返回 200 且舞台有实际尺寸；
 2. **样式一致性**：16 组「同一组件在出货页面 vs 在预览里」的 `getComputedStyle` 逐属性对比，**每个组件同时验证 `components.html` 与 `preview/<组件>.html` 两个落点**，共 32 项；

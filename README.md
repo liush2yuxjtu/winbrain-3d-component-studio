@@ -149,7 +149,7 @@ python3 -m http.server 8791 --bind 127.0.0.1    # 另开一个终端
 cd source && npm run verify:system -- --port 8791
 ```
 
-脚本用 Python Playwright（`pip install playwright && playwright install chromium`），与仓库里 `source/review/compare.py`、`visual-diff/` 的 Python 工具链一致，不额外引入 Node 侧浏览器依赖。
+`npm run verify:system` 先跑 `source/system/check-docs.mjs`，断言 `DESIGN.md` 里引用到的每个实测数字都与 `manifest.json` 一致；再用 Python Playwright（`pip install playwright && playwright install chromium`）驱动真实浏览器。用 Python 是因为仓库已有 `source/review/compare.py`、`visual-diff/` 的 Python 工具链，不额外引入 Node 侧浏览器依赖。只跑文档数字检查可以单独用 `npm run check:docs`。
 
 脚本驱动真实 Chromium：检查 6 个页面 + 28 个独立预览页可加载、无 JavaScript 错误、无外部请求；把 16 组「同一组件在出货页面 vs 在预览里的 computedStyle」逐属性对比（`components.html` 与 `preview/` 两个落点各验一遍，共 32 项）；检查每个组件的 markup class 都有对应样式；并逐条请求两套新页面上的 37 条内部链接。最近一次结果 47 项全部通过。结果写入 `design-system-verification.json`，截图落在 `design-system-review/`。
 
