@@ -59,7 +59,7 @@ async function loadSourceRules(file) {
   return rules;
 }
 
-export const previewClass = (component) => `ds-pv-${slug(component.id)}`;
+const previewClass = (component) => `ds-pv-${slug(component.id)}`;
 
 /**
  * Collect the stylesheet one component's preview stage needs.

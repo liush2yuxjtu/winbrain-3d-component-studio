@@ -1310,4 +1310,3 @@ export const UI_SYSTEM = {
 
 export const COMPONENT_GROUPS = UI_SYSTEM.groups;
 export const UI_COMPONENTS = UI_SYSTEM.components;
-export const COMPONENTS_BY_ID = new Map(UI_COMPONENTS.map((c) => [c.id, c]));
