@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Asset Card — WinBrain Component Preview</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Preview chrome. This is the documentation page's own layout, not component design,
+   so it lives here rather than in a shipping stylesheet. */
+.ds-frame{position:relative;border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:#0b1119;overflow:hidden;margin-top:18px}
+.ds-frame--scene{aspect-ratio:1536/1024;padding:0;background:#070c12}
+.ds-frame--scene .ds-stage{position:absolute;inset:0}
+.ds-frame--scene .scene{transform:scale(var(--k,.33));transform-origin:top left}
+.ds-stage{padding:26px;min-height:96px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+/* Type and colour are deliberately absent here: the extracted shipping rules set them,
+   and a value written here would outrank the real one and hide a drift. */
+.ds-stage--studio{display:block;padding:22px}
+.ds-stage--docs{display:block}
+.ds-stage--home{display:block;padding:0;min-height:0}
+.ds-stage-note{margin:9px 0 0;font-size:11px;color:#7c93b3}
+.ds-stage-note b{color:#a9c9f2;font-weight:500}
+
+*{box-sizing:border-box}html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header strong{font-size:21px;letter-spacing:-.4px}
+.ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
+.ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
+.ds-page>main{width:91%;max-width:1536px;margin:auto}
+.ds-page .hero{padding:64px 0 42px;border-bottom:1px solid #2e3b4c;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+.ds-page .eyebrow{font-size:10px;color:#90b3e4;letter-spacing:2px}
+.ds-page .hero h1{font-size:38px;letter-spacing:-1px;font-weight:500;margin:17px 0 12px}
+.ds-page .hero p{color:var(--wb-color-text-muted);line-height:1.8;font-size:13px;margin:0;max-width:760px}
+.ds-page .hero code{background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:1px 5px;font-size:12px;color:#bcd8fa}
+.ds-page .count{font-size:68px;font-weight:300;letter-spacing:-4px;color:#a9c9fa}
+.ds-page .count small{display:block;font-size:10px;letter-spacing:1.5px;color:#728caa;text-align:right}
+.ds-page .map{margin:26px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:1000px}
+.ds-page .map div{border:1px solid #39506f;background:#162232;border-radius:var(--wb-radius-card);padding:13px 14px;font-size:11px;color:#c9dcf5}
+.ds-page .map b{display:block;font-size:12px;color:#ddebff;margin-bottom:5px}
+.ds-page .map span{color:#7e97b8;font-size:10px}
+.ds-page .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:26px 0 4px}
+.ds-page .stat{border:1px solid var(--wb-color-border);background:var(--wb-color-panel);border-radius:var(--wb-radius-card);padding:16px 17px}
+.ds-page .stat b{display:block;font-size:31px;font-weight:300;color:#cfe2ff;letter-spacing:-1px}
+.ds-page .stat span{display:block;font-size:11px;color:#8ba1bf;margin-top:5px;line-height:1.5}
+.ds-page .stat.warn b{color:#e8c98a}
+.ds-page .tools{padding:24px 0 14px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start;position:sticky;top:74px;background:var(--wb-color-canvas);z-index:10;border-bottom:1px solid #24303f}
+.ds-page .search{background:#162232;border:1px solid #3a4d67;color:#dbe9ff;padding:12px 14px;border-radius:6px;width:min(320px,100%);font:inherit}
+.ds-page .filters{display:flex;gap:7px;flex-wrap:wrap}
+.ds-page .filters button{border:1px solid #38506d;background:#162232;color:#91a9c9;border-radius:16px;padding:7px 11px;font-size:10px;cursor:pointer}
+.ds-page .filters button.active{background:#315986;color:white;border-color:#77a8e6}
+.ds-page .section-head{display:flex;justify-content:space-between;align-items:end;margin:44px 0 4px;padding-bottom:13px;border-bottom:1px solid #2e3b4c}
+.ds-page .section-head h2{font-size:19px;font-weight:500;margin:0}
+.ds-page .section-head span{font-size:11px;color:#7c93b3;max-width:52%}
+.ds-component{border-top:1px solid #24303f;padding:36px 0 40px;scroll-margin-top:150px}
+.ds-component:first-of-type{border-top:0}
+.ds-head{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.ds-kind{font-size:9px;letter-spacing:1.4px;color:#7fa6d9}
+.ds-head h3{font-size:23px;font-weight:500;margin:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ds-head h3 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px}
+.ds-summary{margin:2px 0 0;color:#a9bfda;line-height:1.75;font-size:13px;max-width:900px}
+.ds-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.ds-meta span{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:4px 6px;color:#9dbde4}
+.ds-meta span.gap{border-color:#6b5330;color:#d6b075}
+.ds-body{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:26px}
+.ds-block h4{font-size:11px;letter-spacing:1.4px;color:#7fa6d9;font-weight:500;margin:0 0 11px;text-transform:uppercase}
+.ds-block p{margin:0;color:#a9bfda;line-height:1.8;font-size:13px}
+.ds-body table{width:100%;border-collapse:collapse;font-size:12px}
+.ds-body th,.ds-body td{text-align:left;padding:9px 11px;border-bottom:1px solid #26313f;vertical-align:top;line-height:1.6}
+.ds-body th{font-size:10px;letter-spacing:.8px;color:#7e97b8;font-weight:500;background:#131c28}
+.ds-body td code{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#bcd8fa;background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.ds-body td:first-child{color:#dcebfd}
+.ds-a11y{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ds-a11y div{border:1px solid #2d4058;background:#141f2d;border-radius:var(--wb-radius-card);padding:13px 14px}
+.ds-a11y b{display:block;font-size:9px;letter-spacing:1.2px;color:#6f8bb0;margin-bottom:7px}
+.ds-a11y p{margin:0;font-size:12px;color:#b8cce6;line-height:1.7}
+.guidance{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.guidance ul{margin:0;padding:0;list-style:none}
+.guidance li{font-size:12px;line-height:1.7;color:#b8cce6;padding:8px 0 8px 22px;position:relative;border-bottom:1px solid #222d3b}
+.guidance li:before{position:absolute;left:0;top:8px;font-size:12px}
+.guidance .do li:before{content:"✅"}
+.guidance .dont li:before{content:"❌"}
+.guidance h5{margin:0 0 4px;font-size:11px;color:#8fb4e4;font-weight:500}
+.ds-body pre{margin:0;background:#0d1521;border:1px solid #2d4058;border-radius:var(--wb-radius-card);padding:15px 17px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c3d9f5}
+.ds-page .findings{margin-top:34px;border-top:1px solid #2e3b4c;padding-top:26px}
+.ds-page .findings b{color:#e8c98a;font-weight:500}
+.ds-page .radius-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.ds-page .radius-list span{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.ds-page .radius-list span.orphan{border-color:#6b5330;color:#d6b075}
+.ds-page footer{margin-top:52px;border-top:1px solid #30415b;padding:25px 0 36px;color:#7089a8;font-size:11px;line-height:1.8;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.ds-page footer a{color:#a5c3ec}
+[hidden]{display:none!important}
+@media(max-width:1100px){.ds-page .strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-a11y{grid-template-columns:1fr}.ds-page .map{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.ds-page>header{height:auto;min-height:70px;padding:15px 22px;gap:12px}.ds-page>header strong span{display:none}.ds-pagenav{gap:12px}.ds-page .hero{grid-template-columns:1fr;padding:38px 0 28px}.ds-page .count{display:none}.guidance{grid-template-columns:1fr}.ds-page .tools{position:static;flex-direction:column}.ds-page footer{display:block}}
+</style>
+<style>/* asset-card · source/build-catalog.mjs */
+:where(.ds-stage--docs.ds-pv-asset-card), :where(.ds-stage--docs.ds-pv-asset-card) *{box-sizing:border-box}
+:where(.ds-stage--docs.ds-pv-asset-card){color-scheme:dark}
+:where(.ds-stage--docs.ds-pv-asset-card){margin:0;background:#101720;color:#dce7f6;font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-asset-card) a{color:inherit;text-decoration:none}
+:where(.ds-stage--docs.ds-pv-asset-card) a:focus-visible{outline:2px solid #acccff;outline-offset:4px}
+:where(.ds-stage--docs.ds-pv-asset-card) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b}
+:where(.ds-stage--docs.ds-pv-asset-card) header strong{font-size:21px;letter-spacing:-.4px}
+:where(.ds-stage--docs.ds-pv-asset-card) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
+:where(.ds-stage--docs.ds-pv-asset-card) nav{display:flex;gap:20px;font-size:12px;color:#aabedb;flex-wrap:wrap}
+:where(.ds-stage--docs.ds-pv-asset-card) .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+:where(.ds-stage--docs.ds-pv-asset-card) article{border:1px solid #31445f;border-radius:9px;background:#182434;overflow:hidden;transition:border-color .15s,transform .15s}
+:where(.ds-stage--docs.ds-pv-asset-card) article:hover{border-color:#7197ca;transform:translateY(-2px)}
+:where(.ds-stage--docs.ds-pv-asset-card) .preview img{width:100%;height:100%;object-fit:contain;max-height:190px}
+:where(.ds-stage--docs.ds-pv-asset-card) .preview>span{position:absolute;bottom:10px;right:11px;background:#0a121fcc;font:9px monospace;color:#637e9e;padding:4px 6px;border-radius:3px}
+:where(.ds-stage--docs.ds-pv-asset-card) .card-body{padding:18px 17px 14px}
+:where(.ds-stage--docs.ds-pv-asset-card) .component-id{font:9px monospace;color:#7492b9}
+:where(.ds-stage--docs.ds-pv-asset-card) h3{font-size:15px;font-weight:500;margin:8px 0 18px;display:flex;align-items:center;justify-content:space-between}
+:where(.ds-stage--docs.ds-pv-asset-card) h3 b{font:9px monospace;border:1px solid #6081af;color:#a9ccfa;padding:2px 4px;border-radius:3px}
+:where(.ds-stage--docs.ds-pv-asset-card) .open-links{display:flex;gap:10px 16px;flex-wrap:wrap;font-size:10px;color:#b4cfee}
+:where(.ds-stage--docs.ds-pv-asset-card) .open-links a:hover{color:#fff}
+:where(.ds-stage--docs.ds-pv-asset-card) .open-links .motion-link{color:#8bd7ff}
+:where(.ds-stage--docs.ds-pv-asset-card) .asset-links{border-top:1px solid #2e425d;margin-top:18px;padding-top:13px;display:flex;gap:12px;flex-wrap:wrap;font-size:9px;color:#7895b9}
+:where(.ds-stage--docs.ds-pv-asset-card) .asset-links a:hover{color:#c4ddff}
+:where(.ds-stage--docs.ds-pv-asset-card) footer{margin-top:55px;padding:26px 0 36px;border-top:1px solid #30415b;display:flex;justify-content:space-between;gap:30px;color:#6f89aa;font-size:11px;line-height:1.8}
+:where(.ds-stage--docs.ds-pv-asset-card) footer a{color:#a5c3ec}
+@media(min-width:1600px){
+:where(.ds-stage--docs.ds-pv-asset-card) .grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+}
+@media(max-width:1050px){
+:where(.ds-stage--docs.ds-pv-asset-card) .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:740px){
+:where(.ds-stage--docs.ds-pv-asset-card) header{padding:0 22px}
+:where(.ds-stage--docs.ds-pv-asset-card) header strong span{display:none}
+:where(.ds-stage--docs.ds-pv-asset-card) .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+:where(.ds-stage--docs.ds-pv-asset-card) .card-body{padding:14px 12px}
+:where(.ds-stage--docs.ds-pv-asset-card) .asset-links{gap:10px}
+:where(.ds-stage--docs.ds-pv-asset-card) .open-links{gap:10px;font-size:9px}
+:where(.ds-stage--docs.ds-pv-asset-card) footer{display:block}
+}
+@media(max-width:450px){
+:where(.ds-stage--docs.ds-pv-asset-card) .grid{grid-template-columns:1fr}
+:where(.ds-stage--docs.ds-pv-asset-card) nav{gap:12px}
+}</style>
+<style>
+body{padding:0}
+.wrap{width:91%;max-width:1536px;margin:auto;padding:34px 0 60px}
+.crumb{font-size:11px;color:#7c93b3;margin-bottom:16px}
+.crumb a{color:#a5c3ec}
+.wrap h1{font-size:29px;font-weight:500;margin:0 0 8px}
+.wrap h1 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px;vertical-align:middle;margin-left:10px}
+.lede{color:#a9bfda;font-size:13px;line-height:1.8;max-width:860px;margin:0 0 6px}
+.siblings{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0 0}
+.siblings a{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.siblings a[aria-current="page"]{background:#315986;border-color:#77a8e6;color:#fff}
+</style>
+</head><body><div class="ds-page">
+<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEW</span></strong></a><nav class="ds-pagenav"><a href="../tokens.html">Tokens</a><a href="../motion.html">Motion</a><a href="../catalog.html">Assets</a><a href="../components.html">Components</a><a href="../studio.html">Studio</a><a href="../index.html">Home</a></nav></header>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">独立预览</a> / 容器</p>
+  <h1>Asset Card<code>asset-card</code></h1>
+  <p class="lede">资产总览页的卡片：预览图、ID、名称、版本徽标与三组外链。</p>
+  <div class="siblings"><a href="token-card.html">Token Card</a><a href="asset-card.html" aria-current="page">Asset Card</a><a href="motion-card.html">Motion Card</a><a href="small-card.html">Small Card</a><a href="component-list-item.html">Component List Item</a><a href="explore-layer-card.html">Layer Card</a></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--docs ds-pv-asset-card"><div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr))"><article><a class="preview" href="#"><img src="../previews/platform.application.png" alt="应用层平台的代码生成模型预览"><span>3D · 可旋转</span></a><div class="card-body"><span class="component-id">platform.application</span><h3>应用层平台<b>V5</b></h3><div class="open-links"><a href="#">Mock-3D 对齐 ↗</a><a href="#">独立 3D ↗</a></div><div class="asset-links"><a href="#">GLB 资产 ↓</a><a href="#">原生资产 ↓</a><a href="#">3D PNG ↓</a></div></div></article><article><a class="preview" href="#"><img src="../previews/actor.ai-agents.png" alt="AI 机器人的代码生成模型预览"><span>3D · 可旋转</span></a><div class="card-body"><span class="component-id">actor.ai-agents</span><h3>AI 机器人<b>V5</b></h3><div class="open-links"><a href="#">独立 3D ↗</a><a class="motion-link" href="#">Motion · robot.idle ↗</a></div><div class="asset-links"><a href="#">GLB 资产 ↓</a><a href="#">原生资产 ↓</a></div></div></article></div></div></div>
+  <p class="ds-stage-note">舞台：<b>文档页</b> · 在 74px 页面头部下的普通内容流里渲染，不需要页面上下文。</p>
+  <div class="ds-body">
+    <section class="ds-block"><h4>Description</h4><p>catalog.html 的主卡片。悬停时边框变亮并整体上移 2px，是系统里唯一使用位移反馈的卡片。卡片底部用一条分隔线把“打开方式”和“下载”分成两块。</p></section>
+    <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>With motion</td><td>资产有 Motion Behavior 时额外给出跳转链接</td><td><code>.open-links .motion-link</code></td></tr><tr><td>Plain</td><td>无 Motion 的静态资产</td><td><code>.open-links</code></td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>border-radius</code></td><td>length</td><td><code>9px</code></td><td>等于 --wb-radius-card，但此处写死。</td></tr><tr><td><code>background</code></td><td>color</td><td><code>#182434</code></td><td>等于 --wb-color-panel，但此处写死。</td></tr><tr><td><code>transition</code></td><td>time</td><td><code>border-color .15s, transform .15s</code></td><td>悬停抬升 2px。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>1px #31445f 边（= --wb-color-border）</td><td>—</td></tr><tr><td>Hover</td><td>border-color #7197ca，transform translateY(-2px)</td><td>0.15s 过渡</td></tr><tr><td>Filtered out</td><td>[hidden] 移除；整节若无匹配则整节隐藏</td><td>搜索过滤</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
+      <div><b>ROLE</b><p>article；预览图是可点的 &lt;a&gt;</p></div>
+      <div><b>KEYBOARD</b><p>每张卡内约 7 个链接依次 Tab 可达；卡片本身不可聚焦</p></div>
+      <div><b>SCREEN READER</b><p>预览图有中文 alt；ID 与名称分两处朗读</p></div>
+    </div></section>
+    <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
+      <div class="do"><h5>✅ Do</h5><ul><li>预览图必须带描述性 alt</li><li>下载链接统一放在底部分隔线以下</li></ul></div>
+      <div class="dont"><h5>❌ Don't</h5><ul><li>不要让整卡可点同时又保留内部 7 个链接（点击区会互相抢夺）</li></ul></div>
+    </div></section>
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;article data-search=&quot;app.chat AI Chat&quot;&gt;
+  &lt;a class=&quot;preview&quot; href=&quot;studio.html?component=app.chat&amp;amp;view=asset&quot;&gt;
+    &lt;img src=&quot;previews/app.chat.png&quot; alt=&quot;AI Chat的代码生成模型预览&quot; loading=&quot;lazy&quot;&gt;
+    &lt;span&gt;3D · 可旋转&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;div class=&quot;card-body&quot;&gt;
+    &lt;span class=&quot;component-id&quot;&gt;app.chat&lt;/span&gt;
+    &lt;h3&gt;AI Chat&lt;b&gt;V5&lt;/b&gt;&lt;/h3&gt;
+    &lt;div class=&quot;open-links&quot;&gt;&lt;a href=&quot;…&quot;&gt;独立 3D ↗&lt;/a&gt;&lt;/div&gt;
+    &lt;div class=&quot;asset-links&quot;&gt;&lt;a href=&quot;assets/app.chat.glb&quot; download&gt;GLB 资产 ↓&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</pre></section>
+    <section class="ds-block"><h4>Source</h4><table><thead><tr><th>来源</th><th>选择器</th></tr></thead><tbody><tr><td><code>source/build-catalog.mjs</code></td><td><code>.grid</code> <code>article</code> <code>article:hover</code> <code>.preview img</code> <code>.preview&gt;span</code> <code>.card-body</code> <code>.component-id</code> <code>h3</code> <code>h3 b</code> <code>.open-links</code> <code>.open-links a:hover</code> <code>.asset-links</code> <code>.asset-links a:hover</code></td></tr></tbody></table></section>
+  </div>
+  <footer><span>本页只加载该组件的样式，来源与出货页面一致。</span><span><a href="../components.html">组件真源 ↗</a>　<a href="index.html">全部预览 ↗</a></span></footer>
+</div>
+</div>
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('.ds-frame--scene').forEach(function(frame){
+      var w = frame.clientWidth;
+      if (w) frame.style.setProperty('--k', (w / 1536).toFixed(5));
+    });
+  }
+  fit();
+  addEventListener('resize', fit);
+  var search = document.querySelector('#search');
+  if (search) {
+    var items = [].slice.call(document.querySelectorAll('.ds-component'));
+    var active = '全部';
+    var filterButtons = [].slice.call(document.querySelectorAll('[data-group-filter]'));
+    var empty = document.querySelector('#empty');
+    function render(){
+      var q = search.value.trim().toLowerCase();
+      var visible = 0;
+      items.forEach(function(item){
+        var okGroup = active === '全部' || item.dataset.group === active;
+        var okSearch = !q || item.dataset.search.indexOf(q) !== -1;
+        item.hidden = !(okGroup && okSearch);
+        if (!item.hidden) visible++;
+      });
+      document.querySelectorAll('.ds-group').forEach(function(section){
+        section.hidden = [].slice.call(section.querySelectorAll('.ds-component')).every(function(i){ return i.hidden; });
+      });
+      if (empty) empty.style.display = visible ? 'none' : 'block';
+      fit();
+    }
+    search.addEventListener('input', render);
+    filterButtons.forEach(function(button){
+      button.addEventListener('click', function(){
+        active = button.dataset.groupFilter;
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        render();
+      });
+    });
+    document.querySelectorAll('.copy').forEach(function(button){
+      button.addEventListener('click', function(){
+        navigator.clipboard.writeText(button.dataset.copy).then(function(){ button.textContent = '已复制'; }, function(){ button.textContent = '手动复制'; });
+        setTimeout(function(){ button.textContent = '复制'; }, 1200);
+      });
+    });
+  }
+})();
+</script>
+</body></html>

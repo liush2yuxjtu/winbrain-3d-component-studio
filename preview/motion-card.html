@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motion Card — WinBrain Component Preview</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Preview chrome. This is the documentation page's own layout, not component design,
+   so it lives here rather than in a shipping stylesheet. */
+.ds-frame{position:relative;border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:#0b1119;overflow:hidden;margin-top:18px}
+.ds-frame--scene{aspect-ratio:1536/1024;padding:0;background:#070c12}
+.ds-frame--scene .ds-stage{position:absolute;inset:0}
+.ds-frame--scene .scene{transform:scale(var(--k,.33));transform-origin:top left}
+.ds-stage{padding:26px;min-height:96px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+/* Type and colour are deliberately absent here: the extracted shipping rules set them,
+   and a value written here would outrank the real one and hide a drift. */
+.ds-stage--studio{display:block;padding:22px}
+.ds-stage--docs{display:block}
+.ds-stage--home{display:block;padding:0;min-height:0}
+.ds-stage-note{margin:9px 0 0;font-size:11px;color:#7c93b3}
+.ds-stage-note b{color:#a9c9f2;font-weight:500}
+
+*{box-sizing:border-box}html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header strong{font-size:21px;letter-spacing:-.4px}
+.ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
+.ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
+.ds-page>main{width:91%;max-width:1536px;margin:auto}
+.ds-page .hero{padding:64px 0 42px;border-bottom:1px solid #2e3b4c;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+.ds-page .eyebrow{font-size:10px;color:#90b3e4;letter-spacing:2px}
+.ds-page .hero h1{font-size:38px;letter-spacing:-1px;font-weight:500;margin:17px 0 12px}
+.ds-page .hero p{color:var(--wb-color-text-muted);line-height:1.8;font-size:13px;margin:0;max-width:760px}
+.ds-page .hero code{background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:1px 5px;font-size:12px;color:#bcd8fa}
+.ds-page .count{font-size:68px;font-weight:300;letter-spacing:-4px;color:#a9c9fa}
+.ds-page .count small{display:block;font-size:10px;letter-spacing:1.5px;color:#728caa;text-align:right}
+.ds-page .map{margin:26px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:1000px}
+.ds-page .map div{border:1px solid #39506f;background:#162232;border-radius:var(--wb-radius-card);padding:13px 14px;font-size:11px;color:#c9dcf5}
+.ds-page .map b{display:block;font-size:12px;color:#ddebff;margin-bottom:5px}
+.ds-page .map span{color:#7e97b8;font-size:10px}
+.ds-page .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:26px 0 4px}
+.ds-page .stat{border:1px solid var(--wb-color-border);background:var(--wb-color-panel);border-radius:var(--wb-radius-card);padding:16px 17px}
+.ds-page .stat b{display:block;font-size:31px;font-weight:300;color:#cfe2ff;letter-spacing:-1px}
+.ds-page .stat span{display:block;font-size:11px;color:#8ba1bf;margin-top:5px;line-height:1.5}
+.ds-page .stat.warn b{color:#e8c98a}
+.ds-page .tools{padding:24px 0 14px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start;position:sticky;top:74px;background:var(--wb-color-canvas);z-index:10;border-bottom:1px solid #24303f}
+.ds-page .search{background:#162232;border:1px solid #3a4d67;color:#dbe9ff;padding:12px 14px;border-radius:6px;width:min(320px,100%);font:inherit}
+.ds-page .filters{display:flex;gap:7px;flex-wrap:wrap}
+.ds-page .filters button{border:1px solid #38506d;background:#162232;color:#91a9c9;border-radius:16px;padding:7px 11px;font-size:10px;cursor:pointer}
+.ds-page .filters button.active{background:#315986;color:white;border-color:#77a8e6}
+.ds-page .section-head{display:flex;justify-content:space-between;align-items:end;margin:44px 0 4px;padding-bottom:13px;border-bottom:1px solid #2e3b4c}
+.ds-page .section-head h2{font-size:19px;font-weight:500;margin:0}
+.ds-page .section-head span{font-size:11px;color:#7c93b3;max-width:52%}
+.ds-component{border-top:1px solid #24303f;padding:36px 0 40px;scroll-margin-top:150px}
+.ds-component:first-of-type{border-top:0}
+.ds-head{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.ds-kind{font-size:9px;letter-spacing:1.4px;color:#7fa6d9}
+.ds-head h3{font-size:23px;font-weight:500;margin:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ds-head h3 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px}
+.ds-summary{margin:2px 0 0;color:#a9bfda;line-height:1.75;font-size:13px;max-width:900px}
+.ds-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.ds-meta span{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:4px 6px;color:#9dbde4}
+.ds-meta span.gap{border-color:#6b5330;color:#d6b075}
+.ds-body{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:26px}
+.ds-block h4{font-size:11px;letter-spacing:1.4px;color:#7fa6d9;font-weight:500;margin:0 0 11px;text-transform:uppercase}
+.ds-block p{margin:0;color:#a9bfda;line-height:1.8;font-size:13px}
+.ds-body table{width:100%;border-collapse:collapse;font-size:12px}
+.ds-body th,.ds-body td{text-align:left;padding:9px 11px;border-bottom:1px solid #26313f;vertical-align:top;line-height:1.6}
+.ds-body th{font-size:10px;letter-spacing:.8px;color:#7e97b8;font-weight:500;background:#131c28}
+.ds-body td code{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#bcd8fa;background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.ds-body td:first-child{color:#dcebfd}
+.ds-a11y{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ds-a11y div{border:1px solid #2d4058;background:#141f2d;border-radius:var(--wb-radius-card);padding:13px 14px}
+.ds-a11y b{display:block;font-size:9px;letter-spacing:1.2px;color:#6f8bb0;margin-bottom:7px}
+.ds-a11y p{margin:0;font-size:12px;color:#b8cce6;line-height:1.7}
+.guidance{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.guidance ul{margin:0;padding:0;list-style:none}
+.guidance li{font-size:12px;line-height:1.7;color:#b8cce6;padding:8px 0 8px 22px;position:relative;border-bottom:1px solid #222d3b}
+.guidance li:before{position:absolute;left:0;top:8px;font-size:12px}
+.guidance .do li:before{content:"✅"}
+.guidance .dont li:before{content:"❌"}
+.guidance h5{margin:0 0 4px;font-size:11px;color:#8fb4e4;font-weight:500}
+.ds-body pre{margin:0;background:#0d1521;border:1px solid #2d4058;border-radius:var(--wb-radius-card);padding:15px 17px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c3d9f5}
+.ds-page .findings{margin-top:34px;border-top:1px solid #2e3b4c;padding-top:26px}
+.ds-page .findings b{color:#e8c98a;font-weight:500}
+.ds-page .radius-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.ds-page .radius-list span{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.ds-page .radius-list span.orphan{border-color:#6b5330;color:#d6b075}
+.ds-page footer{margin-top:52px;border-top:1px solid #30415b;padding:25px 0 36px;color:#7089a8;font-size:11px;line-height:1.8;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.ds-page footer a{color:#a5c3ec}
+[hidden]{display:none!important}
+@media(max-width:1100px){.ds-page .strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-a11y{grid-template-columns:1fr}.ds-page .map{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.ds-page>header{height:auto;min-height:70px;padding:15px 22px;gap:12px}.ds-page>header strong span{display:none}.ds-pagenav{gap:12px}.ds-page .hero{grid-template-columns:1fr;padding:38px 0 28px}.ds-page .count{display:none}.guidance{grid-template-columns:1fr}.ds-page .tools{position:static;flex-direction:column}.ds-page footer{display:block}}
+</style>
+<style>/* motion-card · source/build-motion.mjs */
+:where(.ds-stage--docs.ds-pv-motion-card), :where(.ds-stage--docs.ds-pv-motion-card) *{box-sizing:border-box}
+:where(.ds-stage--docs.ds-pv-motion-card){color-scheme:dark;scroll-behavior:smooth}
+:where(.ds-stage--docs.ds-pv-motion-card){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-motion-card) a{color:inherit;text-decoration:none}
+:where(.ds-stage--docs.ds-pv-motion-card) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-motion-card) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-motion-card) header strong{font-size:21px}
+:where(.ds-stage--docs.ds-pv-motion-card) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
+:where(.ds-stage--docs.ds-pv-motion-card) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
+:where(.ds-stage--docs.ds-pv-motion-card) .behavior-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-card{display:grid;grid-template-columns:180px 1fr;border:1px solid #31445f;border-radius:10px;overflow:hidden;background:#182434}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview{min-height:250px;background:#0d1723;position:relative;overflow:hidden;border-right:1px solid #2d415d}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview i, :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview b{position:absolute;display:block}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.robot i{width:52px;height:72px;border-radius:22px;background:#b9d2ef;left:64px;top:85px;animation:bob 2.8s ease-in-out infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.robot b{width:104px;height:14px;border-radius:50%;background:#67ccff25;box-shadow:0 0 28px #67ccff66;left:38px;top:172px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet:before{content:"";position:absolute;width:140px;height:80px;border:1px solid #5b769c;border-radius:50%;left:20px;top:83px;transform:rotate(-12deg)}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet i{width:11px;height:11px;border-radius:50%;background:#baf3ff;box-shadow:0 0 18px #67ccff;left:30px;top:130px;animation:packet 2.6s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:before, :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:after{content:"";position:absolute;bottom:48px;width:1px;height:150px;background:linear-gradient(#67ccff00,#67ccff88,#67ccff00)}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:before{left:65px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:after{left:115px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise i{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px #67ccff;left:61px;top:168px;animation:rise 2.3s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise b{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px #67ccff;left:111px;top:145px;animation:rise 2.3s linear infinite .65s}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit:before{content:"";position:absolute;width:110px;height:110px;border:1px solid #4f6e96;border-radius:50%;left:34px;top:68px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit b{width:42px;height:42px;border-radius:50%;background:#365a95;box-shadow:0 0 30px #67ccff55;left:68px;top:102px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit i{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px #67ccff;left:83px;top:61px;transform-origin:6px 62px;animation:orbit 5s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-copy{padding:20px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-copy h2{font:500 16px ui-monospace,SFMono-Regular,Menlo,monospace;margin:8px 0 10px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-copy p{color:#91a7c4;line-height:1.6;margin:0 0 14px;font-size:12px}
+:where(.ds-stage--docs.ds-pv-motion-card) dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+:where(.ds-stage--docs.ds-pv-motion-card) dl div{background:#121d2b;border-radius:6px;padding:9px}
+:where(.ds-stage--docs.ds-pv-motion-card) dt{font-size:8px;color:#607b9d;letter-spacing:1px}
+:where(.ds-stage--docs.ds-pv-motion-card) dd{margin:4px 0 0;color:#c7daf3;font:10px ui-monospace,monospace}
+:where(.ds-stage--docs.ds-pv-motion-card) .token-links{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid #2d4058;margin-top:12px;padding-top:10px}
+:where(.ds-stage--docs.ds-pv-motion-card) .token-links strong{width:100%;font-size:8px;letter-spacing:1px;color:#5f7896}
+:where(.ds-stage--docs.ds-pv-motion-card) .token-links a, :where(.ds-stage--docs.ds-pv-motion-card) .usage a, :where(.ds-stage--docs.ds-pv-motion-card) .mini-links a{font:9px ui-monospace,monospace;color:#acd0ff;border:1px solid #395574;border-radius:4px;padding:4px 5px}
+:where(.ds-stage--docs.ds-pv-motion-card) .tracks a{border:1px solid #45658d;border-radius:6px;padding:9px;font:10px ui-monospace,monospace;color:#bdd8fb}
+:where(.ds-stage--docs.ds-pv-motion-card) footer{margin-top:50px;padding:25px 0 35px;border-top:1px solid #30415b;color:#7089a8;font-size:11px;display:flex;justify-content:space-between;gap:20px}
+:where(.ds-stage--docs.ds-pv-motion-card) footer a{color:#a5c3ec}
+@keyframes bob{0%,100%{transform:translateY(-5px)}50%{transform:translateY(5px)}}
+@keyframes packet{0%{transform:translate(0,20px)}25%{transform:translate(38px,-25px)}50%{transform:translate(78px,-35px)}75%{transform:translate(120px,-8px)}100%{transform:translate(138px,21px)}}
+@keyframes rise{from{transform:translateY(0);opacity:0}15%{opacity:1}85%{opacity:1}to{transform:translateY(-140px);opacity:0}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){
+:where(.ds-stage--docs.ds-pv-motion-card), :where(.ds-stage--docs.ds-pv-motion-card) *{animation:none!important;scroll-behavior:auto!important}
+}
+@media(max-width:1100px){
+:where(.ds-stage--docs.ds-pv-motion-card) .behavior-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+:where(.ds-stage--docs.ds-pv-motion-card) header{height:auto;min-height:70px;padding:15px 22px;gap:12px}
+:where(.ds-stage--docs.ds-pv-motion-card) header strong span{display:none}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-card{grid-template-columns:125px 1fr}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview{min-height:230px}
+:where(.ds-stage--docs.ds-pv-motion-card) footer{display:block}
+}
+@media(max-width:500px){
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-card{grid-template-columns:1fr}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview{min-height:145px;border-right:0;border-bottom:1px solid #2d415d}
+}</style>
+<style>
+body{padding:0}
+.wrap{width:91%;max-width:1536px;margin:auto;padding:34px 0 60px}
+.crumb{font-size:11px;color:#7c93b3;margin-bottom:16px}
+.crumb a{color:#a5c3ec}
+.wrap h1{font-size:29px;font-weight:500;margin:0 0 8px}
+.wrap h1 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px;vertical-align:middle;margin-left:10px}
+.lede{color:#a9bfda;font-size:13px;line-height:1.8;max-width:860px;margin:0 0 6px}
+.siblings{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0 0}
+.siblings a{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.siblings a[aria-current="page"]{background:#315986;border-color:#77a8e6;color:#fff}
+</style>
+</head><body><div class="ds-page">
+<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEW</span></strong></a><nav class="ds-pagenav"><a href="../tokens.html">Tokens</a><a href="../motion.html">Motion</a><a href="../catalog.html">Assets</a><a href="../components.html">Components</a><a href="../studio.html">Studio</a><a href="../index.html">Home</a></nav></header>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">独立预览</a> / 容器</p>
+  <h1>Motion Card<code>motion-card</code></h1>
+  <p class="lede">Motion 库的行为卡：左侧动画预览，右侧 Primitive / Trigger / Token 关系。</p>
+  <div class="siblings"><a href="token-card.html">Token Card</a><a href="asset-card.html">Asset Card</a><a href="motion-card.html" aria-current="page">Motion Card</a><a href="small-card.html">Small Card</a><a href="component-list-item.html">Component List Item</a><a href="explore-layer-card.html">Layer Card</a></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--docs ds-pv-motion-card"><div class="behavior-grid" style="grid-template-columns:1fr"><article class="motion-card"><div class="motion-preview orbit" aria-hidden="true"><i></i><b></b></div><div class="motion-copy"><div class="eyebrow">Camera / BEHAVIOR</div><h2>camera.auto-orbit</h2><p>用户开启自动旋转后，相机围绕组织世界缓慢旋转。</p><dl><div><dt>Primitive</dt><dd>orbitYaw</dd></div><div><dt>Trigger</dt><dd>ui.auto-rotate</dd></div></dl><div class="token-links"><strong>TOKENS</strong><a href="#">motion.speed.camera-orbit</a></div><div class="usage"><strong>USED BY</strong><a href="#">home.reference-view ↗</a></div></div></article><article class="motion-card"><div class="motion-preview packet" aria-hidden="true"><i></i></div><div class="motion-copy"><div class="eyebrow">Data Flow / BEHAVIOR</div><h2>connection.packet-flow</h2><p>协作层光点沿项目、专家、AI Agent 与员工之间的曲线循环移动。</p><dl><div><dt>Primitive</dt><dd>followPath</dd></div><div><dt>Trigger</dt><dd>ambient.loop</dd></div></dl><div class="token-links"><strong>TOKENS</strong><a href="#">motion.speed.packet-progress</a></div><div class="usage"><strong>USED BY</strong><a href="#">structure.connections ↗</a></div></div></article></div></div></div>
+  <p class="ds-stage-note">舞台：<b>文档页</b> · 在 74px 页面头部下的普通内容流里渲染，不需要页面上下文。</p>
+  <div class="ds-body">
+    <section class="ds-block"><h4>Description</h4><p>用纯 CSS 动画复现行为本身的预览（浮动、沿路径、上升、环绕），左侧 180px 是动画舞台，右侧是结构化关系。这样做的好处是预览不依赖 three.js，文档页可以离线打开。</p></section>
+    <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>robot</td><td>actor.ai-agents 的上下浮动</td><td><code>.motion-preview.robot</code></td></tr><tr><td>packet</td><td>structure.connections 的沿路径光点</td><td><code>.motion-preview.packet</code></td></tr><tr><td>rise</td><td>world.atmosphere 的上升数据点</td><td><code>.motion-preview.rise</code></td></tr><tr><td>orbit</td><td>camera.auto-orbit 的环绕</td><td><code>.motion-preview.orbit</code></td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>grid-template-columns</code></td><td>track-list</td><td><code>180px 1fr</code></td><td>500px 以下改为单列，预览缩到 145px 高。</td></tr><tr><td><code>min-height (preview)</code></td><td>length</td><td><code>250px</code></td><td>保证四种预览高度一致。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>10px</code></td><td>10px 不在任何圆角 Token 里，是孤值。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Running</td><td>四个 @keyframes：bob / packet / rise / orbit</td><td>无限循环</td></tr><tr><td>Reduced motion</td><td>@media (prefers-reduced-motion:reduce) 下 animation:none</td><td>动画全部停止</td></tr><tr><td>Filtered out</td><td>[hidden] 移除</td><td>搜索过滤</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
+      <div><b>ROLE</b><p>article；预览区带 aria-hidden=&quot;true&quot;</p></div>
+      <div><b>KEYBOARD</b><p>卡片内的 Token 与资产链接 Tab 可达</p></div>
+      <div><b>SCREEN READER</b><p>预览被显式排除，只朗读 id、描述、Primitive、Trigger 与关系</p></div>
+    </div></section>
+    <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
+      <div class="do"><h5>✅ Do</h5><ul><li>预览区必须 aria-hidden，避免装饰性动画进入读屏</li><li>必须实现 prefers-reduced-motion 降级</li></ul></div>
+      <div class="dont"><h5>❌ Don't</h5><ul><li>不要让预览依赖在线资源或 three.js</li><li>不要给预览加声音或自动播放</li></ul></div>
+    </div></section>
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;article class=&quot;motion-card&quot;&gt;
+  &lt;div class=&quot;motion-preview orbit&quot; aria-hidden=&quot;true&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;b&gt;&lt;/b&gt;&lt;/div&gt;
+  &lt;div class=&quot;motion-copy&quot;&gt;
+    &lt;div class=&quot;eyebrow&quot;&gt;Camera / BEHAVIOR&lt;/div&gt;
+    &lt;h2&gt;camera.auto-orbit&lt;/h2&gt;
+    &lt;p&gt;用户开启自动旋转后，相机围绕组织世界缓慢旋转。&lt;/p&gt;
+    &lt;dl&gt;&lt;div&gt;&lt;dt&gt;Primitive&lt;/dt&gt;&lt;dd&gt;orbitYaw&lt;/dd&gt;&lt;/div&gt;&lt;div&gt;&lt;dt&gt;Trigger&lt;/dt&gt;&lt;dd&gt;ui.auto-rotate&lt;/dd&gt;&lt;/div&gt;&lt;/dl&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</pre></section>
+    <section class="ds-block"><h4>Source</h4><table><thead><tr><th>来源</th><th>选择器</th></tr></thead><tbody><tr><td><code>source/build-motion.mjs</code></td><td><code>.behavior-grid</code> <code>.motion-card</code> <code>.motion-preview</code> <code>.motion-preview.robot i</code> <code>.motion-preview.robot b</code> <code>.motion-preview.packet:before</code> <code>.motion-preview.packet i</code> <code>.motion-preview.rise:before</code> <code>.motion-preview.rise:after</code> <code>.motion-preview.rise i</code> <code>.motion-preview.rise b</code> <code>.motion-preview.orbit:before</code> <code>.motion-preview.orbit b</code> <code>.motion-preview.orbit i</code> <code>.motion-copy</code> <code>.motion-copy h2</code> <code>.motion-copy p</code> <code>dl</code> <code>dl div</code> <code>dt</code> <code>dd</code> <code>.token-links</code> <code>.token-links strong</code> <code>.token-links a</code> <code>.usage a</code> <code>footer</code> <code>footer a</code></td></tr></tbody></table></section>
+  </div>
+  <footer><span>本页只加载该组件的样式，来源与出货页面一致。</span><span><a href="../components.html">组件真源 ↗</a>　<a href="index.html">全部预览 ↗</a></span></footer>
+</div>
+</div>
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('.ds-frame--scene').forEach(function(frame){
+      var w = frame.clientWidth;
+      if (w) frame.style.setProperty('--k', (w / 1536).toFixed(5));
+    });
+  }
+  fit();
+  addEventListener('resize', fit);
+  var search = document.querySelector('#search');
+  if (search) {
+    var items = [].slice.call(document.querySelectorAll('.ds-component'));
+    var active = '全部';
+    var filterButtons = [].slice.call(document.querySelectorAll('[data-group-filter]'));
+    var empty = document.querySelector('#empty');
+    function render(){
+      var q = search.value.trim().toLowerCase();
+      var visible = 0;
+      items.forEach(function(item){
+        var okGroup = active === '全部' || item.dataset.group === active;
+        var okSearch = !q || item.dataset.search.indexOf(q) !== -1;
+        item.hidden = !(okGroup && okSearch);
+        if (!item.hidden) visible++;
+      });
+      document.querySelectorAll('.ds-group').forEach(function(section){
+        section.hidden = [].slice.call(section.querySelectorAll('.ds-component')).every(function(i){ return i.hidden; });
+      });
+      if (empty) empty.style.display = visible ? 'none' : 'block';
+      fit();
+    }
+    search.addEventListener('input', render);
+    filterButtons.forEach(function(button){
+      button.addEventListener('click', function(){
+        active = button.dataset.groupFilter;
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        render();
+      });
+    });
+    document.querySelectorAll('.copy').forEach(function(button){
+      button.addEventListener('click', function(){
+        navigator.clipboard.writeText(button.dataset.copy).then(function(){ button.textContent = '已复制'; }, function(){ button.textContent = '手动复制'; });
+        setTimeout(function(){ button.textContent = '复制'; }, 1200);
+      });
+    });
+  }
+})();
+</script>
+</body></html>

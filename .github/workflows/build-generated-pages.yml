@@ -35,13 +35,13 @@ jobs:
         working-directory: source
         run: npm ci
 
-      - name: Build homepage, studio, catalog, tokens and motion
+      - name: Build homepage, studio, catalog, tokens, motion and design system
         working-directory: source
         run: npm run build
 
       - name: Commit generated artifacts
         run: |
-          GENERATED=(index.html studio.html catalog.html tokens.html tokens.css motion.html motion-manifest.json)
+          GENERATED=(index.html studio.html catalog.html tokens.html tokens.css motion.html motion-manifest.json components.html manifest.json preview)
           if [ -z "$(git status --porcelain -- "${GENERATED[@]}")" ]; then
             echo "Generated artifacts are already current."
             exit 0

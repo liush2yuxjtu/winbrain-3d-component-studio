@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nudge Pad — WinBrain Component Preview</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Preview chrome. This is the documentation page's own layout, not component design,
+   so it lives here rather than in a shipping stylesheet. */
+.ds-frame{position:relative;border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:#0b1119;overflow:hidden;margin-top:18px}
+.ds-frame--scene{aspect-ratio:1536/1024;padding:0;background:#070c12}
+.ds-frame--scene .ds-stage{position:absolute;inset:0}
+.ds-frame--scene .scene{transform:scale(var(--k,.33));transform-origin:top left}
+.ds-stage{padding:26px;min-height:96px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+/* Type and colour are deliberately absent here: the extracted shipping rules set them,
+   and a value written here would outrank the real one and hide a drift. */
+.ds-stage--studio{display:block;padding:22px}
+.ds-stage--docs{display:block}
+.ds-stage--home{display:block;padding:0;min-height:0}
+.ds-stage-note{margin:9px 0 0;font-size:11px;color:#7c93b3}
+.ds-stage-note b{color:#a9c9f2;font-weight:500}
+
+*{box-sizing:border-box}html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header strong{font-size:21px;letter-spacing:-.4px}
+.ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
+.ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
+.ds-page>main{width:91%;max-width:1536px;margin:auto}
+.ds-page .hero{padding:64px 0 42px;border-bottom:1px solid #2e3b4c;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+.ds-page .eyebrow{font-size:10px;color:#90b3e4;letter-spacing:2px}
+.ds-page .hero h1{font-size:38px;letter-spacing:-1px;font-weight:500;margin:17px 0 12px}
+.ds-page .hero p{color:var(--wb-color-text-muted);line-height:1.8;font-size:13px;margin:0;max-width:760px}
+.ds-page .hero code{background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:1px 5px;font-size:12px;color:#bcd8fa}
+.ds-page .count{font-size:68px;font-weight:300;letter-spacing:-4px;color:#a9c9fa}
+.ds-page .count small{display:block;font-size:10px;letter-spacing:1.5px;color:#728caa;text-align:right}
+.ds-page .map{margin:26px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:1000px}
+.ds-page .map div{border:1px solid #39506f;background:#162232;border-radius:var(--wb-radius-card);padding:13px 14px;font-size:11px;color:#c9dcf5}
+.ds-page .map b{display:block;font-size:12px;color:#ddebff;margin-bottom:5px}
+.ds-page .map span{color:#7e97b8;font-size:10px}
+.ds-page .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:26px 0 4px}
+.ds-page .stat{border:1px solid var(--wb-color-border);background:var(--wb-color-panel);border-radius:var(--wb-radius-card);padding:16px 17px}
+.ds-page .stat b{display:block;font-size:31px;font-weight:300;color:#cfe2ff;letter-spacing:-1px}
+.ds-page .stat span{display:block;font-size:11px;color:#8ba1bf;margin-top:5px;line-height:1.5}
+.ds-page .stat.warn b{color:#e8c98a}
+.ds-page .tools{padding:24px 0 14px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start;position:sticky;top:74px;background:var(--wb-color-canvas);z-index:10;border-bottom:1px solid #24303f}
+.ds-page .search{background:#162232;border:1px solid #3a4d67;color:#dbe9ff;padding:12px 14px;border-radius:6px;width:min(320px,100%);font:inherit}
+.ds-page .filters{display:flex;gap:7px;flex-wrap:wrap}
+.ds-page .filters button{border:1px solid #38506d;background:#162232;color:#91a9c9;border-radius:16px;padding:7px 11px;font-size:10px;cursor:pointer}
+.ds-page .filters button.active{background:#315986;color:white;border-color:#77a8e6}
+.ds-page .section-head{display:flex;justify-content:space-between;align-items:end;margin:44px 0 4px;padding-bottom:13px;border-bottom:1px solid #2e3b4c}
+.ds-page .section-head h2{font-size:19px;font-weight:500;margin:0}
+.ds-page .section-head span{font-size:11px;color:#7c93b3;max-width:52%}
+.ds-component{border-top:1px solid #24303f;padding:36px 0 40px;scroll-margin-top:150px}
+.ds-component:first-of-type{border-top:0}
+.ds-head{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.ds-kind{font-size:9px;letter-spacing:1.4px;color:#7fa6d9}
+.ds-head h3{font-size:23px;font-weight:500;margin:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ds-head h3 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px}
+.ds-summary{margin:2px 0 0;color:#a9bfda;line-height:1.75;font-size:13px;max-width:900px}
+.ds-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.ds-meta span{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:4px 6px;color:#9dbde4}
+.ds-meta span.gap{border-color:#6b5330;color:#d6b075}
+.ds-body{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:26px}
+.ds-block h4{font-size:11px;letter-spacing:1.4px;color:#7fa6d9;font-weight:500;margin:0 0 11px;text-transform:uppercase}
+.ds-block p{margin:0;color:#a9bfda;line-height:1.8;font-size:13px}
+.ds-body table{width:100%;border-collapse:collapse;font-size:12px}
+.ds-body th,.ds-body td{text-align:left;padding:9px 11px;border-bottom:1px solid #26313f;vertical-align:top;line-height:1.6}
+.ds-body th{font-size:10px;letter-spacing:.8px;color:#7e97b8;font-weight:500;background:#131c28}
+.ds-body td code{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#bcd8fa;background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.ds-body td:first-child{color:#dcebfd}
+.ds-a11y{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ds-a11y div{border:1px solid #2d4058;background:#141f2d;border-radius:var(--wb-radius-card);padding:13px 14px}
+.ds-a11y b{display:block;font-size:9px;letter-spacing:1.2px;color:#6f8bb0;margin-bottom:7px}
+.ds-a11y p{margin:0;font-size:12px;color:#b8cce6;line-height:1.7}
+.guidance{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.guidance ul{margin:0;padding:0;list-style:none}
+.guidance li{font-size:12px;line-height:1.7;color:#b8cce6;padding:8px 0 8px 22px;position:relative;border-bottom:1px solid #222d3b}
+.guidance li:before{position:absolute;left:0;top:8px;font-size:12px}
+.guidance .do li:before{content:"✅"}
+.guidance .dont li:before{content:"❌"}
+.guidance h5{margin:0 0 4px;font-size:11px;color:#8fb4e4;font-weight:500}
+.ds-body pre{margin:0;background:#0d1521;border:1px solid #2d4058;border-radius:var(--wb-radius-card);padding:15px 17px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c3d9f5}
+.ds-page .findings{margin-top:34px;border-top:1px solid #2e3b4c;padding-top:26px}
+.ds-page .findings b{color:#e8c98a;font-weight:500}
+.ds-page .radius-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.ds-page .radius-list span{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.ds-page .radius-list span.orphan{border-color:#6b5330;color:#d6b075}
+.ds-page footer{margin-top:52px;border-top:1px solid #30415b;padding:25px 0 36px;color:#7089a8;font-size:11px;line-height:1.8;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.ds-page footer a{color:#a5c3ec}
+[hidden]{display:none!important}
+@media(max-width:1100px){.ds-page .strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-a11y{grid-template-columns:1fr}.ds-page .map{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.ds-page>header{height:auto;min-height:70px;padding:15px 22px;gap:12px}.ds-page>header strong span{display:none}.ds-pagenav{gap:12px}.ds-page .hero{grid-template-columns:1fr;padding:38px 0 28px}.ds-page .count{display:none}.guidance{grid-template-columns:1fr}.ds-page .tools{position:static;flex-direction:column}.ds-page footer{display:block}}
+</style>
+<style>/* nudge-pad · source/editor/studio.css */
+:where(.ds-stage--studio.ds-pv-nudge-pad){
+  --border: #28313f;
+  --dim: #8d9aab;
+  --surface: #141b25;
+  --accent: #9dbeff;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad), :where(.ds-stage--studio.ds-pv-nudge-pad){
+  height: 100%;
+  overflow: hidden;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad){
+  background: #10151d;
+  font-family: Roboto, "PingFang SC", Arial, sans-serif;
+  font-size: 12px;
+  color: #dce4f0;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button, :where(.ds-stage--studio.ds-pv-nudge-pad) a, :where(.ds-stage--studio.ds-pv-nudge-pad) input, :where(.ds-stage--studio.ds-pv-nudge-pad) select{
+  outline-offset: 2px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) input, :where(.ds-stage--studio.ds-pv-nudge-pad) select{
+  color: inherit;
+  font: inherit;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) input[type="number"], :where(.ds-stage--studio.ds-pv-nudge-pad) select, :where(.ds-stage--studio.ds-pv-nudge-pad) input[type="search"]{
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #323d4d;
+  background: #101720;
+  border-radius: 5px;
+  padding: 8px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) input[type="number"]:focus, :where(.ds-stage--studio.ds-pv-nudge-pad) input[type="search"]:focus{
+  border-color: #90b5f6;
+  outline: none;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) input[type="checkbox"], :where(.ds-stage--studio.ds-pv-nudge-pad) input[type="range"]{
+  accent-color: #9ebcff;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) input[type="checkbox"]{
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  vertical-align: middle;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) input[type="range"]{
+  height: 3px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) input[type="file"]{
+  display: none;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button{
+  transition: background 0.12s;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button:hover{
+  background: #2b394d;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button:disabled{
+  opacity: 0.45;
+  cursor: wait;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .panel-heading button{
+  font-size: 11px;
+  color: #92a3ba;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .library-search input{
+  padding-left: 32px;
+  font-size: 11px;
+  background: #0f1722;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .component-item[data-family="data"] .component-glyph{
+  color: #9cbec7;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .mode-switch button{
+  padding: 7px 12px;
+  border-radius: 4px;
+  color: #8fa0b6;
+  font-size: 11px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .mode-switch button.active{
+  background: #3a4a64;
+  color: #e6efff;
+  box-shadow: 0 1px 4px #0004;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .view-tools button{
+  font-size: 10px;
+  color: #a9bdd7;
+  padding: 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .view-tools select{
+  width: 76px;
+  font-size: 10px;
+  padding: 6px 4px;
+  border-color: #2a3749;
+  background: #17212e;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) #stage-area{
+  min-height: 100%;
+  min-width: 100%;
+  padding: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) body[data-view="asset"] #world canvas{
+  cursor: grab;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) body[data-view="mock"] #world canvas{
+  cursor: move;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) #home-overlay *{
+  pointer-events: none !important;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .comparison-toolbar button{
+  border: 1px solid #3c4c62;
+  border-radius: 4px;
+  padding: 5px 8px;
+  color: #b3c7e3;
+  font-size: 10px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .comparison-toolbar input[type="range"]{
+  width: 62px;
+  margin: 0 -7px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .selected-meta{
+  padding-top: 2px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .selected-meta #asset-type{
+  font-size: 9px;
+  letter-spacing: 1.15px;
+  color: #84a8d9;
+  margin-bottom: 11px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .selected-meta code{
+  font-size: 12px;
+  color: #c8d8ee;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .selected-meta p{
+  font-size: 9px;
+  color: #758ba7;
+  margin: 8px 0 15px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .two-fields input, :where(.ds-stage--studio.ds-pv-nudge-pad) .three-fields input{
+  display: block;
+  margin-top: 6px;
+  padding: 8px 7px;
+  font-size: 12px;
+  color: #d4e2f6;
+  font-variant-numeric: tabular-nums;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .nudge-pad{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 13px;
+  gap: 3px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .nudge-pad > div{
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .nudge-pad span{
+  font: 9px monospace;
+  color: #7d92ae;
+  width: 33px;
+  text-align: center;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .nudge-pad button{
+  border: 1px solid #38485e;
+  color: #b7cae5;
+  width: 30px;
+  height: 23px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 20px;
+  padding: 0;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .wide-field input{
+  display: block;
+  margin-top: 6px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .color-row input{
+  width: 26px;
+  height: 23px;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .color-row button{
+  font-size: 9px;
+  color: #a6b9d3;
+  padding: 5px 0;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .inspector-section select{
+  font-size: 10px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .full-button, :where(.ds-stage--studio.ds-pv-nudge-pad) .file-button{
+  display: block;
+  text-align: center;
+  width: 100%;
+  font-size: 10px;
+  border: 1px solid #3d506c;
+  border-radius: 5px;
+  padding: 9px;
+  margin-top: 8px;
+  cursor: pointer;
+  color: #b9cde8;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .file-button{
+  background: #253753;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .file-button:hover{
+  background: #30486b;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .text-button{
+  font-size: 9px;
+  color: #91a8c8;
+  margin: 9px auto 0;
+  display: block;
+  padding: 4px 6px;
+  border-radius: 3px;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .two-buttons button{
+  border: 1px solid #3b4b62;
+  border-radius: 5px;
+  padding: 9px 4px;
+  font-size: 10px;
+  color: #b0c5e1;
+  margin: 0;
+  background: #1e2a3b;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .two-buttons button:hover{
+  background: #2d405c;
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .studio-header button:focus-visible, :where(.ds-stage--studio.ds-pv-nudge-pad) button:focus-visible, :where(.ds-stage--studio.ds-pv-nudge-pad) a:focus-visible{
+  outline-offset: 2px;
+}
+@media (max-width: 1180px){
+:where(.ds-stage--studio.ds-pv-nudge-pad) .mode-switch button{
+    padding: 7px 6px;
+    font-size: 10px;
+  }
+:where(.ds-stage--studio.ds-pv-nudge-pad) .view-tools button{
+    font-size: 9px;
+  }
+:where(.ds-stage--studio.ds-pv-nudge-pad) .view-tools select{
+    width: 59px;
+  }
+}
+@media (max-width: 850px){
+:where(.ds-stage--studio.ds-pv-nudge-pad){
+    overflow-x: auto;
+  }
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) [hidden]{
+  display: none !important;
+}
+/* nudge-pad · source/shell.html */
+:where(.ds-stage--studio.ds-pv-nudge-pad), :where(.ds-stage--studio.ds-pv-nudge-pad) *{box-sizing:border-box}
+:where(.ds-stage--studio.ds-pv-nudge-pad){background:#0a0f16;color-scheme:dark}
+:where(.ds-stage--studio.ds-pv-nudge-pad){margin:0;color:#f4f5f8;font-family:Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button, :where(.ds-stage--studio.ds-pv-nudge-pad) a{-webkit-tap-highlight-color:transparent}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button{font:inherit;color:inherit;cursor:pointer}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button:focus-visible, :where(.ds-stage--studio.ds-pv-nudge-pad) a:focus-visible{outline:2px solid #a6d6ff;outline-offset:6px}
+:where(.ds-stage--studio.ds-pv-nudge-pad) button{border:0;background:none}
+:where(.ds-stage--studio.ds-pv-nudge-pad) a{color:inherit;text-decoration:none}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .nav button{height:40px;display:flex;align-items:center;gap:10px;font-size:14px;padding:0 10px;white-space:nowrap}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .dialog-list button{border:1px solid #59779866;border-radius:10px;padding:16px;text-align:left;background:#bed8ff08}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .dialog-list button:hover{background:#a2c9ff20}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .search-input{width:100%;padding:14px;background:#07101e;border:1px solid #7188a7;border-radius:9px;color:#fff;font:inherit;margin-top:12px}
+@media(prefers-reduced-motion:reduce){
+:where(.ds-stage--studio.ds-pv-nudge-pad), :where(.ds-stage--studio.ds-pv-nudge-pad) *{transition:none!important}
+}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .hero button{pointer-events:auto}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
+:where(.ds-stage--studio.ds-pv-nudge-pad) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-nudge-pad) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}</style>
+<style>
+body{padding:0}
+.wrap{width:91%;max-width:1536px;margin:auto;padding:34px 0 60px}
+.crumb{font-size:11px;color:#7c93b3;margin-bottom:16px}
+.crumb a{color:#a5c3ec}
+.wrap h1{font-size:29px;font-weight:500;margin:0 0 8px}
+.wrap h1 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px;vertical-align:middle;margin-left:10px}
+.lede{color:#a9bfda;font-size:13px;line-height:1.8;max-width:860px;margin:0 0 6px}
+.siblings{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0 0}
+.siblings a{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.siblings a[aria-current="page"]{background:#315986;border-color:#77a8e6;color:#fff}
+</style>
+</head><body><div class="ds-page">
+<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEW</span></strong></a><nav class="ds-pagenav"><a href="../tokens.html">Tokens</a><a href="../motion.html">Motion</a><a href="../catalog.html">Assets</a><a href="../components.html">Components</a><a href="../studio.html">Studio</a><a href="../index.html">Home</a></nav></header>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">独立预览</a> / 表单</p>
+  <h1>Nudge Pad<code>nudge-pad</code></h1>
+  <p class="lede">方向键步进键盘，1 / 10 / 0.1 像素三档。</p>
+  <div class="siblings"><a href="search-field.html">Search Field</a><a href="number-field.html">Number Field</a><a href="checkbox.html">Checkbox</a><a href="color-field.html">Color Field</a><a href="nudge-pad.html" aria-current="page">Nudge Pad</a></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-nudge-pad"><div class="nudge-pad"><div><button>↑</button></div><div><button>←</button><span>1 px</span><button>→</button></div><div><button>↓</button></div></div></div></div>
+  <p class="ds-stage-note">舞台：<b>编辑器</b> · 在 body[data-mode=&quot;studio&quot;] 的字体与底色上下文中渲染。</p>
+  <div class="ds-body">
+    <section class="ds-block"><h4>Description</h4><p>十字排列的微调控件：上下左右四个方向键，中间显示当前步长。步长由键盘修饰键决定（默认 1px，Shift 10px，Alt 0.1px），界面上的按钮与快捷键是同一条规则的两种入口。</p></section>
+    <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>Default</td><td>Mock-3D 对齐模式下的位置微调</td><td><code>.nudge-pad</code></td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>gap</code></td><td>length</td><td><code>3px</code></td><td>两级 gap（行内 3px、行间 3px）。</td></tr><tr><td><code>button size</code></td><td>length</td><td><code>30px × 23px</code></td><td>比高度更宽，因为箭头字形偏窄。</td></tr><tr><td><code>step display</code></td><td>length</td><td><code>33px 宽，9px monospace</code></td><td>固定宽度避免步长数字变化时整行位移。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>1px #38485e 边，圆角 4px，文字 #b7cae5</td><td>每次点击移动一个步长</td></tr><tr><td>Hover</td><td>继承全局 button:hover 的 #2b394d</td><td>需长按重复，无连发实现</td></tr><tr><td>Step readout</td><td>中间 9px monospace，如 “1 px”</td><td>随修饰键改变</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
+      <div><b>ROLE</b><p>四个 button + 一个只读读数</p></div>
+      <div><b>KEYBOARD</b><p>按钮 Tab 可达；画布本身支持方向键，这是冗余入口</p></div>
+      <div><b>SCREEN READER</b><p>按钮用箭头字符，未提供 aria-label，读屏会朗读字形名</p></div>
+    </div></section>
+    <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
+      <div class="do"><h5>✅ Do</h5><ul><li>读数区固定宽度</li><li>步长档位与键盘修饰键保持一致：1 / 10 / 0.1</li></ul></div>
+      <div class="dont"><h5>❌ Don't</h5><ul><li>不要给箭头按钮用图标字体（当前是文本箭头）</li><li>不要让读数随步长变化而改变行高</li></ul></div>
+    </div></section>
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;nudge-pad&quot;&gt;
+  &lt;div&gt;&lt;button data-nudge=&quot;up&quot;&gt;↑&lt;/button&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;button data-nudge=&quot;left&quot;&gt;←&lt;/button&gt;&lt;span&gt;1 px&lt;/span&gt;&lt;button data-nudge=&quot;right&quot;&gt;→&lt;/button&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;button data-nudge=&quot;down&quot;&gt;↓&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</pre></section>
+    <section class="ds-block"><h4>Source</h4><table><thead><tr><th>来源</th><th>选择器</th></tr></thead><tbody><tr><td><code>source/editor/studio.css</code></td><td><code>.nudge-pad</code> <code>.nudge-pad &gt; div</code> <code>.nudge-pad span</code> <code>.nudge-pad button</code></td></tr></tbody></table></section>
+  </div>
+  <footer><span>本页只加载该组件的样式，来源与出货页面一致。</span><span><a href="../components.html">组件真源 ↗</a>　<a href="index.html">全部预览 ↗</a></span></footer>
+</div>
+</div>
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('.ds-frame--scene').forEach(function(frame){
+      var w = frame.clientWidth;
+      if (w) frame.style.setProperty('--k', (w / 1536).toFixed(5));
+    });
+  }
+  fit();
+  addEventListener('resize', fit);
+  var search = document.querySelector('#search');
+  if (search) {
+    var items = [].slice.call(document.querySelectorAll('.ds-component'));
+    var active = '全部';
+    var filterButtons = [].slice.call(document.querySelectorAll('[data-group-filter]'));
+    var empty = document.querySelector('#empty');
+    function render(){
+      var q = search.value.trim().toLowerCase();
+      var visible = 0;
+      items.forEach(function(item){
+        var okGroup = active === '全部' || item.dataset.group === active;
+        var okSearch = !q || item.dataset.search.indexOf(q) !== -1;
+        item.hidden = !(okGroup && okSearch);
+        if (!item.hidden) visible++;
+      });
+      document.querySelectorAll('.ds-group').forEach(function(section){
+        section.hidden = [].slice.call(section.querySelectorAll('.ds-component')).every(function(i){ return i.hidden; });
+      });
+      if (empty) empty.style.display = visible ? 'none' : 'block';
+      fit();
+    }
+    search.addEventListener('input', render);
+    filterButtons.forEach(function(button){
+      button.addEventListener('click', function(){
+        active = button.dataset.groupFilter;
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        render();
+      });
+    });
+    document.querySelectorAll('.copy').forEach(function(button){
+      button.addEventListener('click', function(){
+        navigator.clipboard.writeText(button.dataset.copy).then(function(){ button.textContent = '已复制'; }, function(){ button.textContent = '手动复制'; });
+        setTimeout(function(){ button.textContent = '复制'; }, 1200);
+      });
+    });
+  }
+})();
+</script>
+</body></html>

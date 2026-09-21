@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Control Button — WinBrain Component Preview</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Preview chrome. This is the documentation page's own layout, not component design,
+   so it lives here rather than in a shipping stylesheet. */
+.ds-frame{position:relative;border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:#0b1119;overflow:hidden;margin-top:18px}
+.ds-frame--scene{aspect-ratio:1536/1024;padding:0;background:#070c12}
+.ds-frame--scene .ds-stage{position:absolute;inset:0}
+.ds-frame--scene .scene{transform:scale(var(--k,.33));transform-origin:top left}
+.ds-stage{padding:26px;min-height:96px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+/* Type and colour are deliberately absent here: the extracted shipping rules set them,
+   and a value written here would outrank the real one and hide a drift. */
+.ds-stage--studio{display:block;padding:22px}
+.ds-stage--docs{display:block}
+.ds-stage--home{display:block;padding:0;min-height:0}
+.ds-stage-note{margin:9px 0 0;font-size:11px;color:#7c93b3}
+.ds-stage-note b{color:#a9c9f2;font-weight:500}
+
+*{box-sizing:border-box}html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header strong{font-size:21px;letter-spacing:-.4px}
+.ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
+.ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
+.ds-page>main{width:91%;max-width:1536px;margin:auto}
+.ds-page .hero{padding:64px 0 42px;border-bottom:1px solid #2e3b4c;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+.ds-page .eyebrow{font-size:10px;color:#90b3e4;letter-spacing:2px}
+.ds-page .hero h1{font-size:38px;letter-spacing:-1px;font-weight:500;margin:17px 0 12px}
+.ds-page .hero p{color:var(--wb-color-text-muted);line-height:1.8;font-size:13px;margin:0;max-width:760px}
+.ds-page .hero code{background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:1px 5px;font-size:12px;color:#bcd8fa}
+.ds-page .count{font-size:68px;font-weight:300;letter-spacing:-4px;color:#a9c9fa}
+.ds-page .count small{display:block;font-size:10px;letter-spacing:1.5px;color:#728caa;text-align:right}
+.ds-page .map{margin:26px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:1000px}
+.ds-page .map div{border:1px solid #39506f;background:#162232;border-radius:var(--wb-radius-card);padding:13px 14px;font-size:11px;color:#c9dcf5}
+.ds-page .map b{display:block;font-size:12px;color:#ddebff;margin-bottom:5px}
+.ds-page .map span{color:#7e97b8;font-size:10px}
+.ds-page .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:26px 0 4px}
+.ds-page .stat{border:1px solid var(--wb-color-border);background:var(--wb-color-panel);border-radius:var(--wb-radius-card);padding:16px 17px}
+.ds-page .stat b{display:block;font-size:31px;font-weight:300;color:#cfe2ff;letter-spacing:-1px}
+.ds-page .stat span{display:block;font-size:11px;color:#8ba1bf;margin-top:5px;line-height:1.5}
+.ds-page .stat.warn b{color:#e8c98a}
+.ds-page .tools{padding:24px 0 14px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start;position:sticky;top:74px;background:var(--wb-color-canvas);z-index:10;border-bottom:1px solid #24303f}
+.ds-page .search{background:#162232;border:1px solid #3a4d67;color:#dbe9ff;padding:12px 14px;border-radius:6px;width:min(320px,100%);font:inherit}
+.ds-page .filters{display:flex;gap:7px;flex-wrap:wrap}
+.ds-page .filters button{border:1px solid #38506d;background:#162232;color:#91a9c9;border-radius:16px;padding:7px 11px;font-size:10px;cursor:pointer}
+.ds-page .filters button.active{background:#315986;color:white;border-color:#77a8e6}
+.ds-page .section-head{display:flex;justify-content:space-between;align-items:end;margin:44px 0 4px;padding-bottom:13px;border-bottom:1px solid #2e3b4c}
+.ds-page .section-head h2{font-size:19px;font-weight:500;margin:0}
+.ds-page .section-head span{font-size:11px;color:#7c93b3;max-width:52%}
+.ds-component{border-top:1px solid #24303f;padding:36px 0 40px;scroll-margin-top:150px}
+.ds-component:first-of-type{border-top:0}
+.ds-head{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.ds-kind{font-size:9px;letter-spacing:1.4px;color:#7fa6d9}
+.ds-head h3{font-size:23px;font-weight:500;margin:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ds-head h3 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px}
+.ds-summary{margin:2px 0 0;color:#a9bfda;line-height:1.75;font-size:13px;max-width:900px}
+.ds-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.ds-meta span{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:4px 6px;color:#9dbde4}
+.ds-meta span.gap{border-color:#6b5330;color:#d6b075}
+.ds-body{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:26px}
+.ds-block h4{font-size:11px;letter-spacing:1.4px;color:#7fa6d9;font-weight:500;margin:0 0 11px;text-transform:uppercase}
+.ds-block p{margin:0;color:#a9bfda;line-height:1.8;font-size:13px}
+.ds-body table{width:100%;border-collapse:collapse;font-size:12px}
+.ds-body th,.ds-body td{text-align:left;padding:9px 11px;border-bottom:1px solid #26313f;vertical-align:top;line-height:1.6}
+.ds-body th{font-size:10px;letter-spacing:.8px;color:#7e97b8;font-weight:500;background:#131c28}
+.ds-body td code{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#bcd8fa;background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.ds-body td:first-child{color:#dcebfd}
+.ds-a11y{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ds-a11y div{border:1px solid #2d4058;background:#141f2d;border-radius:var(--wb-radius-card);padding:13px 14px}
+.ds-a11y b{display:block;font-size:9px;letter-spacing:1.2px;color:#6f8bb0;margin-bottom:7px}
+.ds-a11y p{margin:0;font-size:12px;color:#b8cce6;line-height:1.7}
+.guidance{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.guidance ul{margin:0;padding:0;list-style:none}
+.guidance li{font-size:12px;line-height:1.7;color:#b8cce6;padding:8px 0 8px 22px;position:relative;border-bottom:1px solid #222d3b}
+.guidance li:before{position:absolute;left:0;top:8px;font-size:12px}
+.guidance .do li:before{content:"✅"}
+.guidance .dont li:before{content:"❌"}
+.guidance h5{margin:0 0 4px;font-size:11px;color:#8fb4e4;font-weight:500}
+.ds-body pre{margin:0;background:#0d1521;border:1px solid #2d4058;border-radius:var(--wb-radius-card);padding:15px 17px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c3d9f5}
+.ds-page .findings{margin-top:34px;border-top:1px solid #2e3b4c;padding-top:26px}
+.ds-page .findings b{color:#e8c98a;font-weight:500}
+.ds-page .radius-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.ds-page .radius-list span{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.ds-page .radius-list span.orphan{border-color:#6b5330;color:#d6b075}
+.ds-page footer{margin-top:52px;border-top:1px solid #30415b;padding:25px 0 36px;color:#7089a8;font-size:11px;line-height:1.8;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.ds-page footer a{color:#a5c3ec}
+[hidden]{display:none!important}
+@media(max-width:1100px){.ds-page .strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-a11y{grid-template-columns:1fr}.ds-page .map{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.ds-page>header{height:auto;min-height:70px;padding:15px 22px;gap:12px}.ds-page>header strong span{display:none}.ds-pagenav{gap:12px}.ds-page .hero{grid-template-columns:1fr;padding:38px 0 28px}.ds-page .count{display:none}.guidance{grid-template-columns:1fr}.ds-page .tools{position:static;flex-direction:column}.ds-page footer{display:block}}
+</style>
+<style>/* control-button · source/shell.html */
+:where(.ds-stage--home.ds-pv-control-button), :where(.ds-stage--home.ds-pv-control-button) *{box-sizing:border-box}
+:where(.ds-stage--home.ds-pv-control-button){background:#0a0f16;color-scheme:dark}
+:where(.ds-stage--home.ds-pv-control-button){margin:0;color:#f4f5f8;font-family:Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+:where(.ds-stage--home.ds-pv-control-button) button, :where(.ds-stage--home.ds-pv-control-button) a{-webkit-tap-highlight-color:transparent}
+:where(.ds-stage--home.ds-pv-control-button) button{font:inherit;color:inherit;cursor:pointer}
+:where(.ds-stage--home.ds-pv-control-button) button:focus-visible, :where(.ds-stage--home.ds-pv-control-button) a:focus-visible{outline:2px solid #a6d6ff;outline-offset:6px}
+:where(.ds-stage--home.ds-pv-control-button) button{border:0;background:none}
+:where(.ds-stage--home.ds-pv-control-button) a{color:inherit;text-decoration:none}
+:where(.ds-stage--home.ds-pv-control-button) .viewport{width:100%;overflow:hidden}
+:where(.ds-stage--home.ds-pv-control-button) .scene{width:1536px;height:1024px;position:relative;transform-origin:top left;isolation:isolate;background:radial-gradient(ellipse at 47% 115%,#283f60 0,transparent 55%),linear-gradient(120deg,#080b0f 0%,#080d13 55%,#0e1621 100%)}
+:where(.ds-stage--home.ds-pv-control-button) .nav button{height:40px;display:flex;align-items:center;gap:10px;font-size:14px;padding:0 10px;white-space:nowrap}
+:where(.ds-stage--home.ds-pv-control-button) .dialog-list button{border:1px solid #59779866;border-radius:10px;padding:16px;text-align:left;background:#bed8ff08}
+:where(.ds-stage--home.ds-pv-control-button) .dialog-list button:hover{background:#a2c9ff20}
+@media(prefers-reduced-motion:reduce){
+:where(.ds-stage--home.ds-pv-control-button), :where(.ds-stage--home.ds-pv-control-button) *{transition:none!important}
+}
+@media(max-width:650px){
+:where(.ds-stage--home.ds-pv-control-button) .scene{transform-origin:top left}
+:where(.ds-stage--home.ds-pv-control-button) .viewport{min-height:100svh;background:#0b111b}
+}
+:where(.ds-stage--home.ds-pv-control-button) .controls{z-index:3}
+:where(.ds-stage--home.ds-pv-control-button) .scene{background:radial-gradient(ellipse at 49% 102%,#1b2d47 0,transparent 47%),radial-gradient(ellipse at 75% 49%,#101825 0,transparent 70%),#070c12}
+:where(.ds-stage--home.ds-pv-control-button) .hero button{pointer-events:auto}
+:where(.ds-stage--home.ds-pv-control-button) .controls{position:absolute;left:39px;top:514px;width:245px;color:#8a9bb1}
+:where(.ds-stage--home.ds-pv-control-button) .controls p{font-size:12px;line-height:19px;margin:0 0 12px;color:#91a5c0}
+:where(.ds-stage--home.ds-pv-control-button) .control-buttons{display:flex;gap:7px;flex-wrap:wrap}
+:where(.ds-stage--home.ds-pv-control-button) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
+:where(.ds-stage--home.ds-pv-control-button) .control-buttons button:hover, :where(.ds-stage--home.ds-pv-control-button) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
+:where(.ds-stage--home.ds-pv-control-button) .controls.attention{filter:drop-shadow(0 0 10px #84d5ff)}
+:where(.ds-stage--home.ds-pv-control-button) .controls{opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility .18s}
+:where(.ds-stage--home.ds-pv-control-button) .controls.is-open, :where(.ds-stage--home.ds-pv-control-button) .controls:focus-within{opacity:1;visibility:visible;transform:none}</style>
+<style>
+body{padding:0}
+.wrap{width:91%;max-width:1536px;margin:auto;padding:34px 0 60px}
+.crumb{font-size:11px;color:#7c93b3;margin-bottom:16px}
+.crumb a{color:#a5c3ec}
+.wrap h1{font-size:29px;font-weight:500;margin:0 0 8px}
+.wrap h1 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px;vertical-align:middle;margin-left:10px}
+.lede{color:#a9bfda;font-size:13px;line-height:1.8;max-width:860px;margin:0 0 6px}
+.siblings{display:flex;gap:7px;flex-wrap:wrap;margin:22px 0 0}
+.siblings a{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.siblings a[aria-current="page"]{background:#315986;border-color:#77a8e6;color:#fff}
+</style>
+</head><body><div class="ds-page">
+<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEW</span></strong></a><nav class="ds-pagenav"><a href="../tokens.html">Tokens</a><a href="../motion.html">Motion</a><a href="../catalog.html">Assets</a><a href="../components.html">Components</a><a href="../studio.html">Studio</a><a href="../index.html">Home</a></nav></header>
+<div class="wrap">
+  <p class="crumb"><a href="index.html">独立预览</a> / 操作</p>
+  <h1>Control Button<code>control-button</code></h1>
+  <p class="lede">首页视角工具里的小胶囊按钮，16px 圆角，带 aria-pressed 开关态。</p>
+  <div class="siblings"><a href="explore-button.html">Explore Button</a><a href="control-button.html" aria-current="page">Control Button</a><a href="primary-button.html">Primary Button</a><a href="secondary-button.html">Secondary Button</a><a href="file-button.html">File Button</a><a href="text-button.html">Text Button</a></div>
+  <div class="ds-frame ds-frame--scene"><div class="ds-stage ds-stage--home ds-pv-control-button"><div class="viewport"><main class="scene" aria-label="Control Button 预览"><div class="controls is-open" style="opacity:1;visibility:visible;transform:none"><p>拖动旋转 · 滚轮缩放<br>点击物体，探索每一层</p><div class="control-buttons"><button>初始视角</button><button aria-pressed="false">自动旋转</button><button aria-pressed="true">模型线框</button><button aria-pressed="false">暂停光流</button></div></div></main></div></div></div>
+  <p class="ds-stage-note">舞台：<b>首页场景</b> · 在 1536 × 1024 的 .scene 内按原坐标绝对定位渲染，预览按比例缩放。</p>
+  <div class="ds-body">
+    <section class="ds-block"><h4>Description</h4><p>一组可切换的视图开关（自动旋转、模型线框、暂停光流）。这是全站唯一把“按下”状态写进 aria-pressed 的控件，因此样式规则也直接挂在属性选择器上——状态和语义是同一条规则，不会漂移。</p></section>
+    <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>Toggle</td><td>有开/关两态的视图开关，带 aria-pressed</td><td><code>.control-buttons button[aria-pressed]</code></td></tr><tr><td>Action</td><td>一次性动作（初始视角、进入编辑器），无 aria-pressed</td><td><code>.control-buttons button</code></td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>小尺寸胶囊。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>对应 tokens.js 里的 radius.control，但该 Token 未导出到 tokens.css。</td></tr><tr><td><code>border</code></td><td>border</td><td><code>1px solid #a7c3ea2c</code></td><td>约 17% 透明度的冷色描边。</td></tr><tr><td><code>background</code></td><td>color</td><td><code>#14213460</code></td><td>约 38% 透明度的深蓝，浮在三维场景上方。</td></tr><tr><td><code>aria-pressed</code></td><td>boolean</td><td><code>false</code></td><td>开/关状态，驱动选中样式。同时存在一个 hover 规则，两条规则共用同一样式块。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>半透明深蓝底 + 17% 冷色描边，文字 11px #b5c9e1</td><td>点击切换</td></tr><tr><td>Hover</td><td>与按下态相同：#335da081 底、#fff 字、#a5c6ff80 边</td><td>过渡 0.2s</td></tr><tr><td>Pressed (aria-pressed=true)</td><td>同 Hover</td><td>保持到再次点击</td></tr><tr><td>Hidden (父级 .controls)</td><td>父级默认 opacity:0 / visibility:hidden / translateY(6px)</td><td>Explore 展开或父级 :focus-within 时恢复</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
+      <div><b>ROLE</b><p>button，切换型带 aria-pressed</p></div>
+      <div><b>KEYBOARD</b><p>Tab 可达；.controls 的 :focus-within 会让隐藏的工具条重新出现，键盘用户不会掉进不可见区域</p></div>
+      <div><b>SCREEN READER</b><p>朗读按钮文字与 “pressed / not pressed”</p></div>
+    </div></section>
+    <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
+      <div class="do"><h5>✅ Do</h5><ul><li>开/关类开关必须带 aria-pressed 并让样式依赖该属性</li><li>整组开关用 flex-wrap 兜住窄屏</li></ul></div>
+      <div class="dont"><h5>❌ Don't</h5><ul><li>不要用 .active class 表达开关状态（同一页面已有两套选中约定）</li><li>不要把 .controls 的隐藏做成 display:none，否则键盘无法唤起</li></ul></div>
+    </div></section>
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;control-buttons&quot;&gt;
+  &lt;button id=&quot;rotate&quot; aria-pressed=&quot;false&quot;&gt;自动旋转&lt;/button&gt;
+&lt;/div&gt;</pre></section>
+    <section class="ds-block"><h4>Source</h4><table><thead><tr><th>来源</th><th>选择器</th></tr></thead><tbody><tr><td><code>source/shell.html</code></td><td><code>.controls</code> <code>.controls p</code> <code>.control-buttons</code> <code>.control-buttons button</code> <code>.control-buttons button:hover</code> <code>.control-buttons button[aria-pressed=&quot;true&quot;]</code></td></tr></tbody></table></section>
+  </div>
+  <footer><span>本页只加载该组件的样式，来源与出货页面一致。</span><span><a href="../components.html">组件真源 ↗</a>　<a href="index.html">全部预览 ↗</a></span></footer>
+</div>
+</div>
+<script>
+(function(){
+  function fit(){
+    document.querySelectorAll('.ds-frame--scene').forEach(function(frame){
+      var w = frame.clientWidth;
+      if (w) frame.style.setProperty('--k', (w / 1536).toFixed(5));
+    });
+  }
+  fit();
+  addEventListener('resize', fit);
+  var search = document.querySelector('#search');
+  if (search) {
+    var items = [].slice.call(document.querySelectorAll('.ds-component'));
+    var active = '全部';
+    var filterButtons = [].slice.call(document.querySelectorAll('[data-group-filter]'));
+    var empty = document.querySelector('#empty');
+    function render(){
+      var q = search.value.trim().toLowerCase();
+      var visible = 0;
+      items.forEach(function(item){
+        var okGroup = active === '全部' || item.dataset.group === active;
+        var okSearch = !q || item.dataset.search.indexOf(q) !== -1;
+        item.hidden = !(okGroup && okSearch);
+        if (!item.hidden) visible++;
+      });
+      document.querySelectorAll('.ds-group').forEach(function(section){
+        section.hidden = [].slice.call(section.querySelectorAll('.ds-component')).every(function(i){ return i.hidden; });
+      });
+      if (empty) empty.style.display = visible ? 'none' : 'block';
+      fit();
+    }
+    search.addEventListener('input', render);
+    filterButtons.forEach(function(button){
+      button.addEventListener('click', function(){
+        active = button.dataset.groupFilter;
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        render();
+      });
+    });
+    document.querySelectorAll('.copy').forEach(function(button){
+      button.addEventListener('click', function(){
+        navigator.clipboard.writeText(button.dataset.copy).then(function(){ button.textContent = '已复制'; }, function(){ button.textContent = '手动复制'; });
+        setTimeout(function(){ button.textContent = '复制'; }, 1200);
+      });
+    });
+  }
+})();
+</script>
+</body></html>

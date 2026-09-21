@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WinBrain — Component Previews</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Preview chrome. This is the documentation page's own layout, not component design,
+   so it lives here rather than in a shipping stylesheet. */
+.ds-frame{position:relative;border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:#0b1119;overflow:hidden;margin-top:18px}
+.ds-frame--scene{aspect-ratio:1536/1024;padding:0;background:#070c12}
+.ds-frame--scene .ds-stage{position:absolute;inset:0}
+.ds-frame--scene .scene{transform:scale(var(--k,.33));transform-origin:top left}
+.ds-stage{padding:26px;min-height:96px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+/* Type and colour are deliberately absent here: the extracted shipping rules set them,
+   and a value written here would outrank the real one and hide a drift. */
+.ds-stage--studio{display:block;padding:22px}
+.ds-stage--docs{display:block}
+.ds-stage--home{display:block;padding:0;min-height:0}
+.ds-stage-note{margin:9px 0 0;font-size:11px;color:#7c93b3}
+.ds-stage-note b{color:#a9c9f2;font-weight:500}
+
+*{box-sizing:border-box}html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header strong{font-size:21px;letter-spacing:-.4px}
+.ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
+.ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
+.ds-page>main{width:91%;max-width:1536px;margin:auto}
+.ds-page .hero{padding:64px 0 42px;border-bottom:1px solid #2e3b4c;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:end}
+.ds-page .eyebrow{font-size:10px;color:#90b3e4;letter-spacing:2px}
+.ds-page .hero h1{font-size:38px;letter-spacing:-1px;font-weight:500;margin:17px 0 12px}
+.ds-page .hero p{color:var(--wb-color-text-muted);line-height:1.8;font-size:13px;margin:0;max-width:760px}
+.ds-page .hero code{background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:1px 5px;font-size:12px;color:#bcd8fa}
+.ds-page .count{font-size:68px;font-weight:300;letter-spacing:-4px;color:#a9c9fa}
+.ds-page .count small{display:block;font-size:10px;letter-spacing:1.5px;color:#728caa;text-align:right}
+.ds-page .map{margin:26px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:1000px}
+.ds-page .map div{border:1px solid #39506f;background:#162232;border-radius:var(--wb-radius-card);padding:13px 14px;font-size:11px;color:#c9dcf5}
+.ds-page .map b{display:block;font-size:12px;color:#ddebff;margin-bottom:5px}
+.ds-page .map span{color:#7e97b8;font-size:10px}
+.ds-page .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:26px 0 4px}
+.ds-page .stat{border:1px solid var(--wb-color-border);background:var(--wb-color-panel);border-radius:var(--wb-radius-card);padding:16px 17px}
+.ds-page .stat b{display:block;font-size:31px;font-weight:300;color:#cfe2ff;letter-spacing:-1px}
+.ds-page .stat span{display:block;font-size:11px;color:#8ba1bf;margin-top:5px;line-height:1.5}
+.ds-page .stat.warn b{color:#e8c98a}
+.ds-page .tools{padding:24px 0 14px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start;position:sticky;top:74px;background:var(--wb-color-canvas);z-index:10;border-bottom:1px solid #24303f}
+.ds-page .search{background:#162232;border:1px solid #3a4d67;color:#dbe9ff;padding:12px 14px;border-radius:6px;width:min(320px,100%);font:inherit}
+.ds-page .filters{display:flex;gap:7px;flex-wrap:wrap}
+.ds-page .filters button{border:1px solid #38506d;background:#162232;color:#91a9c9;border-radius:16px;padding:7px 11px;font-size:10px;cursor:pointer}
+.ds-page .filters button.active{background:#315986;color:white;border-color:#77a8e6}
+.ds-page .section-head{display:flex;justify-content:space-between;align-items:end;margin:44px 0 4px;padding-bottom:13px;border-bottom:1px solid #2e3b4c}
+.ds-page .section-head h2{font-size:19px;font-weight:500;margin:0}
+.ds-page .section-head span{font-size:11px;color:#7c93b3;max-width:52%}
+.ds-component{border-top:1px solid #24303f;padding:36px 0 40px;scroll-margin-top:150px}
+.ds-component:first-of-type{border-top:0}
+.ds-head{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.ds-kind{font-size:9px;letter-spacing:1.4px;color:#7fa6d9}
+.ds-head h3{font-size:23px;font-weight:500;margin:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ds-head h3 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4;border:1px solid #395574;border-radius:4px;padding:3px 6px}
+.ds-summary{margin:2px 0 0;color:#a9bfda;line-height:1.75;font-size:13px;max-width:900px}
+.ds-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.ds-meta span{font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:4px 6px;color:#9dbde4}
+.ds-meta span.gap{border-color:#6b5330;color:#d6b075}
+.ds-body{display:grid;grid-template-columns:minmax(0,1fr);gap:26px;margin-top:26px}
+.ds-block h4{font-size:11px;letter-spacing:1.4px;color:#7fa6d9;font-weight:500;margin:0 0 11px;text-transform:uppercase}
+.ds-block p{margin:0;color:#a9bfda;line-height:1.8;font-size:13px}
+.ds-body table{width:100%;border-collapse:collapse;font-size:12px}
+.ds-body th,.ds-body td{text-align:left;padding:9px 11px;border-bottom:1px solid #26313f;vertical-align:top;line-height:1.6}
+.ds-body th{font-size:10px;letter-spacing:.8px;color:#7e97b8;font-weight:500;background:#131c28}
+.ds-body td code{font:11px ui-monospace,SFMono-Regular,Menlo,monospace;color:#bcd8fa;background:#0f1926;border:1px solid #2d4058;border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
+.ds-body td:first-child{color:#dcebfd}
+.ds-a11y{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ds-a11y div{border:1px solid #2d4058;background:#141f2d;border-radius:var(--wb-radius-card);padding:13px 14px}
+.ds-a11y b{display:block;font-size:9px;letter-spacing:1.2px;color:#6f8bb0;margin-bottom:7px}
+.ds-a11y p{margin:0;font-size:12px;color:#b8cce6;line-height:1.7}
+.guidance{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.guidance ul{margin:0;padding:0;list-style:none}
+.guidance li{font-size:12px;line-height:1.7;color:#b8cce6;padding:8px 0 8px 22px;position:relative;border-bottom:1px solid #222d3b}
+.guidance li:before{position:absolute;left:0;top:8px;font-size:12px}
+.guidance .do li:before{content:"✅"}
+.guidance .dont li:before{content:"❌"}
+.guidance h5{margin:0 0 4px;font-size:11px;color:#8fb4e4;font-weight:500}
+.ds-body pre{margin:0;background:#0d1521;border:1px solid #2d4058;border-radius:var(--wb-radius-card);padding:15px 17px;overflow-x:auto;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c3d9f5}
+.ds-page .findings{margin-top:34px;border-top:1px solid #2e3b4c;padding-top:26px}
+.ds-page .findings b{color:#e8c98a;font-weight:500}
+.ds-page .radius-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.ds-page .radius-list span{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:5px 7px;color:#a8c8ee}
+.ds-page .radius-list span.orphan{border-color:#6b5330;color:#d6b075}
+.ds-page footer{margin-top:52px;border-top:1px solid #30415b;padding:25px 0 36px;color:#7089a8;font-size:11px;line-height:1.8;display:flex;justify-content:space-between;gap:25px;flex-wrap:wrap}
+.ds-page footer a{color:#a5c3ec}
+[hidden]{display:none!important}
+@media(max-width:1100px){.ds-page .strip{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-a11y{grid-template-columns:1fr}.ds-page .map{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.ds-page>header{height:auto;min-height:70px;padding:15px 22px;gap:12px}.ds-page>header strong span{display:none}.ds-pagenav{gap:12px}.ds-page .hero{grid-template-columns:1fr;padding:38px 0 28px}.ds-page .count{display:none}.guidance{grid-template-columns:1fr}.ds-page .tools{position:static;flex-direction:column}.ds-page footer{display:block}}
+
+.section-head{margin:38px 0 17px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}
+.card{display:block;border:1px solid var(--wb-color-border);background:var(--wb-color-panel);border-radius:var(--wb-radius-card);padding:17px;transition:border-color .15s,transform .15s}
+.card:hover{border-color:#7197ca;transform:translateY(-2px)}
+.card h3{font-size:15px;font-weight:500;margin:9px 0 7px}
+.card code{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4}
+.card p{font-size:11.5px;color:#93a9c5;line-height:1.7;margin:11px 0 13px}
+.card .kind{font-size:9px;letter-spacing:1.2px;color:#7fa6d9}
+.card .stage{display:inline-block;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:3px 5px;color:#9dbde4}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+</style>
+</head><body><div class="ds-page">
+<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEWS</span></strong></a><nav class="ds-pagenav"><a href="../tokens.html">Tokens</a><a href="../motion.html">Motion</a><a href="../catalog.html">Assets</a><a href="../components.html">Components</a><a href="../studio.html">Studio</a><a href="../index.html">Home</a></nav></header>
+<main>
+<section class="hero"><div>
+  <span class="eyebrow">ISOLATED PREVIEWS / ONE COMPONENT PER PAGE</span>
+  <h1>28 个组件，一页一个。</h1>
+  <p>每一页只加载该组件自己的样式，用来单独核对变体、状态与无障碍行为，不受同页其他组件干扰。完整文档（说明、属性、状态表、Do/Don't、代码）在 <a href="../components.html" style="color:#a5c3ec">components.html</a>。</p>
+</div><div class="count">28<small>ISOLATED PAGES</small></div></section>
+<section><div class="section-head"><h2>导航</h2><span>页面之间、视图之间和层之间的移动。</span></div><div class="grid"><a class="card" href="page-header.html">
+    <span class="kind">navigation</span>
+    <h3>Page Header</h3>
+    <code>page-header</code>
+    <p>文档页顶部的 74px 固定头部：品牌、跨页导航、右侧工具。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="nav-item.html">
+    <span class="kind">navigation</span>
+    <h3>Nav Item</h3>
+    <code>nav-item</code>
+    <p>首页顶部的导航按钮，当前项渲染为 25px 圆角胶囊。</p>
+    <span class="stage">首页场景</span>
+  </a><a class="card" href="mode-switch.html">
+    <span class="kind">navigation</span>
+    <h3>Mode Switch</h3>
+    <code>mode-switch</code>
+    <p>编辑器里的三段式视图切换：整页构图 / 独立 3D / Mock-3D 对齐。</p>
+    <span class="stage">编辑器</span>
+  </a></div></section>
+<section><div class="section-head"><h2>操作</h2><span>触发保存、切换、导入和打开。</span></div><div class="grid"><a class="card" href="explore-button.html">
+    <span class="kind">actions</span>
+    <h3>Explore Button</h3>
+    <code>explore-button</code>
+    <p>首页主行动按钮，29px 圆角胶囊，224 × 55。</p>
+    <span class="stage">首页场景</span>
+  </a><a class="card" href="control-button.html">
+    <span class="kind">actions</span>
+    <h3>Control Button</h3>
+    <code>control-button</code>
+    <p>首页视角工具里的小胶囊按钮，16px 圆角，带 aria-pressed 开关态。</p>
+    <span class="stage">首页场景</span>
+  </a><a class="card" href="primary-button.html">
+    <span class="kind">actions</span>
+    <h3>Primary Button</h3>
+    <code>primary-button</code>
+    <p>编辑器里唯一的高对比实心按钮：“保存并应用到首页”。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="secondary-button.html">
+    <span class="kind">actions</span>
+    <h3>Secondary Button</h3>
+    <code>secondary-button</code>
+    <p>编辑器的成对操作按钮：导出 JSON / 保存模型 PNG、重置 / 恢复。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="file-button.html">
+    <span class="kind">actions</span>
+    <h3>File Button</h3>
+    <code>file-button</code>
+    <p>通栏的导入 / 导出按钮，比次级按钮更重一档的蓝底。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="text-button.html">
+    <span class="kind">actions</span>
+    <h3>Text Button</h3>
+    <code>text-button</code>
+    <p>最轻的一档动作：还原颜色、恢复选中组件。</p>
+    <span class="stage">编辑器</span>
+  </a></div></section>
+<section><div class="section-head"><h2>表单</h2><span>数字、颜色、开关和搜索输入。</span></div><div class="grid"><a class="card" href="search-field.html">
+    <span class="kind">forms</span>
+    <h3>Search Field</h3>
+    <code>search-field</code>
+    <p>带前置放大镜的搜索输入，用于过滤组件列表和文档页内容。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="number-field.html">
+    <span class="kind">forms</span>
+    <h3>Number Field</h3>
+    <code>number-field</code>
+    <p>检查器里的数值输入，等宽数字对齐。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="checkbox.html">
+    <span class="kind">forms</span>
+    <h3>Checkbox</h3>
+    <code>checkbox</code>
+    <p>13px 的原生复选框，accent-color 统一为冷蓝。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="color-field.html">
+    <span class="kind">forms</span>
+    <h3>Color Field</h3>
+    <code>color-field</code>
+    <p>原生取色器，26 × 23，无边框，带同行“还原”。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="nudge-pad.html">
+    <span class="kind">forms</span>
+    <h3>Nudge Pad</h3>
+    <code>nudge-pad</code>
+    <p>方向键步进键盘，1 / 10 / 0.1 像素三档。</p>
+    <span class="stage">编辑器</span>
+  </a></div></section>
+<section><div class="section-head"><h2>容器</h2><span>承载内容的面板、卡片和分区。</span></div><div class="grid"><a class="card" href="token-card.html">
+    <span class="kind">surfaces</span>
+    <h3>Token Card</h3>
+    <code>token-card</code>
+    <p>Token 审计页的卡片，左预览右元数据的两栏结构。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="asset-card.html">
+    <span class="kind">surfaces</span>
+    <h3>Asset Card</h3>
+    <code>asset-card</code>
+    <p>资产总览页的卡片：预览图、ID、名称、版本徽标与三组外链。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="motion-card.html">
+    <span class="kind">surfaces</span>
+    <h3>Motion Card</h3>
+    <code>motion-card</code>
+    <p>Motion 库的行为卡：左侧动画预览，右侧 Primitive / Trigger / Token 关系。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="small-card.html">
+    <span class="kind">surfaces</span>
+    <h3>Small Card</h3>
+    <code>small-card</code>
+    <p>四列栅格里的最小信息卡：Primitive、Motion Token、Trigger。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="component-list-item.html">
+    <span class="kind">surfaces</span>
+    <h3>Component List Item</h3>
+    <code>component-list-item</code>
+    <p>编辑器左侧组件列表的一行：图标、名称、改动圆点与版本号。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="explore-layer-card.html">
+    <span class="kind">surfaces</span>
+    <h3>Layer Card</h3>
+    <code>explore-layer-card</code>
+    <p>首页右侧的三张层卡：应用层 / 智能中枢 / 数据底座。</p>
+    <span class="stage">首页场景</span>
+  </a></div></section>
+<section><div class="section-head"><h2>反馈</h2><span>结果、状态与阻塞提示。</span></div><div class="grid"><a class="card" href="toast.html">
+    <span class="kind">feedback</span>
+    <h3>Toast</h3>
+    <code>toast</code>
+    <p>底部居中的一次性结果提示，唯一的亮底深字大面积反馈。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="dialog.html">
+    <span class="kind">feedback</span>
+    <h3>Dialog</h3>
+    <code>dialog</code>
+    <p>首页的层详情对话框，20px 圆角 + 模糊遮罩。</p>
+    <span class="stage">首页场景</span>
+  </a><a class="card" href="status-dot.html">
+    <span class="kind">feedback</span>
+    <h3>Status Dot</h3>
+    <code>status-dot</code>
+    <p>5px 绿色圆点，表示运行时状态正常。</p>
+    <span class="stage">编辑器</span>
+  </a><a class="card" href="badge.html">
+    <span class="kind">feedback</span>
+    <h3>Badge</h3>
+    <code>badge</code>
+    <p>表示版本号或类型的小描边标签：V5、PRIMITIVE、10px monospace。</p>
+    <span class="stage">文档页</span>
+  </a></div></section>
+<section><div class="section-head"><h2>数据展示</h2><span>把 Token、资产和预览画成可读的形状。</span></div><div class="grid"><a class="card" href="swatch.html">
+    <span class="kind">display</span>
+    <h3>Swatch</h3>
+    <code>swatch</code>
+    <p>62px 圆形色板，用来把 Token 值变成可判断的颜色。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="filter-chip.html">
+    <span class="kind">display</span>
+    <h3>Filter Chip</h3>
+    <code>filter-chip</code>
+    <p>Token 审计页的分类筛选胶囊，选中态填实。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="eyebrow.html">
+    <span class="kind">display</span>
+    <h3>Eyebrow</h3>
+    <code>eyebrow</code>
+    <p>正文上方的 9–11px 小标签，用字距和大写标出层级。</p>
+    <span class="stage">文档页</span>
+  </a><a class="card" href="platform-label.html">
+    <span class="kind">display</span>
+    <h3>Platform Label</h3>
+    <code>platform-label</code>
+    <p>跟随三维平台的世界空间标签，带板号和层级。</p>
+    <span class="stage">首页场景</span>
+  </a></div></section>
+<footer><span>这些页面只引用出货样式表，不引入新的设计值。</span><span><a href="../components.html">组件真源 ↗</a></span></footer>
+</main>
+</div>
+</body></html>

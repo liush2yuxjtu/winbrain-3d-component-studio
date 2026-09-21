@@ -9,6 +9,10 @@
 - **原图差异对照：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/comparison.html
 - **组件编辑器：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/studio.html
 - **22 个资产总览：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/catalog.html
+- **设计系统 UI 组件真源：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/components.html
+- **28 个组件独立预览：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/preview/
+- **Motion 库：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/motion.html
+- **全局预览：** https://liush2yuxjtu.github.io/winbrain-3d-component-studio/global.html
 
 GitHub 源码：https://github.com/liush2yuxjtu/winbrain-3d-component-studio
 
@@ -18,6 +22,8 @@ GitHub 源码：https://github.com/liush2yuxjtu/winbrain-3d-component-studio
 - **原图差异对照：** http://127.0.0.1:8765/comparison.html
 - **组件编辑器：** http://127.0.0.1:8765/studio.html
 - **22 个资产总览：** http://127.0.0.1:8765/catalog.html
+- **设计系统 UI 组件真源：** http://127.0.0.1:8765/components.html
+- **28 个组件独立预览：** http://127.0.0.1:8765/preview/
 - **三维首页：** http://127.0.0.1:8765/index.html
 
 本机如已启动预览服务，可直接打开上面的 `127.0.0.1` 地址。首页与编辑器的运行依赖都嵌入 HTML，无需连接网络。原始参考图只在编辑器中用作对照；首页没有使用参考图作为背景、贴图或模型。
@@ -85,6 +91,15 @@ Mock-3D 支持参考图叠加、透明度、差值显示、网格、100%–800% 
 | `index.html` | 可独立运行的三维首页 |
 | `tokens.html` | Design Token 审计：搜索、分类、值、CSS 变量、使用资产反查 |
 | `tokens.css` | 从 Token 真源生成的 CSS Custom Properties |
+| `DESIGN.md` | 设计系统说明：四层结构、组件契约、实测审计与优先级 |
+| `manifest.json` | 设计系统包清单：四层定义、产物、计数、审计与门禁 |
+| `components.html` | 设计系统 UI 组件真源：28 个组件的变体、状态、无障碍与代码 |
+| `preview/` | 28 个单组件独立预览页 + 索引（与 `previews/` 不同） |
+| `source/system/ui-registry.js` | UI 组件文档真源 |
+| `source/system/css-scope.js` | 从出货样式表提取并作用域化组件 CSS |
+| `source/system/audit.js` | Token 覆盖与一致性审计，全部数字从出货文件实测 |
+| `design-system-verification.json` | 设计系统真实运行验证结果 |
+| `design-system-review/` | 验证截图 |
 | `source/tokens/tokens.js` | UI / 3D 共用设计规则的结构化真源 |
 | `source/tokens/apply.js` | 在 3D 世界创建前应用运行时 Token |
 | `studio.html` | 可独立运行的组件编辑器，内嵌参考图 |
@@ -117,9 +132,26 @@ npm ci
 npm run build
 ```
 
-构建脚本会生成上一层的 `index.html`、`studio.html`、`catalog.html`、`tokens.css` 和 `tokens.html`。模型源文件或 Token 修改后，网页会使用新值。现有 GLB 和 PNG 是交付时的快照；模型修改后可在编辑器重新导出对应模型和预览。
+构建脚本会生成上一层的 `index.html`、`studio.html`、`catalog.html`、`tokens.css`、`tokens.html`、`motion.html`、`components.html`、`manifest.json` 和 `preview/`。模型源文件或 Token 修改后，网页会使用新值。现有 GLB 和 PNG 是交付时的快照；模型修改后可在编辑器重新导出对应模型和预览。
 
 运行时无需访问在线模型、在线字体或远程贴图。四个品牌图标已内嵌，其他纹理由代码生成。Three.js 与字体的许可证随项目提供，品牌素材来源单独记录。
+
+## 设计系统
+
+四层设计决策分别是 Token（`tokens.js`）、Motion（`motion/library.js`）、UI 组件（`system/ui-registry.js`）和三维资产（`registry.js`）。界面层的说明、真源页与实测审计见 `DESIGN.md`。
+
+`components.html` 与 `preview/` 里的每个组件都用**出货中的真实样式表**现场渲染：构建时从 `shell.html`、`studio.css` 和 `build-*.mjs` 里提取对应规则，加 `:where(.ds-stage--*)` 前缀（权重为 0，不改变原有层叠顺序）。因此预览不会与产品漂移。
+
+验证：
+
+```sh
+python3 -m http.server 8791 --bind 127.0.0.1    # 另开一个终端
+cd source && npm run verify:system -- --port 8791
+```
+
+`npm run verify:system` 先跑 `source/system/check-docs.mjs`，断言 `DESIGN.md` 里引用到的每个实测数字都与 `manifest.json` 一致；再用 Python Playwright（`pip install playwright && playwright install chromium`）驱动真实浏览器。用 Python 是因为仓库已有 `source/review/compare.py`、`visual-diff/` 的 Python 工具链，不额外引入 Node 侧浏览器依赖。只跑文档数字检查可以单独用 `npm run check:docs`。
+
+脚本驱动真实 Chromium：检查 6 个页面 + 28 个独立预览页可加载、无 JavaScript 错误、无外部请求；把 16 组「同一组件在出货页面 vs 在预览里的 computedStyle」逐属性对比（`components.html` 与 `preview/` 两个落点各验一遍，共 32 项）；检查每个组件的 markup class 都有对应样式；并逐条请求两套新页面上的 37 条内部链接。最近一次结果 47 项全部通过。结果写入 `design-system-verification.json`，截图落在 `design-system-review/`。
 
 ## 已验证与当前差异
 

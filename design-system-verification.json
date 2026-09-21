@@ -1,0 +1,1122 @@
+{
+  "schema": "winbrain.design-system-verification/v1",
+  "base": "http://127.0.0.1:8791",
+  "viewport": "1536x1024 (+430x900 mobile)",
+  "checks": [
+    {
+      "name": "加载 components.html",
+      "passed": true,
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "name": "加载 preview/index.html",
+      "passed": true,
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "name": "加载 manifest.json",
+      "passed": true,
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "name": "加载 tokens.html",
+      "passed": true,
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "name": "加载 motion.html",
+      "passed": true,
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "name": "加载 catalog.html",
+      "passed": true,
+      "detail": {
+        "status": 200
+      }
+    },
+    {
+      "name": "preview/index.html 卡片数 = 28",
+      "passed": true,
+      "detail": {
+        "count": 28
+      }
+    },
+    {
+      "name": "28 个独立预览页可渲染",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "首页类舞台已按比例缩放",
+      "passed": true,
+      "detail": {
+        "sceneScale": [
+          0.90885,
+          0.90885,
+          0.90885,
+          0.90885,
+          0.90885,
+          0.90885
+        ]
+      }
+    },
+    {
+      "name": "首页 · 视角控制按钮 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgba(20, 33, 52, 0.376)",
+          "color": "rgb(181, 201, 225)",
+          "borderTopColor": "rgba(167, 195, 234, 0.173)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgba(20, 33, 52, 0.376)",
+          "color": "rgb(181, 201, 225)",
+          "borderTopColor": "rgba(167, 195, 234, 0.173)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "首页 · 视角控制按钮 · preview/control-button.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgba(20, 33, 52, 0.376)",
+          "color": "rgb(181, 201, 225)",
+          "borderTopColor": "rgba(167, 195, 234, 0.173)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgba(20, 33, 52, 0.376)",
+          "color": "rgb(181, 201, 225)",
+          "borderTopColor": "rgba(167, 195, 234, 0.173)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "首页 · Explore 主按钮 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgba(11, 16, 23, 0.44)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(145, 158, 176)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "29px",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingLeft": "29px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgba(11, 16, 23, 0.44)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(145, 158, 176)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "29px",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingLeft": "29px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "首页 · Explore 主按钮 · preview/explore-button.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgba(11, 16, 23, 0.44)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(145, 158, 176)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "29px",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingLeft": "29px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgba(11, 16, 23, 0.44)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(145, 158, 176)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "29px",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "paddingTop": "0px",
+          "paddingLeft": "29px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "首页 · 层卡标题 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "0px",
+          "fontSize": "18px",
+          "fontWeight": "500",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "25px"
+        },
+        "actual": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "0px",
+          "fontSize": "18px",
+          "fontWeight": "500",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "25px"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "首页 · 层卡标题 · preview/explore-layer-card.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "0px",
+          "fontSize": "18px",
+          "fontWeight": "500",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "25px"
+        },
+        "actual": {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "0px",
+          "fontSize": "18px",
+          "fontWeight": "500",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "25px"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "首页 · 导航选中项 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(40, 47, 67)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "25px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "24px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(40, 47, 67)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "25px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "24px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "首页 · 导航选中项 · preview/nav-item.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(40, 47, 67)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "25px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "24px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(40, 47, 67)",
+          "color": "rgb(244, 245, 248)",
+          "borderTopColor": "rgb(244, 245, 248)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "25px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "24px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 视图切换选中 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(58, 74, 100)",
+          "color": "rgb(230, 239, 255)",
+          "borderTopColor": "rgb(230, 239, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "4px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "12px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(58, 74, 100)",
+          "color": "rgb(230, 239, 255)",
+          "borderTopColor": "rgb(230, 239, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "4px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "12px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 视图切换选中 · preview/mode-switch.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(58, 74, 100)",
+          "color": "rgb(230, 239, 255)",
+          "borderTopColor": "rgb(230, 239, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "4px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "12px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(58, 74, 100)",
+          "color": "rgb(230, 239, 255)",
+          "borderTopColor": "rgb(230, 239, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "4px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "12px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 主按钮 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(186, 209, 255)",
+          "color": "rgb(23, 36, 59)",
+          "borderTopColor": "rgb(208, 223, 255)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "6px",
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "paddingTop": "10px",
+          "paddingLeft": "15px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(186, 209, 255)",
+          "color": "rgb(23, 36, 59)",
+          "borderTopColor": "rgb(208, 223, 255)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "6px",
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "paddingTop": "10px",
+          "paddingLeft": "15px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 主按钮 · preview/primary-button.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(186, 209, 255)",
+          "color": "rgb(23, 36, 59)",
+          "borderTopColor": "rgb(208, 223, 255)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "6px",
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "paddingTop": "10px",
+          "paddingLeft": "15px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(186, 209, 255)",
+          "color": "rgb(23, 36, 59)",
+          "borderTopColor": "rgb(208, 223, 255)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "6px",
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "paddingTop": "10px",
+          "paddingLeft": "15px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 成对按钮 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(30, 42, 59)",
+          "color": "rgb(176, 197, 225)",
+          "borderTopColor": "rgb(59, 75, 98)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "4px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(30, 42, 59)",
+          "color": "rgb(176, 197, 225)",
+          "borderTopColor": "rgb(59, 75, 98)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "4px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 成对按钮 · preview/secondary-button.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(30, 42, 59)",
+          "color": "rgb(176, 197, 225)",
+          "borderTopColor": "rgb(59, 75, 98)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "4px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(30, 42, 59)",
+          "color": "rgb(176, 197, 225)",
+          "borderTopColor": "rgb(59, 75, 98)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "4px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 组件列表选中行 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(41, 61, 92)",
+          "color": "rgb(232, 241, 255)",
+          "borderTopColor": "rgb(232, 241, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "10px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(41, 61, 92)",
+          "color": "rgb(232, 241, 255)",
+          "borderTopColor": "rgb(232, 241, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "10px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 组件列表选中行 · preview/component-list-item.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(41, 61, 92)",
+          "color": "rgb(232, 241, 255)",
+          "borderTopColor": "rgb(232, 241, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "10px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(41, 61, 92)",
+          "color": "rgb(232, 241, 255)",
+          "borderTopColor": "rgb(232, 241, 255)",
+          "borderTopWidth": "0px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "11px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "10px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 文件按钮 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(37, 55, 83)",
+          "color": "rgb(185, 205, 232)",
+          "borderTopColor": "rgb(61, 80, 108)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "9px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(37, 55, 83)",
+          "color": "rgb(185, 205, 232)",
+          "borderTopColor": "rgb(61, 80, 108)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "9px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "编辑器 · 文件按钮 · preview/file-button.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(37, 55, 83)",
+          "color": "rgb(185, 205, 232)",
+          "borderTopColor": "rgb(61, 80, 108)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "9px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(37, 55, 83)",
+          "color": "rgb(185, 205, 232)",
+          "borderTopColor": "rgb(61, 80, 108)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "5px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "9px",
+          "paddingLeft": "9px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "资产总览 · 卡片 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "资产总览 · 卡片 · preview/asset-card.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · 分类胶囊选中 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(49, 89, 134)",
+          "color": "rgb(255, 255, 255)",
+          "borderTopColor": "rgb(119, 168, 230)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(49, 89, 134)",
+          "color": "rgb(255, 255, 255)",
+          "borderTopColor": "rgb(119, 168, 230)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · 分类胶囊选中 · preview/filter-chip.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(49, 89, 134)",
+          "color": "rgb(255, 255, 255)",
+          "borderTopColor": "rgb(119, 168, 230)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(49, 89, 134)",
+          "color": "rgb(255, 255, 255)",
+          "borderTopColor": "rgb(119, 168, 230)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "16px",
+          "fontSize": "10px",
+          "fontWeight": "400",
+          "paddingTop": "7px",
+          "paddingLeft": "11px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · Token 卡片 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · Token 卡片 · preview/token-card.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · 色板 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · 色板 · preview/swatch.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · 卡片内色板 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Token 审计 · 卡片内色板 · preview/token-card.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(103, 204, 255)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgba(255, 255, 255, 0.29)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Motion 库 · 行为卡 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "10px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "10px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Motion 库 · 行为卡 · preview/motion-card.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "10px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "10px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "0px",
+          "paddingLeft": "0px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Motion 库 · 小卡 · components.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingLeft": "16px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingLeft": "16px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "Motion 库 · 小卡 · preview/small-card.html",
+      "passed": true,
+      "detail": {
+        "expected": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingLeft": "16px",
+          "lineHeight": "normal"
+        },
+        "actual": {
+          "backgroundColor": "rgb(24, 36, 52)",
+          "color": "rgb(220, 231, 246)",
+          "borderTopColor": "rgb(49, 68, 95)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "9px",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "paddingTop": "16px",
+          "paddingLeft": "16px",
+          "lineHeight": "normal"
+        },
+        "diff": {}
+      }
+    },
+    {
+      "name": "28 个组件的自身 class 都有对应样式",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "新页面 37 条内部链接全部可达",
+      "passed": true,
+      "detail": {
+        "checked": 37,
+        "broken": []
+      }
+    },
+    {
+      "name": "components.html 渲染 28 个组件块",
+      "passed": true,
+      "detail": {
+        "components": 28,
+        "stages": 28
+      }
+    },
+    {
+      "name": "components.html 已加载 tokens.css（--wb-color-accent 可解析）",
+      "passed": true,
+      "detail": {
+        "tokensCssApplied": "rgb(103, 204, 255)"
+      }
+    },
+    {
+      "name": "无 JavaScript 错误",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "无外部网络依赖",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "summary": {
+    "passed": 47,
+    "failed": 0,
+    "javascriptErrors": 0,
+    "externalRequests": 0,
+    "styleParityChecked": 32,
+    "styleParityPassed": 32
+  },
+  "screenshots": [
+    "design-system-review/components-hero.png",
+    "design-system-review/components-anatomy.png",
+    "design-system-review/preview-index.png",
+    "design-system-review/preview-token-card.png",
+    "design-system-review/preview-index-mobile.png"
+  ]
+}
