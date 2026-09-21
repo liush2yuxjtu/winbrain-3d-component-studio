@@ -2,11 +2,20 @@
 :root {
   --wb-color-canvas: #101720;
   --wb-color-panel: #182434;
+  --wb-color-panel-elevated: #161F2B;
   --wb-color-border: #31445F;
+  --wb-color-divider: #28313F;
   --wb-color-text: #DCE7F6;
   --wb-color-text-muted: #93A9C5;
+  --wb-color-text-dim: #8D9AAB;
   --wb-color-accent: #67CCFF;
+  --wb-color-accent-blue: #668AFF;
+  --wb-color-accent-violet: #9F81FF;
   --wb-color-scene-background: #141B25;
+  --wb-color-scene-clear: #07101B;
+  --wb-color-silver: #C6D5ED;
+  --wb-color-white: #E8F3FF;
+  --wb-color-black: #061126;
   --wb-color-glass: #365A95;
   --wb-color-tube-glass: #ACCDF9;
   --wb-type-hero-size: 44px;
@@ -14,11 +23,16 @@
   --wb-type-layer-title-size: 20px;
   --wb-type-body-size: 14px;
   --wb-type-caption-size: 12px;
+  --wb-type-family-ui: Roboto, Arial, sans-serif;
+  --wb-type-layer-title-weight: 500;
+  --wb-space-4: 4px;
   --wb-space-8: 8px;
   --wb-space-12: 12px;
   --wb-space-16: 16px;
   --wb-space-24: 24px;
   --wb-space-32: 32px;
+  --wb-space-48: 48px;
+  --wb-radius-control: 16px;
   --wb-radius-card: 9px;
   --wb-radius-panel: 19px;
   --wb-radius-dialog: 20px;

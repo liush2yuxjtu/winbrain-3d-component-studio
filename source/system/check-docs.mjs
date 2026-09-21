@@ -48,6 +48,29 @@ for (const surface of coverage.surfaces) {
 }
 console.log(`${failures.length > beforeRows ? "FAIL" : "ok  "}  ${coverage.surfaces.length} 个页面的表格行`);
 
+// A ratchet, not another description. The checks above only prove DESIGN.md still matches
+// the audit; they pass just as happily if the count they compare against has grown. These
+// two fail when the exact thing the audit complains about quietly comes back.
+//
+// `color`, `typography`, `spacing` and `radius` are the groups the UI draws from, so a leaf
+// in one of them that reaches neither TOKEN_CATALOG nor a same-namespace entry is a UI
+// decision with no route out of tokens.js. The remaining groups (material, rendering,
+// lighting, camera, layers) are 3D-only by design — see DESIGN.md §5.4 — and are not budgeted.
+const UI_GROUPS = new Set(["color", "typography", "spacing", "radius"]);
+const budgets = [
+  ["手写复制的 Token 字面值（应被 var() 取代）", coverage.duplicatedLiterals.length, 0],
+  ["没有出口的 UI 设计值", audit.tokens.undocumented.filter((leaf) => UI_GROUPS.has(leaf.id.split(".")[0])).length, 0],
+];
+const beforeBudgets = failures.length;
+for (const [label, actual, allowed] of budgets) {
+  const ok = actual <= allowed;
+  if (!ok) failures.push({ label, expected: `不超过 ${allowed}，实际 ${actual}` });
+  console.log(`${ok ? "ok  " : "FAIL"}  ${label}：${actual} / 上限 ${allowed}`);
+}
+if (failures.length > beforeBudgets) {
+  console.error("     这是棘轮：新值要么改用 var()/补 TOKEN_CATALOG 出口，要么把这个上限连同理由一起调高。");
+}
+
 if (failures.length) {
   console.error(`\nDESIGN.md 与实测不一致（${failures.length} 项）：`);
   for (const failure of failures) console.error(`  ${failure.label} — 期望出现：${failure.expected}`);

@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -97,12 +97,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 @media(max-width:760px){.ds-page>header{height:auto;min-height:70px;padding:15px 22px;gap:12px}.ds-page>header strong span{display:none}.ds-pagenav{gap:12px}.ds-page .hero{grid-template-columns:1fr;padding:38px 0 28px}.ds-page .count{display:none}.guidance{grid-template-columns:1fr}.ds-page .tools{position:static;flex-direction:column}.ds-page footer{display:block}}
 </style>
 <style>/* component-list-item · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-component-list-item){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-component-list-item), :where(.ds-stage--studio.ds-pv-component-list-item){
   height: 100%;
   overflow: hidden;
@@ -124,7 +118,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -446,7 +440,7 @@ body{padding:0}
   <h1>Component List Item<code>component-list-item</code></h1>
   <p class="lede">编辑器左侧组件列表的一行：图标、名称、改动圆点与版本号。</p>
   <div class="siblings"><a href="token-card.html">Token Card</a><a href="asset-card.html">Asset Card</a><a href="motion-card.html">Motion Card</a><a href="small-card.html">Small Card</a><a href="component-list-item.html" aria-current="page">Component List Item</a><a href="explore-layer-card.html">Layer Card</a></div>
-  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-component-list-item"><div id="component-list" style="padding:0"><div class="library-category"><span>智能角色</span><span>4</span></div><button class="component-item" data-family="actor"><span class="component-glyph">◆</span>项目团队</button><button class="component-item active changed" data-family="actor"><span class="component-glyph">◆</span>专家<span class="edit-dot"></span></button><button class="component-item" data-family="data"><span class="component-glyph">▣</span>Documents<span class="item-version">V5</span></button></div></div></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-component-list-item"><div id="component-list" style="padding:0"><div class="library-category"><span>智能角色</span><span>4</span></div><button class="component-item" aria-pressed="false" data-family="actor"><span class="component-glyph">◆</span>项目团队</button><button class="component-item active changed" aria-pressed="true" data-family="actor"><span class="component-glyph">◆</span>专家<span class="edit-dot"></span></button><button class="component-item" aria-pressed="false" data-family="data"><span class="component-glyph">▣</span>Documents<span class="item-version">V5</span></button></div></div></div>
   <p class="ds-stage-note">舞台：<b>编辑器</b> · 在 body[data-mode=&quot;studio&quot;] 的字体与底色上下文中渲染。</p>
   <div class="ds-body">
     <section class="ds-block"><h4>Description</h4><p>一行里压缩了四类信息：家族图标（按 family 换色）、名称、是否被改过（金色 4px 圆点）、以及资产版本。选中态用左侧 2px 内阴影条 + 底色，而不是整行高亮，因为列表项很密。</p></section>
@@ -456,13 +450,13 @@ body{padding:0}
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>button（宽 100% 的 &lt;button&gt;）</p></div>
       <div><b>KEYBOARD</b><p>Tab 逐行；方向键未接管</p></div>
-      <div><b>SCREEN READER</b><p>朗读名称；版本号 .item-version 是相邻文本会被一并读出；改动状态无文本替代</p></div>
+      <div><b>SCREEN READER</b><p>朗读名称；版本号 .item-version 是相邻文本会被一并读出；选中态由 aria-pressed 暴露；改动状态 .edit-dot 无文本替代</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>改动状态用圆点而不是改变整行颜色</li><li>按 family 给图标换色，让类别在密集列表里可扫</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要用颜色深浅表达选中（已有左侧条承担）</li><li>不要让版本徽标和改动圆点同时占位（都用 margin-left:auto）</li></ul></div>
     </div></section>
-    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;component-item active&quot; data-family=&quot;actor&quot; data-id=&quot;actor.experts&quot;&gt;
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;component-item active&quot; aria-pressed=&quot;true&quot; data-family=&quot;actor&quot; data-id=&quot;actor.experts&quot;&gt;
   &lt;span class=&quot;component-glyph&quot;&gt;◆&lt;/span&gt;专家
   &lt;span class=&quot;edit-dot&quot;&gt;&lt;/span&gt;
 &lt;/button&gt;</pre></section>
@@ -506,7 +500,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

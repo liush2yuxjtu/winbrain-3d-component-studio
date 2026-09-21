@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -146,7 +146,7 @@ body{padding:0}
   <h1>Nav Item<code>nav-item</code></h1>
   <p class="lede">首页顶部的导航按钮，当前项渲染为 25px 圆角胶囊。</p>
   <div class="siblings"><a href="page-header.html">Page Header</a><a href="nav-item.html" aria-current="page">Nav Item</a><a href="mode-switch.html">Mode Switch</a></div>
-  <div class="ds-frame ds-frame--scene"><div class="ds-stage ds-stage--home ds-pv-nav-item"><div class="viewport"><main class="scene" aria-label="Nav Item 预览"><header class="header"><nav class="nav" aria-label="Main navigation"><button class="active" data-home>Home</button><button data-open="chat"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>AI Chat</button><button data-open="data"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>Data</button></nav></header></main></div></div></div>
+  <div class="ds-frame ds-frame--scene"><div class="ds-stage ds-stage--home ds-pv-nav-item"><div class="viewport"><main class="scene" aria-label="Nav Item 预览"><header class="header"><nav class="nav" aria-label="Main navigation"><button class="active" data-home aria-current="page">Home</button><button data-open="chat"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>AI Chat</button><button data-open="data"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>Data</button></nav></header></main></div></div></div>
   <p class="ds-stage-note">舞台：<b>首页场景</b> · 在 1536 × 1024 的 .scene 内按原坐标绝对定位渲染，预览按比例缩放。</p>
   <div class="ds-body">
     <section class="ds-block"><h4>Description</h4><p>首页 .nav 里的按钮，可带 19px 图标。选中态不是颜色变化而是形状变化：未选中项是透明背景的文字按钮，当前项变成有底色的胶囊。这样在复杂的三维背景上，位置感比颜色更可靠。</p></section>
@@ -156,13 +156,13 @@ body{padding:0}
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>button（原生 &lt;button&gt;），容器 nav 带 aria-label</p></div>
       <div><b>KEYBOARD</b><p>Tab 进入，Enter/Space 触发；focus-visible 有 6px 外扩描边以免贴住胶囊边界</p></div>
-      <div><b>SCREEN READER</b><p>由文本内容朗读；图标 svg 无 title，不重复朗读</p></div>
+      <div><b>SCREEN READER</b><p>由文本内容朗读；图标 svg 无 title，不重复朗读；当前项用 aria-current=&quot;page&quot; 暴露</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>选中态同时改变形状与背景，避免只靠颜色</li><li>图标统一 19px、stroke 1.4、currentColor</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要用 &lt;a&gt; 假装按钮再补 role</li><li>不要在导航项之间混用不同图标尺寸</li></ul></div>
     </div></section>
-    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;active&quot; data-home&gt;Home&lt;/button&gt;
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;active&quot; data-home aria-current=&quot;page&quot;&gt;Home&lt;/button&gt;
 &lt;button data-open=&quot;chat&quot;&gt;&lt;svg class=&quot;icon&quot;&gt;…&lt;/svg&gt;AI Chat&lt;/button&gt;</pre></section>
     <section class="ds-block"><h4>Source</h4><table><thead><tr><th>来源</th><th>选择器</th></tr></thead><tbody><tr><td><code>source/shell.html</code></td><td><code>.header</code> <code>.nav</code> <code>.nav button</code> <code>.nav .active</code> <code>.icon</code></td></tr></tbody></table></section>
   </div>
@@ -204,7 +204,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

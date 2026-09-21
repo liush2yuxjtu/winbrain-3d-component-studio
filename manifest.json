@@ -78,9 +78,9 @@
     }
   ],
   "counts": {
-    "designTokensDefined": 81,
-    "designTokensExported": 40,
-    "designTokensWithCss": 40,
+    "designTokensDefined": 83,
+    "designTokensExported": 54,
+    "designTokensWithCss": 54,
     "uiComponents": 28,
     "uiComponentGroups": 6,
     "uiComponentsFullyDocumented": 28,
@@ -105,9 +105,9 @@
         "css": "source/editor/studio.css",
         "layer": "工具",
         "extraCss": "source/shell.html",
-        "linksTokensCss": false,
-        "tokenUsages": 0,
-        "rawColorLiterals": 198,
+        "linksTokensCss": true,
+        "tokenUsages": 7,
+        "rawColorLiterals": 192,
         "documented": false
       },
       {
@@ -115,9 +115,9 @@
         "label": "资产总览",
         "css": "source/build-catalog.mjs",
         "layer": "文档",
-        "linksTokensCss": false,
-        "tokenUsages": 0,
-        "rawColorLiterals": 36,
+        "linksTokensCss": true,
+        "tokenUsages": 7,
+        "rawColorLiterals": 30,
         "documented": true
       },
       {
@@ -126,8 +126,8 @@
         "css": "source/build-tokens.mjs",
         "layer": "文档",
         "linksTokensCss": true,
-        "tokenUsages": 10,
-        "rawColorLiterals": 48,
+        "tokenUsages": 11,
+        "rawColorLiterals": 47,
         "documented": true
       },
       {
@@ -136,8 +136,8 @@
         "css": "source/build-motion.mjs",
         "layer": "文档",
         "linksTokensCss": true,
-        "tokenUsages": 4,
-        "rawColorLiterals": 65,
+        "tokenUsages": 17,
+        "rawColorLiterals": 50,
         "documented": true
       },
       {
@@ -169,93 +169,24 @@
         "layer": "文档",
         "instrument": true,
         "linksTokensCss": true,
-        "tokenUsages": 15,
-        "rawColorLiterals": 83,
+        "tokenUsages": 16,
+        "rawColorLiterals": 82,
         "documented": true
       }
     ],
     "auditedSurfaces": 7,
-    "totalRawColorLiterals": 490,
-    "totalTokenUsages": 14,
-    "surfacesLinkingTokensCss": 2,
-    "duplicatedLiterals": [
-      {
-        "literal": "#67ccff",
-        "token": "color.accent",
-        "pages": [
-          "motion.html"
-        ],
-        "count": 5
-      },
-      {
-        "literal": "#101720",
-        "token": "color.canvas",
-        "pages": [
-          "studio.html",
-          "catalog.html",
-          "motion.html"
-        ],
-        "count": 4
-      },
-      {
-        "literal": "#31445f",
-        "token": "color.border",
-        "pages": [
-          "catalog.html",
-          "motion.html"
-        ],
-        "count": 4
-      },
-      {
-        "literal": "#182434",
-        "token": "color.panel",
-        "pages": [
-          "catalog.html",
-          "motion.html"
-        ],
-        "count": 3
-      },
-      {
-        "literal": "#dce7f6",
-        "token": "color.text",
-        "pages": [
-          "catalog.html",
-          "motion.html"
-        ],
-        "count": 2
-      },
-      {
-        "literal": "#93a9c5",
-        "token": "color.text-muted",
-        "pages": [
-          "catalog.html",
-          "motion.html"
-        ],
-        "count": 2
-      },
-      {
-        "literal": "#141b25",
-        "token": "color.scene-background",
-        "pages": [
-          "studio.html"
-        ],
-        "count": 1
-      },
-      {
-        "literal": "#365a95",
-        "token": "color.glass",
-        "pages": [
-          "motion.html"
-        ],
-        "count": 1
-      }
-    ],
+    "totalRawColorLiterals": 462,
+    "totalTokenUsages": 42,
+    "surfacesLinkingTokensCss": 4,
+    "duplicatedLiterals": [],
     "radiusScale": [
       {
         "value": "var(--wb-radius-card)",
-        "count": 2,
+        "count": 5,
         "pages": [
-          "tokens.html"
+          "catalog.html",
+          "tokens.html",
+          "motion.html"
         ]
       },
       {
@@ -353,12 +284,10 @@
       },
       {
         "value": "9px",
-        "count": 7,
+        "count": 4,
         "pages": [
           "index.html",
           "studio.html",
-          "catalog.html",
-          "motion.html",
           "comparison.html"
         ]
       },
@@ -425,7 +354,7 @@
         ]
       }
     ],
-    "radiusTokenUsages": 2
+    "radiusTokenUsages": 5
   },
   "gates": [
     "components.html 的预览必须由出货样式表渲染，不得手写副本",

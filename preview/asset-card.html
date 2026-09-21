@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -99,15 +99,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <style>/* asset-card · source/build-catalog.mjs */
 :where(.ds-stage--docs.ds-pv-asset-card), :where(.ds-stage--docs.ds-pv-asset-card) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-asset-card){color-scheme:dark}
-:where(.ds-stage--docs.ds-pv-asset-card){margin:0;background:#101720;color:#dce7f6;font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-asset-card){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-asset-card) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-asset-card) a:focus-visible{outline:2px solid #acccff;outline-offset:4px}
-:where(.ds-stage--docs.ds-pv-asset-card) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b}
+:where(.ds-stage--docs.ds-pv-asset-card) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated)}
 :where(.ds-stage--docs.ds-pv-asset-card) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-asset-card) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-asset-card) nav{display:flex;gap:20px;font-size:12px;color:#aabedb;flex-wrap:wrap}
 :where(.ds-stage--docs.ds-pv-asset-card) .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-:where(.ds-stage--docs.ds-pv-asset-card) article{border:1px solid #31445f;border-radius:9px;background:#182434;overflow:hidden;transition:border-color .15s,transform .15s}
+:where(.ds-stage--docs.ds-pv-asset-card) article{border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:var(--wb-color-panel);overflow:hidden;transition:border-color .15s,transform .15s}
 :where(.ds-stage--docs.ds-pv-asset-card) article:hover{border-color:#7197ca;transform:translateY(-2px)}
 :where(.ds-stage--docs.ds-pv-asset-card) .preview img{width:100%;height:100%;object-fit:contain;max-height:190px}
 :where(.ds-stage--docs.ds-pv-asset-card) .preview>span{position:absolute;bottom:10px;right:11px;background:#0a121fcc;font:9px monospace;color:#637e9e;padding:4px 6px;border-radius:3px}
@@ -228,7 +228,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

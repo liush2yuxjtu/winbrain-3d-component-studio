@@ -119,7 +119,7 @@ const PAGE_CSS = `
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -300,7 +300,7 @@ const PREVIEW_RUNTIME = `<script>
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });
@@ -363,8 +363,8 @@ const componentsHtml = `<!doctype html>
 <section class="tools">
   <input id="search" class="search" type="search" placeholder="搜索组件、选择器、Token…" aria-label="搜索 UI 组件">
   <div class="filters" role="group" aria-label="组件分组">
-    <button data-group-filter="全部" class="active">全部</button>
-    ${COMPONENT_GROUPS.map((group) => `<button data-group-filter="${esc(group.id)}">${esc(group.name)}</button>`).join("")}
+    <button data-group-filter="全部" class="active" aria-pressed="true">全部</button>
+    ${COMPONENT_GROUPS.map((group) => `<button data-group-filter="${esc(group.id)}" aria-pressed="false">${esc(group.name)}</button>`).join("")}
   </div>
 </section>
 
@@ -449,7 +449,7 @@ const previewIndexCss = `${PREVIEW_CSS}${PAGE_CSS}
 .card:hover{border-color:#7197ca;transform:translateY(-2px)}
 .card h3{font-size:15px;font-weight:500;margin:9px 0 7px}
 .card code{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4}
-.card p{font-size:11.5px;color:#93a9c5;line-height:1.7;margin:11px 0 13px}
+.card p{font-size:11.5px;color:var(--wb-color-text-muted);line-height:1.7;margin:11px 0 13px}
 .card .kind{font-size:9px;letter-spacing:1.2px;color:#7fa6d9}
 .card .stage{display:inline-block;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:3px 5px;color:#9dbde4}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
