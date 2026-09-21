@@ -119,7 +119,7 @@ const PAGE_CSS = `
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -300,7 +300,7 @@ const PREVIEW_RUNTIME = `<script>
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });
@@ -324,6 +324,12 @@ const allCss = (await Promise.all(UI_COMPONENTS.map((c) => buildCss(c)))).join("
 const undocumentedTop = audit.tokens.undocumented.slice(0, 6).map((token) => esc(token.id));
 const orphans = audit.coverage.radiusScale.filter((entry) => /^\d/.test(entry.value) && !["9px", "19px", "20px", "16px"].includes(entry.value));
 const duplicated = audit.coverage.duplicatedLiterals.slice(0, 8);
+// Derived, not typed. The list used to be written out by hand and named pages that had
+// since started linking tokens.css, so the audit page contradicted its own number.
+const unlinkedSurfaces = audit.coverage.surfaces
+  .filter((surface) => !surface.instrument && !surface.linksTokensCss)
+  .map((surface) => surface.label)
+  .join("、");
 
 const componentsHtml = `<!doctype html>
 <html lang="zh-CN">
@@ -357,14 +363,14 @@ const componentsHtml = `<!doctype html>
   <div class="stat"><b>${audit.ui.fullyDocumented}/${audit.ui.components}</b><span>七项文档检查全部通过的组件（说明、变体、属性、状态、无障碍、约定、示例）</span></div>
   <div class="stat warn"><b>${audit.coverage.totalRawColorLiterals}</b><span>出货页面 &lt;style&gt; 里的硬编码色值；同期 Token 引用只有 ${audit.coverage.totalTokenUsages} 处</span></div>
   <div class="stat warn"><b>${audit.tokens.undocumentedCount}</b><span>已在 tokens.js 定义、但没有进入 TOKEN_CATALOG / tokens.css 的设计值</span></div>
-  <div class="stat"><b>${audit.coverage.surfacesLinkingTokensCss}/${audit.coverage.auditedSurfaces}</b><span>链接 tokens.css 的出货页面（首页、编辑器、资产总览、原图对照都没有引用 Token 层）</span></div>
+  <div class="stat"><b>${audit.coverage.surfacesLinkingTokensCss}/${audit.coverage.auditedSurfaces}</b><span>链接 tokens.css 的出货页面（未接入：${unlinkedSurfaces}）</span></div>
 </section>
 
 <section class="tools">
   <input id="search" class="search" type="search" placeholder="搜索组件、选择器、Token…" aria-label="搜索 UI 组件">
   <div class="filters" role="group" aria-label="组件分组">
-    <button data-group-filter="全部" class="active">全部</button>
-    ${COMPONENT_GROUPS.map((group) => `<button data-group-filter="${esc(group.id)}">${esc(group.name)}</button>`).join("")}
+    <button data-group-filter="全部" class="active" aria-pressed="true">全部</button>
+    ${COMPONENT_GROUPS.map((group) => `<button data-group-filter="${esc(group.id)}" aria-pressed="false">${esc(group.name)}</button>`).join("")}
   </div>
 </section>
 
@@ -449,7 +455,7 @@ const previewIndexCss = `${PREVIEW_CSS}${PAGE_CSS}
 .card:hover{border-color:#7197ca;transform:translateY(-2px)}
 .card h3{font-size:15px;font-weight:500;margin:9px 0 7px}
 .card code{font:10px ui-monospace,SFMono-Regular,Menlo,monospace;color:#8fb4e4}
-.card p{font-size:11.5px;color:#93a9c5;line-height:1.7;margin:11px 0 13px}
+.card p{font-size:11.5px;color:var(--wb-color-text-muted);line-height:1.7;margin:11px 0 13px}
 .card .kind{font-size:9px;letter-spacing:1.2px;color:#7fa6d9}
 .card .stage{display:inline-block;font:9px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #395574;border-radius:4px;padding:3px 5px;color:#9dbde4}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -95,13 +95,25 @@ function tokenValueIndex() {
       index.get(raw).push(token.id);
     }
   }
-  for (const value of ["9px", "19px", "20px", "16px"]) {
-    const owner = TOKEN_CATALOG.find((t) => String(t.value).toLowerCase() === value);
-    if (owner) {
-      const key = `len:${value}`;
-      if (!index.has(key)) index.set(key, []);
-      index.get(key).push(owner.id);
-    }
+  return index;
+}
+
+/**
+ * Radius values, so a hand-written `border-radius: 16px` counts as a duplicate too.
+ *
+ * Restricting this to the Radius group matters. A value-only lookup credits `16px` to
+ * whichever token is listed first, and that is `space.16` — a spacing decision owning a
+ * border-radius literal. Same class of mistake the namespace rule above exists to stop.
+ *
+ * Deliberately not extended to every dimension: `padding: 16px` equals `space.16` but is
+ * not a copy of a spacing decision, and flagging those would drown the real ones.
+ */
+function radiusValueIndex() {
+  const index = new Map();
+  for (const token of TOKEN_CATALOG) {
+    if (token.group !== "Radius") continue;
+    const raw = String(token.value).trim().toLowerCase();
+    if (raw) index.set(raw, token.id);
   }
   return index;
 }
@@ -125,6 +137,7 @@ export async function auditDesignSystem(root) {
     .map((leaf) => ({ id: leaf.id, value: Array.isArray(leaf.value) ? leaf.value.join(", ") : String(leaf.value) }));
 
   const valueIndex = tokenValueIndex();
+  const radiusIndex = radiusValueIndex();
   const surfaces = [];
   const radiusUse = new Map();
   const duplicates = new Map();
@@ -147,6 +160,15 @@ export async function auditDesignSystem(root) {
         const value = match[1].trim();
         if (!radiusUse.has(value)) radiusUse.set(value, []);
         radiusUse.get(value).push(surface.id);
+        // The same ratchet as the colours, one property over: a radius literal that equals
+        // a radius token is a copy of that decision, whether or not anyone noticed.
+        const owner = radiusIndex.get(value.toLowerCase());
+        if (!owner) continue;
+        const key = `${value.toLowerCase()}|${owner}`;
+        if (!duplicates.has(key)) duplicates.set(key, { literal: value.toLowerCase(), token: owner, pages: new Set(), count: 0 });
+        const entry = duplicates.get(key);
+        entry.pages.add(surface.id);
+        entry.count += 1;
       }
       for (const hex of hexes) {
         const owners = valueIndex.get(hex.toLowerCase());

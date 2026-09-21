@@ -4,7 +4,7 @@ WinBrain 的三维组织世界由四层设计决策叠起来：数值、运动�
 
 **这一层现在有什么：** 28 个 UI 组件的说明、变体、属性、状态、无障碍约定与代码示例；一张可视化的组件真源页 `components.html`；28 个单组件独立预览页；一份由脚本实测、不含手写数字的覆盖审计。
 
-**这一层现在缺什么：** Token 定义完整，但界面代码里绝大多数颜色、圆角和字号是直接写死的。7 个出货页面里只有 2 个引用了 `tokens.css`。这不是「没时间做」的欠债，而是当前系统的真实形态——下面的 Audit 一节给出全部数字和优先级。
+**这一层现在缺什么：** Token 定义完整，但界面代码里绝大多数颜色、圆角和字号是直接写死的。7 个出货页面里有 4 个引用了 `tokens.css`，而剩下的 `index.html` 一张就有 79 处硬编码色值。这不是「没时间做」的欠债，而是当前系统的真实形态——下面的 Audit 一节给出全部数字和优先级。
 
 ---
 
@@ -42,7 +42,7 @@ WinBrain 的三维组织世界由四层设计决策叠起来：数值、运动�
 
 ## 二、Token 层
 
-`source/tokens/tokens.js` 里 81 个叶子值，`TOKEN_CATALOG` 收录 40 条，其中 40 条带 CSS 变量。**原则是：重复的设计规则进 Token；一次性模型顶点、人物姿态、单个资产的坐标不进 Token。**
+`source/tokens/tokens.js` 里 83 个叶子值，`TOKEN_CATALOG` 收录 54 条，其中 54 条带 CSS 变量。**原则是：重复的设计规则进 Token；一次性模型顶点、人物姿态、单个资产的坐标不进 Token。**
 
 Token 分成八组，其中五组只服务 3D：
 
@@ -51,13 +51,13 @@ Token 分成八组，其中五组只服务 3D：
 | Color | `color.canvas` `color.accent` `color.glass` | UI 与 3D 都有 |
 | Typography | `type.hero.size` `type.body.size` | UI 与 3D 标签 |
 | Spacing | `space.8` … `space.32` | UI |
-| Radius | `radius.card` `radius.panel` `radius.dialog` | UI |
+| Radius | `radius.control` `radius.card` `radius.panel` `radius.dialog` | UI |
 | 3D Material | `material.glass.transmission` `material.glass.ior` | 只有 3D |
 | Lighting | `light.key.intensity` `light.rim.intensity` | 只有 3D |
 | Camera | `camera.yaw` `camera.pitch` `camera.ortho.*` | 只有 3D |
 | Layout | `layer.application.y` `layer.intelligence.y` `layer.data.y` | 只有 3D |
 
-第五到第八组没有对应的 CSS 变量是有意的：CSS 表达不了传输率、IOR 和正交视锥。它们的消费者是 3D 运行时，通过 `source/tokens/apply.js` 在 `buildWorld()` 之前读取。
+第五到第八组同样会生成 CSS 变量——`tokens.css` 里能看到 `--wb-camera-yaw`、`--wb-material-glass-ior` 之类。它们进变量表是为了「所有设计值只有一个出口」，不是因为页面要用：CSS 表达不了传输率、IOR 和正交视锥，真正的消费者是 3D 运行时，通过 `source/tokens/apply.js` 在 `buildWorld()` 之前读取。
 
 ### 命名约定
 
@@ -118,89 +118,134 @@ Token 分成八组，其中五组只服务 3D：
 | 页面 | 链接 `tokens.css` | `var(--wb-*)` 次数 | 硬编码色值 |
 |---|---|---|---|
 | `index.html` 三维首页 | ❌ | 0 | 79 |
-| `studio.html` 组件编辑器 | ❌ | 0 | 198 |
-| `catalog.html` 资产总览 | ❌ | 0 | 36 |
-| `tokens.html` Token 审计 | ✅ | 10 | 48 |
-| `motion.html` Motion 库 | ✅ | 4 | 65 |
+| `studio.html` 组件编辑器 | ✅ | 7 | 192 |
+| `catalog.html` 资产总览 | ✅ | 7 | 30 |
+| `tokens.html` Token 审计 | ✅ | 11 | 47 |
+| `motion.html` Motion 库 | ✅ | 17 | 50 |
 | `comparison.html` 原图对照 | ❌ | 0 | 29 |
 | `global.html` 全局预览 | ❌ | 0 | 35 |
-| **合计（7 个出货页面）** | **2 / 7** | **14** | **490** |
+| **合计（7 个出货页面）** | **4 / 7** | **42** | **462** |
 
-`components.html` 是这套审计自己的载体：它用 15 处 `var()`，但它同时内嵌了一份出货 CSS 的副本用于渲染预览。把它计入会让每一条尺度和每一处字面值都被重复统计，并用自己的 `var()` 抬高整体采用率。因此上表把它单列，**色值、圆角与手写复制的合计都只用左边 7 个出货页面**。
+`components.html` 是这套审计自己的载体：它用 16 处 `var()`，但它同时内嵌了一份出货 CSS 的副本用于渲染预览。把它计入会让每一条尺度和每一处字面值都被重复统计，并用自己的 `var()` 抬高整体采用率。因此上表把它单列，**色值、圆角与手写复制的合计都只用左边 7 个出货页面**。
 
-### 5.2 被手写复制最多的 Token 值
+**462 不是 462 个待办。** 去重后全站只有 335 种色值，其中 289 种（86%）只出现一次——那是三维场景的一次性色，抽象成 Token 只会得到 289 个只用一次的 Token。真正可机械处理的，是下面那一小类：**逐字节等于某条既有 Token 的手写副本**。
 
-这些不是「看起来像」，是**完全相同**的色值：
+### 5.2 手写复制的 Token 值：已清零
 
-| 字面值 | 等价 Token | 出现次数 | 页面 |
+上一版这里列着 8 处逐字节复制，分布在 `catalog.html`、`motion.html` 与 `studio.html`。现在全部改为 `var()` 引用，**颜色字面值复制实测为 0**。
+
+同一把尺子量到圆角时还剩 **11 处**：`9px`（`radius.card`）4 处、`16px`（`radius.control`）3 处、`20px`（`radius.dialog`）2 处、`19px`（`radius.panel`）2 处。这不是没发现，是**暂时做不了**，而且原因已实测确认：
+
+> `index.html` 拒绝加载 `tokens.css`。它的 CSP 是 `style-src 'unsafe-inline'`，没有 `'self'`，Chromium 直接拦掉同源样式表——控制台原话：`Loading the stylesheet ... violates the following Content Security Policy directive: "style-src 'unsafe-inline'"`。实测时 `var(--wb-color-accent)` 解析成继承值 `rgb(244, 245, 248)`，不是 `#67ccff`。
+
+这 11 处全部经由 `source/shell.html` 进入审计。把 `index.html` 接进 Token 层，等于要放宽这张页面的 CSP——那是关于首页安全姿态的决定，不该由一次 Token 迁移替它回答。所以棘轮把这笔债记在明面上（§5.6），而不是让它继续隐形。
+
+改动是**可证明无视觉变化**的，不是「看起来一样」：
+
+- 每个被替换的字面值都**逐字节等于**它换上的那条 Token；
+- `tokens.css` 是一个纯 `:root` 自定义属性块，没有任何元素选择器，所以给它加 `<link>` 不可能影响布局；
+- `source/review/verify-design-system.py` 的 32 项 `getComputedStyle` 对比在改动前后都是 **32 / 32**。
+
+#### 编辑器影子 Token：上一版的建议是错的
+
+`studio.css` 的 `:root` 里有四个局部变量，上一版建议「并回 `tokens.css`」。照字面做会把编辑器重新上色——其中三个和同名全局 Token 的**值并不相同**：
+
+| 局部变量 | 值 | 与同名全局 Token 的关系 | 实际处理 |
 |---|---|---|---|
-| `#67ccff` | `color.accent` | 5 | motion.html |
-| `#101720` | `color.canvas` | 4 | studio.html, catalog.html, motion.html |
-| `#31445f` | `color.border` | 4 | catalog.html, motion.html |
-| `#182434` | `color.panel` | 3 | catalog.html, motion.html |
-| `#dce7f6` | `color.text` | 2 | catalog.html, motion.html |
-| `#93a9c5` | `color.text-muted` | 2 | catalog.html, motion.html |
-| `#141b25` | `color.scene-background` | 1 | studio.html |
-| `#365a95` | `color.glass` | 1 | motion.html |
+| `--surface` | `#141b25` | 等于 `color.scene-background` | 零处 `var()` 引用，删除 |
+| `--accent` | `#9dbeff` | **不等于** `color.accent`（`#67ccff`） | 零处 `var()` 引用，删除 |
+| `--border` | `#28313f` | **不等于** `color.border`（`#31445f`） | 提升为 `color.divider`，4 处引用改 `var()` |
+| `--dim` | `#8d9aab` | **不等于** `color.text-muted`（`#93a9c5`） | 提升为 `color.text-dim`，1 处引用改 `var()` |
 
-`catalog.html` 的卡片最典型：`border:1px solid #31445f; background:#182434; border-radius:9px` 三个值分别等于 `--wb-color-border`、`--wb-color-panel`、`--wb-radius-card`，写死在那里。改 Token 不会影响它。
+真正的问题是**命名撞车**：`--border` / `--accent` 看起来像全局 Token 的别名，值却不同，读代码的人一定会猜错。现在这四条声明全部消失，值从 `tokens.js` 流到 `tokens.css`，编辑器视觉不变。
 
-编辑器还有一层影子 Token：`.studio-header` 之外，`studio.css` 的 `:root` 重新声明了 `--border` `--dim` `--surface` `--accent` 四个局部变量，和 `tokens.css` 的同名概念各走各的。
+`--border` 与 `--dim` 提升后仍是**编辑器专用值**，与全局同级 Token 不同。编辑器是否应该比站点更深，是一个尚未决定的设计问题——本文件只保证不再有第二条真源。
+
+这一步还暴露了一个已经存在的缺陷：`studio.css` 补上了 `var(--wb-*)` 之后，`studio.html` 并没有加载 `tokens.css`，7 处引用全部解析为空。**给 `studio.html` 补 `<link>` 是这一步的必要条件，不是附带改动。**
 
 ### 5.3 圆角尺度
 
-系统里实际出现 **20 种** `border-radius` 值，Token 只定义了 3 种，且只在 7 个出货页面里被引用 **2 次**。
+系统里实际出现 **20 种** `border-radius` 值，Token 定义了 4 种（补录 `radius.control` 后），在 7 个出货页面里被引用 **5 次**。
 
 ```
-var(--wb-radius-card) ×2   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
-20px ×2   19px ×2   16px ×3   15px ×2   12px ×4   10px ×5    9px ×7
+var(--wb-radius-card) ×5   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
+20px ×2   19px ×2   16px ×3   15px ×2   12px ×4   10px ×5    9px ×4
 8px ×6    7px ×3    6px ×8    5px ×6    4px ×8    3px ×5    2px ×1
 ```
 
-其中 `16px` 就是 `tokens.js` 里的 `radius.control`——胶囊按钮和筛选胶囊都在用它，但这条 Token 没有导出。`10px`（`.motion-card`、`.timeline-card`）没有任何 Token 对应。
+`16px` 就是 `radius.control`——胶囊按钮和筛选胶囊一直在手写它。`10px`（`.motion-card`、`.timeline-card`）仍没有任何 Token 对应。
+
+注意 `50% ×14` 与 `100% ×2` 是圆和胶囊，不是尺度决策。真正的临时值约 17 个，且多为 2–5px 的小件。这一步需要逐页看图，是纯观感工作，不适合和数值迁移混在一起做。
 
 ### 5.4 没有出口的设计值
 
-`tokens.js` 里 81 个叶子值中，**40 个**既不在 `tokens.css` 里，也没有以同值同命名空间的条目出现在审计页。判定规则写在 `source/system/audit.js`：按名字匹配，或按「同值且同命名空间」匹配（`typography.heroSize` 与 `type.hero.size` 是同一个决策，`radius.control: 16px` 与 `space.16: 16px` 不是）。
+`tokens.js` 里 83 个叶子值中，**28 个**既不在 `tokens.css` 里，也没有以同值同命名空间的条目出现在审计页。
 
-这 40 个值按组分布：
+判定规则写在 `source/system/audit.js`：按名字匹配，或按「同值且同命名空间」匹配（`typography.heroSize` 与 `type.hero.size` 是同一个决策，`radius.control: 16px` 与 `space.16: 16px` 不是）。
+
+这 28 个全部是 3D 值：
 
 | 组 | 数量 | 例子 |
 |---|---|---|
-| Color | 7 | `color.panelElevated` `color.accentBlue` `color.accentViolet` `color.silver` `color.white` `color.black` `color.sceneClear` |
-| Typography | 2 | `typography.familyUi` `typography.layerTitleWeight` |
-| Spacing | 2 | `spacing.4` `spacing.48` |
-| Radius | 1 | `radius.control` |
-| 3D Material | 9 | `material.default.clearcoat` `material.silver.*` `material.white.*` `material.glass.metalness/thickness` `material.tubeGlass.*` |
+| 3D Material | 10 | `material.default.clearcoat` `material.glass.thickness` `material.tubeGlass.*` |
+| Lighting | 9 | `lighting.hemisphere.*` `lighting.{key,rim,front}.color/position` |
+| Camera | 7 | `camera.ortho.*` `camera.target` |
 | Rendering | 2 | `rendering.pixelRatioMin/Max` |
-| Lighting | 11 | `lighting.hemisphere.*` `lighting.{key,rim,front}.color/position` |
-| Camera | 6 | `camera.ortho.left/right/top/bottom/near/far` `camera.target` |
 
-3D 类的值不出现在 CSS 里是设计使然（见第二节）。但 Color、Typography、Spacing、Radius 这四组的 **12 个**值是纯 UI 决策，它们应该出现在 `tokens.css` 里。
+**UI 四组（Color / Typography / Spacing / Radius）已经没有任何出口缺口。**
+
+上一版这里有 12 个，其中 7 个被描述成「纯 UI 决策」。那个判断只对了一部分——按**真实消费者**核对之后：
+
+| 值 | 真实消费者 | 处理 |
+|---|---|---|
+| `color.panelElevated` | 4 张文档页的页头背景，值被手写 | 补 `css:`，页面改用 `var()` |
+| `radius.control` / `space.4` / `space.48` | UI 大量手写（4px 一项就有约 45 处） | 补 `css:` |
+| `type.familyUi` / `type.layerTitleWeight` | 值被手写进 CSS，但**没有任何代码读这个键** | 补 `css:`，供后续接管 |
+| `accentBlue` / `accentViolet` / `sceneClear` / `silver` / `white` / `black` | 只在 `source/core.js` 与 `.wb3d.json` | 仅入册，不新增 UI 使用者 |
+
+补录后 `TOKEN_CATALOG` 收录 54 条，其中 54 条带 CSS 变量。
 
 ### 5.5 命名一致性
 
-同一个角色出现了多种命名：
-
-| 角色 | 现有写法 | 位置 |
+| 角色 | 现有写法 | 状态 |
 |---|---|---|
-| 页面头部 | `.header`（首页）/ `.studio-header`（编辑器）/ `header`（文档页裸元素） | 三处三种 |
-| 分区小标签 | `.eyebrow` / `.stage-eyebrow` / `.kind` / `.token-meta` | 四种写法，字号 9/10/11px、字距 1.4/1.5/2px、五种蓝色 |
-| 选中态 | `.active`（多数）/ `[aria-pressed="true"]`（首页控制按钮） | 两套约定 |
-| 徽标圆角 | `.version-tag` 4px / `.item-version` 3px | 两处不一致 |
+| 选中态 | `.active` + `aria-pressed` / `aria-current` | ✅ 已统一 |
+| 页面头部 | `.header`（首页）/ `.studio-header`（编辑器）/ `header`（文档页裸元素） | ⬜ 三处三种 |
+| 分区小标签 | `.eyebrow` / `.stage-eyebrow` / `.kind` / `.token-meta` | ⬜ 四种写法，字号 9/10/11px、字距 1.4/1.5/2px、五种蓝色 |
+| 徽标圆角 | `.version-tag` 4px / `.item-version` 3px | ⬜ 两处不一致 |
 
-`.active` 与 `aria-pressed` 并存不是纯风格问题：前者读屏收不到，后者能。
+选中态不是纯风格问题：`.active` 读屏收不到，`aria-pressed` / `aria-current` 能。但**「选中」在不同控件上需要的属性并不相同**，一把梭是错的：
 
-### 5.6 优先级行动
+| 控件 | 属性 | 为什么 |
+|---|---|---|
+| 首页导航项 | `aria-current="page"` | 导航里「当前所在」正是该属性定义的语义 |
+| 编辑器视图切换 / 筛选胶囊 | `aria-pressed` | 容器已是 `role="group"`，按钮是切换按钮 |
+| 编辑器组件行 | `aria-pressed` | 宽 100% 的 `<button>`，同一时刻只有一个为真 |
 
-1. **把 12 个纯 UI 值加进 `TOKEN_CATALOG`**（Color 7、Typography 2、Spacing 2、Radius 1）。它们是已经存在的决策，只是没有出口；加进去不动任何视觉。
-2. **让 `catalog.html` 与 `motion.html` 改用 `var()`。** `motion.html` 已经 `<link>` 了 `tokens.css`，只差把 8 处字面值换掉；`catalog.html` 要先加 `<link>`。改完之后上表 8 处手写复制全部消失，这是收益最直接的一步。
-3. **收敛圆角尺度。** 20 种降到 5–6 种（如 3/5/9/16/20/50%），先决定 `10px` 归到 `9px` 还是新增 `radius.card-elevated`。
-4. **统一小标签命名**为一个组件（见 `preview/eyebrow.html`），四套写法合并。
-5. **给 `.active` 补上 `aria-pressed` 或 `aria-current`**，让选中状态对读屏可见。`components.html` 每个组件的 Accessibility 一栏已经逐条记下了缺什么。
-6. **编辑器消除影子 Token**：把 `studio.css` 的 `:root` 四个局部变量并回 `tokens.css`。
+这四处现在都是「`.active` 负责样式、ARIA 属性负责语义」，**CSS 一行没改**——所以这一步同样不产生视觉变化。`components.html` 里对应组件的 Preview、Accessibility 与 Code Example 也已同步到出货代码的真实写法。
 
----
+### 5.6 棘轮：防止清单重新长回来
+
+上面的数字都会被 `npm run verify:system` 核对，但那只能证明**文档没腐烂**，并不能阻止数字本身变大。所以 `source/system/check-docs.mjs` 末尾有两条棘轮：
+
+| 棘轮 | 当前 / 上限 | 为什么不是 0 |
+|---|---|---|
+| 手写复制的颜色字面值（应被 `var()` 取代） | 0 / 0 | — |
+| 手写复制的圆角字面值 | 11 / 11 | 全部要经 `index.html`，而它的 CSP 挡住 `tokens.css`（§5.2） |
+| 没有出口的 UI 设计值 | 0 / 0 | — |
+
+圆角那一行**钉死在 11**，且单位是出现次数而不是「有几种不同的值」——按种类计数的话，同一个值被复制任意多次都不会触发，那就不叫棘轮了。
+
+失败信息会直接说明怎么处理：新值要么改用 `var()`、要么补 `TOKEN_CATALOG` 出口，**要么把这个上限连同理由一起调高**。调高上限是允许的，但必须写理由——否则棘轮就变成了装饰。
+
+### 5.7 优先级行动
+
+1. **决定 `index.html` 的 CSP 要不要放宽。** 这是剩下所有 Token 接入工作的前置条件，也是唯一需要人拍板的一条：它的 `style-src` 只允许内联样式，`tokens.css` 进不去（实测见 §5.2）。放宽，11 处圆角复制和 79 处硬编码色值才有下一步；不放宽，这张页面就应当被明确列为「不进 Token 体系」的例外，而不是继续挂着待办。`comparison.html`、`global.html` 是内部工具页，可一并归入例外。
+2. **收敛圆角尺度。** 20 种降到 5–6 种（如 3/5/9/16/20/50%），先决定 `10px` 归到 `9px` 还是新增 `radius.card-elevated`。纯观感工作，需要看图。
+3. **统一小标签命名**为一个组件（见 `preview/eyebrow.html`），四套写法合并。
+4. **统一页面头部命名**，三处变一处。
+5. **决定编辑器专用 Token 的去留**：`color.divider` / `color.text-dim` 现在是合法的独立 Token，但「编辑器为什么比站点更深」还没有答案。
+6. **给 `comparison.html` / `global.html` 补 `<link>`**，或明确承认它们是临时页、不进入 Token 体系。
 
 ## 六、贡献规则
 
@@ -212,7 +257,11 @@ var(--wb-radius-card) ×2   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
 
 **改一个组件的样式：** 直接改出货样式表（`shell.html` / `studio.css` / `build-*.mjs`）。预览会在下次构建时自动跟上，**不要**去改 `components.html`——它是产物。
 
-**改设计数值：** 只改 `source/tokens/tokens.js`。不要在任何页面里新写一个「差不多」的值；如果现有 Token 不够用，先加 Token 再用。
+**改设计数值：** 只改 `source/tokens/tokens.js`。不要在任何页面里新写一个「差不多」的值；如果现有 Token 不够用，先加 Token 再用。**加 Token 时必须同时决定它的消费者**：值被页面手写，就顺手改成 `var()`；只在 3D 运行时里用，就只入册不铺开，并在 §5.4 的表格里记一行。
+
+**改选中态：** `.active` 只管样式，语义交给 ARIA。先查 §5.5 的表决定用 `aria-pressed` 还是 `aria-current`，再同步 `ui-registry.js` 里该组件的 Preview、Accessibility 与 Code Example——`components.html` 是组件设计真源，它写着「当前选中没有 aria-pressed 可读」而产品里已经有了，就是真源在说谎。
+
+**棘轮失败时：** 不要直接调高上限。先问「这个新值该不该有出口」；确实不该有的（例如一次性场景色），再把上限和理由一起写进 `check-docs.mjs`。
 
 **不要做的事：**
 
@@ -240,7 +289,7 @@ pip install playwright && playwright install chromium   # 首次
 cd source && npm run verify:system -- --port 8791
 ```
 
-`npm run verify:system` 跑两步：先由 `source/system/check-docs.mjs` 断言本文件里每一个引用到的实测数字都与 `manifest.json` 一致（文档里的数字同样会腐烂），再由 `source/review/verify-design-system.py` 驱动真实 Chromium 做五件事，结果写入 `design-system-verification.json`：
+`npm run verify:system` 跑两步：先由 `source/system/check-docs.mjs` 断言本文件里每一个引用到的实测数字都与 `manifest.json` 一致（文档里的数字同样会腐烂），再跑 §5.6 的两条棘轮，再由 `source/review/verify-design-system.py` 驱动真实 Chromium 做五件事，结果写入 `design-system-verification.json`：
 
 1. **加载**：6 个页面 + 28 个独立预览页全部返回 200 且舞台有实际尺寸；
 2. **样式一致性**：16 组「同一组件在出货页面 vs 在预览里」的 `getComputedStyle` 逐属性对比，**每个组件同时验证 `components.html` 与 `preview/<组件>.html` 两个落点**，共 32 项；
@@ -250,14 +299,15 @@ cd source && npm run verify:system -- --port 8791
 
 最近一次结果：**47 项检查全部通过，样式一致性 32 / 32，0 个 JavaScript 错误，0 个外部请求。**
 
-这套对比是真会失败的——本次开发过程中它先后抓出了六个真实缺陷，每一个都会让预览悄悄偏离产品：
+这套对比是真会失败的——它先后抓出了七个真实缺陷，每一个都会让预览悄悄偏离产品：
 
 1. 剥 `@font-face` 的正则连带吞掉了后面的整张样式表；
 2. `source/home.js` 被当作 CSS 解析，一个假规则吃掉了剩余全部规则；
 3. 文档页的基础规则串进首页舞台，让预览继承了另一张页面的 `body` 颜色；
 4. `.swatch`（Token 审计）与 `.preview>span`（资产总览）在共享作用域里撞车；
 5. Token 卡片漏登记两个变体选择器，卡片自己的预览框渲染成无样式；
-6. `preview/` 里的跨页导航用了根相对路径，从子目录打开全部 404——这是后加的链接检查抓到的。
+6. `preview/` 里的跨页导航用了根相对路径，从子目录打开全部 404——这是后加的链接检查抓到的；
+7. 给 `tokens.html` 的筛选胶囊补 ARIA 时改动了内联脚本，少了一个右括号，整页脚本停止执行（`missing ) after argument list`）。样式一致性 32 / 32 依然全过——**只比样式是抓不到脚本挂掉的**，这条是靠控制台错误检查兜住的。
 
 截图落在 `design-system-review/`。
 

@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -150,9 +150,9 @@ body{padding:0}
   <div class="ds-frame ds-frame--scene"><div class="ds-stage ds-stage--home ds-pv-control-button"><div class="viewport"><main class="scene" aria-label="Control Button 预览"><div class="controls is-open" style="opacity:1;visibility:visible;transform:none"><p>拖动旋转 · 滚轮缩放<br>点击物体，探索每一层</p><div class="control-buttons"><button>初始视角</button><button aria-pressed="false">自动旋转</button><button aria-pressed="true">模型线框</button><button aria-pressed="false">暂停光流</button></div></div></main></div></div></div>
   <p class="ds-stage-note">舞台：<b>首页场景</b> · 在 1536 × 1024 的 .scene 内按原坐标绝对定位渲染，预览按比例缩放。</p>
   <div class="ds-body">
-    <section class="ds-block"><h4>Description</h4><p>一组可切换的视图开关（自动旋转、模型线框、暂停光流）。这是全站唯一把“按下”状态写进 aria-pressed 的控件，因此样式规则也直接挂在属性选择器上——状态和语义是同一条规则，不会漂移。</p></section>
+    <section class="ds-block"><h4>Description</h4><p>一组可切换的视图开关（自动旋转、模型线框、暂停光流）。全站唯一把选中样式直接挂在属性选择器上的控件（.control-buttons button[aria-pressed=&quot;true&quot;]）；其余控件的选中态一律是 .active 管样式、ARIA 管语义。写进属性选择器意味着状态和语义是同一条规则，不会漂移。</p></section>
     <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>Toggle</td><td>有开/关两态的视图开关，带 aria-pressed</td><td><code>.control-buttons button[aria-pressed]</code></td></tr><tr><td>Action</td><td>一次性动作（初始视角、进入编辑器），无 aria-pressed</td><td><code>.control-buttons button</code></td></tr></tbody></table></section>
-    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>小尺寸胶囊。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>对应 tokens.js 里的 radius.control，但该 Token 未导出到 tokens.css。</td></tr><tr><td><code>border</code></td><td>border</td><td><code>1px solid #a7c3ea2c</code></td><td>约 17% 透明度的冷色描边。</td></tr><tr><td><code>background</code></td><td>color</td><td><code>#14213460</code></td><td>约 38% 透明度的深蓝，浮在三维场景上方。</td></tr><tr><td><code>aria-pressed</code></td><td>boolean</td><td><code>false</code></td><td>开/关状态，驱动选中样式。同时存在一个 hover 规则，两条规则共用同一样式块。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>小尺寸胶囊。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>对应 tokens.js 里的 radius.control，已导出为 --wb-radius-control。</td></tr><tr><td><code>border</code></td><td>border</td><td><code>1px solid #a7c3ea2c</code></td><td>约 17% 透明度的冷色描边。</td></tr><tr><td><code>background</code></td><td>color</td><td><code>#14213460</code></td><td>约 38% 透明度的深蓝，浮在三维场景上方。</td></tr><tr><td><code>aria-pressed</code></td><td>boolean</td><td><code>false</code></td><td>开/关状态，驱动选中样式。同时存在一个 hover 规则，两条规则共用同一样式块。</td></tr></tbody></table></section>
     <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>半透明深蓝底 + 17% 冷色描边，文字 11px #b5c9e1</td><td>点击切换</td></tr><tr><td>Hover</td><td>与按下态相同：#335da081 底、#fff 字、#a5c6ff80 边</td><td>过渡 0.2s</td></tr><tr><td>Pressed (aria-pressed=true)</td><td>同 Hover</td><td>保持到再次点击</td></tr><tr><td>Hidden (父级 .controls)</td><td>父级默认 opacity:0 / visibility:hidden / translateY(6px)</td><td>Explore 展开或父级 :focus-within 时恢复</td></tr></tbody></table></section>
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>button，切换型带 aria-pressed</p></div>
@@ -206,7 +206,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

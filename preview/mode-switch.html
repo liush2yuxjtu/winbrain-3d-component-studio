@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -97,12 +97,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 @media(max-width:760px){.ds-page>header{height:auto;min-height:70px;padding:15px 22px;gap:12px}.ds-page>header strong span{display:none}.ds-pagenav{gap:12px}.ds-page .hero{grid-template-columns:1fr;padding:38px 0 28px}.ds-page .count{display:none}.guidance{grid-template-columns:1fr}.ds-page .tools{position:static;flex-direction:column}.ds-page footer{display:block}}
 </style>
 <style>/* mode-switch · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-mode-switch){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-mode-switch), :where(.ds-stage--studio.ds-pv-mode-switch){
   height: 100%;
   overflow: hidden;
@@ -124,7 +118,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -389,7 +383,7 @@ body{padding:0}
   <h1>Mode Switch<code>mode-switch</code></h1>
   <p class="lede">编辑器里的三段式视图切换：整页构图 / 独立 3D / Mock-3D 对齐。</p>
   <div class="siblings"><a href="page-header.html">Page Header</a><a href="nav-item.html">Nav Item</a><a href="mode-switch.html" aria-current="page">Mode Switch</a></div>
-  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-mode-switch"><div class="mode-switch"><button data-view="mock">Mock-3D 对齐</button><button data-view="asset" class="active">独立 3D</button><button data-view="page">整页构图</button></div></div></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-mode-switch"><div class="mode-switch" role="group" aria-label="预览模式"><button data-mode="composition" aria-pressed="false">整页构图</button><button data-mode="asset" aria-pressed="false">独立 3D</button><button data-mode="mock" class="active" aria-pressed="true">Mock-3D 对齐</button></div></div></div>
   <p class="ds-stage-note">舞台：<b>编辑器</b> · 在 body[data-mode=&quot;studio&quot;] 的字体与底色上下文中渲染。</p>
   <div class="ds-body">
     <section class="ds-block"><h4>Description</h4><p>互斥的分段控件。未选中项是文字，选中项抬起到 #3a4a64 并带 1px 4px 阴影，用极轻的立面差表达“当前挡位”，而不是用高饱和色。整体容器比按钮深一档（#1c2430 对 #10151d 的页面底）。</p></section>
@@ -397,18 +391,18 @@ body{padding:0}
     <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>padding</code></td><td>length</td><td><code>4px（容器）/ 7px 12px（按钮）</code></td><td>容器内边距就是胶囊的呼吸空间。</td></tr><tr><td><code>gap</code></td><td>length</td><td><code>3px</code></td><td>按钮间距，比容器内边距小，形成连续轨道。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>7px（容器）/ 4px（按钮）</code></td><td>两层圆角不成比例，按钮更方。</td></tr><tr><td><code>white-space</code></td><td>keyword</td><td><code>nowrap</code></td><td>≤1180px 时收小字号而不换行。</td></tr></tbody></table></section>
     <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>按钮 11px #8fa0b6，透明背景</td><td>hover 继承全局 button:hover 的 #2b394d</td></tr><tr><td>Active</td><td>background #3a4a64，文字 #e6efff，box-shadow 0 1px 4px #0004</td><td>切换 body[data-view]</td></tr><tr><td>Narrow (≤1180px)</td><td>按钮 padding 收到 7px 6px，字号 10px</td><td>—</td></tr></tbody></table></section>
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
-      <div><b>ROLE</b><p>无 role=tablist；是三个普通 button，由 class 表达选中</p></div>
+      <div><b>ROLE</b><p>无 role=tablist；是三个普通 button，选中由 class 表达，状态由 aria-pressed 暴露</p></div>
       <div><b>KEYBOARD</b><p>Tab 逐个进入，Enter/Space 切换</p></div>
-      <div><b>SCREEN READER</b><p>朗读按钮文字；当前挡位没有 aria-selected / aria-pressed 可读</p></div>
+      <div><b>SCREEN READER</b><p>朗读按钮文字；当前挡位由 aria-pressed=&quot;true&quot; 暴露</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>容器比页面底深或浅一档，让轨道可见</li><li>选中态用立面差 + 轻微阴影，不用高饱和填充</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要在同一个 switch 里混放图标项和文字项</li><li>不要把按钮数超过 4 个（已是编辑器宽度的极限）</li></ul></div>
     </div></section>
-    <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;mode-switch&quot;&gt;
-  &lt;button data-view=&quot;mock&quot;&gt;Mock-3D 对齐&lt;/button&gt;
-  &lt;button data-view=&quot;asset&quot; class=&quot;active&quot;&gt;独立 3D&lt;/button&gt;
-  &lt;button data-view=&quot;page&quot;&gt;整页构图&lt;/button&gt;
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;mode-switch&quot; role=&quot;group&quot; aria-label=&quot;预览模式&quot;&gt;
+  &lt;button data-mode=&quot;composition&quot; aria-pressed=&quot;false&quot;&gt;整页构图&lt;/button&gt;
+  &lt;button data-mode=&quot;asset&quot; aria-pressed=&quot;false&quot;&gt;独立 3D&lt;/button&gt;
+  &lt;button data-mode=&quot;mock&quot; class=&quot;active&quot; aria-pressed=&quot;true&quot;&gt;Mock-3D 对齐&lt;/button&gt;
 &lt;/div&gt;</pre></section>
     <section class="ds-block"><h4>Source</h4><table><thead><tr><th>来源</th><th>选择器</th></tr></thead><tbody><tr><td><code>source/editor/studio.css</code><br><code>source/editor/studio-shell.html</code></td><td><code>.mode-switch</code> <code>.mode-switch button</code> <code>.mode-switch button.active</code></td></tr></tbody></table></section>
   </div>
@@ -450,7 +444,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -99,10 +99,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <style>/* small-card · source/build-motion.mjs */
 :where(.ds-stage--docs.ds-pv-small-card), :where(.ds-stage--docs.ds-pv-small-card) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-small-card){color-scheme:dark;scroll-behavior:smooth}
-:where(.ds-stage--docs.ds-pv-small-card){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-small-card){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-small-card) a{color:inherit;text-decoration:none}
-:where(.ds-stage--docs.ds-pv-small-card) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-small-card) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-small-card) a:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-small-card) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:8}
 :where(.ds-stage--docs.ds-pv-small-card) header strong{font-size:21px}
 :where(.ds-stage--docs.ds-pv-small-card) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-small-card) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -111,7 +111,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-small-card) .mini-links{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid #2d4058;margin-top:12px;padding-top:10px}
 :where(.ds-stage--docs.ds-pv-small-card) .token-links a, :where(.ds-stage--docs.ds-pv-small-card) .usage a, :where(.ds-stage--docs.ds-pv-small-card) .mini-links a{font:9px ui-monospace,monospace;color:#acd0ff;border:1px solid #395574;border-radius:4px;padding:4px 5px}
 :where(.ds-stage--docs.ds-pv-small-card) .small-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-:where(.ds-stage--docs.ds-pv-small-card) .small-card{border:1px solid #31445f;border-radius:9px;background:#182434;padding:16px;min-height:150px}
+:where(.ds-stage--docs.ds-pv-small-card) .small-card{border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:var(--wb-color-panel);padding:16px;min-height:150px}
 :where(.ds-stage--docs.ds-pv-small-card) .small-card h3{font:500 13px ui-monospace,monospace;margin:8px 0}
 :where(.ds-stage--docs.ds-pv-small-card) .small-card code{font-size:10px;color:#9bb9df}
 :where(.ds-stage--docs.ds-pv-small-card) .metric{display:flex;align-items:baseline;gap:6px;margin:10px 0}
@@ -220,7 +220,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

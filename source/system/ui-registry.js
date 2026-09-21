@@ -98,7 +98,7 @@ export const UI_SYSTEM = {
         { property: "height", type: "length", default: "40px", description: "按钮高度，图标用 vertical-align:middle 对齐。" },
         { property: "gap", type: "length", default: "34px（导航）/ 10px（图标与文字）", description: "项间距与项内间距是两套值。" },
         { property: "border-radius", type: "length", default: "25px", description: "仅选中态生效。" },
-        { property: "aria-pressed / .active", type: "state", default: "—", description: "源码用 class 表达选中，未使用 aria-current。" },
+        { property: "aria-current / .active", type: "state", default: "—", description: "class 负责选中样式，当前项另由 aria-current=\"page\" 暴露给读屏。" },
       ],
       states: [
         { state: "Default", visual: "无背景，文字 14px #f4f5f8（继承 body）", behavior: "hover 无背景变化" },
@@ -108,15 +108,15 @@ export const UI_SYSTEM = {
       a11y: {
         role: "button（原生 <button>），容器 nav 带 aria-label",
         keyboard: "Tab 进入，Enter/Space 触发；focus-visible 有 6px 外扩描边以免贴住胶囊边界",
-        screenReader: "由文本内容朗读；图标 svg 无 title，不重复朗读",
+        screenReader: "由文本内容朗读；图标 svg 无 title，不重复朗读；当前项用 aria-current=\"page\" 暴露",
       },
       dos: ["选中态同时改变形状与背景，避免只靠颜色", "图标统一 19px、stroke 1.4、currentColor"],
       donts: ["不要用 <a> 假装按钮再补 role", "不要在导航项之间混用不同图标尺寸"],
       tokens: [],
       hardcoded: ["#282f43", "#a6d6ff", "25px", "40px", "34px", "19px"],
-      example: `<button class="active" data-home>Home</button>
+      example: `<button class="active" data-home aria-current="page">Home</button>
 <button data-open="chat"><svg class="icon">…</svg>AI Chat</button>`,
-      markup: `<header class="header"><nav class="nav" aria-label="Main navigation"><button class="active" data-home>Home</button><button data-open="chat"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>AI Chat</button><button data-open="data"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>Data</button></nav></header>`,
+      markup: `<header class="header"><nav class="nav" aria-label="Main navigation"><button class="active" data-home aria-current="page">Home</button><button data-open="chat"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>AI Chat</button><button data-open="data"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>Data</button></nav></header>`,
     },
     {
       id: "mode-switch",
@@ -143,20 +143,20 @@ export const UI_SYSTEM = {
         { state: "Narrow (≤1180px)", visual: "按钮 padding 收到 7px 6px，字号 10px", behavior: "—" },
       ],
       a11y: {
-        role: "无 role=tablist；是三个普通 button，由 class 表达选中",
+        role: "无 role=tablist；是三个普通 button，选中由 class 表达，状态由 aria-pressed 暴露",
         keyboard: "Tab 逐个进入，Enter/Space 切换",
-        screenReader: "朗读按钮文字；当前挡位没有 aria-selected / aria-pressed 可读",
+        screenReader: "朗读按钮文字；当前挡位由 aria-pressed=\"true\" 暴露",
       },
       dos: ["容器比页面底深或浅一档，让轨道可见", "选中态用立面差 + 轻微阴影，不用高饱和填充"],
       donts: ["不要在同一个 switch 里混放图标项和文字项", "不要把按钮数超过 4 个（已是编辑器宽度的极限）"],
       tokens: [],
       hardcoded: ["#1c2430", "#2c3849", "#3a4a64", "#8fa0b6", "#e6efff", "7px", "4px", "3px"],
-      example: `<div class="mode-switch">
-  <button data-view="mock">Mock-3D 对齐</button>
-  <button data-view="asset" class="active">独立 3D</button>
-  <button data-view="page">整页构图</button>
+      example: `<div class="mode-switch" role="group" aria-label="预览模式">
+  <button data-mode="composition" aria-pressed="false">整页构图</button>
+  <button data-mode="asset" aria-pressed="false">独立 3D</button>
+  <button data-mode="mock" class="active" aria-pressed="true">Mock-3D 对齐</button>
 </div>`,
-      markup: `<div class="mode-switch"><button data-view="mock">Mock-3D 对齐</button><button data-view="asset" class="active">独立 3D</button><button data-view="page">整页构图</button></div>`,
+      markup: `<div class="mode-switch" role="group" aria-label="预览模式"><button data-mode="composition" aria-pressed="false">整页构图</button><button data-mode="asset" aria-pressed="false">独立 3D</button><button data-mode="mock" class="active" aria-pressed="true">Mock-3D 对齐</button></div>`,
     },
 
     // ---------------------------------------------------------------- actions
@@ -205,7 +205,7 @@ export const UI_SYSTEM = {
       stage: "home",
       summary: "首页视角工具里的小胶囊按钮，16px 圆角，带 aria-pressed 开关态。",
       description:
-        "一组可切换的视图开关（自动旋转、模型线框、暂停光流）。这是全站唯一把“按下”状态写进 aria-pressed 的控件，因此样式规则也直接挂在属性选择器上——状态和语义是同一条规则，不会漂移。",
+        "一组可切换的视图开关（自动旋转、模型线框、暂停光流）。全站唯一把选中样式直接挂在属性选择器上的控件（.control-buttons button[aria-pressed=\"true\"]）；其余控件的选中态一律是 .active 管样式、ARIA 管语义。写进属性选择器意味着状态和语义是同一条规则，不会漂移。",
       sources: ["source/shell.html"],
       selectors: [
         ".controls",
@@ -221,7 +221,7 @@ export const UI_SYSTEM = {
       ],
       props: [
         { property: "padding", type: "length", default: "7px 11px", description: "小尺寸胶囊。" },
-        { property: "border-radius", type: "length", default: "16px", description: "对应 tokens.js 里的 radius.control，但该 Token 未导出到 tokens.css。" },
+        { property: "border-radius", type: "length", default: "16px", description: "对应 tokens.js 里的 radius.control，已导出为 --wb-radius-control。" },
         { property: "border", type: "border", default: "1px solid #a7c3ea2c", description: "约 17% 透明度的冷色描边。" },
         { property: "background", type: "color", default: "#14213460", description: "约 38% 透明度的深蓝，浮在三维场景上方。" },
         { property: "aria-pressed", type: "boolean", default: "false", description: "开/关状态，驱动选中样式。同时存在一个 hover 规则，两条规则共用同一样式块。" },
@@ -239,7 +239,7 @@ export const UI_SYSTEM = {
       },
       dos: ["开/关类开关必须带 aria-pressed 并让样式依赖该属性", "整组开关用 flex-wrap 兜住窄屏"],
       donts: ["不要用 .active class 表达开关状态（同一页面已有两套选中约定）", "不要把 .controls 的隐藏做成 display:none，否则键盘无法唤起"],
-      tokens: ["radius.control（未导出）"],
+      tokens: ["radius.control"],
       hardcoded: ["#a7c3ea2c", "#14213460", "#335da081", "#a5c6ff80", "#b5c9e1", "16px"],
       example: `<div class="control-buttons">
   <button id="rotate" aria-pressed="false">自动旋转</button>
@@ -890,17 +890,17 @@ export const UI_SYSTEM = {
       a11y: {
         role: "button（宽 100% 的 <button>）",
         keyboard: "Tab 逐行；方向键未接管",
-        screenReader: "朗读名称；版本号 .item-version 是相邻文本会被一并读出；改动状态无文本替代",
+        screenReader: "朗读名称；版本号 .item-version 是相邻文本会被一并读出；选中态由 aria-pressed 暴露；改动状态 .edit-dot 无文本替代",
       },
       dos: ["改动状态用圆点而不是改变整行颜色", "按 family 给图标换色，让类别在密集列表里可扫"],
       donts: ["不要用颜色深浅表达选中（已有左侧条承担）", "不要让版本徽标和改动圆点同时占位（都用 margin-left:auto）"],
       tokens: [],
       hardcoded: ["#293d5c", "#b0ceff", "#223148", "#c0ccdd", "#ccab69", "#91b9f6", "#bb9ff5", "#9cbec7", "5px", "21px"],
-      example: `<button class="component-item active" data-family="actor" data-id="actor.experts">
+      example: `<button class="component-item active" aria-pressed="true" data-family="actor" data-id="actor.experts">
   <span class="component-glyph">◆</span>专家
   <span class="edit-dot"></span>
 </button>`,
-      markup: `<div id="component-list" style="padding:0"><div class="library-category"><span>智能角色</span><span>4</span></div><button class="component-item" data-family="actor"><span class="component-glyph">◆</span>项目团队</button><button class="component-item active changed" data-family="actor"><span class="component-glyph">◆</span>专家<span class="edit-dot"></span></button><button class="component-item" data-family="data"><span class="component-glyph">▣</span>Documents<span class="item-version">V5</span></button></div>`,
+      markup: `<div id="component-list" style="padding:0"><div class="library-category"><span>智能角色</span><span>4</span></div><button class="component-item" aria-pressed="false" data-family="actor"><span class="component-glyph">◆</span>项目团队</button><button class="component-item active changed" aria-pressed="true" data-family="actor"><span class="component-glyph">◆</span>专家<span class="edit-dot"></span></button><button class="component-item" aria-pressed="false" data-family="data"><span class="component-glyph">▣</span>Documents<span class="item-version">V5</span></button></div>`,
     },
     {
       id: "explore-layer-card",
@@ -1176,7 +1176,7 @@ export const UI_SYSTEM = {
       stage: "docs",
       summary: "Token 审计页的分类筛选胶囊，选中态填实。",
       description:
-        "一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊）但不同语义：这里用 .active class 表达唯一选中，而首页用 aria-pressed。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。",
+        "一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊），选中态也都是 class + aria-pressed 的组合：.active 管样式，aria-pressed 管语义。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。",
       sources: ["source/build-tokens.mjs"],
       selectors: [".filters", ".filters button", ".filters button.active", ".tools", ".search"],
       variants: [
@@ -1184,7 +1184,7 @@ export const UI_SYSTEM = {
         { name: "Active", useWhen: "唯一选中的分类；再点“全部”可复位", selector: ".filters button.active" },
       ],
       props: [
-        { property: "border-radius", type: "length", default: "16px", description: "与首页 .control-buttons button 相同，等于未导出的 radius.control。" },
+        { property: "border-radius", type: "length", default: "16px", description: "与首页 .control-buttons button 相同，等于 radius.control。" },
         { property: "padding", type: "length", default: "7px 11px", description: "与首页控制按钮完全一致。" },
         { property: "font-size", type: "length", default: "10px", description: "比首页的 11px 小一档。" },
       ],
@@ -1196,17 +1196,17 @@ export const UI_SYSTEM = {
       a11y: {
         role: "容器 role=\"group\" + aria-label=\"Token 分类\"",
         keyboard: "Tab 逐个；Enter/Space 切换",
-        screenReader: "朗读分类名；当前选中没有 aria-pressed / aria-current",
+        screenReader: "朗读分类名；当前选中由 aria-pressed=\"true\" 暴露",
       },
       dos: ["第一个胶囊固定为“全部”，提供复位入口", "与搜索框组合时用 flex-wrap 兜住窄屏"],
       donts: ["不要与搜索框抢占同一行宽度（窄屏要转成纵向）", "不要给分类胶囊加图标"],
       tokens: [],
       hardcoded: ["#38506d", "#162232", "#91a9c9", "#315986", "#77a8e6", "16px"],
       example: `<div class="filters" role="group" aria-label="Token 分类">
-  <button class="active" data-group-filter="全部">全部</button>
-  <button data-group-filter="Color">Color</button>
+  <button class="active" data-group-filter="全部" aria-pressed="true">全部</button>
+  <button data-group-filter="Color" aria-pressed="false">Color</button>
 </div>`,
-      markup: `<div class="filters" role="group" aria-label="Token 分类"><button class="active" data-group-filter="全部">全部</button><button data-group-filter="Color">Color</button><button data-group-filter="Typography">Typography</button><button data-group-filter="Spacing">Spacing</button><button data-group-filter="3D Material">3D Material</button><button data-group-filter="Camera">Camera</button></div>`,
+      markup: `<div class="filters" role="group" aria-label="Token 分类"><button class="active" data-group-filter="全部" aria-pressed="true">全部</button><button data-group-filter="Color" aria-pressed="false">Color</button><button data-group-filter="Typography" aria-pressed="false">Typography</button><button data-group-filter="Spacing" aria-pressed="false">Spacing</button><button data-group-filter="3D Material" aria-pressed="false">3D Material</button><button data-group-filter="Camera" aria-pressed="false">Camera</button></div>`,
     },
     {
       id: "eyebrow",

@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -99,29 +99,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 <style>/* motion-card · source/build-motion.mjs */
 :where(.ds-stage--docs.ds-pv-motion-card), :where(.ds-stage--docs.ds-pv-motion-card) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-motion-card){color-scheme:dark;scroll-behavior:smooth}
-:where(.ds-stage--docs.ds-pv-motion-card){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-motion-card){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-motion-card) a{color:inherit;text-decoration:none}
-:where(.ds-stage--docs.ds-pv-motion-card) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-motion-card) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-motion-card) a:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-motion-card) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:8}
 :where(.ds-stage--docs.ds-pv-motion-card) header strong{font-size:21px}
 :where(.ds-stage--docs.ds-pv-motion-card) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-motion-card) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
 :where(.ds-stage--docs.ds-pv-motion-card) .behavior-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-card{display:grid;grid-template-columns:180px 1fr;border:1px solid #31445f;border-radius:10px;overflow:hidden;background:#182434}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-card{display:grid;grid-template-columns:180px 1fr;border:1px solid var(--wb-color-border);border-radius:10px;overflow:hidden;background:var(--wb-color-panel)}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview{min-height:250px;background:#0d1723;position:relative;overflow:hidden;border-right:1px solid #2d415d}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview i, :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview b{position:absolute;display:block}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.robot i{width:52px;height:72px;border-radius:22px;background:#b9d2ef;left:64px;top:85px;animation:bob 2.8s ease-in-out infinite}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.robot b{width:104px;height:14px;border-radius:50%;background:#67ccff25;box-shadow:0 0 28px #67ccff66;left:38px;top:172px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet:before{content:"";position:absolute;width:140px;height:80px;border:1px solid #5b769c;border-radius:50%;left:20px;top:83px;transform:rotate(-12deg)}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet i{width:11px;height:11px;border-radius:50%;background:#baf3ff;box-shadow:0 0 18px #67ccff;left:30px;top:130px;animation:packet 2.6s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet i{width:11px;height:11px;border-radius:50%;background:#baf3ff;box-shadow:0 0 18px var(--wb-color-accent);left:30px;top:130px;animation:packet 2.6s linear infinite}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:before, :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:after{content:"";position:absolute;bottom:48px;width:1px;height:150px;background:linear-gradient(#67ccff00,#67ccff88,#67ccff00)}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:before{left:65px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:after{left:115px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise i{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px #67ccff;left:61px;top:168px;animation:rise 2.3s linear infinite}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise b{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px #67ccff;left:111px;top:145px;animation:rise 2.3s linear infinite .65s}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise i{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px var(--wb-color-accent);left:61px;top:168px;animation:rise 2.3s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise b{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px var(--wb-color-accent);left:111px;top:145px;animation:rise 2.3s linear infinite .65s}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit:before{content:"";position:absolute;width:110px;height:110px;border:1px solid #4f6e96;border-radius:50%;left:34px;top:68px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit b{width:42px;height:42px;border-radius:50%;background:#365a95;box-shadow:0 0 30px #67ccff55;left:68px;top:102px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit i{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px #67ccff;left:83px;top:61px;transform-origin:6px 62px;animation:orbit 5s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit b{width:42px;height:42px;border-radius:50%;background:var(--wb-color-glass);box-shadow:0 0 30px #67ccff55;left:68px;top:102px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit i{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px var(--wb-color-accent);left:83px;top:61px;transform-origin:6px 62px;animation:orbit 5s linear infinite}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-copy{padding:20px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-copy h2{font:500 16px ui-monospace,SFMono-Regular,Menlo,monospace;margin:8px 0 10px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-copy p{color:#91a7c4;line-height:1.6;margin:0 0 14px;font-size:12px}
@@ -240,7 +240,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

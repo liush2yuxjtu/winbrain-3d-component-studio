@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -102,7 +102,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-page-header){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-page-header) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-page-header) a:focus-visible, :where(.ds-stage--docs.ds-pv-page-header) button:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-page-header) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:5}
+:where(.ds-stage--docs.ds-pv-page-header) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:5}
 :where(.ds-stage--docs.ds-pv-page-header) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-page-header) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-page-header) nav{display:flex;gap:24px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -121,10 +121,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* page-header · source/build-motion.mjs */
 :where(.ds-stage--docs.ds-pv-page-header), :where(.ds-stage--docs.ds-pv-page-header) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-page-header){color-scheme:dark;scroll-behavior:smooth}
-:where(.ds-stage--docs.ds-pv-page-header){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-page-header){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-page-header) a{color:inherit;text-decoration:none}
-:where(.ds-stage--docs.ds-pv-page-header) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-page-header) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-page-header) a:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-page-header) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:8}
 :where(.ds-stage--docs.ds-pv-page-header) header strong{font-size:21px}
 :where(.ds-stage--docs.ds-pv-page-header) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-page-header) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -147,10 +147,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* page-header · source/build-catalog.mjs */
 :where(.ds-stage--docs.ds-pv-page-header), :where(.ds-stage--docs.ds-pv-page-header) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-page-header){color-scheme:dark}
-:where(.ds-stage--docs.ds-pv-page-header){margin:0;background:#101720;color:#dce7f6;font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-page-header){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-page-header) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-page-header) a:focus-visible{outline:2px solid #acccff;outline-offset:4px}
-:where(.ds-stage--docs.ds-pv-page-header) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b}
+:where(.ds-stage--docs.ds-pv-page-header) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated)}
 :where(.ds-stage--docs.ds-pv-page-header) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-page-header) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-page-header) nav{display:flex;gap:20px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -200,12 +200,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--home.ds-pv-nav-item) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--home.ds-pv-nav-item) .control-buttons button:hover, :where(.ds-stage--home.ds-pv-nav-item) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* mode-switch · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-mode-switch){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-mode-switch), :where(.ds-stage--studio.ds-pv-mode-switch){
   height: 100%;
   overflow: hidden;
@@ -227,7 +221,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -534,12 +528,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--home.ds-pv-control-button) .controls{opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .18s,transform .18s,visibility .18s}
 :where(.ds-stage--home.ds-pv-control-button) .controls.is-open, :where(.ds-stage--home.ds-pv-control-button) .controls:focus-within{opacity:1;visibility:visible;transform:none}
 /* primary-button · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-primary-button){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-primary-button), :where(.ds-stage--studio.ds-pv-primary-button){
   height: 100%;
   overflow: hidden;
@@ -561,7 +549,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -810,12 +798,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-primary-button) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-primary-button) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-primary-button) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* secondary-button · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-secondary-button){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-secondary-button), :where(.ds-stage--studio.ds-pv-secondary-button){
   height: 100%;
   overflow: hidden;
@@ -837,7 +819,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -1079,12 +1061,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-secondary-button) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-secondary-button) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-secondary-button) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* file-button · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-file-button){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-file-button), :where(.ds-stage--studio.ds-pv-file-button){
   height: 100%;
   overflow: hidden;
@@ -1106,7 +1082,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -1343,12 +1319,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-file-button) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-file-button) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-file-button) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* text-button · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-text-button){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-text-button), :where(.ds-stage--studio.ds-pv-text-button){
   height: 100%;
   overflow: hidden;
@@ -1370,7 +1340,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -1607,12 +1577,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-text-button) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-text-button) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-text-button) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* search-field · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-search-field){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-search-field), :where(.ds-stage--studio.ds-pv-search-field){
   height: 100%;
   overflow: hidden;
@@ -1634,7 +1598,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -1893,12 +1857,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-search-field) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-search-field) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-search-field) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* number-field · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-number-field){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-number-field), :where(.ds-stage--studio.ds-pv-number-field){
   height: 100%;
   overflow: hidden;
@@ -1920,7 +1878,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -2181,12 +2139,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-number-field) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-number-field) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-number-field) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* checkbox · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-checkbox){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-checkbox), :where(.ds-stage--studio.ds-pv-checkbox){
   height: 100%;
   overflow: hidden;
@@ -2208,7 +2160,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -2460,12 +2412,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-checkbox) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-checkbox) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-checkbox) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* color-field · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-color-field){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-color-field), :where(.ds-stage--studio.ds-pv-color-field){
   height: 100%;
   overflow: hidden;
@@ -2487,7 +2433,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -2737,12 +2683,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--studio.ds-pv-color-field) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--studio.ds-pv-color-field) .control-buttons button:hover, :where(.ds-stage--studio.ds-pv-color-field) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* nudge-pad · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-nudge-pad){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-nudge-pad), :where(.ds-stage--studio.ds-pv-nudge-pad){
   height: 100%;
   overflow: hidden;
@@ -2764,7 +2704,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -3024,7 +2964,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-token-card){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-token-card) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-token-card) a:focus-visible, :where(.ds-stage--docs.ds-pv-token-card) button:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-token-card) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:5}
+:where(.ds-stage--docs.ds-pv-token-card) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:5}
 :where(.ds-stage--docs.ds-pv-token-card) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-token-card) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-token-card) nav{display:flex;gap:24px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -3068,15 +3008,15 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* asset-card · source/build-catalog.mjs */
 :where(.ds-stage--docs.ds-pv-asset-card), :where(.ds-stage--docs.ds-pv-asset-card) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-asset-card){color-scheme:dark}
-:where(.ds-stage--docs.ds-pv-asset-card){margin:0;background:#101720;color:#dce7f6;font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-asset-card){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-asset-card) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-asset-card) a:focus-visible{outline:2px solid #acccff;outline-offset:4px}
-:where(.ds-stage--docs.ds-pv-asset-card) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b}
+:where(.ds-stage--docs.ds-pv-asset-card) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated)}
 :where(.ds-stage--docs.ds-pv-asset-card) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-asset-card) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-asset-card) nav{display:flex;gap:20px;font-size:12px;color:#aabedb;flex-wrap:wrap}
 :where(.ds-stage--docs.ds-pv-asset-card) .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-:where(.ds-stage--docs.ds-pv-asset-card) article{border:1px solid #31445f;border-radius:9px;background:#182434;overflow:hidden;transition:border-color .15s,transform .15s}
+:where(.ds-stage--docs.ds-pv-asset-card) article{border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:var(--wb-color-panel);overflow:hidden;transition:border-color .15s,transform .15s}
 :where(.ds-stage--docs.ds-pv-asset-card) article:hover{border-color:#7197ca;transform:translateY(-2px)}
 :where(.ds-stage--docs.ds-pv-asset-card) .preview img{width:100%;height:100%;object-fit:contain;max-height:190px}
 :where(.ds-stage--docs.ds-pv-asset-card) .preview>span{position:absolute;bottom:10px;right:11px;background:#0a121fcc;font:9px monospace;color:#637e9e;padding:4px 6px;border-radius:3px}
@@ -3113,29 +3053,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* motion-card · source/build-motion.mjs */
 :where(.ds-stage--docs.ds-pv-motion-card), :where(.ds-stage--docs.ds-pv-motion-card) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-motion-card){color-scheme:dark;scroll-behavior:smooth}
-:where(.ds-stage--docs.ds-pv-motion-card){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-motion-card){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-motion-card) a{color:inherit;text-decoration:none}
-:where(.ds-stage--docs.ds-pv-motion-card) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-motion-card) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-motion-card) a:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-motion-card) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:8}
 :where(.ds-stage--docs.ds-pv-motion-card) header strong{font-size:21px}
 :where(.ds-stage--docs.ds-pv-motion-card) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-motion-card) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
 :where(.ds-stage--docs.ds-pv-motion-card) .behavior-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-card{display:grid;grid-template-columns:180px 1fr;border:1px solid #31445f;border-radius:10px;overflow:hidden;background:#182434}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-card{display:grid;grid-template-columns:180px 1fr;border:1px solid var(--wb-color-border);border-radius:10px;overflow:hidden;background:var(--wb-color-panel)}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview{min-height:250px;background:#0d1723;position:relative;overflow:hidden;border-right:1px solid #2d415d}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview i, :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview b{position:absolute;display:block}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.robot i{width:52px;height:72px;border-radius:22px;background:#b9d2ef;left:64px;top:85px;animation:bob 2.8s ease-in-out infinite}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.robot b{width:104px;height:14px;border-radius:50%;background:#67ccff25;box-shadow:0 0 28px #67ccff66;left:38px;top:172px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet:before{content:"";position:absolute;width:140px;height:80px;border:1px solid #5b769c;border-radius:50%;left:20px;top:83px;transform:rotate(-12deg)}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet i{width:11px;height:11px;border-radius:50%;background:#baf3ff;box-shadow:0 0 18px #67ccff;left:30px;top:130px;animation:packet 2.6s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.packet i{width:11px;height:11px;border-radius:50%;background:#baf3ff;box-shadow:0 0 18px var(--wb-color-accent);left:30px;top:130px;animation:packet 2.6s linear infinite}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:before, :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:after{content:"";position:absolute;bottom:48px;width:1px;height:150px;background:linear-gradient(#67ccff00,#67ccff88,#67ccff00)}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:before{left:65px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise:after{left:115px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise i{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px #67ccff;left:61px;top:168px;animation:rise 2.3s linear infinite}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise b{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px #67ccff;left:111px;top:145px;animation:rise 2.3s linear infinite .65s}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise i{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px var(--wb-color-accent);left:61px;top:168px;animation:rise 2.3s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.rise b{width:8px;height:8px;border-radius:50%;background:#8bd8ff;box-shadow:0 0 15px var(--wb-color-accent);left:111px;top:145px;animation:rise 2.3s linear infinite .65s}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit:before{content:"";position:absolute;width:110px;height:110px;border:1px solid #4f6e96;border-radius:50%;left:34px;top:68px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit b{width:42px;height:42px;border-radius:50%;background:#365a95;box-shadow:0 0 30px #67ccff55;left:68px;top:102px}
-:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit i{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px #67ccff;left:83px;top:61px;transform-origin:6px 62px;animation:orbit 5s linear infinite}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit b{width:42px;height:42px;border-radius:50%;background:var(--wb-color-glass);box-shadow:0 0 30px #67ccff55;left:68px;top:102px}
+:where(.ds-stage--docs.ds-pv-motion-card) .motion-preview.orbit i{width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 0 14px var(--wb-color-accent);left:83px;top:61px;transform-origin:6px 62px;animation:orbit 5s linear infinite}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-copy{padding:20px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-copy h2{font:500 16px ui-monospace,SFMono-Regular,Menlo,monospace;margin:8px 0 10px}
 :where(.ds-stage--docs.ds-pv-motion-card) .motion-copy p{color:#91a7c4;line-height:1.6;margin:0 0 14px;font-size:12px}
@@ -3173,10 +3113,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* small-card · source/build-motion.mjs */
 :where(.ds-stage--docs.ds-pv-small-card), :where(.ds-stage--docs.ds-pv-small-card) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-small-card){color-scheme:dark;scroll-behavior:smooth}
-:where(.ds-stage--docs.ds-pv-small-card){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-small-card){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-small-card) a{color:inherit;text-decoration:none}
-:where(.ds-stage--docs.ds-pv-small-card) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-small-card) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-small-card) a:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-small-card) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:8}
 :where(.ds-stage--docs.ds-pv-small-card) header strong{font-size:21px}
 :where(.ds-stage--docs.ds-pv-small-card) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-small-card) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -3185,7 +3125,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-small-card) .mini-links{display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid #2d4058;margin-top:12px;padding-top:10px}
 :where(.ds-stage--docs.ds-pv-small-card) .token-links a, :where(.ds-stage--docs.ds-pv-small-card) .usage a, :where(.ds-stage--docs.ds-pv-small-card) .mini-links a{font:9px ui-monospace,monospace;color:#acd0ff;border:1px solid #395574;border-radius:4px;padding:4px 5px}
 :where(.ds-stage--docs.ds-pv-small-card) .small-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-:where(.ds-stage--docs.ds-pv-small-card) .small-card{border:1px solid #31445f;border-radius:9px;background:#182434;padding:16px;min-height:150px}
+:where(.ds-stage--docs.ds-pv-small-card) .small-card{border:1px solid var(--wb-color-border);border-radius:var(--wb-radius-card);background:var(--wb-color-panel);padding:16px;min-height:150px}
 :where(.ds-stage--docs.ds-pv-small-card) .small-card h3{font:500 13px ui-monospace,monospace;margin:8px 0}
 :where(.ds-stage--docs.ds-pv-small-card) .small-card code{font-size:10px;color:#9bb9df}
 :where(.ds-stage--docs.ds-pv-small-card) .metric{display:flex;align-items:baseline;gap:6px;margin:10px 0}
@@ -3214,12 +3154,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-small-card) .small-grid{grid-template-columns:1fr}
 }
 /* component-list-item · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-component-list-item){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-component-list-item), :where(.ds-stage--studio.ds-pv-component-list-item){
   height: 100%;
   overflow: hidden;
@@ -3241,7 +3175,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -3585,12 +3519,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--home.ds-pv-explore-layer-card) .control-buttons button:hover, :where(.ds-stage--home.ds-pv-explore-layer-card) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 :where(.ds-stage--home.ds-pv-explore-layer-card) .layer{cursor:pointer}
 /* toast · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-toast){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-toast), :where(.ds-stage--studio.ds-pv-toast){
   height: 100%;
   overflow: hidden;
@@ -3612,7 +3540,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -3907,12 +3835,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--home.ds-pv-dialog) .control-buttons button{padding:7px 11px;font-size:11px;border:1px solid #a7c3ea2c;border-radius:16px;background:#14213460;color:#b5c9e1;transition:background .2s}
 :where(.ds-stage--home.ds-pv-dialog) .control-buttons button:hover, :where(.ds-stage--home.ds-pv-dialog) .control-buttons button[aria-pressed="true"]{background:#335da081;color:#fff;border-color:#a5c6ff80}
 /* status-dot · source/editor/studio.css */
-:where(.ds-stage--studio.ds-pv-status-dot){
-  --border: #28313f;
-  --dim: #8d9aab;
-  --surface: #141b25;
-  --accent: #9dbeff;
-}
 :where(.ds-stage--studio.ds-pv-status-dot), :where(.ds-stage--studio.ds-pv-status-dot){
   height: 100%;
   overflow: hidden;
@@ -3934,7 +3856,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   width: 100%;
   min-width: 0;
   border: 1px solid #323d4d;
-  background: #101720;
+  background: var(--wb-color-canvas);
   border-radius: 5px;
   padding: 8px;
 }
@@ -3974,7 +3896,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   border-radius: 4px;
 }
 :where(.ds-stage--studio.ds-pv-status-dot) .muted{
-  color: var(--dim);
+  color: var(--wb-color-text-dim);
   font-size: 11px;
   font-weight: 400;
 }
@@ -3988,7 +3910,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 }
 :where(.ds-stage--studio.ds-pv-status-dot) .library-footer{
   padding: 14px 14px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--wb-color-divider);
   font-size: 10px;
   color: #8395ab;
 }
@@ -4222,10 +4144,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* badge · source/build-catalog.mjs */
 :where(.ds-stage--docs.ds-pv-badge), :where(.ds-stage--docs.ds-pv-badge) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-badge){color-scheme:dark}
-:where(.ds-stage--docs.ds-pv-badge){margin:0;background:#101720;color:#dce7f6;font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-badge){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-badge) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-badge) a:focus-visible{outline:2px solid #acccff;outline-offset:4px}
-:where(.ds-stage--docs.ds-pv-badge) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b}
+:where(.ds-stage--docs.ds-pv-badge) header{height:74px;border-bottom:1px solid #2c3a4c;display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated)}
 :where(.ds-stage--docs.ds-pv-badge) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-badge) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-badge) nav{display:flex;gap:20px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -4269,10 +4191,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* badge · source/build-motion.mjs */
 :where(.ds-stage--docs.ds-pv-badge), :where(.ds-stage--docs.ds-pv-badge) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-badge){color-scheme:dark;scroll-behavior:smooth}
-:where(.ds-stage--docs.ds-pv-badge){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-badge){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-badge) a{color:inherit;text-decoration:none}
-:where(.ds-stage--docs.ds-pv-badge) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-badge) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-badge) a:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-badge) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:8}
 :where(.ds-stage--docs.ds-pv-badge) header strong{font-size:21px}
 :where(.ds-stage--docs.ds-pv-badge) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-badge) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -4299,7 +4221,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-swatch){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-swatch) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-swatch) a:focus-visible, :where(.ds-stage--docs.ds-pv-swatch) button:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-swatch) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:5}
+:where(.ds-stage--docs.ds-pv-swatch) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:5}
 :where(.ds-stage--docs.ds-pv-swatch) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-swatch) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-swatch) nav{display:flex;gap:24px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -4327,7 +4249,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-filter-chip){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-filter-chip) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-filter-chip) a:focus-visible, :where(.ds-stage--docs.ds-pv-filter-chip) button:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-filter-chip) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:5}
+:where(.ds-stage--docs.ds-pv-filter-chip) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:5}
 :where(.ds-stage--docs.ds-pv-filter-chip) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-filter-chip) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-filter-chip) nav{display:flex;gap:24px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -4363,7 +4285,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-eyebrow){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-eyebrow) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-eyebrow) a:focus-visible, :where(.ds-stage--docs.ds-pv-eyebrow) button:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-eyebrow) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:5}
+:where(.ds-stage--docs.ds-pv-eyebrow) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:5}
 :where(.ds-stage--docs.ds-pv-eyebrow) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-eyebrow) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-eyebrow) nav{display:flex;gap:24px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -4383,10 +4305,10 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 /* eyebrow · source/build-motion.mjs */
 :where(.ds-stage--docs.ds-pv-eyebrow), :where(.ds-stage--docs.ds-pv-eyebrow) *{box-sizing:border-box}
 :where(.ds-stage--docs.ds-pv-eyebrow){color-scheme:dark;scroll-behavior:smooth}
-:where(.ds-stage--docs.ds-pv-eyebrow){margin:0;background:var(--wb-color-canvas,#101720);color:var(--wb-color-text,#dce7f6);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
+:where(.ds-stage--docs.ds-pv-eyebrow){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:14px -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-eyebrow) a{color:inherit;text-decoration:none}
-:where(.ds-stage--docs.ds-pv-eyebrow) a:focus-visible{outline:2px solid var(--wb-color-accent,#67ccff);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-eyebrow) header{height:74px;border-bottom:1px solid var(--wb-color-border,#31445f);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:8}
+:where(.ds-stage--docs.ds-pv-eyebrow) a:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
+:where(.ds-stage--docs.ds-pv-eyebrow) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:8}
 :where(.ds-stage--docs.ds-pv-eyebrow) header strong{font-size:21px}
 :where(.ds-stage--docs.ds-pv-eyebrow) header strong span{font-size:12px;font-weight:400;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-eyebrow) nav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -4466,16 +4388,16 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 
 <section class="strip">
   <div class="stat"><b>28/28</b><span>七项文档检查全部通过的组件（说明、变体、属性、状态、无障碍、约定、示例）</span></div>
-  <div class="stat warn"><b>490</b><span>出货页面 &lt;style&gt; 里的硬编码色值；同期 Token 引用只有 14 处</span></div>
-  <div class="stat warn"><b>40</b><span>已在 tokens.js 定义、但没有进入 TOKEN_CATALOG / tokens.css 的设计值</span></div>
-  <div class="stat"><b>2/7</b><span>链接 tokens.css 的出货页面（首页、编辑器、资产总览、原图对照都没有引用 Token 层）</span></div>
+  <div class="stat warn"><b>462</b><span>出货页面 &lt;style&gt; 里的硬编码色值；同期 Token 引用只有 42 处</span></div>
+  <div class="stat warn"><b>28</b><span>已在 tokens.js 定义、但没有进入 TOKEN_CATALOG / tokens.css 的设计值</span></div>
+  <div class="stat"><b>4/7</b><span>链接 tokens.css 的出货页面（未接入：三维首页、原图差异对照、全局预览）</span></div>
 </section>
 
 <section class="tools">
   <input id="search" class="search" type="search" placeholder="搜索组件、选择器、Token…" aria-label="搜索 UI 组件">
   <div class="filters" role="group" aria-label="组件分组">
-    <button data-group-filter="全部" class="active">全部</button>
-    <button data-group-filter="navigation">导航</button><button data-group-filter="actions">操作</button><button data-group-filter="forms">表单</button><button data-group-filter="surfaces">容器</button><button data-group-filter="feedback">反馈</button><button data-group-filter="display">数据展示</button>
+    <button data-group-filter="全部" class="active" aria-pressed="true">全部</button>
+    <button data-group-filter="navigation" aria-pressed="false">导航</button><button data-group-filter="actions" aria-pressed="false">操作</button><button data-group-filter="forms" aria-pressed="false">表单</button><button data-group-filter="surfaces" aria-pressed="false">容器</button><button data-group-filter="feedback" aria-pressed="false">反馈</button><button data-group-filter="display" aria-pressed="false">数据展示</button>
   </div>
 </section>
 
@@ -4486,16 +4408,16 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     下面三张表是实测结果，也是这个系统接下来该收敛的地方。
   </p>
   <div class="ds-body" style="grid-template-columns:repeat(2,minmax(0,1fr))">
-    <section class="ds-block"><h4>每个页面的 Token 采用</h4><table><thead><tr><th>页面</th><th>链接 tokens.css</th><th>var(--wb-*) 次数</th><th>硬编码色值</th></tr></thead><tbody><tr><td><code>index.html</code><br><span style="color:#7c93b3;font-size:11px">三维首页</span></td><td>❌</td><td>0</td><td>79</td></tr><tr><td><code>studio.html</code><br><span style="color:#7c93b3;font-size:11px">组件编辑器</span></td><td>❌</td><td>0</td><td>198</td></tr><tr><td><code>catalog.html</code><br><span style="color:#7c93b3;font-size:11px">资产总览</span></td><td>❌</td><td>0</td><td>36</td></tr><tr><td><code>tokens.html</code><br><span style="color:#7c93b3;font-size:11px">Token 审计</span></td><td>✅</td><td>10</td><td>48</td></tr><tr><td><code>motion.html</code><br><span style="color:#7c93b3;font-size:11px">Motion 库</span></td><td>✅</td><td>4</td><td>65</td></tr><tr><td><code>comparison.html</code><br><span style="color:#7c93b3;font-size:11px">原图差异对照</span></td><td>❌</td><td>0</td><td>29</td></tr><tr><td><code>global.html</code><br><span style="color:#7c93b3;font-size:11px">全局预览</span></td><td>❌</td><td>0</td><td>35</td></tr><tr><td><code>components.html</code><br><span style="color:#7c93b3;font-size:11px">组件预览（本页）</span></td><td>✅</td><td>15</td><td>83</td></tr></tbody></table></section>
-    <section class="ds-block"><h4>被手写复制最多的 Token 值</h4><table><thead><tr><th>字面值</th><th>等价 Token</th><th>出现次数</th><th>页面</th></tr></thead><tbody><tr><td><code>#67ccff</code></td><td><code>color.accent</code></td><td>5</td><td>motion.html</td></tr><tr><td><code>#101720</code></td><td><code>color.canvas</code></td><td>4</td><td>studio.html, catalog.html, motion.html</td></tr><tr><td><code>#31445f</code></td><td><code>color.border</code></td><td>4</td><td>catalog.html, motion.html</td></tr><tr><td><code>#182434</code></td><td><code>color.panel</code></td><td>3</td><td>catalog.html, motion.html</td></tr><tr><td><code>#dce7f6</code></td><td><code>color.text</code></td><td>2</td><td>catalog.html, motion.html</td></tr><tr><td><code>#93a9c5</code></td><td><code>color.text-muted</code></td><td>2</td><td>catalog.html, motion.html</td></tr><tr><td><code>#141b25</code></td><td><code>color.scene-background</code></td><td>1</td><td>studio.html</td></tr><tr><td><code>#365a95</code></td><td><code>color.glass</code></td><td>1</td><td>motion.html</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>每个页面的 Token 采用</h4><table><thead><tr><th>页面</th><th>链接 tokens.css</th><th>var(--wb-*) 次数</th><th>硬编码色值</th></tr></thead><tbody><tr><td><code>index.html</code><br><span style="color:#7c93b3;font-size:11px">三维首页</span></td><td>❌</td><td>0</td><td>79</td></tr><tr><td><code>studio.html</code><br><span style="color:#7c93b3;font-size:11px">组件编辑器</span></td><td>✅</td><td>7</td><td>192</td></tr><tr><td><code>catalog.html</code><br><span style="color:#7c93b3;font-size:11px">资产总览</span></td><td>✅</td><td>7</td><td>30</td></tr><tr><td><code>tokens.html</code><br><span style="color:#7c93b3;font-size:11px">Token 审计</span></td><td>✅</td><td>11</td><td>47</td></tr><tr><td><code>motion.html</code><br><span style="color:#7c93b3;font-size:11px">Motion 库</span></td><td>✅</td><td>17</td><td>50</td></tr><tr><td><code>comparison.html</code><br><span style="color:#7c93b3;font-size:11px">原图差异对照</span></td><td>❌</td><td>0</td><td>29</td></tr><tr><td><code>global.html</code><br><span style="color:#7c93b3;font-size:11px">全局预览</span></td><td>❌</td><td>0</td><td>35</td></tr><tr><td><code>components.html</code><br><span style="color:#7c93b3;font-size:11px">组件预览（本页）</span></td><td>✅</td><td>16</td><td>82</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>被手写复制最多的 Token 值</h4><table><thead><tr><th>字面值</th><th>等价 Token</th><th>出现次数</th><th>页面</th></tr></thead><tbody><tr><td><code>9px</code></td><td><code>radius.card</code></td><td>4</td><td>index.html, studio.html, comparison.html</td></tr><tr><td><code>16px</code></td><td><code>radius.control</code></td><td>3</td><td>index.html, studio.html, tokens.html</td></tr><tr><td><code>20px</code></td><td><code>radius.dialog</code></td><td>2</td><td>index.html, studio.html</td></tr><tr><td><code>19px</code></td><td><code>radius.panel</code></td><td>2</td><td>index.html, studio.html</td></tr></tbody></table></section>
   </div>
   <section class="ds-block" style="margin-top:26px"><h4>圆角尺度：实际用了 20 种值，Token 只定义了 3 种</h4>
     <p style="font-size:12px;color:#8ba1bf">橙色是没有任何 Token 对应的孤值。<code>16px</code> 其实就是 tokens.js 里的 <code>radius.control</code>，只是没有导出。</p>
-    <div class="radius-list"><span class="">var(--wb-radius-card) ×2</span><span class="orphan">100% ×2</span><span class="orphan">50% ×14</span><span class="orphan">29px ×2</span><span class="orphan">25px ×2</span><span class="orphan">22px ×1</span><span class="">20px ×2</span><span class="">19px ×2</span><span class="">16px ×3</span><span class="orphan">15px ×2</span><span class="orphan">12px ×4</span><span class="orphan">10px ×5</span><span class="">9px ×7</span><span class="orphan">8px ×6</span><span class="orphan">7px ×3</span><span class="orphan">6px ×8</span><span class="orphan">5px ×6</span><span class="orphan">4px ×8</span><span class="orphan">3px ×5</span><span class="orphan">2px ×1</span></div>
+    <div class="radius-list"><span class="">var(--wb-radius-card) ×5</span><span class="orphan">100% ×2</span><span class="orphan">50% ×14</span><span class="orphan">29px ×2</span><span class="orphan">25px ×2</span><span class="orphan">22px ×1</span><span class="">20px ×2</span><span class="">19px ×2</span><span class="">16px ×3</span><span class="orphan">15px ×2</span><span class="orphan">12px ×4</span><span class="orphan">10px ×5</span><span class="">9px ×4</span><span class="orphan">8px ×6</span><span class="orphan">7px ×3</span><span class="orphan">6px ×8</span><span class="orphan">5px ×6</span><span class="orphan">4px ×8</span><span class="orphan">3px ×5</span><span class="orphan">2px ×1</span></div>
   </section>
   <div class="findings" style="border-top:0;padding-top:8px">
-    <h4 style="font-size:11px;letter-spacing:1.4px;color:#7fa6d9;font-weight:500;margin:24px 0 11px">未导出到 tokens.css 的设计值（前 6 / 40）</h4>
-    <div class="radius-list"><span class="orphan">color.panelElevated</span><span class="orphan">color.accentBlue</span><span class="orphan">color.accentViolet</span><span class="orphan">color.sceneClear</span><span class="orphan">color.silver</span><span class="orphan">color.white</span></div>
+    <h4 style="font-size:11px;letter-spacing:1.4px;color:#7fa6d9;font-weight:500;margin:24px 0 11px">未导出到 tokens.css 的设计值（前 6 / 28）</h4>
+    <div class="radius-list"><span class="orphan">material.default.clearcoat</span><span class="orphan">material.default.clearcoatRoughness</span><span class="orphan">material.silver.metalness</span><span class="orphan">material.silver.roughness</span><span class="orphan">material.white.metalness</span><span class="orphan">material.white.roughness</span></div>
   </div>
 </section>
 
@@ -4537,23 +4459,23 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     <p class="ds-summary">首页顶部的导航按钮，当前项渲染为 25px 圆角胶囊。</p>
     <div class="ds-meta"><span>source/shell.html</span><span class="gap">未使用 Token</span><span class="gap">#282f43</span><span class="gap">#a6d6ff</span><span class="gap">25px</span><span class="gap">40px</span><span class="gap">34px</span><span class="gap">19px</span></div>
   </div>
-  <div class="ds-frame ds-frame--scene"><div class="ds-stage ds-stage--home ds-pv-nav-item"><div class="viewport"><main class="scene" aria-label="Nav Item 预览"><header class="header"><nav class="nav" aria-label="Main navigation"><button class="active" data-home>Home</button><button data-open="chat"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>AI Chat</button><button data-open="data"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>Data</button></nav></header></main></div></div></div>
+  <div class="ds-frame ds-frame--scene"><div class="ds-stage ds-stage--home ds-pv-nav-item"><div class="viewport"><main class="scene" aria-label="Nav Item 预览"><header class="header"><nav class="nav" aria-label="Main navigation"><button class="active" data-home aria-current="page">Home</button><button data-open="chat"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>AI Chat</button><button data-open="data"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>Data</button></nav></header></main></div></div></div>
   <p class="ds-stage-note">舞台：<b>首页场景</b> · 在 1536 × 1024 的 .scene 内按原坐标绝对定位渲染，预览按比例缩放。</p>
   <div class="ds-body">
     <section class="ds-block"><h4>Description</h4><p>首页 .nav 里的按钮，可带 19px 图标。选中态不是颜色变化而是形状变化：未选中项是透明背景的文字按钮，当前项变成有底色的胶囊。这样在复杂的三维背景上，位置感比颜色更可靠。</p></section>
     <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>Default</td><td>未选中的页面项</td><td><code>.nav button</code></td></tr><tr><td>Active</td><td>当前页面或当前打开的对话框</td><td><code>.nav .active</code></td></tr></tbody></table></section>
-    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>height</code></td><td>length</td><td><code>40px</code></td><td>按钮高度，图标用 vertical-align:middle 对齐。</td></tr><tr><td><code>gap</code></td><td>length</td><td><code>34px（导航）/ 10px（图标与文字）</code></td><td>项间距与项内间距是两套值。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>25px</code></td><td>仅选中态生效。</td></tr><tr><td><code>aria-pressed / .active</code></td><td>state</td><td><code>—</code></td><td>源码用 class 表达选中，未使用 aria-current。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>height</code></td><td>length</td><td><code>40px</code></td><td>按钮高度，图标用 vertical-align:middle 对齐。</td></tr><tr><td><code>gap</code></td><td>length</td><td><code>34px（导航）/ 10px（图标与文字）</code></td><td>项间距与项内间距是两套值。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>25px</code></td><td>仅选中态生效。</td></tr><tr><td><code>aria-current / .active</code></td><td>state</td><td><code>—</code></td><td>class 负责选中样式，当前项另由 aria-current=&quot;page&quot; 暴露给读屏。</td></tr></tbody></table></section>
     <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>无背景，文字 14px #f4f5f8（继承 body）</td><td>hover 无背景变化</td></tr><tr><td>Active</td><td>background #282f43，border-radius 25px，min-width 94px 居中，padding 0 24px</td><td>—</td></tr><tr><td>Focus</td><td>outline 2px #a6d6ff，offset 6px</td><td>键盘可达</td></tr></tbody></table></section>
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>button（原生 &lt;button&gt;），容器 nav 带 aria-label</p></div>
       <div><b>KEYBOARD</b><p>Tab 进入，Enter/Space 触发；focus-visible 有 6px 外扩描边以免贴住胶囊边界</p></div>
-      <div><b>SCREEN READER</b><p>由文本内容朗读；图标 svg 无 title，不重复朗读</p></div>
+      <div><b>SCREEN READER</b><p>由文本内容朗读；图标 svg 无 title，不重复朗读；当前项用 aria-current=&quot;page&quot; 暴露</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>选中态同时改变形状与背景，避免只靠颜色</li><li>图标统一 19px、stroke 1.4、currentColor</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要用 &lt;a&gt; 假装按钮再补 role</li><li>不要在导航项之间混用不同图标尺寸</li></ul></div>
     </div></section>
-    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;active&quot; data-home&gt;Home&lt;/button&gt;
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;active&quot; data-home aria-current=&quot;page&quot;&gt;Home&lt;/button&gt;
 &lt;button data-open=&quot;chat&quot;&gt;&lt;svg class=&quot;icon&quot;&gt;…&lt;/svg&gt;AI Chat&lt;/button&gt;</pre></section>
   </div>
 </article>
@@ -4564,7 +4486,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     <p class="ds-summary">编辑器里的三段式视图切换：整页构图 / 独立 3D / Mock-3D 对齐。</p>
     <div class="ds-meta"><span>source/editor/studio.css</span><span>source/editor/studio-shell.html</span><span class="gap">未使用 Token</span><span class="gap">#1c2430</span><span class="gap">#2c3849</span><span class="gap">#3a4a64</span><span class="gap">#8fa0b6</span><span class="gap">#e6efff</span><span class="gap">7px</span><span class="gap">4px</span><span class="gap">3px</span></div>
   </div>
-  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-mode-switch"><div class="mode-switch"><button data-view="mock">Mock-3D 对齐</button><button data-view="asset" class="active">独立 3D</button><button data-view="page">整页构图</button></div></div></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-mode-switch"><div class="mode-switch" role="group" aria-label="预览模式"><button data-mode="composition" aria-pressed="false">整页构图</button><button data-mode="asset" aria-pressed="false">独立 3D</button><button data-mode="mock" class="active" aria-pressed="true">Mock-3D 对齐</button></div></div></div>
   <p class="ds-stage-note">舞台：<b>编辑器</b> · 在 body[data-mode=&quot;studio&quot;] 的字体与底色上下文中渲染。</p>
   <div class="ds-body">
     <section class="ds-block"><h4>Description</h4><p>互斥的分段控件。未选中项是文字，选中项抬起到 #3a4a64 并带 1px 4px 阴影，用极轻的立面差表达“当前挡位”，而不是用高饱和色。整体容器比按钮深一档（#1c2430 对 #10151d 的页面底）。</p></section>
@@ -4572,18 +4494,18 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>padding</code></td><td>length</td><td><code>4px（容器）/ 7px 12px（按钮）</code></td><td>容器内边距就是胶囊的呼吸空间。</td></tr><tr><td><code>gap</code></td><td>length</td><td><code>3px</code></td><td>按钮间距，比容器内边距小，形成连续轨道。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>7px（容器）/ 4px（按钮）</code></td><td>两层圆角不成比例，按钮更方。</td></tr><tr><td><code>white-space</code></td><td>keyword</td><td><code>nowrap</code></td><td>≤1180px 时收小字号而不换行。</td></tr></tbody></table></section>
     <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>按钮 11px #8fa0b6，透明背景</td><td>hover 继承全局 button:hover 的 #2b394d</td></tr><tr><td>Active</td><td>background #3a4a64，文字 #e6efff，box-shadow 0 1px 4px #0004</td><td>切换 body[data-view]</td></tr><tr><td>Narrow (≤1180px)</td><td>按钮 padding 收到 7px 6px，字号 10px</td><td>—</td></tr></tbody></table></section>
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
-      <div><b>ROLE</b><p>无 role=tablist；是三个普通 button，由 class 表达选中</p></div>
+      <div><b>ROLE</b><p>无 role=tablist；是三个普通 button，选中由 class 表达，状态由 aria-pressed 暴露</p></div>
       <div><b>KEYBOARD</b><p>Tab 逐个进入，Enter/Space 切换</p></div>
-      <div><b>SCREEN READER</b><p>朗读按钮文字；当前挡位没有 aria-selected / aria-pressed 可读</p></div>
+      <div><b>SCREEN READER</b><p>朗读按钮文字；当前挡位由 aria-pressed=&quot;true&quot; 暴露</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>容器比页面底深或浅一档，让轨道可见</li><li>选中态用立面差 + 轻微阴影，不用高饱和填充</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要在同一个 switch 里混放图标项和文字项</li><li>不要把按钮数超过 4 个（已是编辑器宽度的极限）</li></ul></div>
     </div></section>
-    <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;mode-switch&quot;&gt;
-  &lt;button data-view=&quot;mock&quot;&gt;Mock-3D 对齐&lt;/button&gt;
-  &lt;button data-view=&quot;asset&quot; class=&quot;active&quot;&gt;独立 3D&lt;/button&gt;
-  &lt;button data-view=&quot;page&quot;&gt;整页构图&lt;/button&gt;
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;mode-switch&quot; role=&quot;group&quot; aria-label=&quot;预览模式&quot;&gt;
+  &lt;button data-mode=&quot;composition&quot; aria-pressed=&quot;false&quot;&gt;整页构图&lt;/button&gt;
+  &lt;button data-mode=&quot;asset&quot; aria-pressed=&quot;false&quot;&gt;独立 3D&lt;/button&gt;
+  &lt;button data-mode=&quot;mock&quot; class=&quot;active&quot; aria-pressed=&quot;true&quot;&gt;Mock-3D 对齐&lt;/button&gt;
 &lt;/div&gt;</pre></section>
   </div>
 </article>
@@ -4618,19 +4540,19 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 &lt;/button&gt;</pre></section>
   </div>
 </article>
-<article class="ds-component" id="c-control-button" data-search="control-button control button actions 首页视角工具里的小胶囊按钮，16px 圆角，带 aria-pressed 开关态。 .controls .controls p .control-buttons .control-buttons button .control-buttons button:hover .control-buttons button[aria-pressed=&quot;true&quot;] radius.control（未导出） #a7c3ea2c #14213460 #335da081 #a5c6ff80 #b5c9e1 16px" data-group="actions">
+<article class="ds-component" id="c-control-button" data-search="control-button control button actions 首页视角工具里的小胶囊按钮，16px 圆角，带 aria-pressed 开关态。 .controls .controls p .control-buttons .control-buttons button .control-buttons button:hover .control-buttons button[aria-pressed=&quot;true&quot;] radius.control #a7c3ea2c #14213460 #335da081 #a5c6ff80 #b5c9e1 16px" data-group="actions">
   <div class="ds-head">
     <span class="ds-kind">操作 / UI COMPONENT</span>
     <h3>Control Button<code>control-button</code></h3>
     <p class="ds-summary">首页视角工具里的小胶囊按钮，16px 圆角，带 aria-pressed 开关态。</p>
-    <div class="ds-meta"><span>source/shell.html</span><span>radius.control（未导出）</span><span class="gap">#a7c3ea2c</span><span class="gap">#14213460</span><span class="gap">#335da081</span><span class="gap">#a5c6ff80</span><span class="gap">#b5c9e1</span><span class="gap">16px</span></div>
+    <div class="ds-meta"><span>source/shell.html</span><span>radius.control</span><span class="gap">#a7c3ea2c</span><span class="gap">#14213460</span><span class="gap">#335da081</span><span class="gap">#a5c6ff80</span><span class="gap">#b5c9e1</span><span class="gap">16px</span></div>
   </div>
   <div class="ds-frame ds-frame--scene"><div class="ds-stage ds-stage--home ds-pv-control-button"><div class="viewport"><main class="scene" aria-label="Control Button 预览"><div class="controls is-open" style="opacity:1;visibility:visible;transform:none"><p>拖动旋转 · 滚轮缩放<br>点击物体，探索每一层</p><div class="control-buttons"><button>初始视角</button><button aria-pressed="false">自动旋转</button><button aria-pressed="true">模型线框</button><button aria-pressed="false">暂停光流</button></div></div></main></div></div></div>
   <p class="ds-stage-note">舞台：<b>首页场景</b> · 在 1536 × 1024 的 .scene 内按原坐标绝对定位渲染，预览按比例缩放。</p>
   <div class="ds-body">
-    <section class="ds-block"><h4>Description</h4><p>一组可切换的视图开关（自动旋转、模型线框、暂停光流）。这是全站唯一把“按下”状态写进 aria-pressed 的控件，因此样式规则也直接挂在属性选择器上——状态和语义是同一条规则，不会漂移。</p></section>
+    <section class="ds-block"><h4>Description</h4><p>一组可切换的视图开关（自动旋转、模型线框、暂停光流）。全站唯一把选中样式直接挂在属性选择器上的控件（.control-buttons button[aria-pressed=&quot;true&quot;]）；其余控件的选中态一律是 .active 管样式、ARIA 管语义。写进属性选择器意味着状态和语义是同一条规则，不会漂移。</p></section>
     <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>Toggle</td><td>有开/关两态的视图开关，带 aria-pressed</td><td><code>.control-buttons button[aria-pressed]</code></td></tr><tr><td>Action</td><td>一次性动作（初始视角、进入编辑器），无 aria-pressed</td><td><code>.control-buttons button</code></td></tr></tbody></table></section>
-    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>小尺寸胶囊。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>对应 tokens.js 里的 radius.control，但该 Token 未导出到 tokens.css。</td></tr><tr><td><code>border</code></td><td>border</td><td><code>1px solid #a7c3ea2c</code></td><td>约 17% 透明度的冷色描边。</td></tr><tr><td><code>background</code></td><td>color</td><td><code>#14213460</code></td><td>约 38% 透明度的深蓝，浮在三维场景上方。</td></tr><tr><td><code>aria-pressed</code></td><td>boolean</td><td><code>false</code></td><td>开/关状态，驱动选中样式。同时存在一个 hover 规则，两条规则共用同一样式块。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>小尺寸胶囊。</td></tr><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>对应 tokens.js 里的 radius.control，已导出为 --wb-radius-control。</td></tr><tr><td><code>border</code></td><td>border</td><td><code>1px solid #a7c3ea2c</code></td><td>约 17% 透明度的冷色描边。</td></tr><tr><td><code>background</code></td><td>color</td><td><code>#14213460</code></td><td>约 38% 透明度的深蓝，浮在三维场景上方。</td></tr><tr><td><code>aria-pressed</code></td><td>boolean</td><td><code>false</code></td><td>开/关状态，驱动选中样式。同时存在一个 hover 规则，两条规则共用同一样式块。</td></tr></tbody></table></section>
     <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>半透明深蓝底 + 17% 冷色描边，文字 11px #b5c9e1</td><td>点击切换</td></tr><tr><td>Hover</td><td>与按下态相同：#335da081 底、#fff 字、#a5c6ff80 边</td><td>过渡 0.2s</td></tr><tr><td>Pressed (aria-pressed=true)</td><td>同 Hover</td><td>保持到再次点击</td></tr><tr><td>Hidden (父级 .controls)</td><td>父级默认 opacity:0 / visibility:hidden / translateY(6px)</td><td>Explore 展开或父级 :focus-within 时恢复</td></tr></tbody></table></section>
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>button，切换型带 aria-pressed</p></div>
@@ -5048,7 +4970,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     <p class="ds-summary">编辑器左侧组件列表的一行：图标、名称、改动圆点与版本号。</p>
     <div class="ds-meta"><span>source/editor/studio.css</span><span class="gap">未使用 Token</span><span class="gap">#293d5c</span><span class="gap">#b0ceff</span><span class="gap">#223148</span><span class="gap">#c0ccdd</span><span class="gap">#ccab69</span><span class="gap">#91b9f6</span><span class="gap">#bb9ff5</span><span class="gap">#9cbec7</span><span class="gap">5px</span><span class="gap">21px</span></div>
   </div>
-  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-component-list-item"><div id="component-list" style="padding:0"><div class="library-category"><span>智能角色</span><span>4</span></div><button class="component-item" data-family="actor"><span class="component-glyph">◆</span>项目团队</button><button class="component-item active changed" data-family="actor"><span class="component-glyph">◆</span>专家<span class="edit-dot"></span></button><button class="component-item" data-family="data"><span class="component-glyph">▣</span>Documents<span class="item-version">V5</span></button></div></div></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--studio ds-pv-component-list-item"><div id="component-list" style="padding:0"><div class="library-category"><span>智能角色</span><span>4</span></div><button class="component-item" aria-pressed="false" data-family="actor"><span class="component-glyph">◆</span>项目团队</button><button class="component-item active changed" aria-pressed="true" data-family="actor"><span class="component-glyph">◆</span>专家<span class="edit-dot"></span></button><button class="component-item" aria-pressed="false" data-family="data"><span class="component-glyph">▣</span>Documents<span class="item-version">V5</span></button></div></div></div>
   <p class="ds-stage-note">舞台：<b>编辑器</b> · 在 body[data-mode=&quot;studio&quot;] 的字体与底色上下文中渲染。</p>
   <div class="ds-body">
     <section class="ds-block"><h4>Description</h4><p>一行里压缩了四类信息：家族图标（按 family 换色）、名称、是否被改过（金色 4px 圆点）、以及资产版本。选中态用左侧 2px 内阴影条 + 底色，而不是整行高亮，因为列表项很密。</p></section>
@@ -5058,13 +4980,13 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>button（宽 100% 的 &lt;button&gt;）</p></div>
       <div><b>KEYBOARD</b><p>Tab 逐行；方向键未接管</p></div>
-      <div><b>SCREEN READER</b><p>朗读名称；版本号 .item-version 是相邻文本会被一并读出；改动状态无文本替代</p></div>
+      <div><b>SCREEN READER</b><p>朗读名称；版本号 .item-version 是相邻文本会被一并读出；选中态由 aria-pressed 暴露；改动状态 .edit-dot 无文本替代</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>改动状态用圆点而不是改变整行颜色</li><li>按 family 给图标换色，让类别在密集列表里可扫</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要用颜色深浅表达选中（已有左侧条承担）</li><li>不要让版本徽标和改动圆点同时占位（都用 margin-left:auto）</li></ul></div>
     </div></section>
-    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;component-item active&quot; data-family=&quot;actor&quot; data-id=&quot;actor.experts&quot;&gt;
+    <section class="ds-block"><h4>Code Example</h4><pre>&lt;button class=&quot;component-item active&quot; aria-pressed=&quot;true&quot; data-family=&quot;actor&quot; data-id=&quot;actor.experts&quot;&gt;
   &lt;span class=&quot;component-glyph&quot;&gt;◆&lt;/span&gt;专家
   &lt;span class=&quot;edit-dot&quot;&gt;&lt;/span&gt;
 &lt;/button&gt;</pre></section>
@@ -5254,25 +5176,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     <p class="ds-summary">Token 审计页的分类筛选胶囊，选中态填实。</p>
     <div class="ds-meta"><span>source/build-tokens.mjs</span><span class="gap">未使用 Token</span><span class="gap">#38506d</span><span class="gap">#162232</span><span class="gap">#91a9c9</span><span class="gap">#315986</span><span class="gap">#77a8e6</span><span class="gap">16px</span></div>
   </div>
-  <div class="ds-frame"><div class="ds-stage ds-stage--docs ds-pv-filter-chip"><div class="filters" role="group" aria-label="Token 分类"><button class="active" data-group-filter="全部">全部</button><button data-group-filter="Color">Color</button><button data-group-filter="Typography">Typography</button><button data-group-filter="Spacing">Spacing</button><button data-group-filter="3D Material">3D Material</button><button data-group-filter="Camera">Camera</button></div></div></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--docs ds-pv-filter-chip"><div class="filters" role="group" aria-label="Token 分类"><button class="active" data-group-filter="全部" aria-pressed="true">全部</button><button data-group-filter="Color" aria-pressed="false">Color</button><button data-group-filter="Typography" aria-pressed="false">Typography</button><button data-group-filter="Spacing" aria-pressed="false">Spacing</button><button data-group-filter="3D Material" aria-pressed="false">3D Material</button><button data-group-filter="Camera" aria-pressed="false">Camera</button></div></div></div>
   <p class="ds-stage-note">舞台：<b>文档页</b> · 在 74px 页面头部下的普通内容流里渲染，不需要页面上下文。</p>
   <div class="ds-body">
-    <section class="ds-block"><h4>Description</h4><p>一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊）但不同语义：这里用 .active class 表达唯一选中，而首页用 aria-pressed。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。</p></section>
+    <section class="ds-block"><h4>Description</h4><p>一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊），选中态也都是 class + aria-pressed 的组合：.active 管样式，aria-pressed 管语义。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。</p></section>
     <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>Default</td><td>未选中的分类</td><td><code>.filters button</code></td></tr><tr><td>Active</td><td>唯一选中的分类；再点“全部”可复位</td><td><code>.filters button.active</code></td></tr></tbody></table></section>
-    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>与首页 .control-buttons button 相同，等于未导出的 radius.control。</td></tr><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>与首页控制按钮完全一致。</td></tr><tr><td><code>font-size</code></td><td>length</td><td><code>10px</code></td><td>比首页的 11px 小一档。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>与首页 .control-buttons button 相同，等于 radius.control。</td></tr><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>与首页控制按钮完全一致。</td></tr><tr><td><code>font-size</code></td><td>length</td><td><code>10px</code></td><td>比首页的 11px 小一档。</td></tr></tbody></table></section>
     <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>1px #38506d 边，底 #162232，文字 #91a9c9</td><td>点击切换分类</td></tr><tr><td>Active</td><td>底 #315986，文字 white，边 #77a8e6</td><td>与搜索框叠加过滤</td></tr><tr><td>Focus</td><td>outline 2px var(--wb-color-accent)，offset 3px</td><td>键盘可达</td></tr></tbody></table></section>
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>容器 role=&quot;group&quot; + aria-label=&quot;Token 分类&quot;</p></div>
       <div><b>KEYBOARD</b><p>Tab 逐个；Enter/Space 切换</p></div>
-      <div><b>SCREEN READER</b><p>朗读分类名；当前选中没有 aria-pressed / aria-current</p></div>
+      <div><b>SCREEN READER</b><p>朗读分类名；当前选中由 aria-pressed=&quot;true&quot; 暴露</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>第一个胶囊固定为“全部”，提供复位入口</li><li>与搜索框组合时用 flex-wrap 兜住窄屏</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要与搜索框抢占同一行宽度（窄屏要转成纵向）</li><li>不要给分类胶囊加图标</li></ul></div>
     </div></section>
     <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;filters&quot; role=&quot;group&quot; aria-label=&quot;Token 分类&quot;&gt;
-  &lt;button class=&quot;active&quot; data-group-filter=&quot;全部&quot;&gt;全部&lt;/button&gt;
-  &lt;button data-group-filter=&quot;Color&quot;&gt;Color&lt;/button&gt;
+  &lt;button class=&quot;active&quot; data-group-filter=&quot;全部&quot; aria-pressed=&quot;true&quot;&gt;全部&lt;/button&gt;
+  &lt;button data-group-filter=&quot;Color&quot; aria-pressed=&quot;false&quot;&gt;Color&lt;/button&gt;
 &lt;/div&gt;</pre></section>
   </div>
 </article>
@@ -5377,7 +5299,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });

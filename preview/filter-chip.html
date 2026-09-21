@@ -26,7 +26,7 @@
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:20}
+.ds-page>header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:20}
 .ds-page>header strong{font-size:21px;letter-spacing:-.4px}
 .ds-page>header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 .ds-pagenav{display:flex;gap:22px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -102,7 +102,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 :where(.ds-stage--docs.ds-pv-filter-chip){margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
 :where(.ds-stage--docs.ds-pv-filter-chip) a{color:inherit;text-decoration:none}
 :where(.ds-stage--docs.ds-pv-filter-chip) a:focus-visible, :where(.ds-stage--docs.ds-pv-filter-chip) button:focus-visible{outline:2px solid var(--wb-color-accent);outline-offset:3px}
-:where(.ds-stage--docs.ds-pv-filter-chip) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:#161f2b;position:sticky;top:0;z-index:5}
+:where(.ds-stage--docs.ds-pv-filter-chip) header{height:74px;border-bottom:1px solid var(--wb-color-border);display:flex;align-items:center;justify-content:space-between;padding:0 4.5vw;background:var(--wb-color-panel-elevated);position:sticky;top:0;z-index:5}
 :where(.ds-stage--docs.ds-pv-filter-chip) header strong{font-size:21px;letter-spacing:-.4px}
 :where(.ds-stage--docs.ds-pv-filter-chip) header strong span{font-size:12px;font-weight:400;letter-spacing:.5px;color:#8da4c4;padding-left:20px;margin-left:18px;border-left:1px solid #405372}
 :where(.ds-stage--docs.ds-pv-filter-chip) nav{display:flex;gap:24px;font-size:12px;color:#aabedb;flex-wrap:wrap}
@@ -143,25 +143,25 @@ body{padding:0}
   <h1>Filter Chip<code>filter-chip</code></h1>
   <p class="lede">Token 审计页的分类筛选胶囊，选中态填实。</p>
   <div class="siblings"><a href="swatch.html">Swatch</a><a href="filter-chip.html" aria-current="page">Filter Chip</a><a href="eyebrow.html">Eyebrow</a><a href="platform-label.html">Platform Label</a></div>
-  <div class="ds-frame"><div class="ds-stage ds-stage--docs ds-pv-filter-chip"><div class="filters" role="group" aria-label="Token 分类"><button class="active" data-group-filter="全部">全部</button><button data-group-filter="Color">Color</button><button data-group-filter="Typography">Typography</button><button data-group-filter="Spacing">Spacing</button><button data-group-filter="3D Material">3D Material</button><button data-group-filter="Camera">Camera</button></div></div></div>
+  <div class="ds-frame"><div class="ds-stage ds-stage--docs ds-pv-filter-chip"><div class="filters" role="group" aria-label="Token 分类"><button class="active" data-group-filter="全部" aria-pressed="true">全部</button><button data-group-filter="Color" aria-pressed="false">Color</button><button data-group-filter="Typography" aria-pressed="false">Typography</button><button data-group-filter="Spacing" aria-pressed="false">Spacing</button><button data-group-filter="3D Material" aria-pressed="false">3D Material</button><button data-group-filter="Camera" aria-pressed="false">Camera</button></div></div></div>
   <p class="ds-stage-note">舞台：<b>文档页</b> · 在 74px 页面头部下的普通内容流里渲染，不需要页面上下文。</p>
   <div class="ds-body">
-    <section class="ds-block"><h4>Description</h4><p>一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊）但不同语义：这里用 .active class 表达唯一选中，而首页用 aria-pressed。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。</p></section>
+    <section class="ds-block"><h4>Description</h4><p>一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊），选中态也都是 class + aria-pressed 的组合：.active 管样式，aria-pressed 管语义。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。</p></section>
     <section class="ds-block"><h4>Variants</h4><table><thead><tr><th>Variant</th><th>Use When</th><th>Selector</th></tr></thead><tbody><tr><td>Default</td><td>未选中的分类</td><td><code>.filters button</code></td></tr><tr><td>Active</td><td>唯一选中的分类；再点“全部”可复位</td><td><code>.filters button.active</code></td></tr></tbody></table></section>
-    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>与首页 .control-buttons button 相同，等于未导出的 radius.control。</td></tr><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>与首页控制按钮完全一致。</td></tr><tr><td><code>font-size</code></td><td>length</td><td><code>10px</code></td><td>比首页的 11px 小一档。</td></tr></tbody></table></section>
+    <section class="ds-block"><h4>Props / Properties</h4><table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>border-radius</code></td><td>length</td><td><code>16px</code></td><td>与首页 .control-buttons button 相同，等于 radius.control。</td></tr><tr><td><code>padding</code></td><td>length</td><td><code>7px 11px</code></td><td>与首页控制按钮完全一致。</td></tr><tr><td><code>font-size</code></td><td>length</td><td><code>10px</code></td><td>比首页的 11px 小一档。</td></tr></tbody></table></section>
     <section class="ds-block"><h4>States</h4><table><thead><tr><th>State</th><th>Visual</th><th>Behavior</th></tr></thead><tbody><tr><td>Default</td><td>1px #38506d 边，底 #162232，文字 #91a9c9</td><td>点击切换分类</td></tr><tr><td>Active</td><td>底 #315986，文字 white，边 #77a8e6</td><td>与搜索框叠加过滤</td></tr><tr><td>Focus</td><td>outline 2px var(--wb-color-accent)，offset 3px</td><td>键盘可达</td></tr></tbody></table></section>
     <section class="ds-block"><h4>Accessibility</h4><div class="ds-a11y">
       <div><b>ROLE</b><p>容器 role=&quot;group&quot; + aria-label=&quot;Token 分类&quot;</p></div>
       <div><b>KEYBOARD</b><p>Tab 逐个；Enter/Space 切换</p></div>
-      <div><b>SCREEN READER</b><p>朗读分类名；当前选中没有 aria-pressed / aria-current</p></div>
+      <div><b>SCREEN READER</b><p>朗读分类名；当前选中由 aria-pressed=&quot;true&quot; 暴露</p></div>
     </div></section>
     <section class="ds-block"><h4>Do's and Don'ts</h4><div class="guidance">
       <div class="do"><h5>✅ Do</h5><ul><li>第一个胶囊固定为“全部”，提供复位入口</li><li>与搜索框组合时用 flex-wrap 兜住窄屏</li></ul></div>
       <div class="dont"><h5>❌ Don't</h5><ul><li>不要与搜索框抢占同一行宽度（窄屏要转成纵向）</li><li>不要给分类胶囊加图标</li></ul></div>
     </div></section>
     <section class="ds-block"><h4>Code Example</h4><pre>&lt;div class=&quot;filters&quot; role=&quot;group&quot; aria-label=&quot;Token 分类&quot;&gt;
-  &lt;button class=&quot;active&quot; data-group-filter=&quot;全部&quot;&gt;全部&lt;/button&gt;
-  &lt;button data-group-filter=&quot;Color&quot;&gt;Color&lt;/button&gt;
+  &lt;button class=&quot;active&quot; data-group-filter=&quot;全部&quot; aria-pressed=&quot;true&quot;&gt;全部&lt;/button&gt;
+  &lt;button data-group-filter=&quot;Color&quot; aria-pressed=&quot;false&quot;&gt;Color&lt;/button&gt;
 &lt;/div&gt;</pre></section>
     <section class="ds-block"><h4>Source</h4><table><thead><tr><th>来源</th><th>选择器</th></tr></thead><tbody><tr><td><code>source/build-tokens.mjs</code></td><td><code>.filters</code> <code>.filters button</code> <code>.filters button.active</code> <code>.tools</code> <code>.search</code></td></tr></tbody></table></section>
   </div>
@@ -203,7 +203,7 @@ body{padding:0}
     filterButtons.forEach(function(button){
       button.addEventListener('click', function(){
         active = button.dataset.groupFilter;
-        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); });
+        filterButtons.forEach(function(other){ other.classList.toggle('active', other === button); other.setAttribute('aria-pressed', String(other === button)); });
         render();
       });
     });
