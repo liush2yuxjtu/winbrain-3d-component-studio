@@ -240,16 +240,24 @@ cd source && npx playwright install chromium    # 首次
 npm run verify:system -- --port 8791
 ```
 
-`source/review/verify-design-system.mjs` 驱动真实 Chromium，做四件事，结果写入 `design-system-verification.json`：
+`source/review/verify-design-system.mjs` 驱动真实 Chromium，做五件事，结果写入 `design-system-verification.json`：
 
 1. **加载**：6 个页面 + 28 个独立预览页全部返回 200 且舞台有实际尺寸；
 2. **样式一致性**：16 组「同一组件在出货页面 vs 在预览里」的 `getComputedStyle` 逐属性对比，**每个组件同时验证 `components.html` 与 `preview/<组件>.html` 两个落点**，共 32 项；
 3. **自身样式覆盖**：28 个组件的 markup 里用到的每一个 class，都必须在它自己的预览页里有对应规则——防止登记选择器时漏掉某个变体，让预览静默失去样式；
-4. **运行时**：无 JavaScript 错误、无外部网络请求、`tokens.css` 的变量可解析。
+4. **内部链接**：`components.html` 与 29 个 `preview/` 页面上的 37 条内部链接逐条实际请求，全部必须返回 200；
+5. **运行时**：无 JavaScript 错误、无外部网络请求、`tokens.css` 的变量可解析。
 
-最近一次结果：**46 项检查全部通过，样式一致性 32 / 32，0 个 JavaScript 错误，0 个外部请求。**
+最近一次结果：**47 项检查全部通过，样式一致性 32 / 32，0 个 JavaScript 错误，0 个外部请求。**
 
-这套对比是真会失败的——本次开发过程中它先后抓出了「`@font-face` 正则吞掉整张样式表」「JS 源码被当作 CSS 解析」「跨上下文基础规则串台」「`.swatch` 与 `.preview>span` 撞车」「Token 卡片漏登记变体选择器」五个真实缺陷，每一个都会让预览悄悄偏离产品。
+这套对比是真会失败的——本次开发过程中它先后抓出了六个真实缺陷，每一个都会让预览悄悄偏离产品：
+
+1. 剥 `@font-face` 的正则连带吞掉了后面的整张样式表；
+2. `source/home.js` 被当作 CSS 解析，一个假规则吃掉了剩余全部规则；
+3. 文档页的基础规则串进首页舞台，让预览继承了另一张页面的 `body` 颜色；
+4. `.swatch`（Token 审计）与 `.preview>span`（资产总览）在共享作用域里撞车；
+5. Token 卡片漏登记两个变体选择器，卡片自己的预览框渲染成无样式；
+6. `preview/` 里的跨页导航用了根相对路径，从子目录打开全部 404——这是后加的链接检查抓到的。
 
 截图落在 `design-system-review/`。
 

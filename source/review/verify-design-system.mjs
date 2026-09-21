@@ -171,7 +171,28 @@ for (const href of previewHrefs) {
 }
 record(`${previewHrefs.length} 个组件的自身 class 都有对应样式`, unstyled.length === 0, unstyled);
 
-// ---------------------------------------------------------------- 5. runtime surface
+// ---------------------------------------------------------------- 5. internal links
+// The preview pages live one directory down, so a root-relative nav href 404s there
+// without anything else noticing. Every internal link is requested for real.
+const brokenLinks = [];
+const checkedLinks = new Set();
+for (const path of ["components.html", "preview/index.html", ...previewHrefs.map((href) => `preview/${href}`)]) {
+  await goto(path);
+  const hrefs = await page.evaluate(() =>
+    [...document.querySelectorAll("a[href]")]
+      .map((a) => a.getAttribute("href"))
+      .filter((href) => href && !href.startsWith("#") && !/^[a-z]+:/i.test(href)),
+  );
+  for (const href of new Set(hrefs)) {
+    const url = new URL(href, `${BASE}/${path}`).href;
+    checkedLinks.add(url);
+    const response = await context.request.get(url, { failOnStatusCode: false });
+    if (response.status() >= 400) brokenLinks.push({ page: path, href, status: response.status() });
+  }
+}
+record(`新页面 ${checkedLinks.size} 条内部链接全部可达`, brokenLinks.length === 0, { checked: checkedLinks.size, broken: brokenLinks });
+
+// ---------------------------------------------------------------- 6. runtime surface
 await goto("components.html");
 const summary = await page.evaluate(() => ({
   components: document.querySelectorAll(".ds-component").length,

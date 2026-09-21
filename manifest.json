@@ -118,7 +118,7 @@
         "linksTokensCss": false,
         "tokenUsages": 0,
         "rawColorLiterals": 36,
-        "documented": false
+        "documented": true
       },
       {
         "id": "tokens.html",
@@ -128,7 +128,7 @@
         "linksTokensCss": true,
         "tokenUsages": 10,
         "rawColorLiterals": 48,
-        "documented": false
+        "documented": true
       },
       {
         "id": "motion.html",
@@ -138,7 +138,7 @@
         "linksTokensCss": true,
         "tokenUsages": 4,
         "rawColorLiterals": 65,
-        "documented": false
+        "documented": true
       },
       {
         "id": "comparison.html",

@@ -1069,6 +1069,14 @@
       "detail": []
     },
     {
+      "name": "新页面 37 条内部链接全部可达",
+      "passed": true,
+      "detail": {
+        "checked": 37,
+        "broken": []
+      }
+    },
+    {
       "name": "components.html 渲染 28 个组件块",
       "passed": true,
       "detail": {
@@ -1098,7 +1106,7 @@
   "errors": [],
   "externalRequests": [],
   "summary": {
-    "passed": 46,
+    "passed": 47,
     "failed": 0,
     "javascriptErrors": 0,
     "externalRequests": 0,

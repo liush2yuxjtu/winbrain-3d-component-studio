@@ -260,7 +260,10 @@ function groupSections() {
   }).join("\n");
 }
 
-const NAV = `<nav class="ds-pagenav"><a href="tokens.html">Tokens</a><a href="motion.html">Motion</a><a href="catalog.html">Assets</a><a href="studio.html">Studio</a><a href="index.html">Home</a></nav>`;
+// `prefix` is "" at the repository root and "../" inside preview/, so the cross-page
+// links resolve from either depth instead of 404ing from the subdirectory.
+const NAV = (prefix = "") =>
+  `<nav class="ds-pagenav"><a href="${prefix}tokens.html">Tokens</a><a href="${prefix}motion.html">Motion</a><a href="${prefix}catalog.html">Assets</a><a href="${prefix}components.html">Components</a><a href="${prefix}studio.html">Studio</a><a href="${prefix}index.html">Home</a></nav>`;
 
 const PREVIEW_RUNTIME = `<script>
 (function(){
@@ -333,7 +336,7 @@ const componentsHtml = `<!doctype html>
 <style>${PREVIEW_CSS}${PAGE_CSS}</style>
 <style>${allCss}</style>
 </head><body><div class="ds-page">
-<header><a href="index.html"><strong>WinBrain<span>DESIGN SYSTEM · UI COMPONENTS</span></strong></a>${NAV}</header>
+<header><a href="index.html"><strong>WinBrain<span>DESIGN SYSTEM · UI COMPONENTS</span></strong></a>${NAV()}</header>
 <main>
 <section class="hero">
   <div>
@@ -458,7 +461,7 @@ await writeFile(
 <link rel="stylesheet" href="../tokens.css">
 <style>${previewIndexCss}</style>
 </head><body><div class="ds-page">
-<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEWS</span></strong></a>${NAV}</header>
+<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEWS</span></strong></a>${NAV("../")}</header>
 <main>
 <section class="hero"><div>
   <span class="eyebrow">ISOLATED PREVIEWS / ONE COMPONENT PER PAGE</span>
@@ -498,7 +501,7 @@ body{padding:0}
 .siblings a[aria-current="page"]{background:#315986;border-color:#77a8e6;color:#fff}
 </style>
 </head><body><div class="ds-page">
-<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEW</span></strong></a>${NAV}</header>
+<header><a href="../index.html"><strong>WinBrain<span>COMPONENT PREVIEW</span></strong></a>${NAV("../")}</header>
 <div class="wrap">
   <p class="crumb"><a href="index.html">独立预览</a> / ${esc(COMPONENT_GROUPS.find((g) => g.id === component.group)?.name || component.group)}</p>
   <h1>${esc(component.name)}<code>${esc(component.id)}</code></h1>
