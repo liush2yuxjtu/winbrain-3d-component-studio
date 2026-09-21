@@ -1,6 +1,6 @@
 ---
 name: verify
-description: Verify a code change before shipping by running the relevant existing tests locally, then running the real application or public surface and observing the affected behavior end to end. Use before every pull request, for PR verification, manual acceptance, confirming a fix, or validating local changes before shipping.
+description: Verify a code change before shipping by running the relevant existing tests locally, then running the real application or public surface and observing the affected behavior end to end. Use before every pull request, for PR verification, manual acceptance, confirming a fix, validating local changes before shipping, or turning an audit report into a ranked action list.
 ---
 
 # Verify before shipping
@@ -10,6 +10,21 @@ The question is whether the changed behavior works for a real caller. Shift test
 ## Scope
 
 Identify the full change or named behavior being verified. Read the relevant diff and stated claim. If implementation and claim disagree, record that as a finding.
+
+## Measured audit — from a headline number to an actionable list
+
+An audit report arrives as counts. A count answers "how many", not "how many need action", so measure before you triage. Reproduce each number from source; never carry one forward because it was already written down.
+
+1. **Count occurrences, then de-duplicate.** Report both. 490 colour literals across 7 pages are 335 distinct values, 289 of which appear exactly once. A value used once is not a debt — abstracting it yields a token used once. Repeated values are the candidates.
+2. **Intersect literals with the token table.** The actionable set is the intersection, not the total: 8 of those 490 occurrences are byte-identical copies of an existing token. Those 8 are the refactor; the other 482 are one-off scene values that belong to no scale.
+3. **Compare values before merging by name.** Same name is not the same value. A local `--border: #28313f` beside a global `--wb-color-border: #31445f` reads as an alias and is not one. Every "merge / unify / consolidate" proposal starts with a value diff — differing values make it a design conflict, not cleanup. An instruction written from names alone will silently repaint the product.
+4. **Separate state classes from semantic attributes.** List where the state class is toggled and where the ARIA attribute is set; the difference is the accessibility gap. Check for an in-repo precedent first: an existing correct usage means the pattern was known and not rolled out, which ranks it above a stylistic preference.
+5. **Prove an inclusion is inert before adding it.** Linking a shared stylesheet is only safe once the target is confirmed to be a custom-property-only `:root` block with no element selectors.
+6. **Bind every finding to a reproducible command and its raw output.** A finding with no command is an opinion, and it cannot be re-checked after the code moves.
+
+When the measurement contradicts the headline, lead with the correction. A triage that restates the original framing has added nothing.
+
+In this repository those numbers come from `source/system/audit.js` (`node source/build-system.mjs`, then read `manifest.json`). Extend that audit rather than scripting a second count — two counters measuring the same thing will disagree, and then neither is evidence.
 
 ## Shift-left test gate
 
