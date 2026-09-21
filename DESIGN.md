@@ -132,7 +132,13 @@ Token 分成八组，其中五组只服务 3D：
 
 ### 5.2 手写复制的 Token 值：已清零
 
-上一版这里列着 8 处逐字节复制，分布在 `catalog.html`、`motion.html` 与 `studio.html`。现在全部改为 `var()` 引用，`duplicatedLiterals` 实测为空。
+上一版这里列着 8 处逐字节复制，分布在 `catalog.html`、`motion.html` 与 `studio.html`。现在全部改为 `var()` 引用，**颜色字面值复制实测为 0**。
+
+同一把尺子量到圆角时还剩 **11 处**：`9px`（`radius.card`）4 处、`16px`（`radius.control`）3 处、`20px`（`radius.dialog`）2 处、`19px`（`radius.panel`）2 处。这不是没发现，是**暂时做不了**，而且原因已实测确认：
+
+> `index.html` 拒绝加载 `tokens.css`。它的 CSP 是 `style-src 'unsafe-inline'`，没有 `'self'`，Chromium 直接拦掉同源样式表——控制台原话：`Loading the stylesheet ... violates the following Content Security Policy directive: "style-src 'unsafe-inline'"`。实测时 `var(--wb-color-accent)` 解析成继承值 `rgb(244, 245, 248)`，不是 `#67ccff`。
+
+这 11 处全部经由 `source/shell.html` 进入审计。把 `index.html` 接进 Token 层，等于要放宽这张页面的 CSP——那是关于首页安全姿态的决定，不该由一次 Token 迁移替它回答。所以棘轮把这笔债记在明面上（§5.6），而不是让它继续隐形。
 
 改动是**可证明无视觉变化**的，不是「看起来一样」：
 
@@ -222,16 +228,19 @@ var(--wb-radius-card) ×5   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
 
 上面的数字都会被 `npm run verify:system` 核对，但那只能证明**文档没腐烂**，并不能阻止数字本身变大。所以 `source/system/check-docs.mjs` 末尾有两条棘轮：
 
-| 棘轮 | 当前 / 上限 |
-|---|---|
-| 手写复制的 Token 字面值（应被 `var()` 取代） | 0 / 0 |
-| 没有出口的 UI 设计值 | 0 / 0 |
+| 棘轮 | 当前 / 上限 | 为什么不是 0 |
+|---|---|---|
+| 手写复制的颜色字面值（应被 `var()` 取代） | 0 / 0 | — |
+| 手写复制的圆角字面值 | 11 / 11 | 全部要经 `index.html`，而它的 CSP 挡住 `tokens.css`（§5.2） |
+| 没有出口的 UI 设计值 | 0 / 0 | — |
+
+圆角那一行**钉死在 11**，且单位是出现次数而不是「有几种不同的值」——按种类计数的话，同一个值被复制任意多次都不会触发，那就不叫棘轮了。
 
 失败信息会直接说明怎么处理：新值要么改用 `var()`、要么补 `TOKEN_CATALOG` 出口，**要么把这个上限连同理由一起调高**。调高上限是允许的，但必须写理由——否则棘轮就变成了装饰。
 
 ### 5.7 优先级行动
 
-1. **`index.html` 还没有链接 `tokens.css`。** 单独一张页面就有 79 处硬编码色值。它和 `comparison.html`、`global.html` 是剩余未接入的三张。
+1. **决定 `index.html` 的 CSP 要不要放宽。** 这是剩下所有 Token 接入工作的前置条件，也是唯一需要人拍板的一条：它的 `style-src` 只允许内联样式，`tokens.css` 进不去（实测见 §5.2）。放宽，11 处圆角复制和 79 处硬编码色值才有下一步；不放宽，这张页面就应当被明确列为「不进 Token 体系」的例外，而不是继续挂着待办。`comparison.html`、`global.html` 是内部工具页，可一并归入例外。
 2. **收敛圆角尺度。** 20 种降到 5–6 种（如 3/5/9/16/20/50%），先决定 `10px` 归到 `9px` 还是新增 `radius.card-elevated`。纯观感工作，需要看图。
 3. **统一小标签命名**为一个组件（见 `preview/eyebrow.html`），四套写法合并。
 4. **统一页面头部命名**，三处变一处。

@@ -324,6 +324,12 @@ const allCss = (await Promise.all(UI_COMPONENTS.map((c) => buildCss(c)))).join("
 const undocumentedTop = audit.tokens.undocumented.slice(0, 6).map((token) => esc(token.id));
 const orphans = audit.coverage.radiusScale.filter((entry) => /^\d/.test(entry.value) && !["9px", "19px", "20px", "16px"].includes(entry.value));
 const duplicated = audit.coverage.duplicatedLiterals.slice(0, 8);
+// Derived, not typed. The list used to be written out by hand and named pages that had
+// since started linking tokens.css, so the audit page contradicted its own number.
+const unlinkedSurfaces = audit.coverage.surfaces
+  .filter((surface) => !surface.instrument && !surface.linksTokensCss)
+  .map((surface) => surface.label)
+  .join("、");
 
 const componentsHtml = `<!doctype html>
 <html lang="zh-CN">
@@ -357,7 +363,7 @@ const componentsHtml = `<!doctype html>
   <div class="stat"><b>${audit.ui.fullyDocumented}/${audit.ui.components}</b><span>七项文档检查全部通过的组件（说明、变体、属性、状态、无障碍、约定、示例）</span></div>
   <div class="stat warn"><b>${audit.coverage.totalRawColorLiterals}</b><span>出货页面 &lt;style&gt; 里的硬编码色值；同期 Token 引用只有 ${audit.coverage.totalTokenUsages} 处</span></div>
   <div class="stat warn"><b>${audit.tokens.undocumentedCount}</b><span>已在 tokens.js 定义、但没有进入 TOKEN_CATALOG / tokens.css 的设计值</span></div>
-  <div class="stat"><b>${audit.coverage.surfacesLinkingTokensCss}/${audit.coverage.auditedSurfaces}</b><span>链接 tokens.css 的出货页面（首页、编辑器、资产总览、原图对照都没有引用 Token 层）</span></div>
+  <div class="stat"><b>${audit.coverage.surfacesLinkingTokensCss}/${audit.coverage.auditedSurfaces}</b><span>链接 tokens.css 的出货页面（未接入：${unlinkedSurfaces}）</span></div>
 </section>
 
 <section class="tools">

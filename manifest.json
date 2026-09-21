@@ -178,7 +178,46 @@
     "totalRawColorLiterals": 462,
     "totalTokenUsages": 42,
     "surfacesLinkingTokensCss": 4,
-    "duplicatedLiterals": [],
+    "duplicatedLiterals": [
+      {
+        "literal": "9px",
+        "token": "radius.card",
+        "pages": [
+          "index.html",
+          "studio.html",
+          "comparison.html"
+        ],
+        "count": 4
+      },
+      {
+        "literal": "16px",
+        "token": "radius.control",
+        "pages": [
+          "index.html",
+          "studio.html",
+          "tokens.html"
+        ],
+        "count": 3
+      },
+      {
+        "literal": "20px",
+        "token": "radius.dialog",
+        "pages": [
+          "index.html",
+          "studio.html"
+        ],
+        "count": 2
+      },
+      {
+        "literal": "19px",
+        "token": "radius.panel",
+        "pages": [
+          "index.html",
+          "studio.html"
+        ],
+        "count": 2
+      }
+    ],
     "radiusScale": [
       {
         "value": "var(--wb-radius-card)",

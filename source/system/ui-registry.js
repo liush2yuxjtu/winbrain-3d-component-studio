@@ -221,7 +221,7 @@ export const UI_SYSTEM = {
       ],
       props: [
         { property: "padding", type: "length", default: "7px 11px", description: "小尺寸胶囊。" },
-        { property: "border-radius", type: "length", default: "16px", description: "对应 tokens.js 里的 radius.control，但该 Token 未导出到 tokens.css。" },
+        { property: "border-radius", type: "length", default: "16px", description: "对应 tokens.js 里的 radius.control，已导出为 --wb-radius-control。" },
         { property: "border", type: "border", default: "1px solid #a7c3ea2c", description: "约 17% 透明度的冷色描边。" },
         { property: "background", type: "color", default: "#14213460", description: "约 38% 透明度的深蓝，浮在三维场景上方。" },
         { property: "aria-pressed", type: "boolean", default: "false", description: "开/关状态，驱动选中样式。同时存在一个 hover 规则，两条规则共用同一样式块。" },
@@ -239,7 +239,7 @@ export const UI_SYSTEM = {
       },
       dos: ["开/关类开关必须带 aria-pressed 并让样式依赖该属性", "整组开关用 flex-wrap 兜住窄屏"],
       donts: ["不要用 .active class 表达开关状态（同一页面已有两套选中约定）", "不要把 .controls 的隐藏做成 display:none，否则键盘无法唤起"],
-      tokens: ["radius.control（未导出）"],
+      tokens: ["radius.control"],
       hardcoded: ["#a7c3ea2c", "#14213460", "#335da081", "#a5c6ff80", "#b5c9e1", "16px"],
       example: `<div class="control-buttons">
   <button id="rotate" aria-pressed="false">自动旋转</button>
@@ -1184,7 +1184,7 @@ export const UI_SYSTEM = {
         { name: "Active", useWhen: "唯一选中的分类；再点“全部”可复位", selector: ".filters button.active" },
       ],
       props: [
-        { property: "border-radius", type: "length", default: "16px", description: "与首页 .control-buttons button 相同，等于未导出的 radius.control。" },
+        { property: "border-radius", type: "length", default: "16px", description: "与首页 .control-buttons button 相同，等于 radius.control。" },
         { property: "padding", type: "length", default: "7px 11px", description: "与首页控制按钮完全一致。" },
         { property: "font-size", type: "length", default: "10px", description: "比首页的 11px 小一档。" },
       ],

@@ -50,15 +50,29 @@ console.log(`${failures.length > beforeRows ? "FAIL" : "ok  "}  ${coverage.surfa
 
 // A ratchet, not another description. The checks above only prove DESIGN.md still matches
 // the audit; they pass just as happily if the count they compare against has grown. These
-// two fail when the exact thing the audit complains about quietly comes back.
+// fail when the exact thing the audit complains about quietly comes back.
 //
 // `color`, `typography`, `spacing` and `radius` are the groups the UI draws from, so a leaf
 // in one of them that reaches neither TOKEN_CATALOG nor a same-namespace entry is a UI
 // decision with no route out of tokens.js. The remaining groups (material, rendering,
 // lighting, camera, layers) are 3D-only by design — see DESIGN.md §5.4 — and are not budgeted.
 const UI_GROUPS = new Set(["color", "typography", "spacing", "radius"]);
+const duplicated = coverage.duplicatedLiterals;
+// Count occurrences, not entries. Comparing "4 distinct literals" against a ceiling of 11
+// occurrences would silently permit a literal to be copied any number of times, which is
+// the opposite of a ratchet.
+const occurrences = (entries) => entries.reduce((total, entry) => total + entry.count, 0);
+const colorDuplicates = duplicated.filter((entry) => entry.literal.startsWith("#"));
+const radiusDuplicates = duplicated.filter((entry) => !entry.literal.startsWith("#"));
 const budgets = [
-  ["手写复制的 Token 字面值（应被 var() 取代）", coverage.duplicatedLiterals.length, 0],
+  ["手写复制的颜色字面值（应被 var() 取代）", occurrences(colorDuplicates), 0],
+  // Held at 11, not 0, and the reason is measured rather than assumed. Every one of these
+  // reaches the audit through source/shell.html, and index.html refuses the tokens.css
+  // <link>: its CSP is `style-src 'unsafe-inline'` with no `'self'`, so Chromium blocks the
+  // stylesheet and `var(--wb-color-accent)` resolves to an inherited value. Verified in a
+  // browser — see DESIGN.md §5.2. Widening that CSP is a deliberate decision about the
+  // homepage's security posture, so the ceiling carries the debt instead of hiding it.
+  ["手写复制的圆角字面值", occurrences(radiusDuplicates), 11],
   ["没有出口的 UI 设计值", audit.tokens.undocumented.filter((leaf) => UI_GROUPS.has(leaf.id.split(".")[0])).length, 0],
 ];
 const beforeBudgets = failures.length;
