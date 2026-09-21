@@ -253,10 +253,9 @@
     "radiusScale": [
       {
         "value": "var(--wb-radius-card)",
-        "count": 7,
+        "count": 2,
         "pages": [
-          "tokens.html",
-          "components.html"
+          "tokens.html"
         ]
       },
       {
@@ -318,12 +317,11 @@
       },
       {
         "value": "16px",
-        "count": 4,
+        "count": 3,
         "pages": [
           "index.html",
           "studio.html",
-          "tokens.html",
-          "components.html"
+          "tokens.html"
         ]
       },
       {
@@ -384,15 +382,14 @@
       },
       {
         "value": "6px",
-        "count": 9,
+        "count": 8,
         "pages": [
           "studio.html",
           "catalog.html",
           "tokens.html",
           "motion.html",
           "comparison.html",
-          "global.html",
-          "components.html"
+          "global.html"
         ]
       },
       {
@@ -405,12 +402,11 @@
       },
       {
         "value": "4px",
-        "count": 15,
+        "count": 8,
         "pages": [
           "studio.html",
           "tokens.html",
-          "motion.html",
-          "components.html"
+          "motion.html"
         ]
       },
       {
@@ -429,7 +425,7 @@
         ]
       }
     ],
-    "radiusTokenUsages": 7
+    "radiusTokenUsages": 2
   },
   "gates": [
     "components.html 的预览必须由出货样式表渲染，不得手写副本",

@@ -139,19 +139,24 @@ export async function auditDesignSystem(root) {
     }
     const hexes = css.match(HEX) || [];
     const vars = css.match(VAR) || [];
-    for (const match of css.matchAll(RADIUS)) {
-      const value = match[1].trim();
-      if (!radiusUse.has(value)) radiusUse.set(value, []);
-      radiusUse.get(value).push(surface.id);
-    }
-    for (const hex of hexes) {
-      const owners = valueIndex.get(hex.toLowerCase());
-      if (!owners) continue;
-      const key = `${hex.toLowerCase()}|${owners[0]}`;
-      if (!duplicates.has(key)) duplicates.set(key, { literal: hex.toLowerCase(), token: owners[0], pages: new Set(), count: 0 });
-      const entry = duplicates.get(key);
-      entry.pages.add(surface.id);
-      entry.count += 1;
+    // The instrument page embeds a copy of every shipping stylesheet to render its
+    // previews, so its radii and literals are duplicates. Counting them would double
+    // every scale — and would inflate token adoption with the audit's own usage.
+    if (!surface.instrument) {
+      for (const match of css.matchAll(RADIUS)) {
+        const value = match[1].trim();
+        if (!radiusUse.has(value)) radiusUse.set(value, []);
+        radiusUse.get(value).push(surface.id);
+      }
+      for (const hex of hexes) {
+        const owners = valueIndex.get(hex.toLowerCase());
+        if (!owners) continue;
+        const key = `${hex.toLowerCase()}|${owners[0]}`;
+        if (!duplicates.has(key)) duplicates.set(key, { literal: hex.toLowerCase(), token: owners[0], pages: new Set(), count: 0 });
+        const entry = duplicates.get(key);
+        entry.pages.add(surface.id);
+        entry.count += 1;
+      }
     }
     surfaces.push({
       ...surface,

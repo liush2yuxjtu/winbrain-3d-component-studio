@@ -107,6 +107,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   height: 100%;
   overflow: hidden;
 }
+:where(.ds-stage--studio.ds-pv-secondary-button){
+  background: #10151d;
+  font-family: Roboto, "PingFang SC", Arial, sans-serif;
+  font-size: 12px;
+  color: #dce4f0;
+}
 :where(.ds-stage--studio.ds-pv-secondary-button) button, :where(.ds-stage--studio.ds-pv-secondary-button) a, :where(.ds-stage--studio.ds-pv-secondary-button) input, :where(.ds-stage--studio.ds-pv-secondary-button) select{
   outline-offset: 2px;
 }
@@ -330,6 +336,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   }
 :where(.ds-stage--studio.ds-pv-secondary-button) .view-tools select{
     width: 59px;
+  }
+}
+@media (max-width: 850px){
+:where(.ds-stage--studio.ds-pv-secondary-button){
+    overflow-x: auto;
   }
 }
 :where(.ds-stage--studio.ds-pv-secondary-button) [hidden]{

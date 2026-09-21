@@ -1081,8 +1081,7 @@
       "passed": true,
       "detail": {
         "components": 28,
-        "stages": 28,
-        "scopedRules": 3
+        "stages": 28
       }
     },
     {

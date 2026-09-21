@@ -126,7 +126,7 @@ Token 分成八组，其中五组只服务 3D：
 | `global.html` 全局预览 | ❌ | 0 | 35 |
 | **合计（7 个出货页面）** | **2 / 7** | **14** | **490** |
 
-`components.html` 本身用了 15 处 `var()`，但它包含一份出货 CSS 的副本用于渲染预览，计入会重复计数，所以排除在合计之外。
+`components.html` 是这套审计自己的载体：它用 15 处 `var()`，但它同时内嵌了一份出货 CSS 的副本用于渲染预览。把它计入会让每一条尺度和每一处字面值都被重复统计，并用自己的 `var()` 抬高整体采用率。因此上表把它单列，**色值、圆角与手写复制的合计都只用左边 7 个出货页面**。
 
 ### 5.2 被手写复制最多的 Token 值
 
@@ -149,12 +149,12 @@ Token 分成八组，其中五组只服务 3D：
 
 ### 5.3 圆角尺度
 
-系统里实际出现 **20 种** `border-radius` 值，Token 只定义了 3 种，实际被引用 7 次。
+系统里实际出现 **20 种** `border-radius` 值，Token 只定义了 3 种，且只在 7 个出货页面里被引用 **2 次**。
 
 ```
-50% ×14   100% ×2   29px ×2   25px ×2   22px ×1   20px ×2   19px ×2
-16px ×4   15px ×2   12px ×2   10px ×5    9px ×6    8px ×2    7px ×3
-6px ×7    5px ×6    4px ×15   3px ×5     2px ×1    var(--wb-radius-card) ×7
+var(--wb-radius-card) ×2   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
+20px ×2   19px ×2   16px ×3   15px ×2   12px ×4   10px ×5    9px ×7
+8px ×6    7px ×3    6px ×8    5px ×6    4px ×8    3px ×5    2px ×1
 ```
 
 其中 `16px` 就是 `tokens.js` 里的 `radius.control`——胶囊按钮和筛选胶囊都在用它，但这条 Token 没有导出。`10px`（`.motion-card`、`.timeline-card`）没有任何 Token 对应。
@@ -235,12 +235,12 @@ npm run build          # 生成 index / studio / catalog / tokens / motion / com
 ### 验证
 
 ```sh
-python3 -m http.server 8791 --bind 127.0.0.1   # 或 npm 运行目录下的任意静态服务
-cd source && npx playwright install chromium    # 首次
-npm run verify:system -- --port 8791
+python3 -m http.server 8791 --bind 127.0.0.1   # 或项目目录下的任意静态服务
+pip install playwright && playwright install chromium   # 首次
+cd source && npm run verify:system -- --port 8791
 ```
 
-`source/review/verify-design-system.mjs` 驱动真实 Chromium，做五件事，结果写入 `design-system-verification.json`：
+`source/review/verify-design-system.py` 驱动真实 Chromium，做五件事，结果写入 `design-system-verification.json`：
 
 1. **加载**：6 个页面 + 28 个独立预览页全部返回 200 且舞台有实际尺寸；
 2. **样式一致性**：16 组「同一组件在出货页面 vs 在预览里」的 `getComputedStyle` 逐属性对比，**每个组件同时验证 `components.html` 与 `preview/<组件>.html` 两个落点**，共 32 项；

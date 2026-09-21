@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs && node build-tokens.mjs && node build-motion.mjs && node build-catalog.mjs && node build-system.mjs",
-    "verify:system": "node review/verify-design-system.mjs"
+    "verify:system": "python3 review/verify-design-system.py"
   },
   "dependencies": {
     "three": "0.180.0"

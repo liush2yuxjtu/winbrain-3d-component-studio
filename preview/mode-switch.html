@@ -107,6 +107,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   height: 100%;
   overflow: hidden;
 }
+:where(.ds-stage--studio.ds-pv-mode-switch){
+  background: #10151d;
+  font-family: Roboto, "PingFang SC", Arial, sans-serif;
+  font-size: 12px;
+  color: #dce4f0;
+}
 :where(.ds-stage--studio.ds-pv-mode-switch) button, :where(.ds-stage--studio.ds-pv-mode-switch) a, :where(.ds-stage--studio.ds-pv-mode-switch) input, :where(.ds-stage--studio.ds-pv-mode-switch) select{
   outline-offset: 2px;
 }
@@ -335,6 +341,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   }
 :where(.ds-stage--studio.ds-pv-mode-switch) .view-tools select{
     width: 59px;
+  }
+}
+@media (max-width: 850px){
+:where(.ds-stage--studio.ds-pv-mode-switch){
+    overflow-x: auto;
   }
 }
 :where(.ds-stage--studio.ds-pv-mode-switch) [hidden]{

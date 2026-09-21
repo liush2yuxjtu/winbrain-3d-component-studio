@@ -137,17 +137,18 @@ function scopeSelector(selector, scope, scopeClass) {
  * @param {string[]} needles selector fragments the components own
  * @param {{scope?: string, scopeClass?: string}} options
  */
-export function scopeRules(rules, needles, { scope = ":where(.ds-stage)", scopeClass = ".ds-stage--studio", keepKeyframes = [] } = {}) {
+export function scopeRules(rules, needles, { scope = ":where(.ds-stage)", scopeClass = ".ds-stage--studio", stage = "", keepKeyframes = [] } = {}) {
   const out = [];
 
   const walk = (list) => {
     for (const rule of list) {
       if (!rule.at) {
-        // `body[data-mode="studio"]` belongs to the editor surface only. Mapping it onto a
-        // different stage's scope class would give that one rule class-level specificity
-        // and let the editor's type and colour override the stage it was copied into.
+        // `body[data-mode="studio"]` is the editor's own context. It is only meaningful in
+        // the studio stage; copying it elsewhere gives a stage an inherited type and colour
+        // that the page it stands in for never had. Compare the stage name directly: the
+        // scope class also carries the component id, so a suffix test would never match.
         const mode = rule.prelude.match(/^body\[data-mode="([^"]+)"\]$/);
-        if (mode && !scopeClass.endsWith(`--${mode[1]}`)) continue;
+        if (mode && mode[1] !== stage) continue;
         const keep = keptSelectors(rule.prelude, needles);
         if (!keep.length) continue;
         out.push(`${keep.map((s) => scopeSelector(s, scope, scopeClass)).join(", ")}{${rule.body}}`);

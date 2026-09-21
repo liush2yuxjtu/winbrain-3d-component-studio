@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readFile, writeFile, mkdir, readdir, rm } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { UI_SYSTEM, UI_COMPONENTS, COMPONENT_GROUPS } from "./system/ui-registry.js";
@@ -88,7 +88,7 @@ async function buildCss(component) {
   for (const file of files) {
     const rules = await loadSourceRules(file);
     const needles = surface.has(file) ? [...new Set([...component.selectors, ...(STAGE_BASE[stage] || [])])] : component.selectors;
-    const scoped = scopeRules(rules, needles, { scope, scopeClass: scope, keepKeyframes: KEYFRAMES });
+    const scoped = scopeRules(rules, needles, { scope, scopeClass: scope, stage, keepKeyframes: KEYFRAMES });
     if (scoped.trim()) chunks.push(`/* ${component.id} · ${file} */\n${scoped}`);
   }
   return chunks.join("\n");
@@ -419,6 +419,13 @@ await writeFile(join(out, "components.html"), componentsHtml);
 
 const previewDir = join(out, "preview");
 await mkdir(previewDir, { recursive: true });
+
+// Drop pages for components that were renamed or removed. Nothing else prunes this
+// directory, so a stale file would stay tracked and be served as a live preview.
+const expectedPages = new Set(["index.html", ...UI_COMPONENTS.map((c) => `${slug(c.id)}.html`)]);
+const stale = (await readdir(previewDir)).filter((name) => name.endsWith(".html") && !expectedPages.has(name));
+for (const name of stale) await rm(join(previewDir, name));
+if (stale.length) console.log(`Removed ${stale.length} stale preview page(s): ${stale.join(", ")}`);
 
 const previewIndexCards = COMPONENT_GROUPS.map((group) => {
   const members = UI_COMPONENTS.filter((component) => component.group === group.id);

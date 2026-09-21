@@ -107,6 +107,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   height: 100%;
   overflow: hidden;
 }
+:where(.ds-stage--studio.ds-pv-checkbox){
+  background: #10151d;
+  font-family: Roboto, "PingFang SC", Arial, sans-serif;
+  font-size: 12px;
+  color: #dce4f0;
+}
 :where(.ds-stage--studio.ds-pv-checkbox) button, :where(.ds-stage--studio.ds-pv-checkbox) a, :where(.ds-stage--studio.ds-pv-checkbox) input, :where(.ds-stage--studio.ds-pv-checkbox) select{
   outline-offset: 2px;
 }
@@ -340,6 +346,11 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
   }
 :where(.ds-stage--studio.ds-pv-checkbox) .view-tools select{
     width: 59px;
+  }
+}
+@media (max-width: 850px){
+:where(.ds-stage--studio.ds-pv-checkbox){
+    overflow-x: auto;
   }
 }
 :where(.ds-stage--studio.ds-pv-checkbox) [hidden]{
