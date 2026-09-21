@@ -208,7 +208,7 @@ var(--wb-radius-card) ×2   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
 
 1. 在 `source/system/ui-registry.js` 登记，七项内容缺一不可；
 2. 运行 `cd source && npm run build`；
-3. 运行 `npm run verify:system`，确认 28 → 29 个组件块、独立预览页同步增加。
+3. 运行 `npm run verify:system`。它会先断言本文件的数字，所以组件数量一变，第 3 步会先失败并指出该改哪一句——这是有意的，别绕过它。
 
 **改一个组件的样式：** 直接改出货样式表（`shell.html` / `studio.css` / `build-*.mjs`）。预览会在下次构建时自动跟上，**不要**去改 `components.html`——它是产物。
 
