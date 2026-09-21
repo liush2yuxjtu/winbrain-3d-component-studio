@@ -98,7 +98,7 @@ export const UI_SYSTEM = {
         { property: "height", type: "length", default: "40px", description: "按钮高度，图标用 vertical-align:middle 对齐。" },
         { property: "gap", type: "length", default: "34px（导航）/ 10px（图标与文字）", description: "项间距与项内间距是两套值。" },
         { property: "border-radius", type: "length", default: "25px", description: "仅选中态生效。" },
-        { property: "aria-pressed / .active", type: "state", default: "—", description: "源码用 class 表达选中，未使用 aria-current。" },
+        { property: "aria-current / .active", type: "state", default: "—", description: "class 负责选中样式，当前项另由 aria-current=\"page\" 暴露给读屏。" },
       ],
       states: [
         { state: "Default", visual: "无背景，文字 14px #f4f5f8（继承 body）", behavior: "hover 无背景变化" },
@@ -205,7 +205,7 @@ export const UI_SYSTEM = {
       stage: "home",
       summary: "首页视角工具里的小胶囊按钮，16px 圆角，带 aria-pressed 开关态。",
       description:
-        "一组可切换的视图开关（自动旋转、模型线框、暂停光流）。这是全站唯一把“按下”状态写进 aria-pressed 的控件，因此样式规则也直接挂在属性选择器上——状态和语义是同一条规则，不会漂移。",
+        "一组可切换的视图开关（自动旋转、模型线框、暂停光流）。全站唯一把选中样式直接挂在属性选择器上的控件（.control-buttons button[aria-pressed=\"true\"]）；其余控件的选中态一律是 .active 管样式、ARIA 管语义。写进属性选择器意味着状态和语义是同一条规则，不会漂移。",
       sources: ["source/shell.html"],
       selectors: [
         ".controls",
@@ -1176,7 +1176,7 @@ export const UI_SYSTEM = {
       stage: "docs",
       summary: "Token 审计页的分类筛选胶囊，选中态填实。",
       description:
-        "一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊）但不同语义：这里用 .active class 表达唯一选中，而首页用 aria-pressed。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。",
+        "一组互斥的分类筛选钮。和首页 control-button 是同一形态（16px 圆角胶囊），选中态也都是 class + aria-pressed 的组合：.active 管样式，aria-pressed 管语义。两处圆角值相同，说明 16px 事实上是这个系统的“胶囊档”。",
       sources: ["source/build-tokens.mjs"],
       selectors: [".filters", ".filters button", ".filters button.active", ".tools", ".search"],
       variants: [
