@@ -176,6 +176,8 @@
     ],
     "auditedSurfaces": 7,
     "totalRawColorLiterals": 462,
+    "distinctColorLiterals": 323,
+    "singletonColorLiterals": 284,
     "totalTokenUsages": 42,
     "surfacesLinkingTokensCss": 4,
     "duplicatedLiterals": [

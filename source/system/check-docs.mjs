@@ -28,6 +28,11 @@ const claims = [
   ["圆角 Token 引用次数", `被引用 **${coverage.radiusTokenUsages} 次**`],
   ["没有出口的设计值数量", `**${audit.tokens.undocumentedCount} 个**`],
   ["token 叶子值总数", `里 ${audit.tokens.defined} 个叶子值`],
+  // 去重后的色值种类与只出现一次的种数：DESIGN.md 用它支撑「490 不是 490 个待办」，
+  // 所以这两个数必须和审计一起动。它们此前是手抄的，没人复核。
+  ["去重后的色值种类", `**${coverage.distinctColorLiterals} 种色值**`],
+  ["只出现一次的色值", `其中 ${coverage.singletonColorLiterals} 种`],
+  ["只出现一次的占比", `（${((coverage.singletonColorLiterals / coverage.distinctColorLiterals) * 100).toFixed(1)}%）`],
   ["TOKEN_CATALOG 条数", `\`TOKEN_CATALOG\` 收录 ${audit.tokens.exported} 条`],
   ["CSS 变量条数", `其中 ${audit.tokens.exportedWithCss} 条带 CSS 变量`],
   ["manifest 计数的 UI 组件数", null, () => manifest.counts.uiComponents === audit.ui.components],

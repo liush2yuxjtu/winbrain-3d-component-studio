@@ -41,14 +41,15 @@ async function pageCss(root, surface) {
     const styleBlocks = [...text.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]);
     const candidate = styleBlocks.length ? styleBlocks.join("\n") : text;
     // build-*.mjs wraps CSS inside a JS template string; drop the scaffolding.
-    blocks.push(
-      candidate
+    blocks.push({
+      file,
+      css: candidate
         .replace(FONT_FACE, "")
         .replace(DATA_URI, "url(data:)")
         .replace(/\\n/g, "\n"),
-    );
+    });
   }
-  return blocks.join("\n");
+  return blocks;
 }
 
 /** Flatten TOKENS into leaf values so coverage can be measured value by value. */
@@ -141,9 +142,15 @@ export async function auditDesignSystem(root) {
   const surfaces = [];
   const radiusUse = new Map();
   const duplicates = new Map();
+  // How often each literal repeats. A raw total says "490 literals"; the repeat
+  // distribution says how many of them are copies of something rather than one-off
+  // values, which is the number that decides whether there is work to do.
+  const literalCounts = new Map();
+  const countedFiles = new Set();
 
   for (const surface of SURFACES) {
-    const css = await pageCss(root, surface);
+    const blocks = await pageCss(root, surface);
+    const css = blocks.map((block) => block.css).join("\n");
     let html = "";
     try {
       html = await readFile(join(root, surface.id), "utf8");
@@ -156,6 +163,17 @@ export async function auditDesignSystem(root) {
     // previews, so its radii and literals are duplicates. Counting them would double
     // every scale — and would inflate token adoption with the audit's own usage.
     if (!surface.instrument) {
+      // The same stylesheet can reach two surfaces (studio.html also ships the homepage's
+      // shell.html). Count each source file once so a value written once does not read as
+      // repeated merely because two pages embed it.
+      for (const block of blocks) {
+        if (countedFiles.has(block.file)) continue;
+        countedFiles.add(block.file);
+        for (const hex of block.css.match(HEX) || []) {
+          const lowered = hex.toLowerCase();
+          literalCounts.set(lowered, (literalCounts.get(lowered) || 0) + 1);
+        }
+      }
       for (const match of css.matchAll(RADIUS)) {
         const value = match[1].trim();
         if (!radiusUse.has(value)) radiusUse.set(value, []);
@@ -241,6 +259,8 @@ export async function auditDesignSystem(root) {
       surfaces,
       auditedSurfaces: audited.length,
       totalRawColorLiterals: totalLiterals,
+      distinctColorLiterals: literalCounts.size,
+      singletonColorLiterals: [...literalCounts.values()].filter((count) => count === 1).length,
       totalTokenUsages: totalVars,
       surfacesLinkingTokensCss: audited.filter((s) => s.linksTokensCss).length,
       duplicatedLiterals: [...duplicates.values()].map((d) => ({ ...d, pages: [...d.pages] })).sort((a, b) => b.count - a.count),
