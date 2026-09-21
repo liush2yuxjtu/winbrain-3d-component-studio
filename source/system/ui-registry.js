@@ -651,7 +651,7 @@ export const UI_SYSTEM = {
       states: [
         { state: "Default", visual: "1px 边框 + #182434 底 + 9px 圆角", behavior: "—" },
         { state: "Filtered out", visual: "由 [hidden] 规则 display:none 移除", behavior: "搜索或分类不匹配" },
-        { state: "Copy", useWhen: "点击“复制”，按钮文字临时变为“已复制”，1200ms 后还原", visual: "按钮文字变化", behavior: "写剪贴板" },
+        { state: "Copy", visual: "点击“复制”后按钮文字变为“已复制”，1200ms 后还原为“复制”", behavior: "写入剪贴板；失败时文字改为“选择值复制”，同样 1200ms 后还原" },
       ],
       a11y: {
         role: "article",

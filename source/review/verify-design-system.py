@@ -75,9 +75,13 @@ UNSTYLED_JS = """(skip) => {
   });
   const used = new Set();
   stage.querySelectorAll('*').forEach((el) => el.classList.forEach((name) => used.add(name)));
+  // Match the class as a whole token. A substring test would treat `.layers`,
+  // `.layer-heading` and `.layer-number` as covering `.layer`, so a stage that styles
+  // only the parent would look like it styles the child too.
+  const covered = (name) => new RegExp(`\\\\.${name}(?![\\\\w-])`).test(
+    selectors.join('\\n'));
   return [...used].filter((name) =>
-    !skip.includes(name) && !name.startsWith('ds-') &&
-    !selectors.some((selector) => selector.includes(`.${name}`)));
+    !skip.includes(name) && !name.startsWith('ds-') && !covered(name));
 }"""
 
 CLASS_SKIP = ['active', 'show', 'selected', 'changed', 'compact', 'is-open']
