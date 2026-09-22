@@ -10,6 +10,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { auditDesignSystem } from "./audit.js";
+import { TOKEN_CATALOG } from "../tokens/tokens.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const design = await readFile(join(root, "DESIGN.md"), "utf8");
@@ -69,16 +70,52 @@ const duplicated = coverage.duplicatedLiterals;
 const occurrences = (entries) => entries.reduce((total, entry) => total + entry.count, 0);
 const colorDuplicates = duplicated.filter((entry) => entry.literal.startsWith("#"));
 const radiusDuplicates = duplicated.filter((entry) => !entry.literal.startsWith("#"));
+// The audit above skips `components.html` because it embeds a copy of every shipping
+// stylesheet, and counting that copy would double every scale. The exclusion is right for
+// the totals and wrong as a place to hide, because `source/build-system.mjs` also holds a
+// hand-maintained `.ds-page` replica of the docs pages' CSS that nothing else measures. A
+// copy of `radius.control` lived in that replica's `.filters button` rule; it was invisible
+// until `tokens.html` moved to `var()`, and then it won on specificity and the preview
+// stopped following the token. This is the cheapest guard that would have caught it: the
+// replica may not spell out a value that already has a token.
+//
+// The two indexes mirror `audit.js` rather than reusing it, because the rules differ there:
+// a radius literal is only a copy when it matches a Radius token (`4px` is `space.4`, not a
+// corner decision), which is why the radius side is group-filtered and the colour side is not.
+const replicaPath = join(root, "source", "build-system.mjs");
+const replica = await readFile(replicaPath, "utf8");
+const colorTokenValues = new Set(
+  TOKEN_CATALOG.filter((token) => token.type === "color" || /^#/.test(String(token.value)))
+    .map((token) => String(token.value).trim().toLowerCase()),
+);
+const radiusTokenValues = new Set(
+  TOKEN_CATALOG.filter((token) => token.group === "Radius")
+    .map((token) => String(token.value).trim().toLowerCase()),
+);
+const replicaHits = [
+  ...[...replica.matchAll(/#[0-9a-fA-F]{3,8}\b/g)].map((m) => m[0].toLowerCase()),
+  ...[...replica.matchAll(/border-radius:\s*([^;}]+)/g)].map((m) => m[1].trim().toLowerCase()),
+].filter((value) => colorTokenValues.has(value) || radiusTokenValues.has(value));
+const replicaLabel = replicaHits.length
+  ? `审计看不见的页面副本里手写的 Token 值（${[...new Set(replicaHits)].join(" ")}）`
+  : "审计看不见的页面副本里手写的 Token 值（source/build-system.mjs，改用 var()）";
+
 const budgets = [
   ["手写复制的颜色字面值（应被 var() 取代）", occurrences(colorDuplicates), 0],
-  // Held at 11, not 0, and the reason is measured rather than assumed. Every one of these
-  // reaches the audit through source/shell.html, and index.html refuses the tokens.css
-  // <link>: its CSP is `style-src 'unsafe-inline'` with no `'self'`, so Chromium blocks the
-  // stylesheet and `var(--wb-color-accent)` resolves to an inherited value. Verified in a
-  // browser — see DESIGN.md §5.2. Widening that CSP is a deliberate decision about the
-  // homepage's security posture, so the ceiling carries the debt instead of hiding it.
-  ["手写复制的圆角字面值", occurrences(radiusDuplicates), 11],
+  // Held at 9, not 0, and the reason is measured rather than assumed — see DESIGN.md §5.2.
+  // Eight of the nine are the four literals in source/shell.html, counted once for each page
+  // that embeds it: index.html, which refuses the tokens.css <link> because its CSP is
+  // `style-src 'unsafe-inline'` with no `'self'` (Chromium blocks the stylesheet and
+  // `var(--wb-color-accent)` resolves to an inherited value), and studio.html, which does
+  // load it. One edit to that shared file reaches both pages, and one of them cannot resolve
+  // the var(), so the file cannot move until the homepage can. The ninth is in
+  // comparison.html, which is unlinked rather than blocked; that page's membership in the
+  // token layer is DESIGN.md §5.7 item 6's decision, so the ceiling carries it meanwhile.
+  // The ceiling is deliberately not a promise that the remaining work is hard: two of the
+  // originals were in pages that already load tokens.css and were fixed outright.
+  ["手写复制的圆角字面值", occurrences(radiusDuplicates), 9],
   ["没有出口的 UI 设计值", audit.tokens.undocumented.filter((leaf) => UI_GROUPS.has(leaf.id.split(".")[0])).length, 0],
+  [replicaLabel, replicaHits.length, 0],
 ];
 const beforeBudgets = failures.length;
 for (const [label, actual, allowed] of budgets) {

@@ -265,7 +265,14 @@ export async function auditDesignSystem(root) {
       surfacesLinkingTokensCss: audited.filter((s) => s.linksTokensCss).length,
       duplicatedLiterals: [...duplicates.values()].map((d) => ({ ...d, pages: [...d.pages] })).sort((a, b) => b.count - a.count),
       radiusScale,
-      radiusTokenUsages: radiusUse.get("var(--wb-radius-card)")?.length || 0,
+      // Every radius token, not one hardcoded id. The previous version read
+      // `radiusUse.get("var(--wb-radius-card)")`, which was indistinguishable from
+      // "all radius tokens" only while exactly one radius token was in use. The moment
+      // tokens.html adopted `radius.control`, a metric named "radius token usages"
+      // silently certified 6 of the 7 references. Sum the group instead of naming a member.
+      radiusTokenUsages: [...radiusUse.entries()]
+        .filter(([value]) => value.startsWith("var(--wb-radius-"))
+        .reduce((total, [, pages]) => total + pages.length, 0),
     },
   };
 }
