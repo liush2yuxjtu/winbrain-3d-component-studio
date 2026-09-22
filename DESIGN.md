@@ -176,7 +176,7 @@ Token 分成八组，其中五组只服务 3D：
 
 ### 5.3 圆角尺度
 
-系统里实际出现 **21 种** `border-radius` 值，Token 定义了 4 种（补录 `radius.control` 后），在 7 个出货页面里 `var(--wb-radius-card)` 被引用 **6 次**，`var(--wb-radius-control)` 1 次。
+系统里实际出现 **21 种** `border-radius` 值，Token 定义了 4 种（补录 `radius.control` 后），在 7 个出货页面里圆角 Token 共被引用 **7 次**（`var(--wb-radius-card)` 6 次、`var(--wb-radius-control)` 1 次）。
 
 ```
 var(--wb-radius-card) ×6   var(--wb-radius-control) ×1   100% ×2   50% ×14
@@ -238,15 +238,18 @@ var(--wb-radius-card) ×6   var(--wb-radius-control) ×1   100% ×2   50% ×14
 
 ### 5.6 棘轮：防止清单重新长回来
 
-上面的数字都会被 `npm run verify:system` 核对，但那只能证明**文档没腐烂**，并不能阻止数字本身变大。所以 `source/system/check-docs.mjs` 末尾有三条棘轮：
+上面的数字都会被 `npm run verify:system` 核对，但那只能证明**文档没腐烂**，并不能阻止数字本身变大。所以 `source/system/check-docs.mjs` 末尾有四条棘轮：
 
 | 棘轮 | 当前 / 上限 | 为什么不是 0 |
 |---|---|---|
 | 手写复制的颜色字面值（应被 `var()` 取代） | 0 / 0 | — |
 | 手写复制的圆角字面值 | 9 / 9 | 8 处来自 `source/shell.html`（同一份文件供给两张页面，其中 `index.html` 解析不了 `var()`），1 处在 `comparison.html`（§5.2） |
 | 没有出口的 UI 设计值 | 0 / 0 | — |
+| 审计看不见的页面副本里手写的 Token 值 | 0 / 0 | — |
 
 圆角那一行**钉死在 9**，且单位是出现次数而不是「有几种不同的值」——按种类计数的话，同一个值被复制任意多次都不会触发，那就不叫棘轮了。上限从 11 降到 9 不是因为尺子变松：尺子、单位、判定规则都没动，是那 3 处被错误归因的字面值里有 2 处真的改掉了。
+
+第四条棘轮是**为一次真实的漏网加的**。`components.html` 因为内嵌了所有出货 CSS 的副本而被审计跳过，这个排除对合计是对的，但顺带让 `source/build-system.mjs` 里那份手写的 `.ds-page` 页面副本完全无人测量——那里一直写着 `border-radius: 16px`，也就是 `radius.control`。它一直没被发现，直到 `tokens.html` 改用 `var()`：副本的特异性更高，于是预览其实一直跟着副本走，而不是跟着 Token 走。这件事 `audit.js` 看不到（`instrument: true` 被排除），32/32 的样式一致性也看不到（副本和 Token 解析出来都是 16px）。现在这条棘轮禁止那份副本里出现等于既有 Token 的字面值——颜色和圆角都算，当前两项都是 0。
 
 失败信息会直接说明怎么处理：新值要么改用 `var()`、要么补 `TOKEN_CATALOG` 出口，**要么把这个上限连同理由一起调高**。调高上限是允许的，但必须写理由——否则棘轮就变成了装饰。
 
@@ -301,7 +304,7 @@ pip install playwright && playwright install chromium   # 首次
 cd source && npm run verify:system -- --port 8791
 ```
 
-`npm run verify:system` 跑两步：先由 `source/system/check-docs.mjs` 重新跑一遍审计、断言本文件里每一个引用到的实测数字都与它对得上（文档里的数字同样会腐烂；只有组件数量那一条是拿 `manifest.json` 核的），再跑 §5.6 的三条棘轮，再由 `source/review/verify-design-system.py` 驱动真实 Chromium 做五件事，结果写入 `design-system-verification.json`：
+`npm run verify:system` 跑两步：先由 `source/system/check-docs.mjs` 重新跑一遍审计、断言本文件里每一个引用到的实测数字都与它对得上（文档里的数字同样会腐烂；只有组件数量那一条是拿 `manifest.json` 核的），再跑 §5.6 的四条棘轮，再由 `source/review/verify-design-system.py` 驱动真实 Chromium 做五件事，结果写入 `design-system-verification.json`：
 
 1. **加载**：6 个页面 + 28 个独立预览页全部返回 200 且舞台有实际尺寸；
 2. **样式一致性**：16 组「同一组件在出货页面 vs 在预览里」的 `getComputedStyle` 逐属性对比，**每个组件同时验证 `components.html` 与 `preview/<组件>.html` 两个落点**，共 32 项；
@@ -311,7 +314,7 @@ cd source && npm run verify:system -- --port 8791
 
 最近一次结果：**47 项检查全部通过，样式一致性 32 / 32，0 个 JavaScript 错误，0 个外部请求。**
 
-这套对比是真会失败的——它先后抓出了七个真实缺陷，每一个都会让预览悄悄偏离产品：
+这套对比是真会失败的——它先后抓出了八个真实缺陷，每一个都会让预览悄悄偏离产品：
 
 1. 剥 `@font-face` 的正则连带吞掉了后面的整张样式表；
 2. `source/home.js` 被当作 CSS 解析，一个假规则吃掉了剩余全部规则；
@@ -320,6 +323,9 @@ cd source && npm run verify:system -- --port 8791
 5. Token 卡片漏登记两个变体选择器，卡片自己的预览框渲染成无样式；
 6. `preview/` 里的跨页导航用了根相对路径，从子目录打开全部 404——这是后加的链接检查抓到的；
 7. 给 `tokens.html` 的筛选胶囊补 ARIA 时改动了内联脚本，少了一个右括号，整页脚本停止执行（`missing ) after argument list`）。样式一致性 32 / 32 依然全过——**只比样式是抓不到脚本挂掉的**，这条是靠控制台错误检查兜住的。
+8. `source/build-system.mjs` 的 `.ds-page` 副本里写死 `border-radius:16px`，特异性高过组件的 `var()` 规则，于是预览一直跟着副本走而不是跟着 Token 走。32 / 32 同样全过，因为两边算出来都是 16px——**等值比较看不见「这条规则根本没生效」**。
+
+第 8 条给出的方法是：别比等值，**把 Token 挪走再看像素跟不跟**。实测把 `--wb-radius-control` 改成 `3px`，`tokens.html`、`components.html` 与 `preview/filter-chip.html` 的筛选胶囊全部变成 `3px`；把旧的字面值规则放回去，预览就停在 `16px` 不动。这条探测（以及 §5.6 第四条棘轮）才是这类缺陷的通用检出手段，等值对比不是。
 
 截图落在 `design-system-review/`。
 

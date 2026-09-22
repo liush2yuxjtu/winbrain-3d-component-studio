@@ -169,7 +169,7 @@
         "layer": "文档",
         "instrument": true,
         "linksTokensCss": true,
-        "tokenUsages": 16,
+        "tokenUsages": 17,
         "rawColorLiterals": 82,
         "documented": true
       }
@@ -401,7 +401,7 @@
         ]
       }
     ],
-    "radiusTokenUsages": 6
+    "radiusTokenUsages": 7
   },
   "gates": [
     "components.html 的预览必须由出货样式表渲染，不得手写副本",
