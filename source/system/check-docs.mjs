@@ -71,13 +71,18 @@ const colorDuplicates = duplicated.filter((entry) => entry.literal.startsWith("#
 const radiusDuplicates = duplicated.filter((entry) => !entry.literal.startsWith("#"));
 const budgets = [
   ["手写复制的颜色字面值（应被 var() 取代）", occurrences(colorDuplicates), 0],
-  // Held at 11, not 0, and the reason is measured rather than assumed. Every one of these
-  // reaches the audit through source/shell.html, and index.html refuses the tokens.css
-  // <link>: its CSP is `style-src 'unsafe-inline'` with no `'self'`, so Chromium blocks the
-  // stylesheet and `var(--wb-color-accent)` resolves to an inherited value. Verified in a
-  // browser — see DESIGN.md §5.2. Widening that CSP is a deliberate decision about the
-  // homepage's security posture, so the ceiling carries the debt instead of hiding it.
-  ["手写复制的圆角字面值", occurrences(radiusDuplicates), 11],
+  // Held at 9, not 0, and the reason is measured rather than assumed — see DESIGN.md §5.2.
+  // Eight of the nine are the four literals in source/shell.html, counted once for each page
+  // that embeds it: index.html, which refuses the tokens.css <link> because its CSP is
+  // `style-src 'unsafe-inline'` with no `'self'` (Chromium blocks the stylesheet and
+  // `var(--wb-color-accent)` resolves to an inherited value), and studio.html, which does
+  // load it. One edit to that shared file reaches both pages, and one of them cannot resolve
+  // the var(), so the file cannot move until the homepage can. The ninth is in
+  // comparison.html, which is unlinked rather than blocked; that page's membership in the
+  // token layer is DESIGN.md §5.7 item 6's decision, so the ceiling carries it meanwhile.
+  // The ceiling is deliberately not a promise that the remaining work is hard: two of the
+  // originals were in pages that already load tokens.css and were fixed outright.
+  ["手写复制的圆角字面值", occurrences(radiusDuplicates), 9],
   ["没有出口的 UI 设计值", audit.tokens.undocumented.filter((leaf) => UI_GROUPS.has(leaf.id.split(".")[0])).length, 0],
 ];
 const beforeBudgets = failures.length;

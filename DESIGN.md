@@ -118,13 +118,13 @@ Token 分成八组，其中五组只服务 3D：
 | 页面 | 链接 `tokens.css` | `var(--wb-*)` 次数 | 硬编码色值 |
 |---|---|---|---|
 | `index.html` 三维首页 | ❌ | 0 | 79 |
-| `studio.html` 组件编辑器 | ✅ | 7 | 192 |
+| `studio.html` 组件编辑器 | ✅ | 8 | 192 |
 | `catalog.html` 资产总览 | ✅ | 7 | 30 |
-| `tokens.html` Token 审计 | ✅ | 11 | 47 |
+| `tokens.html` Token 审计 | ✅ | 12 | 47 |
 | `motion.html` Motion 库 | ✅ | 17 | 50 |
 | `comparison.html` 原图对照 | ❌ | 0 | 29 |
 | `global.html` 全局预览 | ❌ | 0 | 35 |
-| **合计（7 个出货页面）** | **4 / 7** | **42** | **462** |
+| **合计（7 个出货页面）** | **4 / 7** | **44** | **462** |
 
 `components.html` 是这套审计自己的载体：它用 16 处 `var()`，但它同时内嵌了一份出货 CSS 的副本用于渲染预览。把它计入会让每一条尺度和每一处字面值都被重复统计，并用自己的 `var()` 抬高整体采用率。因此上表把它单列，**色值、圆角与手写复制的合计都只用左边 7 个出货页面**。
 
@@ -134,11 +134,22 @@ Token 分成八组，其中五组只服务 3D：
 
 上一版这里列着 8 处逐字节复制，分布在 `catalog.html`、`motion.html` 与 `studio.html`。现在全部改为 `var()` 引用，**颜色字面值复制实测为 0**。
 
-同一把尺子量到圆角时还剩 **11 处**：`9px`（`radius.card`）4 处、`16px`（`radius.control`）3 处、`20px`（`radius.dialog`）2 处、`19px`（`radius.panel`）2 处。这不是没发现，是**暂时做不了**，而且原因已实测确认：
+同一把尺子量到圆角时还剩 **9 处**。它们不是一类，按来源分开才看得清：
+
+| 来源 | 次数 | 为什么还没改 |
+|---|---|---|
+| `source/shell.html` 的 `9px` `16px` `19px` `20px` | 8 | 同一份文件同时供给 `index.html` 与 `studio.html`：后者能解析 `var()`，前者不能，而改一处两个页面都变 |
+| `comparison.html` 的 `9px` | 1 | 没有任何 CSP 拦它，只是没链接 `tokens.css`；它属于哪一层是 §5.7 第 6 条的事 |
+
+上一版这里写的是「11 处，全部经由 `source/shell.html`」。**那句话是错的**，而且错得会掩盖工作量：另外 3 处分别在 `source/editor/studio.css`、`source/build-tokens.mjs` 与 `comparison.html`，前两个页面本来就加载 `tokens.css`，把它们记成「被首页 CSP 挡住」等于用一条不成立的 blockage 盖住两个一行就能改的地方。这两处已改为 `var()`——`studio.css` 的品牌标 `9px` → `radius.card`，`tokens.html` 的筛选胶囊 `16px` → `radius.control`——棘轮上限随之从 11 降到 9。
+
+剩下那 8 处确实卡在一个已实测的事实上：
 
 > `index.html` 拒绝加载 `tokens.css`。它的 CSP 是 `style-src 'unsafe-inline'`，没有 `'self'`，Chromium 直接拦掉同源样式表——控制台原话：`Loading the stylesheet ... violates the following Content Security Policy directive: "style-src 'unsafe-inline'"`。实测时 `var(--wb-color-accent)` 解析成继承值 `rgb(244, 245, 248)`，不是 `#67ccff`。
 
-这 11 处全部经由 `source/shell.html` 进入审计。把 `index.html` 接进 Token 层，等于要放宽这张页面的 CSP——那是关于首页安全姿态的决定，不该由一次 Token 迁移替它回答。所以棘轮把这笔债记在明面上（§5.6），而不是让它继续隐形。
+**但内联是通的，所以这里没有一个需要拍板的安全取舍。** 同一条 CSP 允许内联 `<style>`（`'unsafe-inline'` 就是这个意思），而 `source/build.mjs` 已经在用这条路把 `scene.js` 和参考图放进 `index.html`。在同一张页面上注入真正的 `tokens.css` 文本后实测：`var(--wb-color-accent)` → `rgb(103, 204, 255)`，`var(--wb-radius-control)` → `16px`，CSP 拒绝消息 **0 条**。代价是 1.7 KB（`tokens.css`）加在 1784 KB 的单文件首页上，约 0.1%。
+
+不过它解开的也只是这 8 处圆角。`index.html` 的 79 处颜色字面值里，**逐字节等于既有 Token 的是 0 处**——那多是三维场景的一次性色（§5.1 的 323 种色值里 284 种只出现一次）。「把首页接进 Token 层」不等于「首页也能清掉 79 处」，这是两件事。
 
 改动是**可证明无视觉变化**的，不是「看起来一样」：
 
@@ -165,15 +176,16 @@ Token 分成八组，其中五组只服务 3D：
 
 ### 5.3 圆角尺度
 
-系统里实际出现 **20 种** `border-radius` 值，Token 定义了 4 种（补录 `radius.control` 后），在 7 个出货页面里被引用 **5 次**。
+系统里实际出现 **21 种** `border-radius` 值，Token 定义了 4 种（补录 `radius.control` 后），在 7 个出货页面里 `var(--wb-radius-card)` 被引用 **6 次**，`var(--wb-radius-control)` 1 次。
 
 ```
-var(--wb-radius-card) ×5   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
-20px ×2   19px ×2   16px ×3   15px ×2   12px ×4   10px ×5    9px ×4
-8px ×6    7px ×3    6px ×8    5px ×6    4px ×8    3px ×5    2px ×1
+var(--wb-radius-card) ×6   var(--wb-radius-control) ×1   100% ×2   50% ×14
+29px ×2   25px ×2   22px ×1   20px ×2   19px ×2   16px ×2   15px ×2
+12px ×4   10px ×5    9px ×3    8px ×6    7px ×3    6px ×8    5px ×6
+4px ×8    3px ×5    2px ×1
 ```
 
-`16px` 就是 `radius.control`——胶囊按钮和筛选胶囊一直在手写它。`10px`（`.motion-card`、`.timeline-card`）仍没有任何 Token 对应。
+`16px` 就是 `radius.control`——胶囊按钮和筛选胶囊一直在手写它，现在筛选胶囊改用 `var()` 了。`10px`（`.motion-card`、`.timeline-card`）仍没有任何 Token 对应。
 
 注意 `50% ×14` 与 `100% ×2` 是圆和胶囊，不是尺度决策。真正的临时值约 17 个，且多为 2–5px 的小件。这一步需要逐页看图，是纯观感工作，不适合和数值迁移混在一起做。
 
@@ -226,26 +238,26 @@ var(--wb-radius-card) ×5   100% ×2   50% ×14   29px ×2   25px ×2   22px ×1
 
 ### 5.6 棘轮：防止清单重新长回来
 
-上面的数字都会被 `npm run verify:system` 核对，但那只能证明**文档没腐烂**，并不能阻止数字本身变大。所以 `source/system/check-docs.mjs` 末尾有两条棘轮：
+上面的数字都会被 `npm run verify:system` 核对，但那只能证明**文档没腐烂**，并不能阻止数字本身变大。所以 `source/system/check-docs.mjs` 末尾有三条棘轮：
 
 | 棘轮 | 当前 / 上限 | 为什么不是 0 |
 |---|---|---|
 | 手写复制的颜色字面值（应被 `var()` 取代） | 0 / 0 | — |
-| 手写复制的圆角字面值 | 11 / 11 | 全部要经 `index.html`，而它的 CSP 挡住 `tokens.css`（§5.2） |
+| 手写复制的圆角字面值 | 9 / 9 | 8 处来自 `source/shell.html`（同一份文件供给两张页面，其中 `index.html` 解析不了 `var()`），1 处在 `comparison.html`（§5.2） |
 | 没有出口的 UI 设计值 | 0 / 0 | — |
 
-圆角那一行**钉死在 11**，且单位是出现次数而不是「有几种不同的值」——按种类计数的话，同一个值被复制任意多次都不会触发，那就不叫棘轮了。
+圆角那一行**钉死在 9**，且单位是出现次数而不是「有几种不同的值」——按种类计数的话，同一个值被复制任意多次都不会触发，那就不叫棘轮了。上限从 11 降到 9 不是因为尺子变松：尺子、单位、判定规则都没动，是那 3 处被错误归因的字面值里有 2 处真的改掉了。
 
 失败信息会直接说明怎么处理：新值要么改用 `var()`、要么补 `TOKEN_CATALOG` 出口，**要么把这个上限连同理由一起调高**。调高上限是允许的，但必须写理由——否则棘轮就变成了装饰。
 
 ### 5.7 优先级行动
 
-1. **决定 `index.html` 的 CSP 要不要放宽。** 这是剩下所有 Token 接入工作的前置条件，也是唯一需要人拍板的一条：它的 `style-src` 只允许内联样式，`tokens.css` 进不去（实测见 §5.2）。放宽，11 处圆角复制和 79 处硬编码色值才有下一步；不放宽，这张页面就应当被明确列为「不进 Token 体系」的例外，而不是继续挂着待办。`comparison.html`、`global.html` 是内部工具页，可一并归入例外。
-2. **收敛圆角尺度。** 20 种降到 5–6 种（如 3/5/9/16/20/50%），先决定 `10px` 归到 `9px` 还是新增 `radius.card-elevated`。纯观感工作，需要看图。
+1. **把 `tokens.css` 内联进 `index.html`（不是放宽 CSP）。** 这一条不需要拍板，因为那个安全取舍并不存在：同一条 CSP 允许内联 `<style>`，`build.mjs` 已经这样内联 `scene.js` 和参考图，实测注入后 `var()` 正常解析、CSP 拒绝 0 条（§5.2）。做它是为了解开 `source/shell.html` 那 8 处圆角，**不是**为了那 79 处颜色字面值——其中逐字节等于既有 Token 的为 0。成本约 0.1% 体积。建议与下面第 2 条合并成一次改动：内联只是让值可换，换成什么要等圆角尺度定下来。
+2. **收敛圆角尺度。** 21 种降到 5–6 种（如 3/5/9/16/20/50%），先决定 `10px` 归到 `9px` 还是新增 `radius.card-elevated`。纯观感工作，需要看图。
 3. **统一小标签命名**为一个组件（见 `preview/eyebrow.html`），四套写法合并。
 4. **统一页面头部命名**，三处变一处。
 5. **决定编辑器专用 Token 的去留**：`color.divider` / `color.text-dim` 现在是合法的独立 Token，但「编辑器为什么比站点更深」还没有答案。
-6. **给 `comparison.html` / `global.html` 补 `<link>`**，或明确承认它们是临时页、不进入 Token 体系。
+6. **给 `comparison.html` / `global.html` 补 `<link>`**，或明确承认它们是临时页、不进入 Token 体系。这一条现在有具体代价：`comparison.html` 的 `9px` 就是 §5.2 那 9 处中的 1 处，而它并没有 CSP 挡着，只是没链接。
 
 ## 六、贡献规则
 
@@ -289,7 +301,7 @@ pip install playwright && playwright install chromium   # 首次
 cd source && npm run verify:system -- --port 8791
 ```
 
-`npm run verify:system` 跑两步：先由 `source/system/check-docs.mjs` 断言本文件里每一个引用到的实测数字都与 `manifest.json` 一致（文档里的数字同样会腐烂），再跑 §5.6 的两条棘轮，再由 `source/review/verify-design-system.py` 驱动真实 Chromium 做五件事，结果写入 `design-system-verification.json`：
+`npm run verify:system` 跑两步：先由 `source/system/check-docs.mjs` 重新跑一遍审计、断言本文件里每一个引用到的实测数字都与它对得上（文档里的数字同样会腐烂；只有组件数量那一条是拿 `manifest.json` 核的），再跑 §5.6 的三条棘轮，再由 `source/review/verify-design-system.py` 驱动真实 Chromium 做五件事，结果写入 `design-system-verification.json`：
 
 1. **加载**：6 个页面 + 28 个独立预览页全部返回 200 且舞台有实际尺寸；
 2. **样式一致性**：16 组「同一组件在出货页面 vs 在预览里」的 `getComputedStyle` 逐属性对比，**每个组件同时验证 `components.html` 与 `preview/<组件>.html` 两个落点**，共 32 项；

@@ -106,7 +106,7 @@
         "layer": "工具",
         "extraCss": "source/shell.html",
         "linksTokensCss": true,
-        "tokenUsages": 7,
+        "tokenUsages": 8,
         "rawColorLiterals": 192,
         "documented": false
       },
@@ -126,7 +126,7 @@
         "css": "source/build-tokens.mjs",
         "layer": "文档",
         "linksTokensCss": true,
-        "tokenUsages": 11,
+        "tokenUsages": 12,
         "rawColorLiterals": 47,
         "documented": true
       },
@@ -178,7 +178,7 @@
     "totalRawColorLiterals": 462,
     "distinctColorLiterals": 323,
     "singletonColorLiterals": 284,
-    "totalTokenUsages": 42,
+    "totalTokenUsages": 44,
     "surfacesLinkingTokensCss": 4,
     "duplicatedLiterals": [
       {
@@ -188,16 +188,6 @@
           "index.html",
           "studio.html",
           "comparison.html"
-        ],
-        "count": 4
-      },
-      {
-        "literal": "16px",
-        "token": "radius.control",
-        "pages": [
-          "index.html",
-          "studio.html",
-          "tokens.html"
         ],
         "count": 3
       },
@@ -218,13 +208,30 @@
           "studio.html"
         ],
         "count": 2
+      },
+      {
+        "literal": "16px",
+        "token": "radius.control",
+        "pages": [
+          "index.html",
+          "studio.html"
+        ],
+        "count": 2
       }
     ],
     "radiusScale": [
       {
-        "value": "var(--wb-radius-card)",
-        "count": 5,
+        "value": "var(--wb-radius-control)",
+        "count": 1,
         "pages": [
+          "tokens.html"
+        ]
+      },
+      {
+        "value": "var(--wb-radius-card)",
+        "count": 6,
+        "pages": [
+          "studio.html",
           "catalog.html",
           "tokens.html",
           "motion.html"
@@ -289,11 +296,10 @@
       },
       {
         "value": "16px",
-        "count": 3,
+        "count": 2,
         "pages": [
           "index.html",
-          "studio.html",
-          "tokens.html"
+          "studio.html"
         ]
       },
       {
@@ -325,7 +331,7 @@
       },
       {
         "value": "9px",
-        "count": 4,
+        "count": 3,
         "pages": [
           "index.html",
           "studio.html",
@@ -395,7 +401,7 @@
         ]
       }
     ],
-    "radiusTokenUsages": 5
+    "radiusTokenUsages": 6
   },
   "gates": [
     "components.html 的预览必须由出货样式表渲染，不得手写副本",

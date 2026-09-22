@@ -4,6 +4,7 @@ import { dirname, join } from "node:path";
 import { UI_SYSTEM, UI_COMPONENTS, COMPONENT_GROUPS } from "./system/ui-registry.js";
 import { splitRules, scopeRules } from "./system/css-scope.js";
 import { auditDesignSystem } from "./system/audit.js";
+import { TOKEN_CATALOG } from "./tokens/tokens.js";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const out = join(root, "..");
@@ -319,6 +320,12 @@ const CSP = `default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'u
 // ------------------------------------------------------------------ build
 
 const audit = await auditDesignSystem(join(root, ".."));
+// 这两个数写在这一页上，所以从审计里取，不手写——手写的那一版说「Token 只定义了 3 种」，
+// 而补录 radius.control 之后已经是 4 种了。
+const radiusTokens = TOKEN_CATALOG.filter((token) => token.group === "Radius").length;
+const radiusDebt = audit.coverage.duplicatedLiterals
+  .filter((entry) => !entry.literal.startsWith("#"))
+  .reduce((total, entry) => total + entry.count, 0);
 const allCss = (await Promise.all(UI_COMPONENTS.map((c) => buildCss(c)))).join("\n");
 
 const undocumentedTop = audit.tokens.undocumented.slice(0, 6).map((token) => esc(token.id));
@@ -395,8 +402,8 @@ const componentsHtml = `<!doctype html>
       duplicated.map((entry) => [`<code>${esc(entry.literal)}</code>`, `<code>${esc(entry.token)}</code>`, String(entry.count), esc(entry.pages.join(", "))]),
     )}</section>
   </div>
-  <section class="ds-block" style="margin-top:26px"><h4>圆角尺度：实际用了 ${audit.coverage.radiusScale.length} 种值，Token 只定义了 3 种</h4>
-    <p style="font-size:12px;color:#8ba1bf">橙色是没有任何 Token 对应的孤值。<code>16px</code> 其实就是 tokens.js 里的 <code>radius.control</code>，只是没有导出。</p>
+  <section class="ds-block" style="margin-top:26px"><h4>圆角尺度：实际用了 ${audit.coverage.radiusScale.length} 种值，Token 定义了 ${radiusTokens} 种</h4>
+    <p style="font-size:12px;color:#8ba1bf">橙色是没有任何 Token 对应的孤值。<code>9px</code> / <code>16px</code> / <code>19px</code> / <code>20px</code> 都逐字节等于 tokens.js 里的 <code>radius.*</code>，能改的已经改成 <code>var()</code>（所以不带橙色）；仍是字面值的有 ${radiusDebt} 处，全部来自 <code>source/shell.html</code> 与 <code>comparison.html</code>，原因见 DESIGN.md §5.2。</p>
     <div class="radius-list">${audit.coverage.radiusScale
       .map((entry) => `<span class="${orphans.includes(entry) ? "orphan" : ""}">${esc(entry.value)} ×${entry.count}</span>`)
       .join("")}</div>
