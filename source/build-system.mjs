@@ -115,6 +115,15 @@ const PREVIEW_CSS = `
 // Documentation-page chrome. Every selector that could also name something inside a
 // preview stage is scoped under `.ds-page`, otherwise the audit page's own layout would
 // leak into the components it is supposed to be showing unmodified.
+//
+// This block is a hand-maintained replica of the docs pages' own CSS, and it is the one
+// stylesheet in the repo the audit cannot see: components.html is `instrument: true`, so
+// every literal here is excluded from the counts. That exclusion is why a copy of
+// `radius.control` could sit in the `.filters button` rule below for as long as it did —
+// invisible until `tokens.html` moved to `var()`, at which point the replica's literal won
+// on specificity and the preview quietly stopped following the token. When you copy a rule
+// in here from a docs page, copy its `var()` too; `check-docs.mjs` now fails if a literal
+// equal to an existing token appears in this file.
 const PAGE_CSS = `
 *{box-sizing:border-box}html{color-scheme:dark;scroll-behavior:smooth}
 body{margin:0;background:var(--wb-color-canvas);color:var(--wb-color-text);font:var(--wb-type-body-size) -apple-system,BlinkMacSystemFont,"PingFang SC",Arial,sans-serif}
@@ -144,7 +153,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .ds-page .tools{padding:24px 0 14px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start;position:sticky;top:74px;background:var(--wb-color-canvas);z-index:10;border-bottom:1px solid #24303f}
 .ds-page .search{background:#162232;border:1px solid #3a4d67;color:#dbe9ff;padding:12px 14px;border-radius:6px;width:min(320px,100%);font:inherit}
 .ds-page .filters{display:flex;gap:7px;flex-wrap:wrap}
-.ds-page .filters button{border:1px solid #38506d;background:#162232;color:#91a9c9;border-radius:16px;padding:7px 11px;font-size:10px;cursor:pointer}
+.ds-page .filters button{border:1px solid #38506d;background:#162232;color:#91a9c9;border-radius:var(--wb-radius-control);padding:7px 11px;font-size:10px;cursor:pointer}
 .ds-page .filters button.active{background:#315986;color:white;border-color:#77a8e6}
 .ds-page .section-head{display:flex;justify-content:space-between;align-items:end;margin:44px 0 4px;padding-bottom:13px;border-bottom:1px solid #2e3b4c}
 .ds-page .section-head h2{font-size:19px;font-weight:500;margin:0}
