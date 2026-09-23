@@ -63,3 +63,13 @@ No partial pass.
 Report: claim, local test commands/results, runtime method, each driven step with observation/evidence, one edge probe when runtime applies, findings, verdict, and cleanup status.
 
 See `references/cli.md` and `references/server-api.md` for examples.
+
+## Live design settings: working runtime recipe
+
+- Target: repository root (static Pages output), with Node/npm and Python 3 available.
+- Setup: `npm --prefix source ci`, then `npm --prefix source run build`. Run `npm --prefix source run test:settings`, `npm --prefix source run check:docs`, `node --test source/review/storage-scope.test.mjs`, and `git diff --check`. A clean rebuild should leave the generated pages unchanged.
+- Launch from the root: `python3 -m http.server 18792 --bind 127.0.0.1`. Confirm the listening message and load `http://127.0.0.1:18792/index.html` in the authorized browser. Use another free port if occupied; never replace an unknown service.
+- Drive through the browser UI (Codex: `cua_repl`): open “设计系统 · 实时设置”, change brightness and toggle platform titles; observe the real scene, reload and verify retained values. Follow “设计规则” to test UI colors/radius and another open tab's synchronization. Verify Studio's scene too. Before testing, preserve any existing preferences; restore them afterward instead of clearing unrelated local layouts.
+- Adjacent cases: reject an imported settings JSON with exposure `99` without altering the current settings; export must expose selectable JSON; Escape returns focus to the launcher; at 390px the settings panel and its footer remain in bounds. Reset is appropriate only for disposable test preferences.
+- Evidence: retain exact URL/commit, commands and exit statuses, raw browser observations and before/after screenshots in the task's `outputs/` report (or tool trace). Bind post-deployment evidence separately to the final Pages commit. Old audit totals do not establish this panel's behavior.
+- Cleanup: stop only the HTTP server started for this check; restore viewport and preferences. Localhost and Pages have separate storage. Component previews share their deployment's settings. Copyable export is the fallback when the browser does not confirm a download.

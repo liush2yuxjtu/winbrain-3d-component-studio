@@ -31,4 +31,4 @@
 5. 390px 宽度下面板不越界，底部按钮可见；Escape 关闭并将焦点还给入口。
 6. 检查控制台错误，打开面板和改变设置不应触发模型请求。
 
-此版本为本地候选。发布前需要对最终候选执行仓库要求的 pre-PR runtime verification；本文件不代表已经上线。
+发布前按仓库 `.agents/skills/verify.md` 对最终候选执行 pre-PR runtime verification。合并后的 GitHub Pages 发布还需绑定最终提交，在公开页面重新验证设置和刷新恢复；功能说明本身不替代部署验收记录。
