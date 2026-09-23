@@ -5,6 +5,8 @@ const key = settingsStorageKey(location.pathname);
 const isStudio = document.body.dataset.mode === 'studio';
 const isHome = Boolean(document.querySelector('#world')) && !isStudio;
 const hasScene = isHome || isStudio;
+// Only these surfaces consume the shared body-size variable in their stylesheet.
+const supportsBodySize = Boolean(document.querySelector('.ds-page')) || /\/tokens\.html$/.test(location.pathname);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 let overrides = {};
 let persisted = true;
@@ -40,6 +42,7 @@ for (const [group, title, hint, visible] of groups) {
   const fieldset = document.createElement('fieldset');
   fieldset.innerHTML = `<legend>${title}</legend><p class="wb-settings-hint">${hint}</p>`;
   for (const s of SETTINGS.filter(s => s.group === group)) {
+    if (s.id === 'bodySize' && !supportsBodySize) continue;
     const row = document.createElement('label');
     row.className = 'wb-settings-row';
     row.htmlFor = `wb-setting-${s.id}`;
@@ -109,9 +112,25 @@ function setOpen(open) {
 }
 launcher.addEventListener('click', () => setOpen(true));
 panel.querySelector('.wb-settings-close').addEventListener('click', () => setOpen(false));
-panel.addEventListener('keydown', event => {
-  if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); setOpen(false); }
-});
+document.addEventListener('keydown', event => {
+  if (panel.hidden) return;
+  if (event.key === 'Escape') {
+    event.preventDefault(); event.stopPropagation(); setOpen(false);
+    return;
+  }
+  // Keep keyboard navigation within the drawer, including dynamically shown export controls.
+  // Pointer users can still interact with the scene while previewing their settings.
+  if (event.key !== 'Tab' || !panel.contains(document.activeElement)) return;
+  const focusable = [...panel.querySelectorAll('button,a[href],input,textarea')]
+    .filter(element => !element.disabled && element.getClientRects().length);
+  const first = focusable[0];
+  const last = focusable.at(-1);
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault(); last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault(); first.focus();
+  }
+}, true);
 panel.querySelector('[data-action=reset]').addEventListener('click', () => { overrides = {}; apply(); save(); });
 const exportSection = document.createElement('section');
 exportSection.className = 'wb-settings-export';
