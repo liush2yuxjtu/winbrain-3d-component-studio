@@ -11,7 +11,9 @@ The standalone `global.html` is a review surface for the complete scene, not a n
 - Global HTML source: `f14ae67b66a6f86a150f01b995dabf7dc12b2966`
 - Initial preview publication: `54e1f2c1158bb3de147e732acd3e70119ebd1cb4`
 
-The publication reuses the exact previous preview subtree and adds the global viewer, metadata, QA report and comparison route. It adds only `pr-preview/global-880c52f/` and `pr-preview/global/` on the Pages branch. Production root and historical previews remain unchanged. PR #3 is not merged.
+At the time of this preview publication, it reused the previous preview subtree and added the global viewer, metadata, QA report and comparison route under `pr-preview/global-880c52f/` and `pr-preview/global/`. Production root and historical previews were unchanged by that publication.
+
+**Status correction (2026-09-23):** [PR #3](https://github.com/liush2yuxjtu/winbrain-3d-component-studio/pull/3) was merged on 2026-09-15. The provenance and validation below describe that historical preview, not an open PR or a fresh validation of current main. See [current status and follow-ups](STATUS.md).
 
 ## Small preview defects addressed
 
