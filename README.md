@@ -16,6 +16,8 @@
 
 GitHub 源码：https://github.com/liush2yuxjtu/winbrain-3d-component-studio
 
+当前交付范围、验证边界与优先级：[docs/STATUS.md](docs/STATUS.md)。Design System v2 当前为契约文档基础，不代表完整 Screen / Flow 已实现。
+
 ## 在本机打开
 
 - **Design Token Audit：** http://127.0.0.1:8765/tokens.html
