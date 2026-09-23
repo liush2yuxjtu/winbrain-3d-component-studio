@@ -1,3 +1,4 @@
+import { attachSceneSettings } from "../settings/scene.js";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { buildWorld } from "../world.js";
@@ -55,6 +56,7 @@ export async function startStudio() {
   if (["composition", "asset", "mock"].includes(initial.get("view")))
     mode = initial.get("view");
   selectComponent(selected);
+  attachSceneSettings({ render: requestRender });
   new ResizeObserver(() => resizeStage(false)).observe($("#stage-scroll"));
   window.studio = {
     registry,
@@ -452,6 +454,7 @@ function requestRender() {
 }
 
 function markDirty(id = selected) {
+  window.dispatchEvent(new Event("winbrain:design-settings-ready"));
   dirty = true;
   $("#save-status").textContent = "有未保存的修改";
   if (id) rows.get(id)?.classList.add("changed");
@@ -667,7 +670,7 @@ function wireEvents() {
   $("#hold-reference").onpointercancel = release;
   addEventListener("blur", release);
   addEventListener("keydown", (e) => {
-    if (e.target.matches("input,select,textarea")) return;
+    if (e.target.matches("input,select,textarea") || e.target.closest("#wb-settings-panel,#wb-settings-launcher")) return;
     const keys = {
       ArrowLeft: [-1, 0],
       ArrowRight: [1, 0],

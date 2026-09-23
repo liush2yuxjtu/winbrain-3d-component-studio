@@ -1,0 +1,41 @@
+/* Settings chrome uses the existing palette; it stays legible while editing page colors. */
+#wb-settings-launcher,#wb-settings-panel{font:14px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;color:var(--wb-settings-text);color-scheme:dark;box-sizing:border-box}
+#wb-settings-launcher{position:fixed;bottom:22px;right:22px;z-index:1000;display:flex;align-items:center;gap:10px;padding:12px 18px;min-height:48px;border:1px solid var(--wb-settings-border);border-radius:999px;background:var(--wb-settings-panel);box-shadow:0 8px 28px #0006;cursor:pointer}
+#wb-settings-launcher span:first-child{color:var(--wb-settings-accent);font-size:19px}
+#wb-settings-panel{position:fixed;top:16px;bottom:16px;right:16px;width:min(364px,calc(100% - 32px));z-index:1001;display:flex;flex-direction:column;border:1px solid var(--wb-settings-border);border-radius:var(--wb-radius-panel);background:var(--wb-settings-panel);box-shadow:0 20px 70px #0008;overflow:hidden}
+#wb-settings-panel[hidden],#wb-settings-launcher[hidden]{display:none!important}
+#wb-settings-panel *{box-sizing:border-box}
+#wb-settings-panel .wb-settings-head{padding:20px 22px 16px;position:relative;border-bottom:1px solid var(--wb-settings-border);flex-shrink:0}
+#wb-settings-panel h2{font-size:20px;margin:3px 0 5px;font-weight:600;letter-spacing:-.4px}
+#wb-settings-panel p{font-size:12px;color:var(--wb-settings-muted);margin:5px 0;line-height:1.65}
+#wb-settings-panel .wb-settings-kicker{color:var(--wb-settings-accent);font-size:10px;letter-spacing:1.4px}
+#wb-settings-panel button,#wb-settings-panel a.wb-settings-action{font:inherit;color:inherit;cursor:pointer;min-height:40px;padding:8px 12px;border:1px solid var(--wb-settings-border);border-radius:var(--wb-radius-card);background:transparent;text-decoration:none;text-align:center}
+#wb-settings-panel button:hover,#wb-settings-panel a:hover{background:#ffffff0c}
+#wb-settings-panel .wb-settings-close{position:absolute;right:14px;top:14px;border:0;font-size:22px;padding:0;width:40px}
+#wb-settings-panel .wb-settings-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+#wb-settings-panel .wb-settings-links a{font-size:12px;color:var(--wb-settings-accent);text-decoration:none;border-bottom:1px solid var(--wb-settings-border);padding:3px 0}
+#wb-settings-panel .wb-settings-scroll{overflow-y:auto;overscroll-behavior:contain;flex:1;padding:0 22px 16px;min-height:0}
+#wb-settings-panel fieldset{border:0;border-bottom:1px solid var(--wb-settings-border);padding:18px 0;margin:0;min-width:0}
+#wb-settings-panel legend{float:left;width:100%;font-size:14px;font-weight:600;padding:0;margin-bottom:4px}
+#wb-settings-panel .wb-settings-hint{clear:both;margin-bottom:14px}
+#wb-settings-panel .wb-settings-row{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:42px;font-size:13px;margin-top:5px;flex-wrap:wrap}
+#wb-settings-panel .wb-settings-row:has(input[type=range]){padding:6px 0}
+#wb-settings-panel input[type=range]{width:100%;height:22px;accent-color:var(--wb-settings-accent);margin:0;cursor:pointer}
+#wb-settings-panel input[type=color]{width:42px;height:30px;cursor:pointer;padding:2px;border:1px solid var(--wb-settings-border);border-radius:6px;background:transparent}
+#wb-settings-panel input[type=checkbox]{appearance:none;width:38px;height:22px;background:var(--wb-settings-border);border-radius:999px;position:relative;cursor:pointer;flex-shrink:0;margin:0}
+#wb-settings-panel input[type=checkbox]:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;background:var(--wb-settings-text);border-radius:50%;transition:transform .15s}
+#wb-settings-panel input[type=checkbox]:checked{background:var(--wb-settings-accent)}
+#wb-settings-panel input[type=checkbox]:checked:after{transform:translateX(16px);background:var(--wb-settings-panel)}
+#wb-settings-panel output{color:var(--wb-settings-muted);font:12px ui-monospace,monospace;margin-left:auto}
+#wb-settings-panel .wb-settings-foot{padding:14px 22px 18px;border-top:1px solid var(--wb-settings-border);flex-shrink:0}
+#wb-settings-panel .wb-settings-actions{display:flex;gap:8px;flex-wrap:wrap}
+#wb-settings-panel .wb-settings-actions>*{flex:1;font-size:12px;white-space:nowrap}
+#wb-settings-panel .wb-settings-status{min-height:20px;margin-top:9px}
+#wb-settings-launcher:focus-visible,#wb-settings-panel :is(button,a,input):focus-visible{outline:2px solid var(--wb-settings-accent);outline-offset:3px}
+html[data-wb-hero-size] .scene .hero h1{font-size:var(--wb-live-hero-size);line-height:1.14}
+html[data-wb-control-radius] .scene .control-buttons button{border-radius:var(--wb-radius-control)}
+html[data-wb-hide-labels] #spatial-labels{visibility:hidden}
+@media(max-width:480px){#wb-settings-launcher{right:12px;bottom:12px}#wb-settings-panel{top:8px;bottom:8px;right:8px;width:calc(100% - 16px)}}
+@media(prefers-reduced-motion:reduce){#wb-settings-panel input[type=checkbox]:after{transition:none}}
+
+#wb-settings-panel .wb-settings-export{padding-top:14px}#wb-settings-panel .wb-settings-export[hidden]{display:none}#wb-settings-panel .wb-settings-export textarea{display:block;width:100%;font:12px/1.5 ui-monospace,monospace;color:var(--wb-settings-text);background:var(--wb-settings-panel);border:1px solid var(--wb-settings-border);border-radius:6px;padding:10px;resize:vertical;margin:10px 0}#wb-settings-panel .wb-settings-export a{display:block}

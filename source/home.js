@@ -477,5 +477,9 @@ window.winbrain = {
   },
 };
 
-loadSaved().then(() => composer.render());
-listenForSaved(() => composer.render());
+function refreshSavedDesign() {
+  window.dispatchEvent(new Event('winbrain:design-settings-ready'));
+  composer.render();
+}
+loadSaved().then(refreshSavedDesign);
+listenForSaved(refreshSavedDesign);
