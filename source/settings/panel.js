@@ -171,7 +171,13 @@ window.addEventListener('storage', event => {
 });
 window.addEventListener('winbrain:design-settings-ready', apply);
 window.addEventListener('winbrain:motion-settings', event => {
-  overrides = { ...overrides, ...validateOverrides(event.detail) };
+  const current = valueOf();
+  const changed = Object.fromEntries(Object.entries(validateOverrides(event.detail))
+    .filter(([id, value]) => current[id] !== value));
+  // A drag that only stops an already-stopped camera is not an animation preference.
+  // Preserve automatic reduced-motion behavior until the user actually changes it.
+  if (!Object.keys(changed).length) return;
+  overrides = { ...overrides, ...changed };
   refreshControls(valueOf()); save();
 });
 reduced.addEventListener('change', apply);
