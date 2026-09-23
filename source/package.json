@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node build.mjs && node build-tokens.mjs && node build-motion.mjs && node build-catalog.mjs && node build-system.mjs",
+    "build": "node build.mjs && node build-tokens.mjs && node build-motion.mjs && node build-catalog.mjs && node build-system.mjs && node build-settings.mjs",
     "verify:system": "node system/check-docs.mjs && python3 review/verify-design-system.py",
-    "check:docs": "node system/check-docs.mjs"
+    "check:docs": "node system/check-docs.mjs",
+    "test:settings": "node --test review/design-settings.test.mjs"
   },
   "dependencies": {
     "three": "0.180.0"

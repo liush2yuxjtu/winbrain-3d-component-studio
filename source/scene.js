@@ -1,3 +1,4 @@
+import { attachSceneSettings } from "./settings/scene.js";
 import { buildWorld } from "./world.js";
 import { animated, view, updateCamera, pos, renderer } from "./core.js";
 import { createMotionRuntime, attachHomeMotionControls } from "./motion/runtime.js";
@@ -15,4 +16,5 @@ document.fonts.ready.then(async () => {
   motion.start();
   await import("./home.js");
   attachHomeMotionControls(motion, { renderer });
+  attachSceneSettings({ motion });
 });

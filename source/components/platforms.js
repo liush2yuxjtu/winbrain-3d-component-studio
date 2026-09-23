@@ -117,7 +117,7 @@ function platform(level, scale) {
   });
   const slab = mesh(geometry, [surface, edge], g);
   slab.rotation.x = -Math.PI / 2;
-  slab.userData = { layer: level, name: "Glass platform" };
+  slab.userData = { layer: level, name: "Glass platform", designOpacity: [surface.opacity, edge.opacity] };
   clickable.push(slab);
   if (level === 3) {
     const laminate = mesh(

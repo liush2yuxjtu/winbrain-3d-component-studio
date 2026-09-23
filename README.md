@@ -138,6 +138,8 @@ npm run build
 
 ## 设计系统
 
+右下角 **设计系统 · 实时设置** 可打开组件库/规则/动效入口，并直接调整外观。颜色、圆角和 3D 开关即时生效，自动保存在本浏览器，可恢复默认或导入/导出；不调用 AI、不消耗模型 token。详见 [实时设置说明](docs/live-design-settings.md)。
+
 四层设计决策分别是 Token（`tokens.js`）、Motion（`motion/library.js`）、UI 组件（`system/ui-registry.js`）和三维资产（`registry.js`）。界面层的说明、真源页与实测审计见 `DESIGN.md`。
 
 `components.html` 与 `preview/` 里的每个组件都用**出货中的真实样式表**现场渲染：构建时从 `shell.html`、`studio.css` 和 `build-*.mjs` 里提取对应规则，加 `:where(.ds-stage--*)` 前缀（权重为 0，不改变原有层叠顺序）。因此预览不会与产品漂移。
